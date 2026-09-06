@@ -57,7 +57,8 @@ nicio fereastră 3:2 nu le lasă afară.
 
 **Cadrul de acum, 8478370, e ales de om**, după ce amândouă opțiunile declarate ale cheii au căzut.
 Nu are nimic comun cu cele două săli de catalog: sunt fronturile plate ale unor sertare suprapuse,
-tăiate oblic de cadru, fiecare cu un mâner de sârmă și cu umbra lui, în tonuri de nisip, alb, gri și
+tăiate oblic de cadru, cu mai multe mânere de sârmă pe fiecare front (3-4 pe banda albă) și cu umbrele
+lor, de la negru și maro închis (35,5% din fișierul de 1920 stă sub V 0,25) la tonuri de nisip, alb, gri și
 un galben. Sursa are 6720x4480, adică **exact 3:2**, deci fișierul de 1920 este cadrul întreg redus
 și la cheia asta nu s-a tăiat nimic afară.
 
