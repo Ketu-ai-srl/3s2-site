@@ -23,7 +23,7 @@
 // trecut pe rezerva: cadrul propus (9219643, dulapuri metalice albe cu usi numerotate) poarta
 // sub FIECARE cifra un slogan tiparit in chirilica, perfect lizibil la 1:1 in original - text
 // in alt alfabet asezat pe chiar subiectul cadrului, deci imposibil de scos prin decupare.
-// Locul lui il ia rezerva declarata, 29940222: usa alba a unui dulap metalic de birou, cu
+// Locul lui il ia rezerva declarata, 29940222: usa alba a unui dulap de birou, cu
 // cheia in broasca, prim-plan, fara nicio litera in cadru.
 //
 // CE S-A TAIAT AFARA DIN FIECARE ORIGINAL, ca sa se vada ca ferestrele nu sunt preferinte:
@@ -39,6 +39,21 @@
 //               Amandoua fisierele se opresc deasupra ei (1920 la 2291, 960 la 2340), si de
 //               aceea in cadrul livrat intra o SINGURA mana, desi originalul are doua.
 // Inventarul urmelor de text ramase, pe amandoua fisierele livrate, e in `public/img/LICENTA.md`.
+//
+// UN ALT PER CHEIE, DOUA FISIERE PER CHEIE. Registrul tine o SINGURA descriere, dar `<picture>`
+// serveste `-1920` peste 768 px si `-960` sub - deci alt-ul trebuie sa fie adevarat pe AMANDOUA
+// fisierele, nu doar pe cel mare. Prima varianta a gresit exact aici, pe doua chei din sapte:
+//   `legatura` numea „un calculator de birou si o planta". Fereastra de 960 e x 150-1483 din
+//              2999, iar calculatorul incepe la x 1500 si planta la 2324: niciunul nu e in
+//              fisierul servit sub 768 px. Pentru calculator faptul era deja SCRIS in
+//              `LICENTA.md`, la inventarul urmelor de text, si n-a fost dus in alt.
+//   `maini`    numea „un caiet cu spirala". El sta la x 2240-2639 in sursa, iar fereastra de
+//              960 se opreste la 2310: in fisierul livrat intra o feliuta din marginea lui
+//              stanga, fara nicio spirala vizibila.
+// Corectate pe 2026-09-07, privind fisierele de 960 DIRECT, nu sursele. Celelalte cinci chei au
+// fost privite la fel, tot pe `-960`: fiecare obiect numit de alt e in amandoua marimile.
+// REGULA, ca sa nu se repete: se numeste doar ce e in AMANDOUA fisierele. Un obiect care intra
+// doar in cel mare ramane nenumit - unul nenumit nu strica nimic, unul numit si absent minte.
 //
 // `pozitie` e ancora decupajului, si e o masuratoare, nu o preferinta. Toate cifrele de mai
 // jos sunt citite din pagina CONSTRUITA, nu din CSS: `document.documentElement.clientWidth`
@@ -135,9 +150,17 @@ export const FOTOGRAFII = {
   },
   dulapuri: {
     nume: "dulapuri",
-    alt: "Ușa albă a unui dulap metalic de birou, cu cheia lăsată în broască, prim-plan în lumină de zi, fotografie ilustrativă",
+    alt: "Ușa albă a unui dulap de birou, cu cheia lăsată în broască, prim-plan în lumină de zi, fotografie ilustrativă",
+    // MATERIALUL NU SE AFIRMA. Pana pe 2026-09-07 alt-ul spunea „dulap metalic de birou". Privita
+    // la 2x pe zona broastei (x 900-1300, y 300-900 din fisierul de 1920), suprafata e un panou
+    // alb neted, fara nervura, imbinare sau reflexie specifica tablei; cheia si rozeta cromata
+    // sunt de mobilier de birou obisnuit si nu deosebesc tabla de melamina. Nu era o incalcare de
+    // regula - alt-ul se incheie cu mentiunea ilustrativa si nu afirma ca ar fi depozitul nostru -
+    // dar era o afirmatie mai tare decat suporta imaginea, intr-un set in care restul sunt exacte.
+    // Cuvantul s-a scos: alt-ul spune ce se vede, nu din ce banuiesc ca e facut obiectul.
+    //
     // 35%, si e o masuratoare pe cadrul NOU, nu cifra mostenita. Cadrul e aproape gol: singurul
-    // detaliu e cheia, restul e tabla alba. Masurat pe banda x 55-90% a fisierului de 960 -
+    // detaliu e cheia, restul e panou alb. Masurat pe banda x 55-90% a fisierului de 960 -
     // fundalul intunecat din dreapta incepe la 90% si ar fi falsificat pragul - pixelii sub
     // nivelul 70 de gri, adica cheia si umbra ei, tin 30,8-49,5% din inaltime, cu varful la
     // 46,2%; centrul benzii cade la 40,2%.
@@ -151,6 +174,25 @@ export const FOTOGRAFII = {
   sertare: {
     nume: "sertare",
     alt: "Sertar de catalog din lemn, tras afară din peretele de sertare, plin cu fișe puse în picioare; etichetele vecine rămân în afara planului de claritate, fotografie ilustrativă",
+    // DECIZIE DESCHISA, ridicata la om pe 2026-09-07, nu inchisa de mine. Cadrul asta e ACEEASI
+    // sala de catalog ca unul dintre cadrele site-ului precedent al fabricii: alta incadrare
+    // (acolo peretele intreg la focus, aici un singur sertar tras), dar aceeasi mobila de artar,
+    // aceleasi suporturi metalice de eticheta, aceeasi podea gri si aceeasi lumina. Regula
+    // MASURATA e respectata - 0 sume sha256 comune, cu control pozitiv 14 din 14 - dar scopul ei
+    // nu: cine deschide amandoua site-urile vede aceeasi incapere. ID-urile sunt vecine, 6550462
+    // aici si 6550460 acolo, adica doua cadre din aceeasi sedinta foto.
+    //
+    // DE CE NU L-AM INLOCUIT SINGUR, desi rezerva cheii e nefolosita. Rezerva declarata, 6333856,
+    // a fost re-descarcata si privita la 1:1 (5971x3981; decupaje x 0-700 si x 1000-1800 pe
+    // randurile 1900-2500) si PICA regula „fara text in alt alfabet": fiecare sertar poarta o
+    // eticheta tiparita, lizibila cuvant cu cuvant, intr-un alfabet care nu e cel latin - un antet
+    // repetat, plus un numar si un interval alfabetic - iar etichetele acopera TOT peretele, adica
+    // chiar subiectul cadrului. Nicio fereastra 3:2 nu le poate lasa afara. E exact motivul pentru
+    // care a fost respins 9219643 la `dulapuri`, deci a o accepta aici ar fi doua masuri pentru
+    // aceeasi regula. Amandoua optiunile declarate ale cheii pica, asa ca fisierul ramane cum e si
+    // cheia are nevoie de un candidat NOU, ales de om. Detaliul, cu decupajele privite, in
+    // `public/img/LICENTA.md`.
+    //
     // 50%, masurat pe doua criterii care trag invers si se opresc amandoua aici. Sertarul tras
     // afara - lemn cald in jumatatea DREAPTA a fisierului de 960, unde in rest e podea si perete
     // gri - tine 37,2-58,6% din inaltime, cu centrul la 47,9%. La 50% centrul ferestrei e 50,0%,
@@ -165,21 +207,34 @@ export const FOTOGRAFII = {
   },
   maini: {
     nume: "maini",
-    alt: "Mână care scoate un dosar dintr-un suport de documente din carton, alături de un caiet cu spirală, fotografie ilustrativă",
+    alt: "Mână care scoate un dosar dintr-un suport de documente din carton, cu file de hârtie ieșind dintre despărțitoare, fotografie ilustrativă",
     // 30%, masurat: cat la suta din fereastra cardului de telefon e mana (rosu peste 140, cu
     // rosu > verde > albastru si rosu peste albastru cu 25 de niveluri), din 5 in 5 puncte -
     // 44,1% la 25%, 44,3% la 30%, 42,9% la 35%, 40,5% la 40%, 33,0% la 50%, 24,5% la 60%.
     // Maximul e la 30%, iar de la 35% in sus scaderea e continua: mana tine 16,7-53,8% din
     // inaltimea fisierului de 960, deci orice coborare a ferestrei o taie de sus.
     //
-    // ALT-UL DESCRIE FISIERUL LIVRAT, nu sursa. Originalul are DOUA maini; fereastra se opreste
-    // deasupra hartiei de ziar cu text lizibil, si odata cu ea ramane afara si a doua mana. O
-    // descriere luata din original ar fi numit ceva ce nu se vede in nicio marime.
+    // ALT-UL DESCRIE FISIERELE LIVRATE, nu sursa - si nu doar pe cel mare. Originalul are DOUA
+    // maini; fereastra se opreste deasupra hartiei de ziar cu text lizibil, si odata cu ea ramane
+    // afara si a doua mana, de aceea alt-ul spune o singura mana.
+    //
+    // A doua jumatate a aceleiasi greseli a stat aici pana pe 2026-09-07: alt-ul numea si „un
+    // caiet cu spirala". El e in `-1920`, dar in sursa sta la x 2240-2639, iar fereastra de 960 se
+    // opreste la 2310. Marit de 3 ori, coltul din dreapta al fisierului de 960 (x 760-960,
+    // y 1060-1440) e carton gol si o muchie de coala alba: nicio spirala. Principiul era scris
+    // chiar aici si fusese aplicat contra SURSEI, dar nu si contra celeilalte MARIMI.
     pozitie: "center 30%",
   },
   legatura: {
     nume: "legatura",
-    alt: "Bibliorafturi negre așezate în evantai pe un birou alb, cu semne colorate între file, alături de o mapă cu fermoar, un calculator de birou și o plantă, fotografie ilustrativă",
+    alt: "Bibliorafturi negre așezate în evantai pe un birou alb, cu semne colorate între file, alături de o mapă cu fermoar, fotografie ilustrativă",
+    // CE NU E NUMIT, si de ce. Fisierul de 1920 mai are un calculator de birou si o planta, dar
+    // fereastra de 960 e x 150-1483 din 2999, iar ele incep la x 1500, respectiv 2324: in fisierul
+    // servit sub 768 px nu exista niciunul. Privit direct, `legatura-960` arata bibliorafturile,
+    // semnele colorate si mapa cu fermoar - atat numeste si alt-ul. Faptul despre calculator era
+    // deja masurat si scris in `LICENTA.md`, la inventarul urmelor de text; pana pe 2026-09-07 nu
+    // ajunsese si in alt.
+    //
     // 40%, si aici masuratoarea a fost un compromis intre doua marimi care trag invers. Semnele
     // colorate de pe cotoare - singurul detaliu care nu e o suprafata neagra - tin 20,8-64,1%
     // din inaltimea fisierului de 960. Luminanta medie a ferestrei creste monoton cu `pozitie`,

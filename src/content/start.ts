@@ -114,11 +114,16 @@ export const ETAPE = {
       titlu: "Se digitizează ce se caută.",
       text: "Nu se scanează tot. Se scanează ce se cere des, iar originalul rămâne pe raft, cu cotă, și se aduce pe hârtie atunci când este cerut.",
       legatura: { href: "/cum-functioneaza", text: "Cum funcționează" },
-      // `pozitie` e copia celei din `src/content/fotografii.ts`, pentru aceeasi cheie, si o
-      // verificare din `tests/fotografii.test.ts` cere sa fie EGALE. Cifrele de aici s-au
+      // `pozitie` SI `alt` sunt copiile celor din `src/content/fotografii.ts`, pentru aceeasi
+      // cheie, si o verificare din `tests/fotografii.test.ts` cere sa fie EGALE. Cifrele s-au
       // rescris odata cu setul de fotografii al site-ului (2026-09-06): masurate pe cadrele
       // NOI, la clientWidth 390 si card 358x240, ies dosare 50%, cutii 45% si maini 30%.
       // Motivul fiecareia e scris o singura data, langa cadru, in registru.
+      //
+      // Pe 2026-09-07 s-a schimbat si alt-ul lui `maini`: numea „un caiet cu spirala", care e in
+      // fisierul de 1920 dar nu si in cel de 960, servit sub 768 px. Fila „Solve" e chiar cardul
+      // care se vede pe telefon, deci aici alt-ul mintea exact pe marimea livrata. De ce, cu
+      // cifrele ferestrei: in registru, langa cheie.
       imagine: {
         nume: "dosare",
         alt: "Teancuri de dosare vechi de carton, cu filele ieșind dintre coperți, în lumină caldă de prim-plan, fotografie ilustrativă",
@@ -145,7 +150,7 @@ export const ETAPE = {
       legatura: { href: "/instrumente/termene-de-pastrare", text: "Termene de păstrare" },
       imagine: {
         nume: "maini",
-        alt: "Mână care scoate un dosar dintr-un suport de documente din carton, alături de un caiet cu spirală, fotografie ilustrativă",
+        alt: "Mână care scoate un dosar dintr-un suport de documente din carton, cu file de hârtie ieșind dintre despărțitoare, fotografie ilustrativă",
         pozitie: "center 30%",
       },
     },
