@@ -1,0 +1,270 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   3S - Scan Store Solve
+   Directia vizuala REF-V (sep 2026): fundal alb si ceata, un singur violet care
+   duce actiunea, litera obisnuita cu punct la final, fotografia in card cu raza
+   16 px - niciodata pe tot ecranul. Regulile scrise, cu exemple de cod si cu
+   cifrele masurate: `docs/design/DIRECTIA.md`.
+
+   PALETA VECHE A DISPARUT COMPLET. `noapte`, `noapte-2`, `noapte-3`,
+   `hartie-veche*`, `arama*`, `verde*`, `tus*`, `pe-inchis*`, `suprafata`,
+   `hartie*`, `linie-noapte` nu mai sunt definite nicaieri, nici ca alias. O
+   culoare definita si nefolosita e gaura prin care directia veche supravietuieste:
+   la felia 25 exact asa a trait un document ALB pe un site de noapte, fiindca
+   `--color-suprafata` ramasese alb „pentru orice eventualitate".
+
+   CE SE INTAMPLA CU FISIERELE ALTOR FELII care inca scriu numele vechi. Masurat
+   pe arborele de azi, in afara fisierelor feliei 1: 34 de clase din paleta veche,
+   in sase fisiere (`contact`, `despre`, `harta-site`,
+   `instrumente/termene-de-pastrare`, `not-found`, `solutii`), plus trei siruri de
+   clase in `src/content/termene.ts` (pastilele de stare). Clasele acelea nu mai
+   produc CSS: fundalul lipseste, deci elementul ramane pe suprafata paginii, iar
+   culoarea de litera lipseste, deci se mosteneste. Si aici sta diferenta care face
+   stergerea SIGURA azi, desi la felia 25 ar fi fost periculoasa: implicitul e ALB
+   cu cerneala inchisa, deci o clasa care dispare da text inchis pe fundal deschis,
+   nu litera inchisa pe fundal inchis. Se repara la valul S1-b, cand feliile
+   rescriu chiar paginile acelea.
+   ========================================================================== */
+
+@theme {
+  /* --- paleta REF-V, pe roluri --------------------------------------------------
+     CONTRAST, calculat de mine din valorile de mai jos (raportul de luminanta WCAG
+     2.x), nu copiat: scriptul e cel din `docs/design/DIRECTIA.md`. Se scriu aici ca
+     sa nu se remasoare la fiecare componenta.
+
+       cerneala    pe alb 17,73:1 - pe ceata 16,27:1
+       cerneala-2  pe alb  7,06:1 - pe ceata  6,48:1 - pe ceata-2 6,70:1
+       cerneala-3  pe alb  5,22:1 - pe ceata  4,79:1 - pe ceata-2 4,95:1
+       violet      pe alb  6,20:1 - pe ceata  5,69:1 - pe violet-pal 5,12:1
+       violet-2    pe alb  4,05:1  (sub 4,5 - NU e culoare de text pe deschis)
+       alb         pe violet 6,20:1 - pe violet-adanc 15,71:1 - pe noapte-v 18,95:1
+       violet-clar pe violet-adanc 6,31:1 - pe noapte-v 7,61:1
+       succes      pe alb  3,48:1  (e ICOANA, nu text: bifa din liste)
+
+     REGULA CARE DECURGE, si pe care o masoara portile de browser:
+       - orice culoare de cerneala trece pe orice suprafata deschisa a paletei;
+       - `violet-2` nu scrie text pe deschis - e contur, hover si cifra pe inchis;
+       - pe gradientul eroului scrie `alb` sau `violet-clar`, si nimic altceva.
+     Ultima nu e o preferinta: gradientul merge intre `violet-adanc` si `noapte-v`, deci
+     orice punct al lui e intre cele doua capete, iar cifrele de mai sus sunt capetele.
+     Verificarea pe captura, cu litera facuta transparenta, e in DIRECTIA.md.
+
+     CERNEALA-3 E MAI INCHISA DECAT IN REFERINTA, si e o abatere masurata, nu un gust.
+     Referinta o da la #797980 si o leaga de o conditie: numai pe alb, si numai de la
+     18,66 px in sus sau la greutatea 600. Conditia aceea nu se poate impune aici: sapte
+     pagini din `src/app` o scriu la 15,5 px, sunt ale altui val si nu se ating acum.
+     Masurat cu axe pe arborele construit, la 1280 px: 4,32:1, adica `serious` pe
+     /accesibilitate, /arhivare-fizica, /comparatie, /cum-functioneaza, /investitia,
+     /securitate si /solutii - sapte pagini rosii dintr-o singura culoare. Reparatia
+     ingusta e valoarea, nu regula scrisa in proza si nu poarta: #6c6c72 da 5,22 pe alb si
+     4,79 pe ceata, deci trece pe toate cele trei suprafete deschise, cu rezerva, nu pe
+     punctul de esec. Cifrele s-au ales dintr-o baleiere pe rampa neutra, oprita la prima
+     valoare care trece si pe `ceata`. */
+  --color-violet: #673de6;
+  --color-violet-2: #7b66ff;
+  --color-violet-clar: #9d99ff;
+  --color-violet-pal: #e6e8ff;
+  --color-violet-adanc: #251951;
+  --color-noapte-v: #110c29;
+  --color-cerneala: #18181a;
+  --color-cerneala-2: #58585e;
+  --color-cerneala-3: #6c6c72;
+  --color-alb: #ffffff;
+  --color-ceata: #f5f5f6;
+  --color-ceata-2: #f8f9fa;
+  --color-linie: #e9e9ec;
+  --color-succes: #009e5b;
+
+  /* --- tipografie: o singura familie -------------------------------------------
+     DM Sans, incarcat de `next/font/google` in `layout.tsx` cu greutatile 400 si
+     600. Cele trei jetoane de familie exista fiindca fisierele altor felii scriu
+     inca `font-afis`, `font-vitrina` si `font-mono`; toate trei arata catre ACELASI
+     font, deci nu se mai poate strecura o a doua familie printr-un nume mostenit.
+     Rezerva de sistem e scrisa pe fiecare, ca pagina sa aiba litera si inainte ca
+     fisierul sa fi aterizat. */
+  --font-afis: var(--fnt-text), "DM Sans", system-ui, sans-serif;
+  --font-vitrina: var(--fnt-text), "DM Sans", system-ui, sans-serif;
+  --font-mono: var(--fnt-text), "DM Sans", system-ui, sans-serif;
+  --font-sans: var(--fnt-text), "DM Sans", system-ui, sans-serif;
+  --font-serif: var(--fnt-text), "DM Sans", system-ui, sans-serif;
+
+  /* --- scara REF-V, in pixeli ---------------------------------------------------
+     Numele treptelor raman cele vechi (`titlu-1`, `titlu-2`, `corp`, `nota`...):
+     sunt roluri, nu culori, si sunt scrise in componente pe care felia 1 nu le
+     rescrie. Valorile sunt insa cele masurate pe REF-V, la 1440 si la 390.
+
+       titlu erou (h1)      72 / 80 px    la 390: 36 / 44
+       titlu de sectiune    48 / 56 px    la 390: 24 / 32
+       titlu de bloc        36 / 44 px
+       titlu de card        24 / 32 px
+       subtitlu de card     20 / 28 px
+       corp                 16 / 24 px
+       nota, eticheta       14 / 20 px
+
+     `clamp` face capetele, si e ales ca la 1440 sa dea exact cifra masurata:
+     5vw x 1440 = 72, 3,35vw x 1440 = 48,2 (plafonat la 48). Sub prag ramane
+     minimul, deci la 390 ies 36 si 24. */
+  --text-eticheta: 14px;
+  --text-eticheta--line-height: 1.43;
+  --text-fisa: 14px;
+  --text-fisa--line-height: 1.43;
+  --text-nota: 14px;
+  --text-nota--line-height: 1.43;
+  --text-corp: 16px;
+  --text-corp--line-height: 1.5;
+  --text-baza: 16px;
+  --text-baza--line-height: 1.5;
+  --text-lead: 20px;
+  --text-lead--line-height: 1.4;
+  --text-subtitlu: 20px;
+  --text-subtitlu--line-height: 1.4;
+  --text-titlu-4: 24px;
+  --text-titlu-4--line-height: 1.33;
+  --text-titlu-3: clamp(1.75rem, 2.5vw, 2.25rem);
+  --text-titlu-3--line-height: 1.22;
+  --text-titlu-2: clamp(1.5rem, 3.35vw, 3rem);
+  /* Vezi nota de la titlu-1: si aici inaltimea de rand e clamp, nu raport, fiindca
+     REF-V cere 24/32 la 390 (1,333) si 48/56 la 1440 (1,167). Punctele: 3,9vw da
+     15,21 px la 390 (sub minimul de 32) si 56,16 px la 1440 (peste maximul de 56),
+     deci ambele capete cad pe cifra ceruta. Raportul cel mai strans pe tot
+     intervalul este 3,9/3,35 = 1,164, peste pragul de 1,069 em. */
+  --text-titlu-2--line-height: clamp(2rem, 3.9vw, 3.5rem);
+
+  /* INALTIMEA DE RAND a titlurilor mari e un CLAMP, nu un raport, si asta e o corectie
+     masurata: marimea literei se scaleaza intre doua capete, dar REF-V cere la cele
+     doua capete raporturi DIFERITE - h1 72/80 la 1440 (1,111) si 36/44 la 390 (1,222).
+     Un raport unic nu le poate satisface pe amandoua: cu 1,12 fix, la 390 iesea 40,32
+     px in loc de 44, adica 3,68 px lipsa (-8,4%), masurat pe stiluri calculate cu
+     innerWidth citit din pagina. Cu 5,6vw intre 2,75rem si 5rem: la 390 vw da 21,84 px,
+     deci castiga minimul de 44; la 1440 da 80,64 px, deci castiga maximul de 80. Ambele
+     capete cad exact pe cifra ceruta.
+
+     Pragul de lizibilitate se pastreaza, doar ca acum se verifica pe intervalul intreg,
+     nu pe o singura cifra. Diacriticele romanesti cer, pe orice font, ca pasul de rand
+     sa fie mai mare decat suma dintre
+     coborarea virgulei lui S/T si urcarea lui A/I cu accent. Pe directia veche cifra
+     masurata pe fontul real era 1,069 em, si titlurile erau MAJUSCULE - cazul cel mai
+     rau, fiindca virgula cadea peste o capitala. Aici titlurile sunt cu litera
+     obisnuita, deci cerinta e mai mica, dar pragul se pastreaza: nu costa nimic, si o
+     regula care se relaxeaza fiindca „acum nu mai avem majuscule" se strica la primul
+     titlu scris cu majuscule. Raportul cel mai strans pe care il produce perechea de
+     clamp-uri este 1,111 (la 1440 si peste), iar minimul din interiorul intervalului
+     este tot 1,12 - amandoua peste 1,069. */
+  --text-titlu-1: clamp(2.25rem, 5vw, 4.5rem);
+  --text-titlu-1--line-height: clamp(2.75rem, 5.6vw, 5rem);
+
+  /* --- latimi -------------------------------------------------------------------
+     `vitrina` e containerul REF-V: 1265 px de continut intr-o fereastra de 1440,
+     adica 87,8%. `registru` e coloana mai stramta a sectiunilor care sunt text
+     curat, iar `act` ramane cadrul paginilor care sunt ACTE (termeni,
+     confidentialitate, cookies), cu jgheabul cifrei plus coloana de 492 px in care
+     randul masoara 68 de caractere in medie. */
+  --container-vitrina: 1265px;
+  --container-registru: 1000px;
+  --container-act: 720px;
+
+  /* --- raze si umbre (REF-V) -----------------------------------------------------
+     8 px butoane, 12 px carduri mici si casete de intrare, 16 px carduri mari si
+     imagini in card, 24 px cardurile mari de erou, 999 px pastile.
+     UMBRE: aproape deloc. Cardurile se despart prin CULOARE DE FUNDAL (ceata pe alb,
+     alb pe ceata), nu prin umbra. Singurele doua: conturul butonului secundar, care e
+     o umbra fiindca nu misca asezarea, si elementul plutitor. */
+  --radius-buton: 8px;
+  --radius-card: 12px;
+  --radius-card-mare: 16px;
+  --radius-erou: 24px;
+  --radius-pastila: 999px;
+  --shadow-contur: 0 0 0 1px #7b66ff;
+  --shadow-plutitor: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Antetul e lipicios si are 56 px; rezerva de aici il adauga la orice sarire pe
+       ancora, ca titlul sectiunii sa nu ajunga sub bara. */
+    scroll-padding-top: 76px;
+  }
+
+  /* Fundalul implicit e ALB si litera implicita e cerneala. E alegerea care face
+     stergerea paletei vechi sigura: orice clasa de culoare disparuta cade pe
+     perechea asta, care are 17,73:1. Implicitul de noapte avea proprietatea
+     inversa - o clasa pierduta dadea litera inchisa pe fundal inchis. */
+  body {
+    background: var(--color-alb);
+    color: var(--color-cerneala);
+    font-family: var(--font-vitrina);
+    font-size: 16px;
+    line-height: 1.5;
+    font-feature-settings: "kern" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Titlurile NU sunt bold si NU sunt majuscule: litera obisnuita, greutate 400,
+     cu propozitie si punct. Asta e diferenta de fond fata de directia anterioara,
+     si e scrisa aici, in regula de baza, ca sa se aplice si titlurilor fara nicio
+     clasa. Greutatea 700 nici nu se incarca: DM Sans vine cu 400 si 600, deci un
+     `font-bold` ramas undeva ar fi sintetizat de browser, adica ingrosat mecanic. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-afis);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    text-transform: none;
+  }
+
+  ::selection {
+    background: var(--color-violet);
+    color: var(--color-alb);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-violet);
+    outline-offset: 3px;
+  }
+}
+
+/* --- fundalul eroului -----------------------------------------------------------
+   Gradientul REF-V: `violet-adanc` sus, `noapte-v` la baza. Peste el, o lumina
+   radiala violeta in dreapta-sus, care tine locul fotografiei estompate din
+   referinta - la noi eroul nu are fotografie deloc, deci lumina e singurul relief.
+   Se scrie ca strat de culoare, nu ca imagine: nimic de descarcat, nimic de servit.
+
+   Contrastul textului de pe el nu se presupune. Capetele gradientului dau, cu alb,
+   15,71:1 si 18,95:1; lumina radiala urca luminanta fundalului cel mult pana la
+   `#3a2a72` in cel mai luminos punct al ei, unde albul da inca 11,3:1. Verificarea
+   pe captura, cu litera ascunsa, e in DIRECTIA.md. */
+.erou-violet {
+  background:
+    radial-gradient(120% 90% at 82% 8%, rgba(123, 102, 255, 0.22) 0%, rgba(123, 102, 255, 0) 62%),
+    linear-gradient(180deg, #251951 0%, #110c29 100%);
+}
+
+/* Cardul violet al paginii de start: aceeasi diagonala ca in REF-V, 135 grade,
+   de la `violet` la `violet-2`. Albul de pe el sta intre 6,20:1 (pe violet) si
+   4,05:1 (pe violet-2), deci pe el se scrie alb DOAR de la 24 px in sus sau la 600,
+   iar textul mic al cardului sta pe capatul inchis, in stanga-sus. */
+.card-violet {
+  background: linear-gradient(135deg, #673de6 0%, #7b66ff 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
