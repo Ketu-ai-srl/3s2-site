@@ -33,8 +33,39 @@ Cheile au rămas neschimbate - `rafturi`, `cutii`, `dosare`, `dulapuri`, `sertar
 metalice albe cu uși numerotate. Privit la 1:1 înainte de generare, are sub **fiecare** cifră un
 slogan tipărit în chirilică, care se citește cuvânt cu cuvânt în original - text în alt alfabet
 așezat pe chiar subiectul cadrului, deci imposibil de scos printr-un decupaj. Locul lui îl ia
-rezerva declarată, 29940222: ușa albă a unui dulap metalic de birou, cu cheia lăsată în broască,
+rezerva declarată, 29940222: ușa albă a unui dulap de birou, cu cheia lăsată în broască,
 prim-plan, fără nicio literă în cadru.
+
+## `sertare`: aceeași sală ca la site-ul precedent - decizie deschisă
+
+**Cadrul `sertare` (6550462) arată aceeași sală de catalog ca unul dintre cadrele site-ului
+precedent al fabricii (6550460).** Încadrarea e alta - acolo peretele întreg de sertare, aici un
+singur sertar tras afară - dar sunt aceeași mobilă de artar, aceleași suporturi metalice de
+etichetă, aceeași podea gri și aceeași lumină; ID-urile vecine spun că sunt două cadre din
+aceeași ședință foto. **Regula măsurată e respectată** (0 sume sha256 comune, control pozitiv 14
+din 14), dar scopul ei nu: cine deschide amândouă site-urile vede aceeași încăpere.
+
+**Rezerva declarată a cheii, 6333856, nu poate lua locul.** A fost re-descărcată și privită la
+1:1 (5971x3981, decupaje x 0-700 și x 1000-1800 pe rândurile 1900-2500): fiecare sertar poartă o
+etichetă tipărită, **lizibilă cuvânt cu cuvânt, într-un alfabet care nu e cel latin** - un antet
+repetat, plus un număr și un interval alfabetic. Etichetele acoperă tot peretele, adică chiar
+subiectul cadrului, deci nicio fereastră 3:2 nu le lasă afară. E exact motivul pentru care a fost
+respins 9219643 la `dulapuri`; a o accepta aici ar însemna două măsuri pentru aceeași regulă.
+
+Amândouă opțiunile declarate ale cheii pică, așa că fișierul rămâne cum e și **cheia are nevoie
+de un candidat nou, ales de om.** Nu s-a inventat un ID de înlocuire.
+
+**Asimetria cu `dulapuri`, argumentată în scris, fiindcă altfel arată ca două măsuri.** Cadrul
+`sertare` e acceptat deși e fotografiat în aceeași sală cu etichete în alfabet nelatin, iar
+9219643 și 6333856 sunt respinse pentru același lucru. Criteriul nu e „există text nelatin în
+sală", ci **ce se poate citi în fișierul livrat**: la `sertare` cartonașele sunt în afara
+planului de claritate, iar neclaritatea e **optică, din sursă** - verificată la 8x pe fișierul
+livrat și la 3x pe originalul re-descărcat, pe aceleași cartonașe: niciun glif nu se rezolvă în
+niciunul din cele două. Deci nici o reîncadrare mai strânsă, nici o recompresie viitoare nu o pot
+desface. La celelalte două, textul e la focus, tipărit pe chiar subiectul cadrului, și se citește
+la 1:1 în original. **Un editor care reîncadrează `sertare` lucrează totuși într-o sală cu
+etichete în alfabet nelatin** - dacă apropie cadrul până când cartonașele intră în plan, cade
+regula. De asta e scris aici.
 
 ## Cele două mărimi, și ce lasă afară fiecare fereastră
 
@@ -91,6 +122,12 @@ Niciun cadru sub 30 la luminanță, niciunul peste 50 la saturație. Cel mai str
 luminanță și 43,0 saturație - la 1,1 respectiv 7,0 puncte de praguri, deci un cadru de urmărit dacă
 se recomprimă vreodată setul.
 
+**Riscul nu e teoretic, și cele două fapte se ating.** `dosare-1920` e chiar fișierul care a cerut
+calitate 78 în loc de 81 ca să intre sub 250 KB (236.856 octeți), adică e **cel mai probabil din
+lot să fie recomprimat** data viitoare când se strânge plafonul de mărime - și e totodată singurul
+la 1,1 puncte de podeaua de luminanță. Cine coboară calitatea aici remăsoară L înainte de a comite:
+de sub 30 nu se mai iese fără schimbarea cadrului.
+
 **Cum se măsoară, ca să nu iasă altă cifră data viitoare.** „Eșantion de 160x160" înseamnă **întregul
 fișier de 1920 redus la 160x160** (Pillow, LANCZOS), apoi media pe pixeli a lui `L` din
 `colorsys.rgb_to_hls` și a lui `S` din `colorsys.rgb_to_hsv`, înmulțite cu 100. NU înseamnă un
@@ -108,13 +145,19 @@ scrie ce SE DISTINGE și ce NU, nu ce știu din original.
 | rafturi | etichetele de coordonate ale consolelor de raft: `02-12-40`, `02-11-40`, `02-12-30` și vecinele - **numai cifre și cratime**, coordonate de amplasare, nici marcă, nici cod de bare. Pe folia paleților, urme cenușii-albăstrui de tipar de sub folie: la 4x nu se identifică nicio literă | aceleași coduri de raft, la aceeași lizibilitate. Pe paletul înfoliat din colțul de jos, la 4x, doar pete albastre pe folie, nicio literă. Eticheta cu cod de bare nu e în fișier |
 | cutii | nicio urmă de text. Cartonul kraft e gol, cârligele dosarelor suspendate sunt din plastic alb, fără inscripție | nicio urmă de text |
 | dosare | pe cotorul unui dosar aflat în umbră, **trei semne ștanțate** care se citesc ca cifre (`161` sau `181`): un număr de dosar, nu un cuvânt și nu o marcă. Restul teancurilor e gol | același număr ștanțat, la 6x la fel de clar. Scrisul de mână în alt alfabet nu e în fișier |
-| dulapuri | nicio urmă de text. Ușa e tablă albă, broasca și cheia nu poartă inscripție | nicio urmă de text |
-| sertare | cartonașele din suporturile metalice ale sertarelor: la 6x se disting **două rânduri de scris cenușiu** pe cele din planul apropiat, dar niciun cuvânt și nicio literă nu se identifică - sunt în afara planului de claritate | aceleași cartonașe, aceeași concluzie la 6x: două rânduri de urme, nicio literă |
+| dulapuri | nicio urmă de text. Ușa e un panou alb neted, broasca și cheia nu poartă inscripție. **Materialul nu se poate stabili din cadru** - nicio nervură, îmbinare sau reflexie de tablă; poate fi la fel de bine melamină, iar cheia și rozeta sunt de mobilier de birou obișnuit. De aceea nici textul alternativ nu îl mai afirmă | nicio urmă de text |
+| sertare | cartonașele din suporturile metalice ale sertarelor: la 6x se disting **două rânduri de scris cenușiu** pe cele din planul apropiat, dar niciun cuvânt și nicio literă nu se identifică - sunt în afara planului de claritate. **Scrisul acela nu e în alfabet latin** - se vede în cadrul aceleiași săli fotografiat cu peretele de etichete la focus; vezi secțiunea de mai jos | aceleași cartonașe, aceeași concluzie la 6x: două rânduri de urme, nicio literă |
 | maini | pe o coală albă dintre despărțitoare, **un singur semn de pix în formă de X**. Nicio literă, niciun cuvânt. Ziarul cu text lizibil nu e în fișier | aceeași coală, același X, nimic altceva |
 | legatura | calculatorul de birou poartă inscripțiile standard ale tastelor: cifrele, `MU`, `M+`, `M-`, `MR`, `MC`, `%`, `+/-`, `C/CE`, `00`. Sunt **funcții de tastă, nu un nume de firmă** - pe carcasă nu apare nicio marcă, iar afișajul e stins. Bibliorafturile și mapa cu fermoar sunt goale | calculatorul nu e în fișier: fereastra de 960 se oprește la x 1483, iar el începe la 1500. Nicio urmă de text |
 
 Ce rămâne nemăsurat, scris ca atare: nu am rulat OCR pe fișiere, deci „nu se identifică nicio
 literă" înseamnă ce am văzut privind mărirea, nu un rezultat de recunoaștere automată.
+
+**Tabelul ăsta e și sursa textelor alternative, nu doar un inventar de text.** Coloana `-960`
+spune ce NU e în fișierul servit sub 768 px, iar un obiect scris acolo ca absent nu are voie să
+rămână numit în `src/content/fotografii.ts`. S-a întâmplat o dată: rândul `legatura` scria deja
+că „calculatorul nu e în fișier", iar textul alternativ îl numea mai departe. Corectat pe
+2026-09-07, împreună cu `maini`; regula, cu cifrele ferestrelor, e scrisă în antetul registrului.
 
 <!-- Dovada unicității, măsurată pe 2026-09-06 pe arborele acestei felii.
 
