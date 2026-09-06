@@ -48,14 +48,17 @@ export default function CumFunctioneaza() {
     <main id="continut">
       <AntetPagina
         adresa="/cum-functioneaza"
-        // Ancora de decupaj ramane la 20%, dar din motivul care a supravietuit directiei
-        // vechi, nu din cel care a murit odata cu ea. Baleiat atunci pe `maini-1920.webp`
-        // (portret, 1920x2880): la ancora implicita de 50% mana - subiectul cadrului - iese
-        // aproape complet din banda vazuta, iar la 20% se vede cu de 2,6 ori mai multa lumina
-        // in cadranul liber. ATAT ramane valabil. Cealalta jumatate a masuratorii de atunci -
-        // contrastul etichetei de 12 px asezate PESTE fotografie - nu mai are obiect: in
-        // REF-V fotografia sta intr-un card la dreapta si nu poarta niciun text peste ea.
-        imagine={{ ...FOTOGRAFII.maini, pozitie: "center 20%" }}
+        // Ancora locala de 20% s-a SCOS pe 2026-09-06, odata cu setul de fotografii al
+        // site-ului. Motivul ei fusese masurat pe un `maini-1920.webp` PORTRET de 1920x2880,
+        // fisier care nu mai exista: cel de acum e peisaj, 1920x1280, si e alt cadru. O cifra
+        // ramasa din masuratoarea altei fotografii nu e o preferinta de pagina, e o nota
+        // devenita falsa - la a treia editare cineva ar fi aparat-o ca pe o decizie.
+        //
+        // Ce ramane e valoarea din registru, 30%, masurata pe cadrul NOU (motivul, langa
+        // cadru, in `src/content/fotografii.ts`). Verificat ca nu pierde nimic aici: pe
+        // antetul de 555x340 se vede 92,0% din inaltimea fisierului de 1920, deci fereastra
+        // cade la 2,4-94,4% si mana - care tine 16,7-53,8% - intra oricum intreaga.
+        imagine={FOTOGRAFII.maini}
         fir={[{ text: "Pagina de start", href: "/" }, { text: "Cum funcționează" }]}
         eticheta={C.eticheta}
         titlu={C.h1}
