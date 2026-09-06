@@ -176,7 +176,7 @@ export const FOTOGRAFII = {
   },
   sertare: {
     nume: "sertare",
-    alt: "Fronturile mai multor sertare plate suprapuse, fiecare cu un mâner de sârmă, văzute în prim-plan apropiat și oblic; benzile lor merg de la tonuri de nisip la alb, gri și un galben, fotografie ilustrativă",
+    alt: "Fronturile mai multor sertare plate suprapuse, cu mânere de sârmă, văzute în prim-plan apropiat și oblic; benzile lor merg de la negru și maro închis la tonuri de nisip, alb, gri și un galben, fotografie ilustrativă",
     // CADRU NOU IN RUNDA A TREIA, si de ce nu mai e cel dinainte. Cheia purta 6550462, care arata
     // ACEEASI sala de catalog ca doua cadre ale site-ului precedent (6549926 si 6550460): regula
     // MASURATA era respectata - 0 sume sha256 comune, control pozitiv 14 din 14 - dar scopul ei
@@ -197,7 +197,12 @@ export const FOTOGRAFII = {
     // calitate 81, adica la mai putin de doua treimi din plafonul de 250 KB.
     //
     // CE SE VEDE, PRIVIT, si ce anume NU se afirma. Fronturi plate suprapuse, taiate oblic de
-    // cadru, fiecare cu un maner de sarma si cu umbra lui pe placa de dedesubt. Marit de 4 ori
+    // cadru, cu MAI MULTE manere de sarma pe fiecare front (3-4 pe banda alba, x 150-570,
+    // 830-1090, 1180-1290, 1400-1520 din 1920 - criticul rundei a treia le-a numarat, de aceea
+    // alt-ul spune „cu manere", nu „fiecare cu un maner") si cu umbrele lor pe placa de
+    // dedesubt. Culorile din alt incep cu negru si maro inchis fiindca o treime din cadru e
+    // intunecata: pixeli cu V < 0,25 in HSV = 35,5% pe `-1920`, 33,2% pe `-960` (galben saturat
+    // 7,3% / 8,7%, luminos si neutru 16,7% / 17,5%), masurat de acelasi critic. Marit de 4 ori
     // pe `-1920` (banda alba, x 300-700 y 560-720) si pe `-960` (x 0-480 y 820-1160 si
     // x 480-960 y 180-520): nicio litera, nicio marca, niciun cod de bare, niciun chip. LIMITA,
     // scrisa ca atare: corpul dulapului nu intra in cadru, deci „sertar" e citirea pe care o

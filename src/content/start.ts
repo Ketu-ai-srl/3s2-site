@@ -76,7 +76,7 @@ export const CARDURI_EROU: CardImagine[] = [
     // alt lasat neschimbat ar fi descris o fotografie care nu mai exista. De ce cadrul asta si ce
     // NU afirma alt-ul despre el: in registru, langa cheie.
     nume: "sertare",
-    alt: "Fronturile mai multor sertare plate suprapuse, fiecare cu un mâner de sârmă, văzute în prim-plan apropiat și oblic; benzile lor merg de la tonuri de nisip la alb, gri și un galben, fotografie ilustrativă",
+    alt: "Fronturile mai multor sertare plate suprapuse, cu mânere de sârmă, văzute în prim-plan apropiat și oblic; benzile lor merg de la negru și maro închis la tonuri de nisip, alb, gri și un galben, fotografie ilustrativă",
     eticheta: "Căutare",
   },
 ];
