@@ -19,12 +19,15 @@
 // contractul cu paginile, fisierul e al acestui site. Nimic din `public/img/` nu se copiaza de
 // la alt site. Dovada, cu control pozitiv, e in `public/img/LICENTA.md`.
 //
-// SASE DIN SAPTE ID-URI sunt cele propuse la pornirea feliei. Al saptelea, `dulapuri`, a
-// trecut pe rezerva: cadrul propus (9219643, dulapuri metalice albe cu usi numerotate) poarta
-// sub FIECARE cifra un slogan tiparit in chirilica, perfect lizibil la 1:1 in original - text
-// in alt alfabet asezat pe chiar subiectul cadrului, deci imposibil de scos prin decupare.
-// Locul lui il ia rezerva declarata, 29940222: usa alba a unui dulap de birou, cu
-// cheia in broasca, prim-plan, fara nicio litera in cadru.
+// CINCI DIN SAPTE ID-URI sunt cele propuse la pornirea feliei; doua s-au schimbat, si fiecare
+// isi poarta motivul langa cheie. `dulapuri` a trecut pe rezerva inca de la prima runda: cadrul
+// propus (9219643, dulapuri metalice albe cu usi numerotate) poarta sub FIECARE cifra un slogan
+// tiparit intr-un alfabet nelatin, perfect lizibil la 1:1 in original - text asezat pe chiar
+// subiectul cadrului, deci imposibil de scos prin decupare. Locul lui il ia rezerva declarata,
+// 29940222: usa alba a unui dulap de birou, cu cheia in broasca, prim-plan, fara nicio litera in
+// cadru. `sertare` s-a schimbat abia in runda a TREIA, cu un cadru ales de om (8478370), fiindca
+// amandoua optiunile lui de pana atunci picasera: una arata aceeasi sala de catalog ca site-ul
+// precedent, cealalta purta etichete intr-un alfabet nelatin pe tot peretele.
 //
 // CE S-A TAIAT AFARA DIN FIECARE ORIGINAL, ca sa se vada ca ferestrele nu sunt preferinte:
 //   `rafturi` - doua etichete de transport cu cod de bare, una la randul 1680 al sursei si una
@@ -173,37 +176,57 @@ export const FOTOGRAFII = {
   },
   sertare: {
     nume: "sertare",
-    alt: "Sertar de catalog din lemn, tras afară din peretele de sertare, plin cu fișe puse în picioare; etichetele vecine rămân în afara planului de claritate, fotografie ilustrativă",
-    // DECIZIE DESCHISA, ridicata la om pe 2026-09-07, nu inchisa de mine. Cadrul asta e ACEEASI
-    // sala de catalog ca unul dintre cadrele site-ului precedent al fabricii: alta incadrare
-    // (acolo peretele intreg la focus, aici un singur sertar tras), dar aceeasi mobila de artar,
-    // aceleasi suporturi metalice de eticheta, aceeasi podea gri si aceeasi lumina. Regula
-    // MASURATA e respectata - 0 sume sha256 comune, cu control pozitiv 14 din 14 - dar scopul ei
-    // nu: cine deschide amandoua site-urile vede aceeasi incapere. ID-urile sunt vecine, 6550462
-    // aici si 6550460 acolo, adica doua cadre din aceeasi sedinta foto.
+    alt: "Fronturile mai multor sertare plate suprapuse, fiecare cu un mâner de sârmă, văzute în prim-plan apropiat și oblic; benzile lor merg de la tonuri de nisip la alb, gri și un galben, fotografie ilustrativă",
+    // CADRU NOU IN RUNDA A TREIA, si de ce nu mai e cel dinainte. Cheia purta 6550462, care arata
+    // ACEEASI sala de catalog ca doua cadre ale site-ului precedent (6549926 si 6550460): regula
+    // MASURATA era respectata - 0 sume sha256 comune, control pozitiv 14 din 14 - dar scopul ei
+    // nu, fiindca cine deschidea amandoua site-urile vedea aceeasi incapere. Rezerva de atunci,
+    // 6333856, nu putea lua locul: fiecare sertar poarta o eticheta tiparita, lizibila cuvant cu
+    // cuvant, intr-un alfabet nelatin, si etichetele acopera TOT peretele. Cadrul de acum,
+    // 8478370, e ales de om si nu are nimic comun cu niciuna din cele doua sali.
     //
-    // DE CE NU L-AM INLOCUIT SINGUR, desi rezerva cheii e nefolosita. Rezerva declarata, 6333856,
-    // a fost re-descarcata si privita la 1:1 (5971x3981; decupaje x 0-700 si x 1000-1800 pe
-    // randurile 1900-2500) si PICA regula „fara text in alt alfabet": fiecare sertar poarta o
-    // eticheta tiparita, lizibila cuvant cu cuvant, intr-un alfabet care nu e cel latin - un antet
-    // repetat, plus un numar si un interval alfabetic - iar etichetele acopera TOT peretele, adica
-    // chiar subiectul cadrului. Nicio fereastra 3:2 nu le poate lasa afara. E exact motivul pentru
-    // care a fost respins 9219643 la `dulapuri`, deci a o accepta aici ar fi doua masuri pentru
-    // aceeasi regula. Amandoua optiunile declarate ale cheii pica, asa ca fisierul ramane cum e si
-    // cheia are nevoie de un candidat NOU, ales de om. Detaliul, cu decupajele privite, in
-    // `public/img/LICENTA.md`.
+    // A DOUA REZERVA A PICAT LA FEL, si se scrie ca sa nu fie re-descarcata de runda urmatoare:
+    // 3747525 (sertare de catalog din lemn cu etichete de hartie) are pe cartonase text tiparit
+    // intr-un alfabet nelatin, lizibil cuvant cu cuvant - si nu abia la 1:1, ci deja in
+    // previzualizarea de 800 px; confirmat apoi si la 1:1, pe decupajul x 1200-2600, y 700-1400
+    // din 3840x5760. E exact motivul pentru care au cazut 9219643 la `dulapuri` si 6333856 aici,
+    // deci a treia oara nu se mai rediscuta.
     //
-    // 50%, masurat pe doua criterii care trag invers si se opresc amandoua aici. Sertarul tras
-    // afara - lemn cald in jumatatea DREAPTA a fisierului de 960, unde in rest e podea si perete
-    // gri - tine 37,2-58,6% din inaltime, cu centrul la 47,9%. La 50% centrul ferestrei e 50,0%,
-    // adica 2,1 puncte diferenta, iar fereastra 27,7-72,3% il cuprinde cu marja de amandoua
-    // partile.
+    // SURSA E EXACT 3:2, 6720x4480, deci fisierul de 1920 e cadrul INTREG redus: la cheia asta
+    // nu exista fereastra de 1920 si nimic nu s-a taiat afara. Fisierul iese 162.928 octeti la
+    // calitate 81, adica la mai putin de doua treimi din plafonul de 250 KB.
     //
-    // Al doilea criteriu impinge in jos: gri neutru (podea si perete) scade monoton, 13,8% la
-    // 25% si 7,5% la 65%. Nu se merge dupa el pana la capat, fiindca la 65% fereastra porneste
-    // la 36,0%, adica la 1,2 puncte de muchia de sus a sertarului - o marja pe care ar sterge-o
-    // orice reincadrare viitoare. La 50% gri-ul e 11,9% si sertarul sta centrat.
-    pozitie: "center 50%",
+    // CE SE VEDE, PRIVIT, si ce anume NU se afirma. Fronturi plate suprapuse, taiate oblic de
+    // cadru, fiecare cu un maner de sarma si cu umbra lui pe placa de dedesubt. Marit de 4 ori
+    // pe `-1920` (banda alba, x 300-700 y 560-720) si pe `-960` (x 0-480 y 820-1160 si
+    // x 480-960 y 180-520): nicio litera, nicio marca, niciun cod de bare, niciun chip. LIMITA,
+    // scrisa ca atare: corpul dulapului nu intra in cadru, deci „sertar" e citirea pe care o
+    // sustine un maner de sarma pe un front plat, nu ceva ce se poate dovedi din imagine; iar
+    // materialul placilor nu se afirma deloc, aceeasi masura ca la `dulapuri`. Singura urma care
+    // ar putea fi luata drept litera e in coltul de jos-stanga al lui `-1920`: la 6x arata a „V"
+    // unghiular, dar e UMBRA unui maner taiat de marginea cadrului - aceeasi tonalitate si
+    // acelasi rand cu celelalte umbre de maner - si nu e in `-960`, a carui fereastra incepe la
+    // x 1866 din sursa.
+    //
+    // DECUPAJUL DE 960 E FEREASTRA 2:3 CENTRATA, x 1866-4853 din 6720. Masurat pe 13 pozitii,
+    // din 300 in 300: luminanta ferestrei are un maxim plat, 40,53 la x 1600-1700, iar centrul
+    // geometric (1866) da 40,52 - o diferenta sub orice rezolutie utila. Celelalte doua criterii
+    // nu au maxim in interval, ci trag invers unul de altul: suprafata luminoasa si neutra creste
+    // monoton cu x (15,95% la 0, 21,80% la 3300), galbenul scade monoton (15,4% la 0, 6,0% la
+    // 3300). Cand doua criterii sunt monotone si opuse, iar al treilea e plat, ramane centrul.
+    //
+    // 70%, masurat pe doua criterii care se opresc amandoua aici. Banda galbena - singurul accent
+    // de culoare intr-un cadru altfel neutru - tine 59,7-81,2% din inaltimea fisierului de 960.
+    // Capatul de jos al ferestrei cardului de telefon e `pozitie` x 0,554 + 0,446, deci ca sa
+    // incapa banda INTREAGA e nevoie de cel putin 66,1%. Al doilea criteriu trage invers:
+    // suprafata luminoasa si neutra - manerele plus placile palide, V peste 0,62 si saturatie sub
+    // 0,14 - are un platou intre 45% si 65%, cu varful 29,15% la 55%, si scade dupa.
+    //
+    // La 70% fereastra e 38,8-83,3%: banda galbena incape toata, cu 2,1 puncte marja dedesubt,
+    // iar suprafata luminoasa e 28,28%, la 0,87 puncte de varf. La 65% s-ar castiga 0,6 puncte de
+    // suprafata luminoasa si s-ar taia 0,6 puncte din banda galbena, iar marja de sub ea ar
+    // disparea cu totul - adica prima reincadrare de maine ar scoate accentul din card.
+    pozitie: "center 70%",
   },
   maini: {
     nume: "maini",

@@ -70,8 +70,13 @@ export const CARDURI_EROU: CardImagine[] = [
     eticheta: "Digitizare",
   },
   {
+    // Alt-ul s-a rescris pe 2026-09-07 fiindca s-a schimbat CADRUL, nu formularea: cadrul vechi
+    // (6550462) arata aceeasi sala de catalog ca site-ul precedent, iar rezervele lui purtau
+    // etichete intr-un alfabet nelatin. Fila „Cautare" e chiar cardul in care se vede, deci un
+    // alt lasat neschimbat ar fi descris o fotografie care nu mai exista. De ce cadrul asta si ce
+    // NU afirma alt-ul despre el: in registru, langa cheie.
     nume: "sertare",
-    alt: "Sertar de catalog din lemn, tras afară din peretele de sertare, plin cu fișe puse în picioare; etichetele vecine rămân în afara planului de claritate, fotografie ilustrativă",
+    alt: "Fronturile mai multor sertare plate suprapuse, fiecare cu un mâner de sârmă, văzute în prim-plan apropiat și oblic; benzile lor merg de la tonuri de nisip la alb, gri și un galben, fotografie ilustrativă",
     eticheta: "Căutare",
   },
 ];
