@@ -32,11 +32,16 @@ const CSS = readFileSync(join(RADACINA, 'src', 'app', 'globals.css'), 'utf8')
 const DIRECTIA = readFileSync(join(RADACINA, 'docs', 'design', 'DIRECTIA.md'), 'utf8')
 const PAGINA = join(RADACINA, 'src', 'app', 'page.tsx')
 
-// Cele 10 roluri ale paletei REF-A. Lista e inchisa: o culoare in plus inseamna un rol pe care
-// nu l-a numit nimeni, iar rolurile nenumite se aleg dupa gust, nu dupa masuratoare.
+// Cele 9 roluri ale paletei REF-A, asa cum le poate folosi acest site. Lista e inchisa: o
+// culoare in plus inseamna un rol pe care nu l-a numit nimeni, iar rolurile nenumite se aleg
+// dupa gust, nu dupa masuratoare.
+//
+// AL ZECELEA ROL AL REFERINTEI, griul deschis de la paragraful de capitol, NU e aici, si e o
+// refutare masurata: la 21 px si greutatea 600 da 3,62:1, iar axe l-a raportat `serious` pe 20
+// din 22 de rute. Pragul de 3:1 pentru text mare cere 24 px sau greutatea 700, iar directia are
+// doua greutati. Motivul intreg, cu cele trei iesiri cantarite: `globals.css` si DIRECTIA.md.
 const PALETA = [
   'cerneala',
-  'cerneala-2',
   'cerneala-3',
   'albastru',
   'albastru-2',
@@ -108,7 +113,7 @@ const valoare = (rol: string) => {
 }
 
 describe('paleta REF-A', () => {
-  it('globals.css defineste exact cele 10 roluri ale paletei, si nimic in plus', () => {
+  it('globals.css defineste exact cele 9 roluri folosibile, si nimic in plus', () => {
     for (const rol of PALETA) {
       expect(CSS, 'globals.css nu defineste --color-' + rol).toContain('--color-' + rol + ':')
     }
@@ -195,36 +200,35 @@ describe('paleta REF-A', () => {
       contrast(valoare('albastru-clar'), valoare('alb')),
       'albastru-clar a devenit culoare de text pe alb',
     ).toBeLessThan(4.5)
-    expect(
-      contrast(valoare('cerneala-2'), valoare('alb')),
-      'cerneala-2 a devenit culoare de text mic pe alb',
-    ).toBeLessThan(4.5)
-    expect(
-      contrast(valoare('cerneala-2'), valoare('ceata')),
-      'cerneala-2 a devenit culoare de text mic pe ceata',
-    ).toBeLessThan(4.5)
-    // Dar la 21 px si 600 pragul e 3:1, si acolo trece - de asta are voie sa existe.
-    expect(contrast(valoare('cerneala-2'), valoare('ceata'))).toBeGreaterThan(3)
+    // Si griul referintei, cel care NU e definit: calculat aici din valoarea lui literala,
+    // ca sa ramana scris de ce nu poate exista. 3,62:1 pe alb, adica sub 4,5:1; iar usa de
+    // 3:1 pentru text mare cere 24 px sau greutatea 700, pe care directia nu le are la
+    // paragraful de capitol. Daca cineva il reintroduce, prima proba din fisier se inroseste.
+    expect(contrast('#86868b', valoare('alb')), 'griul referintei ar trece pragul de text mic').toBeLessThan(4.5)
+    expect(contrast('#86868b', valoare('ceata'))).toBeLessThan(4.5)
   })
 
-  it('conditia lui cerneala-2 e scrisa ca MECANISM in CSS, nu ca regula in proza', () => {
-    // Clasa cade pe `cerneala-3` peste tot si redevine `cerneala-2` numai impreuna cu marimea
-    // si greutatea care o fac legitima. Asa conditia referintei se aplica singura, la fiecare
-    // randare, si nu depinde de disciplina cuiva.
-    expect(CSS, 'lipseste coborarea clasei text-cerneala-2').toMatch(
-      /\.text-cerneala-2\s*\{\s*color:\s*var\(--color-cerneala-3\)/,
-    )
-    expect(CSS, 'lipseste perechea care redevine cerneala-2 la 21 px si 600').toMatch(
-      /\.text-capitol\.font-semibold\.text-cerneala-2\s*\{\s*color:\s*var\(--color-cerneala-2\)/,
-    )
-    // Si singurul loc din felia 1 care scrie perechea o scrie INTREAGA: fara `font-semibold`
-    // sau fara `text-capitol` culoarea nu se aplica, deci o pereche rupta ar fi un gri gresit.
-    const ecran = faraComentarii(readFileSync(join(COMPONENTE, 'Ecran.tsx'), 'utf8'))
-    for (const m of ecran.matchAll(/className="[^"]*text-cerneala-2[^"]*"/g)) {
-      expect(m[0], 'text-cerneala-2 scris fara marimea si greutatea care il fac legitim').toMatch(
-        /text-capitol[^"]*font-semibold/,
-      )
+  it('griul de la 21 px al referintei nu se intoarce, nici ca jeton, nici ca clasa', () => {
+    // Rolul a fost RETRAS dupa o masuratoare cu axe, nu uitat: 3,62:1 la 19 px, impact
+    // `serious` pe 20 din 22 de rute, un nod pe fiecare - paragraful de capitol. Proba pazeste
+    // exact intoarcerea lui, in amandoua formele in care s-ar putea intoarce.
+    expect(CSS, 'griul de 21 px a fost redefinit ca jeton').not.toMatch(/--color-cerneala-2:/)
+    expect(CSS, 'valoarea lui a fost strecurata sub alt nume').not.toMatch(/--color-[a-z0-9-]+:\s*#86868b/)
+    const scriu: string[] = []
+    for (const cale of fisiereTsx(SURSA)) {
+      const rel = relativa(cale)
+      if (!ALE_FELIEI.some((x) => rel.startsWith(x))) continue
+      const cod = faraComentarii(readFileSync(cale, 'utf8'))
+      for (const m of cod.matchAll(/\btext-cerneala-2\b/g)) scriu.push(rel + ': ' + m[0])
     }
+    expect(scriu, 'fisierele feliei 1 inca scriu clasa griului retras').toEqual([])
+    // Control pozitiv: tiparele prind formele pe care le vaneaza.
+    expect('--color-cerneala-2: #86868b;'.match(/--color-cerneala-2:/), 'tiparul de jeton nu prinde martorul').not.toBeNull()
+    expect('--color-gri-nou: #86868b;'.match(/--color-[a-z0-9-]+:\s*#86868b/), 'tiparul de valoare nu prinde martorul').not.toBeNull()
+    expect([...'className="text-cerneala-2"'.matchAll(/\btext-cerneala-2\b/g)].length).toBe(1)
+    // Si motivul retragerii e SCRIS, nu doar aplicat: cifra masurata si pragul care o judeca.
+    expect(CSS, 'globals.css nu scrie cifra masurata de axe').toContain('3,62')
+    expect(DIRECTIA, 'DIRECTIA.md nu scrie de ce a fost retras rolul').toMatch(/700/)
   })
 
   it('cifrele de contrast si pragul diacriticelor sunt scrise in globals.css si in DIRECTIA.md', () => {

@@ -37,7 +37,6 @@
      Controlul formulei: alb pe negru da 21,00 si alb pe alb da 1,00.
 
        cerneala      pe alb 16,83:1 - pe ceata 15,46:1
-       cerneala-2    pe alb  3,62:1 - pe ceata  3,33:1 - pe negru 5,80:1
        cerneala-3    pe alb  5,07:1 - pe ceata  4,66:1
        albastru      alb pe el 4,70:1 (e SUPRAFATA de buton, nu litera)
        albastru-2    pe alb  5,57:1 - pe ceata  5,11:1
@@ -47,10 +46,6 @@
        accent-nou    pe alb  5,07:1 - pe ceata 4,66:1
 
      REGULILE CARE DECURG, si fiecare are o proba in `tests/directia.test.ts`:
-       - `cerneala-2` (#86868b) e SUB 4,5:1 pe alb si pe ceata. Se scrie numai de la
-         18,66 px in sus SI la greutatea 600 - exact conditia sub care il foloseste
-         referinta (21 px / 600), unde pragul WCAG e 3:1, nu 4,5:1. Sub marimea aia
-         se ia `cerneala-3` (5,07:1), care trece oriunde pe deschis.
        - `albastru` (#0071e3) NU e culoare de litera: pe ceata da 4,31:1. E fundalul
          pastilei pline, cu litera alba deasupra (4,70:1). Legaturile si conturul iau
          `albastru-2`.
@@ -59,7 +54,6 @@
      acolo, iar `albastru-clar` pe alb da 3,02:1, deci nu are ce cauta pe deschis.
      Fiecare culoare are UN capat pe care trece. */
   --color-cerneala: #1d1d1f;
-  --color-cerneala-2: #86868b;
   --color-cerneala-3: #6e6e73;
   --color-albastru: #0071e3;
   --color-albastru-2: #0066cc;
@@ -274,35 +268,33 @@
   }
 }
 
-/* --- conditia lui `cerneala-2`, scrisa ca MECANISM, nu ca regula in proza ---------
-   `cerneala-2` (#86868b) da 3,62:1 pe alb si 3,33:1 pe ceata. Referinta o foloseste intr-un
-   singur loc - paragraful de capitol, 21 px la greutatea 600 - unde pragul WCAG e 3:1 si unde
-   trece. Sub 18,66 px sau sub 600 nu trece nicaieri.
+/* --- de ce paleta are NOUA roluri, nu zece -----------------------------------------
+   Referinta are doua griuri de text: #6e6e73 (notele de 14 px) si #86868b, pe care il
+   foloseste intr-un singur loc - paragraful de capitol, 21 px la greutatea 600. Al doilea
+   NU e definit la noi, si e o refutare MASURATA, nu o omisiune.
 
-   PROBLEMA MASURATA. Clasa `text-cerneala-2` e scrisa in 38 de locuri din unsprezece pagini pe
-   care felia 1 nu le atinge, si acolo e pusa pe text de 17 px la greutatea 400 (34 de locuri)
-   si de 14 px (4). Masurat pe pagina construita, la 1440, pe /solutii/notari: 31 de blocuri sub
-   prag dintr-un singur jeton. Cu valoarea referintei si fara nicio alta masura, unsprezece
-   pagini ar fi iesit rosii la axe - si nu dintr-o greseala a cuiva, ci fiindca un nume mostenit
-   a primit o valoare noua.
+   Ce s-a masurat, cu axe pe arborele construit, la 1280 px: `color-contrast` de impact
+   `serious` pe 20 din cele 22 de rute, cate un nod pe fiecare - exact paragraful acela.
+   Cifra raportata: 3,62 la 19 px. Motivul e in definitia WCAG a „textului mare", pe care
+   axe o aplica literal: pragul coboara la 3:1 numai de la 24 px, sau de la 18,66 px CU
+   greutate cel putin 700. Greutatea 600 nu e „bold" acolo, si axe chiar asa o si scrie in
+   raport: `font weight: normal`. Conditia referintei (18,66 px si 600) nu e conditia WCAG.
 
-   REPARATIA. Nu se scrie in proza „foloseste-l doar peste 18,66 px si 600", fiindca o regula in
-   proza nu se aplica singura: se scrie in CSS. Clasa `text-cerneala-2` da `cerneala-3` (5,07:1
-   pe alb, 4,66:1 pe ceata) PESTE TOT, si redevine `cerneala-2` numai cand elementul poarta si
-   marimea, si greutatea care fac culoarea legitima - `text-capitol` (21 / 29) impreuna cu
-   `font-semibold`. Adica exact conditia referintei, verificata de browser la fiecare randare.
+   Cele trei iesiri, si de ce am ales-o pe a treia:
+     - a incarca greutatea 700 doar pentru culoarea asta: directia are DOUA greutati, iar un
+       al treilea fisier de font pe fiecare pagina pentru un singur paragraf nu se justifica;
+     - a urca paragraful la 24 px: ar fi insemnat sa schimb o marime pe care referinta a
+       masurat-o (21 / 29), ca sa salvez o culoare;
+     - a scrie paragraful cu `cerneala-3` (5,07:1 pe alb, 4,66:1 pe ceata): marimile raman
+       exact cele masurate, si dispare o culoare pe care nu o puteam folosi nicaieri legal.
+   Un rol definit si nefolosit e chiar gaura prin care o directie supravietuieste tacut, deci
+   nu ramane definit „pentru S2-b": ar fi o capcana intinsa valului urmator, care ar afla la
+   fel de tarziu ca mine, din poarta.
 
-   Directia in care greseste e cea sigura: cine uita o clasa primeste gri INCHIS, nu deschis.
-   Selectorul cu trei clase are specificitate 0,3,0 si bate utilitarul generat (0,1,0); cel cu o
-   clasa are aceeasi specificitate ca el si castiga prin ordine, fiindca vine dupa import. */
-@layer utilities {
-  .text-cerneala-2 {
-    color: var(--color-cerneala-3);
-  }
-  .text-capitol.font-semibold.text-cerneala-2 {
-    color: var(--color-cerneala-2);
-  }
-}
+   CLASA `text-cerneala-2` ramane scrisa in 38 de locuri din unsprezece pagini ale valului
+   urmator. Fara jeton, Tailwind nu mai genereaza utilitarul deloc, deci acele elemente
+   MOSTENESC `cerneala` (16,83:1 pe alb) - degradare in directia sigura, la fel ca la
+   stergerea paletei REF-V. */
 
 /* --- alb ramas pe o banda care nu mai e colorata ---------------------------------
    Sapte pagini din `src/app`, ale valului urmator, trimit in slotul `nota` al benzii de

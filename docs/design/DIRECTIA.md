@@ -11,14 +11,13 @@ secundă, iar porțile de browser le măsoară pe pagina construită. Nu sunt pr
 
 ## Paleta
 
-Paleta are zece roluri. Lista e închisă: o culoare în plus înseamnă un rol pe care nu l-a numit
+Paleta are nouă roluri. Lista e închisă: o culoare în plus înseamnă un rol pe care nu l-a numit
 nimeni, iar rolurile nenumite se aleg după gust, nu după măsurătoare. Proba refuză un jeton
 `--color-*` care nu e în listă.
 
 | Rol | Valoare | Unde se folosește |
 |---|---|---|
 | `cerneala` | `#1d1d1f` | titluri și text principal |
-| `cerneala-2` | `#86868b` | paragraful de capitol, **numai** la 21 px și greutatea 600 |
 | `cerneala-3` | `#6e6e73` | note, etichete, text secundar - cerneala sigură la orice mărime |
 | `albastru` | `#0071e3` | **suprafața** pastilei pline; niciodată literă |
 | `albastru-2` | `#0066cc` | legături, conturul butonului secundar |
@@ -32,7 +31,6 @@ nimeni, iar rolurile nenumite se aleg după gust, nu după măsurătoare. Proba 
 finalul acestui document; controlul lui e alb pe negru, care trebuie să dea 21,00.
 
     cerneala      pe alb 16,83:1   pe ceata 15,46:1
-    cerneala-2    pe alb  3,62:1   pe ceata  3,33:1   pe negru 5,80:1
     cerneala-3    pe alb  5,07:1   pe ceata  4,66:1
     albastru      alb pe el 4,70:1              pe ceata 4,31:1 (deci nu e literă)
     albastru-2    pe alb  5,57:1   pe ceata  5,11:1   pe negru 3,86:1 (deci nu e literă acolo)
@@ -51,28 +49,34 @@ Regulile care decurg, și fiecare are o probă:
   vreuna ar începe să treacă și pe celălalt capăt, regula și-a pierdut motivul;
 - pe negru se scrie `ceata`, nu alb: albul pur vibrează la mărimi mici.
 
-### Condiția lui `cerneala-2` e scrisă ca mecanism, nu ca regulă în proză
+### Griul de la 21 px al referinței nu există la noi, și e o refutare măsurată
 
-`cerneala-2` (#86868b) dă 3,62:1 pe alb și 3,33:1 pe ceață. Referința o folosește într-un singur
-loc - paragraful de capitol, 21 px la greutatea 600 - unde pragul WCAG este 3:1 și unde trece.
-Sub 18,66 px sau sub greutatea 600 nu trece nicăieri.
+Referința are două griuri de text: `#6e6e73`, care la noi e `cerneala-3`, și `#86868b`, pe care
+îl folosește într-un singur loc - paragraful de capitol, 21 px la greutatea 600. Al doilea **nu e
+definit** în paleta noastră, și nu din scăpare.
 
-Clasa `text-cerneala-2` e însă scrisă în 38 de locuri din unsprezece pagini pe care felia asta nu
-le atinge, și acolo stă pe text de 17 px la greutatea 400. **Măsurat pe pagina construită, la
-1440, pe o singură pagină de segment: 31 de blocuri sub prag dintr-un singur jeton.** O regulă în
-proză („folosește-l doar peste 18,66 px") nu ar fi reparat nimic, fiindcă o regulă în proză nu se
-aplică singură. Reparația e în CSS:
+**Ce s-a măsurat**, cu `axe` pe arborele construit, la 1280 px: `color-contrast` de impact
+`serious` pe **20 din cele 22 de rute**, câte un nod pe fiecare - exact paragraful acela. Cifra
+raportată: **3,62 la 19 px**. Motivul stă în definiția WCAG a „textului mare", pe care axe o
+aplică literal: pragul coboară la 3:1 numai de la **24 px**, sau de la 18,66 px **cu greutatea cel
+puțin 700**. Greutatea 600 nu e „bold" acolo - axe chiar așa o scrie în raport, `font weight:
+normal`. **Condiția referinței (18,66 px și 600) nu este condiția WCAG**, iar diferența nu se vede
+până nu rulează poarta.
 
-```css
-@layer utilities {
-  .text-cerneala-2 { color: var(--color-cerneala-3); }
-  .text-capitol.font-semibold.text-cerneala-2 { color: var(--color-cerneala-2); }
-}
-```
+Cele trei ieșiri, și de ce am ales-o pe a treia:
 
-Clasa dă gri închis peste tot și redevine gri deschis numai când elementul poartă și mărimea, și
-greutatea care fac culoarea legitimă. Direcția în care greșește e cea sigură: cine uită o clasă
-primește gri **mai închis**, niciodată mai deschis.
+1. **încărcarea greutății 700** doar pentru culoarea asta - direcția are două greutăți, iar un al
+   treilea fișier de font pe fiecare pagină, pentru un singur paragraf, nu se justifică;
+2. **urcarea paragrafului la 24 px** - ar fi însemnat schimbarea unei mărimi pe care referința a
+   măsurat-o (21 / 29), ca să salvăm o culoare;
+3. **scrierea paragrafului cu `cerneala-3`** (5,07:1 pe alb, 4,66:1 pe ceață) - mărimile rămân
+   exact cele măsurate, și dispare o culoare pe care nu o puteam folosi legal nicăieri.
+
+Rolul nu rămâne definit „pentru valul următor": o culoare definită și nefolosită e chiar gaura
+prin care o direcție supraviețuiește tăcut, iar aici ar fi fost și o capcană - valul următor ar fi
+aflat la fel de târziu ca noi, din poartă. Clasa `text-cerneala-2` rămâne scrisă în 38 de locuri
+din unsprezece pagini ale valului următor; fără jeton, Tailwind nu mai generează utilitarul deloc,
+deci acele elemente moștenesc `cerneala` (16,83:1) - degradare în direcția sigură.
 
 ## Litera
 

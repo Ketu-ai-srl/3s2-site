@@ -228,10 +228,13 @@ export default function Ecran({
             ) : null}
             <Titlu className="max-w-[20ch] text-titlu-2 text-cerneala">{titlu}</Titlu>
             {text ? (
-              // Paragraful de capitol: 21 / 29 la greutatea 600, in `cerneala-2`. E singurul loc
-              // in care `cerneala-2` are voie sa scrie - 21 px si 600 il duc peste pragul de 3:1
-              // pentru text mare, exact conditia sub care il foloseste referinta.
-              <p className="mt-5 max-w-[52ch] text-capitol font-semibold text-cerneala-2">{text}</p>
+              // Paragraful de capitol: 21 / 29 la greutatea 600, in `cerneala-3`. Referinta il
+              // scrie cu griul ei mai deschis (#86868b), si asa a fost si aici pana la
+              // masuratoarea cu axe: 3,62:1 la 19 px, `serious` pe 20 din 22 de rute. Pragul de
+              // 3:1 pentru text mare cere 24 px, sau 18,66 px la greutatea 700 - iar 600 nu e
+              // „bold" pentru WCAG. Marimea ramane cea masurata; culoarea urca la 5,07:1.
+              // Povestea intreaga, cu cele trei iesiri cantarite: `globals.css`.
+              <p className="mt-5 max-w-[52ch] text-capitol font-semibold text-cerneala-3">{text}</p>
             ) : null}
             {children}
             {actiune ? (
