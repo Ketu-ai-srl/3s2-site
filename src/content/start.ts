@@ -97,7 +97,7 @@ export const CARD_MARE = {
 export const CARDURI_MICI: CardMic[] = [
   {
     eticheta: "Termene",
-    titlu: "Termenul de păstrare al fiecărui document",
+    titlu: "Ani de păstrare, pe categorii",
     text: "Termenele uzuale, fiecare cu actul normativ lângă el. Unde norma lipsește, scrie că lipsește.",
     href: "/instrumente/termene-de-pastrare",
   },

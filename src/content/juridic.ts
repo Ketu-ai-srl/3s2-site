@@ -130,7 +130,7 @@ export const TERMENI: PaginaJuridica = {
     },
     {
       id: "ce-face-site-ul",
-      titlu: "Site-ul prezintă și primește cereri.",
+      titlu: "Site-ul face puține lucruri.",
       blocuri: [
         {
           fel: "paragraf",
@@ -350,7 +350,7 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
   sectiuni: [
     {
       id: "cine-prelucreaza",
-      titlu: "Operatorul este 3S.",
+      titlu: "Datele le prelucrăm noi.",
       blocuri: [
         {
           fel: "paragraf",
@@ -433,7 +433,7 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
     },
     {
       id: "cat-pastram",
-      titlu: "Azi nu le păstrăm deloc.",
+      titlu: "Nu le păstrăm încă.",
       blocuri: [
         {
           fel: "paragraf",
@@ -451,7 +451,7 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
     },
     {
       id: "cui-le-dam",
-      titlu: "Azi nu ajung la nimeni.",
+      titlu: "Nu ajung la nimeni.",
       blocuri: [
         {
           fel: "paragraf",
