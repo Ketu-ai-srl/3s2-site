@@ -1,39 +1,48 @@
 import type { Metadata } from "next";
 import AntetPagina from "@/components/AntetPagina";
+import BaraLocala from "@/components/BaraLocala";
 import HartaAncore from "@/components/HartaAncore";
 import HartaLista from "@/components/HartaLista";
 import JuridicSectiune from "@/components/JuridicSectiune";
-import { ANCORE_ACASA } from "@/content/interior-juridic";
+import { ANCORE_ACASA, BARA_HARTA, MASURA_ACT } from "@/content/interior-juridic";
 import { PAGINI_JURIDICE } from "@/content/juridic";
 import { CALE_DISCUTIE, RUTE, SECTIUNI_ACASA, type Ruta } from "@/content/rute";
 import { FOTOGRAFII } from "@/content/fotografii";
 
-// Harta site-ului pentru om. `sitemap.xml` exista de mult si e pentru masini; pagina asta
-// e pentru cineva care vrea sa vada dintr-o privire ce scrie pe site si sa aleaga.
+// Harta site-ului pentru om. `sitemap.xml` exista de mult si e pentru masini; pagina asta e
+// pentru cineva care vrea sa vada dintr-o privire ce scrie pe site si sa aleaga.
 //
 // TOATE RUTELE VIN DIN `RUTE`, niciuna scrisa de mana. Daca as fi scris lista aici, ar fi
 // existat a doua sursa de adevar despre ce pagini are site-ul, si s-ar fi desincronizat de
-// prima exact in ziua in care cineva face lucrul corect si adauga o pagina. Pe proiectul
-// asta s-a intamplat deja o data, si de aceea exista `poarta-rute.py`.
+// prima exact in ziua in care cineva face lucrul corect si adauga o pagina. Pe proiectul asta
+// s-a intamplat deja o data, si de aceea exista `poarta-rute.py`.
 //
-// IMPARTIREA PE GRUPE E O PARTITIE, nu o serie de filtre independente. Fiecare ruta e
-// luata O SINGURA data, in ordinea regulilor, iar ultimul grup ia TOT ce a ramas. Asa, o
-// ruta dintr-o categorie la care nu m-am gandit apare oricum in pagina, la "Paginile
-// principale", in loc sa dispara tacut dintr-o harta care se declara completa. Ce se
-// pierde e doar asezarea ei ideala, si aia se vede.
+// IMPARTIREA PE GRUPE E O PARTITIE, nu o serie de filtre independente. Fiecare ruta e luata O
+// SINGURA data, in ordinea regulilor, iar ultimul grup ia TOT ce a ramas. Asa, o ruta dintr-o
+// categorie la care nu m-am gandit apare oricum in pagina, la „Paginile principale", in loc sa
+// dispara tacut dintr-o harta care se declara completa. Ce se pierde e doar asezarea ei ideala,
+// si aia se vede.
 //
-// ASEZAREA, la valul S1-b: sectiuni albe si de ceata alternate, fiecare cu eticheta ei si
-// cu titlul de 48 px, iar rutele in GRILA DE CARDURI (`HartaLista`), trei pe rand la 1440.
-// Inainte erau douazeci si doua de randuri late cat pagina, unul sub altul, in cinci benzi
-// de registru cu cota romana - forma paginilor de vitrina, pusa pe un cuprins. Cardurile
-// arata o grupa intreaga dintr-o privire, ceea ce e chiar sarcina unei harti.
+// ASEZAREA, la valul S2-b, si de ce fiecare bloc si-a schimbat forma:
 //
-// UN SINGUR BUTON IN ANTET, si nu e o ancora. Erau doua: "Vedeti toate paginile" catre
-// `#pagini` si "Vedeti cum functioneaza" catre o pagina care sta oricum in bara de sus.
-// Primul nu promitea nimic - derula catre lista care urmeaza imediat sub ecran - iar al
-// doilea repeta un rand din bara. Pagina de start, aprobata, poarta UN buton, si el numeste
-// un angajament; aici e acelasi, cel din `CALE_DISCUTIE`, adica regula de proiect: butonul
-// principal duce mereu la discutia de treizeci de minute.
+//   BARA LOCALA cu cele cinci grupe. Harta e singura pagina a feliei pe care navigarea in
+//   pagina chiar are ce naviga: cinci grupe, cu nume de un cuvant. Ele intra pe randul de 52 px
+//   fara sa-l depaseasca, deci bara isi face treaba pentru care exista.
+//
+//   RUTELE SUNT RANDURI, nu carduri. Douazeci si doua de carduri de ceata cu raza 28, trei pe
+//   rand, purtau fiecare un nume, o descriere si o adresa - adica trei randuri de text intr-un
+//   dreptunghi cu patruzeci de pixeli de captuseala in jur. REF-A pune cardul acolo unde cardul
+//   E continutul; un cuprins e o lista, si o lista se desparte prin firul de 1 px.
+//
+//   SECTIUNILE NU MAI SUNT BENZI. Fundalul nu mai alterneaza alb / ceata si nu mai exista
+//   eticheta colorata deasupra titlului: cele cinci grupe sunt cinci parti ale aceluiasi
+//   cuprins, nu cinci afise. Titlul a coborat de la 48 px la 32, treapta h2-ului de pagina
+//   juridica.
+//
+// UN SINGUR BUTON IN ANTET, si nu e o ancora. Erau doua: „Vedeti toate paginile" catre
+// `#pagini` si „Vedeti cum functioneaza" catre o pagina care sta oricum in bara de sus. Primul
+// nu promitea nimic - derula catre lista care urmeaza imediat sub ecran - iar al doilea repeta
+// un rand din bara. Butonul principal duce mereu la discutia de treizeci de minute.
 
 export const metadata: Metadata = {
   title: "Harta site-ului",
@@ -82,9 +91,14 @@ export default function HartaSite() {
         actiune={{ href: CALE_DISCUTIE, text: "Discuție de 30 de minute" }}
       />
 
+      <BaraLocala
+        ancore={BARA_HARTA.ancore}
+        actiune={{ href: CALE_DISCUTIE, text: BARA_HARTA.pastila }}
+        eticheta={BARA_HARTA.eticheta}
+      />
+
       <JuridicSectiune
         id="pagini"
-        eticheta="Prezentarea"
         titlu="Paginile principale."
         lead="De aici începe oricine ne vede prima dată: ce facem, cum lucrăm, cine suntem și pe ce drum ne scrieți."
       >
@@ -93,17 +107,14 @@ export default function HartaSite() {
 
       <JuridicSectiune
         id="domenii"
-        ton="ceata"
-        eticheta="Domeniile"
         titlu="Fișele pe domenii."
         lead="Aceleași etape, scrise cu documentele și termenele fiecărui domeniu. Hubul le adună pe toate."
       >
-        <HartaLista rute={domenii} fundal="ceata" />
+        <HartaLista rute={domenii} />
       </JuridicSectiune>
 
       <JuridicSectiune
         id="instrumente"
-        eticheta="Instrumentele"
         titlu="Ce puteți folosi fără să ne cumpărați nimic."
         lead="Pagini scrise ca să fie utile singure. Se pot tipări, trimite prin mesaj sau cita, iar noi le corectăm când cineva ne arată că un rând contrazice actul citat."
       >
@@ -112,46 +123,35 @@ export default function HartaSite() {
 
       <JuridicSectiune
         id="juridic"
-        ton="ceata"
-        eticheta="Documentele"
         titlu="Textele juridice ale site-ului."
         lead="Cine răspunde de site, ce date primim printr-un mesaj și ce scriem în browserul dumneavoastră. Sunt scurte dinadins."
       >
-        <HartaLista rute={juridice} fundal="ceata" />
+        <HartaLista rute={juridice} />
       </JuridicSectiune>
 
       <JuridicSectiune
         id="sectiuni"
-        eticheta="Pagina de start"
         titlu="Secțiunile paginii de start."
         lead="Nu sunt pagini separate, sunt locuri din pagina de start. Legăturile duc direct la ele."
       >
-        {/* Pastilele stau pe ceata, deci sectiunea le da un cadru propriu: pe alb, o pastila
-            alba n-ar avea de ce sa se deosebeasca de pagina. */}
-        <div className="rounded-card-mare bg-ceata p-6 md:p-8">
-          <span className="mb-5 block text-nota font-semibold text-cerneala-2">
-            {ANCORE_ACASA.eticheta}
-          </span>
-          <HartaAncore sectiuni={SECTIUNI_ACASA} />
-        </div>
+        <span className="mb-3 block text-mic font-semibold text-cerneala-3">
+          {ANCORE_ACASA.eticheta}
+        </span>
+        <HartaAncore sectiuni={SECTIUNI_ACASA} />
 
-        <p className="mt-10 max-w-[62ch] text-corp text-cerneala-2">
+        <p className={`mt-10 ${MASURA_ACT} text-capitol text-cerneala`}>
           Pagini publice pe tot site-ul: {RUTE.length}. Toate sunt listate mai sus, în cele
           patru grupe, fiindcă ultima grupă ia tot ce nu a intrat în celelalte.
         </p>
 
-        <p className="mt-5 max-w-[62ch] text-corp text-cerneala-2">
+        <p className={`mt-5 ${MASURA_ACT} text-capitol text-cerneala`}>
           Harta pentru mașini stă la{" "}
-          <a
-            href="/sitemap.xml"
-            className="text-violet underline decoration-violet-2 underline-offset-[3px]"
-          >
+          <a href="/sitemap.xml" className="text-albastru-2 no-underline hover:text-cerneala">
             sitemap.xml
           </a>
-          . Se face din același manifest, păstrând rutele marcate pentru indexare. Pagina
-          aceasta le arată pe toate, inclusiv pe cele care nu se indexează.
+          . Se face din același manifest, păstrând rutele marcate pentru indexare. Pagina aceasta
+          le arată pe toate, inclusiv pe cele care nu se indexează.
         </p>
-
       </JuridicSectiune>
     </main>
   );

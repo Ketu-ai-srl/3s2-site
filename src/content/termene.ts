@@ -25,37 +25,39 @@ export type Termen = {
   nota: string;
 };
 
-// PASTILELE DE STARE. Sirul `clase` NU s-a atins la valul S2-a, desi paleta paginii se
-// schimba: `tests/felie-juridic.test.ts` cere ca fiecare rol de culoare de aici sa fie in
-// lista paletei REF-V, deci o mutare facuta din fisierul de TEXT ar inrosi proba fara ca
-// paleta noua sa fi aterizat. Perechile se muta odata cu proba, nu inaintea ei.
+// PASTILELE DE STARE, mutate pe paleta REF-A la valul S2-b. S-a schimbat DOAR sirul `clase`:
+// textul si cheile sunt neatinse, fiindca ele sunt continut, nu stil. Doua dintre perechile de
+// dinainte numeau roluri care nu mai exista in `globals.css` de la felia de fundatie, deci nu
+// mai produceau CSS - pastila isi pierdea si fundalul, si culoarea, si ramanea text simplu.
 //
-// Nota de mai jos e cea scrisa la valul dinainte, pe paleta REF-V. S-a schimbat DOAR sirul de clase: textul si cheile
-// sunt neatinse, fiindca ele sunt continut, nu stil. Cele trei perechi de dinainte
-// (fundal moale plus cerneala, cate una pe stare) numeau culori care nu mai exista in
-// `globals.css` de la felia de fundatie, deci nu mai produceau CSS: pastilele isi
-// pierdeau si fundalul, si culoarea, si ramaneau text pe suprafata paginii.
+// CINE E CEA MAI APASATA, si de ce nu cea confirmata. Cinci randuri sunt confirmate cu articol,
+// doua orientative si UNUL nu poate fi sustinut. Pastila inchisa se da randului care are nevoie
+// sa fie observat, adica exceptiei: cazul normal ramane discret, iar cel care cere atentie o
+// primeste. Invers - cinci pastile negre si una palida - accentul ar fi cazut pe regula si ar
+// fi tacut exact acolo unde pagina isi scrie limita.
 //
 // Perechile de acum, cu contrastul calculat din valorile paletei:
-//   confirmat    violet pe violet-pal   5,12:1 - suprafata de accent a referintei
-//   orientativ   cerneala pe ceata     16,27:1 - o treapta mai discreta, fara accent
-//   neconfirmat  alb pe cerneala       17,73:1 - singura pastila inchisa, fiindca e
-//                singurul rand pe care nu il putem sustine
+//   confirmat    cerneala pe ceata     15,46:1 - cazul obisnuit, fara accent
+//   orientativ   cerneala-3 pe ceata    4,66:1 - o treapta mai discreta (12 px la 600: prag 4,5)
+//   neconfirmat  ceata pe negru        19,29:1 - singura pastila inchisa, fiindca e singurul
+//                rand pe care nu il putem sustine
+//
+// Pe negru se scrie ceata, nu alb: regula paletei, si e cea care alege litera de aici.
 //
 // Codul de culoare nu poarta singur informatia: starea e scrisa in litere, intreaga, pe
 // fiecare pastila.
 export const STARI: Record<StareTermen, { text: string; clase: string }> = {
   confirmat: {
     text: "Confirmat cu articol",
-    clase: "bg-violet-pal text-violet",
+    clase: "bg-ceata text-cerneala",
   },
   orientativ: {
     text: "Orientativ, confirmați pe nomenclator",
-    clase: "bg-ceata text-cerneala",
+    clase: "bg-ceata text-cerneala-3",
   },
   neconfirmat: {
     text: "Nu îl putem susține încă",
-    clase: "bg-cerneala text-alb",
+    clase: "bg-negru text-ceata",
   },
 };
 

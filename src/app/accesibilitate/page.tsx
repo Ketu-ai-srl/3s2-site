@@ -3,50 +3,66 @@ import Link from "next/link";
 import Acordeon from "@/components/Acordeon";
 import AntetPagina from "@/components/AntetPagina";
 import BandaCTA from "@/components/BandaCTA";
-import Card from "@/components/Card";
+import BaraLocala from "@/components/BaraLocala";
+import Capitol from "@/components/Capitol";
 import JuridicListaLipsa from "@/components/JuridicListaLipsa";
-import JuridicSectiune from "@/components/JuridicSectiune";
+import ListaBifa from "@/components/ListaBifa";
 import { ACCESIBILITATE as A } from "@/content/securitate";
+import {
+  BARA_ACCESIBILITATE,
+  CAPITOLE_ACCESIBILITATE as C,
+  MASURA_ACT,
+  MASURA_LISTA,
+} from "@/content/interior-juridic";
 import { FOTOGRAFII } from "@/content/fotografii";
 
 // Declaratia de accesibilitate, scrisa ca lista de masuratori si nu ca declaratie de
 // conformitate.
 //
 // Distinctia e tot continutul paginii. „Zero incalcari gasite de o unealta automata" si
-// „conform cu un nivel dintr-un standard" sunt doua afirmatii diferite, iar a doua nu
-// decurge din prima: unealta acopera o parte din criterii, restul se judeca de un om, si
-// niciun om nu a facut inca auditul. Pagina spune amandoua lucrurile, in ordinea asta,
-// si nu foloseste litera unui nivel nicaieri.
+// „conform cu un nivel dintr-un standard" sunt doua afirmatii diferite, iar a doua nu decurge
+// din prima: unealta acopera o parte din criterii, restul se judeca de un om, si niciun om nu a
+// facut inca auditul. Pagina spune amandoua lucrurile, in ordinea asta, si nu foloseste litera
+// unui nivel nicaieri.
 //
-// ASEZAREA, la valul S1-b, si de ce fiecare bloc si-a schimbat forma:
+// ASEZAREA, la valul S2-b, si de ce fiecare bloc si-a schimbat forma:
 //
-//   CE SE MASOARA - carduri pe ceata, trei pe rand la 1440. Cele sase randuri sunt perechi
-//   titlu-si-explicatie, deci nu incap intr-o lista cu bife: `ListaBifa` primeste siruri, iar
-//   a-i da titlurile ar fi insemnat sa pierd explicatiile. Cardul poarta amandoua.
+//   TREI CAPITOLE in loc de trei benzi de sectiune. Banda cu fundal alternand alb / ceata si
+//   cu eticheta colorata deasupra titlului era gramatica directiei anterioare; REF-A pune pe o
+//   pagina interioara CAPITOLE - eticheta de 24 px, afirmatia de 80 px, un paragraf de 21 / 29,
+//   apoi rama de ceata cu continutul. Afirmatiile sunt cele trei intrebari ale paginii, in
+//   ordinea in care si le pune cineva: ce am masurat, ce lipseste, cum ne spuneti.
 //
-//   CE NU AM MASURAT - carduri cu LINIUTA, nu cu bifa (`JuridicListaLipsa`). Pana acum cele
-//   opt randuri stateau intr-o `ListaBifa`, adica opt afirmatii despre ce NU am masurat,
-//   fiecare cu o bifa verde in fata - semnul care spune exact contrariul textului de langa el.
-//   REF-V are amandoua formele si le tine diferite dinadins.
+//   CE AM MASURAT e o LISTA, nu sase carduri. Cele sase randuri sunt perechi de forma
+//   „afirmatie scurta cu punct, apoi explicatia": exact ce citeste bine intr-un rand de lista
+//   despartit de un fir de 1 px. Sase carduri pe trei coloane faceau din verificarile care
+//   chiar ruleaza o vitrina de fise identice - forma pe care „Ce nu se face" o numeste pe fata.
+//   Textele intra INTREGI, titlul lipit de explicatie, deci nu se pierde niciun cuvant; asa
+//   ramane vizibila si afirmatia cu cele 390 de puncte, pe care registrul de afirmatii o cere.
 //
-//   SEMNALAREA - acordeon pe linii. Patru pasi deschisi, dupa doua sectiuni de liste, se
-//   citesc ca inca un perete; intrebarea „cum va semnalez o problema" se raspunde cu un rand
-//   pe care omul il deschide. Textul ramane in HTML-ul servit: `details`/`summary`.
+//   CE NU AM MASURAT ramane `JuridicListaLipsa`, care la valul asta a devenit tot o lista pe
+//   fir - aceeasi forma cu lista de deasupra, si cu liniuta in fata fiecarui rand. Liniuta e
+//   singurul semn care spune „asta lipseste"; bifa spunea contrariul textului de langa ea.
 //
-//   INCHEIEREA - banda CTA violeta a referintei. Erau doua butoane pe aceeasi sectiune, unul
-//   plin si unul de text; banda are unul singur, alb pe violet.
+//   SEMNALAREA ramane acordeon pe linii: patru pasi deschisi, dupa doua liste, se citesc ca
+//   inca un perete. Textul ramane in HTML-ul servit, fiindca `Acordeon` e `details`/`summary`.
 //
 // Continutul sta in `src/content/securitate.ts`; aici e numai forma paginii.
 //
-// Canonical auto-referential: fara el, pagina ar mosteni canonical-ul layout-ului si ar
-// arata spre pagina de start, ceea ce o scoate din index.
+// Canonical auto-referential: fara el, pagina ar mosteni canonical-ul layout-ului si ar arata
+// spre pagina de start, ceea ce o scoate din index.
 export const metadata: Metadata = {
   title: A.titluMeta,
   description: A.descriereMeta,
   alternates: { canonical: "/accesibilitate" },
 };
 
-const LEGATURA = "text-violet underline decoration-violet-2 underline-offset-[3px]";
+const LEGATURA = "text-albastru-2 no-underline hover:text-cerneala";
+
+// Fiecare verificare intra in lista ca un singur rand: afirmatia scurta, apoi explicatia ei.
+// Nu se taie nimic - `ListaBifa` primeste siruri, iar a-i da numai titlurile ar fi pierdut
+// tocmai propozitiile in care stau cifrele.
+const MASURAT = A.masurat.map((f) => f.titlu + " " + f.text);
 
 export default function Accesibilitate() {
   return (
@@ -63,79 +79,79 @@ export default function Accesibilitate() {
         secundar={{ href: "/securitate", text: "Vedeți pagina de securitate" }}
       />
 
-      <JuridicSectiune
+      <BaraLocala
+        ancore={BARA_ACCESIBILITATE.ancore}
+        actiune={{ href: "/contact", text: BARA_ACCESIBILITATE.pastila }}
+        eticheta={BARA_ACCESIBILITATE.eticheta}
+      />
+
+      <Capitol
         id="masurat"
-        ton="ceata"
-        eticheta="Ce se măsoară"
-        titlu="Ce rulează automat, pe fiecare pagină, înainte de fiecare publicare."
-        lead="Nu sunt intenții și nu au fost făcute o singură dată, la lansare. Rulează automat înaintea fiecărei publicări, pe fiecare pagină publică, iar dacă una dintre ele se înroșește, versiunea aceea nu ajunge la dumneavoastră."
+        eticheta={C.masuratEticheta}
+        afirmatie={C.masuratAfirmatie}
+        text={C.masuratText}
       >
-        <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2 lg:grid-cols-3">
-          {A.masurat.map((f) => (
-            <li key={f.titlu}>
-              <Card titlu={f.titlu} fundal="ceata">
-                {f.text}
-              </Card>
-            </li>
-          ))}
-        </ul>
-      </JuridicSectiune>
+        <div className="w-full p-6 md:p-10">
+          <div className={MASURA_LISTA}>
+            <ListaBifa titlu={C.masuratTitlu} elemente={MASURAT} />
+          </div>
+        </div>
+      </Capitol>
 
-      <JuridicSectiune
+      <Capitol
         id="nemasurat"
-        eticheta="Ce nu am măsurat"
-        titlu="Zero încălcări găsite automat nu înseamnă conform."
-        lead="Declarațiile de accesibilitate se scriu de obicei ca o promisiune de conformitate. Aici se încheie ce putem susține: rândurile de mai jos sunt lucrurile pe care o asemenea declarație le trece sub tăcere, fiindcă niciunul nu arată bine scris pe față."
+        eticheta={C.nemasuratEticheta}
+        afirmatie={C.nemasuratAfirmatie}
+        text={C.nemasuratText}
+        aliniere="centrat"
       >
-        <JuridicListaLipsa
-          titlu="Ce nu putem afirma despre site-ul acesta"
-          elemente={A.neMasurat}
-        />
+        <div className="w-full p-6 md:p-10">
+          <JuridicListaLipsa titlu={C.lipsaTitlu} elemente={A.neMasurat} />
 
-        <p className="mt-12 max-w-[62ch] text-corp text-cerneala-2">
-          Distincția are o consecință practică pentru dumneavoastră: dacă instituția
-          dumneavoastră are nevoie de o declarație de conformitate ca document de achiziție,
-          pagina asta nu ține locul ei și nu vă lăsăm să credeți că ține. Spuneți-ne ce
-          formă vă trebuie și vă spunem ce e nevoie ca să existe.
-        </p>
-      </JuridicSectiune>
+          <p className={`mt-10 ${MASURA_ACT} text-capitol text-cerneala`}>
+            Distincția are o consecință practică pentru dumneavoastră: dacă instituția
+            dumneavoastră are nevoie de o declarație de conformitate ca document de achiziție,
+            pagina asta nu ține locul ei și nu vă lăsăm să credeți că ține. Spuneți-ne ce formă
+            vă trebuie și vă spunem ce e nevoie ca să existe.
+          </p>
+        </div>
+      </Capitol>
 
-      <JuridicSectiune
+      <Capitol
         id="semnalare"
-        ton="ceata"
-        eticheta="Semnalarea"
-        titlu="Dacă ceva nu funcționează pentru dumneavoastră, spuneți-ne."
-        lead="Partea pe care nu o poate măsura nicio unealtă este dacă pagina se poate folosi. Aceea se află numai de la cine o folosește, deci drumul până la noi este scris aici, pe scurt, și nu trece prin niciun formular care nu are destinatar."
+        eticheta={C.semnalareEticheta}
+        afirmatie={C.semnalareAfirmatie}
+        text={C.semnalareText}
       >
-        <Acordeon
-          elemente={A.semnalare.map((f) => ({ intrebare: f.titlu, raspuns: f.text }))}
-        />
+        <div className="w-full p-6 md:p-10">
+          <Acordeon
+            elemente={A.semnalare.map((f) => ({ intrebare: f.titlu, raspuns: f.text }))}
+          />
 
-        <div className="mt-10 rounded-card bg-alb p-6">
-          <span className="mb-2 block text-nota font-semibold text-cerneala-2">Adresa</span>
-          <p className="max-w-[62ch] text-corp text-cerneala-2">
+          <h3 className="mt-10 text-titlu-card font-semibold text-cerneala">{C.adresaTitlu}</h3>
+          <p className={`mt-2 ${MASURA_ACT} text-capitol text-cerneala`}>
             Ne scrieți la{" "}
             <a href="mailto:contact@3s.ro" className={LEGATURA}>
               contact@3s.ro
             </a>
-            . Nu afișăm număr de telefon, iar drumurile care există și cele care încă nu
-            există sunt scrise pe pagina de contact, ca să nu așteptați răspuns pe un canal
-            pe care nu îl citim.
+            . Nu afișăm număr de telefon, iar drumurile care există și cele care încă nu există
+            sunt scrise pe pagina de contact, ca să nu așteptați răspuns pe un canal pe care nu
+            îl citim.
+          </p>
+
+          <p className={`mt-6 ${MASURA_ACT} text-capitol text-cerneala`}>
+            Același fel de împărțire, între ce am măsurat și ce nu, stă și în{" "}
+            <Link href="/securitate" className={LEGATURA}>
+              pagina despre protecția documentelor
+            </Link>{" "}
+            și în{" "}
+            <Link href="/cookies" className={LEGATURA}>
+              pagina despre ce stocăm în browser
+            </Link>
+            .
           </p>
         </div>
-
-        <p className="mt-10 max-w-[62ch] text-corp text-cerneala-2">
-          Același fel de împărțire, între ce am măsurat și ce nu, stă și în{" "}
-          <Link href="/securitate" className={LEGATURA}>
-            pagina despre protecția documentelor
-          </Link>{" "}
-          și în{" "}
-          <Link href="/cookies" className={LEGATURA}>
-            pagina despre ce stocăm în browser
-          </Link>
-          .
-        </p>
-      </JuridicSectiune>
+      </Capitol>
 
       <BandaCTA
         titlu={A.incheiere.titlu}

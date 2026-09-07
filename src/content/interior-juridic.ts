@@ -1,39 +1,215 @@
-// Textele NOI de interfata cerute de gramatica paginii interioare pe paginile
-// feliei juridice: acte (/termeni, /confidentialitate, /cookies), declaratia de
-// accesibilitate, instrumentul de termene, harta site-ului si pagina de 404.
+// Textele NOI de interfata cerute de gramatica REF-A pe paginile feliei juridice: cele patru
+// acte (/termeni, /confidentialitate, /cookies, /accesibilitate), instrumentul de termene,
+// harta site-ului si pagina de 404.
 //
-// DE CE UN FISIER NOU SI NU O ADAUGARE IN `juridic.ts` SAU `termene-extins.ts`. Alea
-// poarta CONTINUTUL - clauzele, termenele, actele citate - si sunt inghetate ca text si
-// ca chei la valul asta. Ce se scrie aici nu e continut: sunt etichetele de interfata pe
-// care le cere asezarea noua si care nu existau in directia veche, fiindca nu exista nici
-// cuprinsul lipicios, nici randul de ancore, nici pastilele de stare. Tinute separat, se
-// vede dintr-o privire ce a adaugat valul S1-b si ce a mostenit.
+// DE CE UN FISIER SEPARAT SI NU O ADAUGARE IN `juridic.ts` SAU `termene-extins.ts`. Alea
+// poarta CONTINUTUL - clauzele, termenele, actele citate - si sunt inghetate ca text si ca
+// chei. Ce se scrie aici nu e continut: sunt etichetele de interfata pe care le cere asezarea
+// noua si care nu existau in directia anterioara, fiindca nu existau nici bara locala, nici
+// capitolele. Tinute separat, se vede dintr-o privire ce a adaugat valul si ce a mostenit.
 //
-// VOCEA REF-A (rescris 2026-09-07): titlul e o AFIRMATIE de doua-patru cuvinte cu punct,
-// urmata de o singura propozitie de explicatie. Litera obisnuita, „dumneavoastra" ca
-// adresare. Eticheta NU are punct la final - o eticheta cu punct e agramata, si a fost
-// defect reparat la valul S1-a. Propozitiile intregi au punct.
+// VOCEA REF-A. Titlul e o AFIRMATIE de doua-patru cuvinte cu punct, urmata de o singura
+// propozitie de explicatie. Litera obisnuita, „dumneavoastra" ca adresare. Eticheta NU are
+// punct la final - o eticheta cu punct e agramata. Propozitiile intregi au punct.
 
-/** Cuprinsul unui act: coloana lipicioasa la 1440, acordeon deasupra textului la 390. */
-export const CUPRINS = {
-  /** Eticheta coloanei. Fara punct: e o eticheta, nu o propozitie. */
-  eticheta: "Cuprins",
-  /** Numele navigatiei, pentru cine citeste pagina cu un cititor de ecran. */
-  numeNavigatie: "Cuprinsul documentului",
+/**
+ * ANCORELE DIN BARA LOCALA A UNUI ACT, pe `id`-ul sectiunii din `juridic.ts`.
+ *
+ * DE CE NU SE FOLOSESTE CHIAR TITLUL SECTIUNII, desi el exista si e in continut. Bara locala
+ * REF-A e o singura linie de 52 px de la 768 px in sus: componenta poarta `flex-nowrap` si
+ * `whitespace-nowrap`, deci ce nu incape nu se rupe pe randul urmator, ci impinge pagina
+ * lateral. Titlurile actelor sunt propozitii, iar cele noua ale paginii de termeni insumeaza
+ * in jur de 200 de caractere: la 12 px inseamna peste 1200 px numai ancorele, pe o coloana de
+ * 1183 px care mai poarta si titlul de 21 px, si pastila. Referinta pune PATRU ancore pe bara
+ * paginii ei juridice; noi avem noua sectiuni si nu le taiem, fiindca taierea scoate exact
+ * informatia pentru care exista bara.
+ *
+ * Deci ancora poarta un NUME SCURT, iar propozitia ramane titlul sectiunii, la locul ei, pe
+ * pagina. Cheia e `id`-ul sectiunii: cine adauga o sectiune fara eticheta o vede lipsa la
+ * proba, nu o descopera pe pagina. Cand eticheta lipseste, bara scrie titlul intreg - o
+ * absenta vizibila, nu una tacuta.
+ *
+ * `moldova` e cheie in doua acte (termeni si confidentialitate) si poarta acelasi nume in
+ * amandoua, deci o singura intrare o acopera.
+ */
+export const ANCORE_ACT: Record<string, string> = {
+  // Termeni și condiții
+  "cine-raspunde": "Cine răspunde",
+  "ce-face-site-ul": "Ce face",
+  formularul: "Formularul",
+  continutul: "Conținutul",
+  "ce-va-cerem": "Ce vă cerem",
+  raspunderea: "Răspunderea",
+  "legea-aplicabila": "Legea",
+  moldova: "Moldova",
+  schimbari: "Schimbări",
+  // Politica de confidențialitate
+  "cine-prelucreaza": "Cine prelucrează",
+  "ce-date": "Ce date",
+  temeiul: "Temeiul",
+  "cat-pastram": "Cât păstrăm",
+  "cui-le-dam": "Cui le dăm",
+  drepturi: "Drepturile",
+  automat: "Cine citește",
+  limite: "Limitele",
+  // Ce stocăm în browser
+  "ce-stocam": "Ce stocăm",
+  "de-ce-fara-caseta": "Fără casetă",
+  "cum-verificam": "Cum verificăm",
+  gazduirea: "Găzduirea",
+  "daca-adaugam": "Dacă adăugăm",
 };
 
-/** Randul de ancore de pe instrumentul de termene, deasupra fiselor. */
+/** Bara locala a unui act: numele ei pentru cititorul de ecran si pastila din dreapta. */
+export const BARA_ACT = {
+  /** Se deosebeste de bara de sus, care poarta numele navigarii principale. */
+  eticheta: "Secțiunile actului",
+  /** Pastila de 24 px din dreapta barei. Un act nu vinde nimic; drumul lui e contactul. */
+  pastila: "Contact",
+};
+
+/** Blocul de incheiere al unui act. */
+export const INCHEIERE_ACT = {
+  /** Titlul randului care spune ce NU i s-a facut textului. Eticheta, deci fara punct. */
+  redactare: "Despre textul acesta",
+  /** Titlul sectiunii de incheiere, ca h2. Propozitie, deci cu punct. */
+  titlu: "Corectăm în text.",
+};
+
+/** Bara locala a instrumentului de termene. */
+export const BARA_TERMENE = {
+  eticheta: "Secțiunile paginii",
+  pastila: "Contact",
+  /**
+   * Cele patru sectiuni ale paginii, in ordinea lor. Ancorele raman cele vechi (`randuri`,
+   * `acoperire`, `moldova`, `folosire`): se citeaza in mesaje si nu se redenumesc la o
+   * reasezare.
+   *
+   * Bara poarta SECTIUNILE, nu cele opt categorii, si motivul e acelasi cu al actelor: numele
+   * categoriilor sunt lungi, iar opt dintre ele pe o bara de un singur rand depasesc coloana.
+   * Categoriile raman ancore, in lista de sub bara, unde au loc sa poarte si termenul, si
+   * actul - forma pe care textul din continut o cere explicit.
+   */
+  ancore: [
+    { ancora: "randuri", eticheta: "Rândurile" },
+    { ancora: "acoperire", eticheta: "Acoperirea" },
+    { ancora: "moldova", eticheta: "Moldova" },
+    { ancora: "folosire", eticheta: "Folosirea" },
+  ],
+};
+
+/**
+ * Capitolele instrumentului de termene: eticheta de 24 px deasupra afirmatiei de 80 px, plus
+ * titlurile de lista dinauntrul ramei. Toate au venit din `page.tsx`, unde erau scrise in
+ * marcaj; aici se citesc odata cu restul textelor de interfata ale feliei.
+ */
+export const CAPITOLE_TERMENE = {
+  randuriEticheta: "Rândurile",
+  randuriAfirmatie: "Termenele, pe categorii.",
+  acoperireEticheta: "Acoperirea",
+  acoperitTitlu: "Ce este acoperit",
+  neacoperitTitlu: "Ce nu este acoperit",
+  acoperireNotaTitlu: "Ce este pagina aceasta",
+  moldovaEticheta: "A doua jurisdicție",
+  folosireEticheta: "Folosirea",
+  temeiuriTitlu: "Actele pe care le citim",
+  folosireNotaTitlu: "Limitele instrumentului",
+};
+
+/** Lista de ancore catre cele opt fise, asezata sub bara locala. */
 export const ANCORE_TERMENE = {
   eticheta: "Săriți la o categorie",
-  /** Rezumatul listei de ancore, pentru cititorul de ecran. Nu e tabel: vezi `TermeneCuprins`. */
+  /** Rezumatul listei, pentru cititorul de ecran. Nu e tabel: vezi `TermeneCuprins`. */
   descriere:
     "Opt categorii de documente, fiecare cu termenul ei și cu actul din care vine. Numele categoriei duce la fișa întreagă.",
+};
+
+/** Bara locala si grupele hartii site-ului. */
+export const BARA_HARTA = {
+  eticheta: "Grupele hărții",
+  pastila: "Contact",
+  ancore: [
+    { ancora: "pagini", eticheta: "Prezentarea" },
+    { ancora: "domenii", eticheta: "Domeniile" },
+    { ancora: "instrumente", eticheta: "Instrumentele" },
+    { ancora: "juridic", eticheta: "Documentele" },
+    { ancora: "sectiuni", eticheta: "Pagina de start" },
+  ],
 };
 
 /** Randul cu ancorele paginii de start, din harta site-ului. */
 export const ANCORE_ACASA = {
   eticheta: "Din pagina de start",
 };
+
+/** Bara locala a declaratiei de accesibilitate. */
+export const BARA_ACCESIBILITATE = {
+  eticheta: "Secțiunile paginii",
+  pastila: "Contact",
+  ancore: [
+    { ancora: "masurat", eticheta: "Ce am măsurat" },
+    { ancora: "nemasurat", eticheta: "Ce lipsește" },
+    { ancora: "semnalare", eticheta: "Cum ne spuneți" },
+  ],
+};
+
+/**
+ * Capitolele declaratiei de accesibilitate: eticheta de 24 px, afirmatia de 80 px si
+ * paragraful de 21 / 29 de sub ea.
+ *
+ * CE S-A INTAMPLAT CU TITLURILE VECHI DE SECTIUNE. Erau propozitii intregi („Zero încălcări
+ * găsite automat nu înseamnă conform.") si stateau pe treapta de 48 px. Afirmatia de capitol e
+ * de doua-trei cuvinte, deci propozitiile n-aveau unde sa mai incapa acolo - si nu s-au
+ * pierdut: au coborat in paragraful capitolului, care e chiar locul unde REF-A pune propozitia
+ * de explicatie. Nimic nu a fost taiat, doar mutat cu un rand mai jos.
+ */
+export const CAPITOLE_ACCESIBILITATE = {
+  masuratEticheta: "Măsurat",
+  masuratAfirmatie: "Ce am măsurat.",
+  masuratText:
+    "Nu sunt intenții și nu au fost făcute o singură dată, la lansare. Rulează înaintea fiecărei publicări, pe fiecare pagină publică.",
+  nemasuratEticheta: "Nemăsurat",
+  nemasuratAfirmatie: "Ce lipsește.",
+  nemasuratText:
+    "Zero încălcări găsite automat nu înseamnă conform. Declarațiile de accesibilitate se scriu de obicei ca o promisiune de conformitate; rândurile de mai jos sunt lucrurile pe care o asemenea promisiune le trece sub tăcere, fiindcă niciunul nu arată bine scris pe față.",
+  semnalareEticheta: "Semnalarea",
+  semnalareAfirmatie: "Cum ne spuneți.",
+  semnalareText:
+    "Dacă ceva nu funcționează pentru dumneavoastră, spuneți-ne. Partea pe care nu o poate măsura nicio unealtă este dacă pagina se poate folosi. Aceea se află numai de la cine o folosește, deci drumul până la noi este scris aici, pe scurt, și nu trece prin niciun formular care nu are destinatar.",
+  /** Titlul listei de verificari care chiar ruleaza. */
+  masuratTitlu: "Ce rulează automat, pe fiecare pagină, înainte de fiecare publicare",
+  /** Titlul listei de goluri. */
+  lipsaTitlu: "Ce nu putem afirma despre site-ul acesta",
+  /** Titlul randului cu adresa de contact. */
+  adresaTitlu: "Adresa",
+};
+
+/**
+ * MASURA RANDULUI, ca sir de clasa, intr-un singur loc, si in DOUA trepte - fiindca felia
+ * scrie proza la doua marimi si o singura cifra ar fi corecta pentru una si gresita pentru
+ * cealalta.
+ *
+ * Cifrele sunt MASURATE pe pagina construita, cu un `Range` peste fiecare rand vizual, nu
+ * derivate din marimea literei. Coloana sectiunilor unui act are 916 px (containerul de 980
+ * minus captuseala de 2 x 32), iar pe toata latimea ei randul iesea de 95-103 caractere - fisa
+ * cere 60-75 pentru un text care se citeste. Litera are si `letter-spacing` negativ mostenit de
+ * pe `body` (-0,022em), deci un caracter costa in jur de 8,9 px la 21 px si 7,5 px la 17 px:
+ * de aici cele doua plafoane: 620 px da 70-75 de caractere la 21 px, 505 px da 68-74 la 17 px,
+ * amandoua masurate DUPA ce plafonul a fost pus, nu prezise.
+ *
+ * DE CE IN PIXELI SI NU IN `ch`. Unitatea `ch` e latimea glifei ZERO, printre cele mai late ale
+ * fontului, deci raspunde la alta intrebare decat cea pusa. Capcana e masurata pe chiar
+ * paginile astea, la un val anterior: plafonul scris `max-w-[74ch]` suna a „74 de caractere pe
+ * rand" si masura 98.
+ *
+ * PLAFONUL E PE PROZA, NU PE CADRU. Titlurile, randurile de definitii si listele de rute iau
+ * toata latimea coloanei; altfel coloana ar deveni o panglica ingusta plutind intr-un
+ * dreptunghi gol.
+ */
+export const MASURA_ACT = "max-w-[620px]";
+
+/** Aceeasi masura, pentru proza de 17 px: liste, randuri de definitie, note. */
+export const MASURA_LISTA = "max-w-[505px]";
 
 /** Lista lucrurilor care lipsesc: liniuta, nu bifa. */
 export const LIPSA = {
@@ -55,29 +231,10 @@ export const NEGASITA = {
 };
 
 /**
- * Masura randului pe paginile care sunt ACTE, ca sir de clasa, intr-un singur loc.
- *
- * Cadrul actului are 720 px (`--container-act`), dar proza nu se scrie pe toata latimea lui:
- * la 16 px, 672 px de coloana dau in jur de 90 de caractere pe rand, iar un act se citeste la
- * 60-75. Deci PROZA are plafonul de mai jos, in pixeli, iar titlurile, casetele si randurile
- * de definitii raman pe toata latimea cadrului - altfel coloana ar deveni o panglica ingusta
- * plutind intr-un dreptunghi gol.
- *
- * DE CE IN PIXELI SI NU IN `ch`. Unitatea `ch` e latimea glifei ZERO, printre cele mai late
- * ale fontului, deci raspunde la alta intrebare decat cea pusa. Capcana e masurata pe chiar
- * paginile astea: plafonul dinainte era scris `max-w-[74ch]` si suna a „74 de caractere pe
- * rand"; masurat cu un `Range` peste fiecare rand vizual, dadea 98 de caractere in medie, cu
- * varf la 103. Nicio poarta nu se inrosea, fiindca niciuna nu numara caractere. Cifra de mai
- * jos e masurata la fel, pe pagina randata.
- */
-export const MASURA_ACT = "max-w-[540px]";
-
-/**
  * Eticheta butonului primar de pe actele juridice si de pe instrumentul de termene. Aceeasi
  * cu a fiselor de domeniu (`interior-solutii.ts`), si scurta dintr-un motiv masurat, nu de
- * gust: „Programați o discuție de 30 de minute" se rupea pe doua randuri la 390 si dadea un
- * buton de 72 px pe /termeni, /confidentialitate si /cookies (de doua ori pe fiecare), fata
- * de 48 px cat are butonul peste tot in rest. Masurat la reconcilierea lotului S1-b, dupa ce
- * un raport spusese 48 px „pe toate cele 7 pagini".
+ * gust: forma lunga se rupea pe doua randuri la 390 si dadea un buton de 72 px pe /termeni,
+ * /confidentialitate si /cookies (de doua ori pe fiecare), fata de 48 px cat are butonul
+ * peste tot in rest. Masurat la reconcilierea lotului S1-b.
  */
 export const BUTON_DISCUTIE = "Discuție de 30 de minute";
