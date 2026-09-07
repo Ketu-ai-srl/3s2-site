@@ -208,19 +208,30 @@ pagina de start. Chemarea la acțiune stă în pastila fiecărei țigle.
 
 ## Cum se construiește o pagină interioară
 
-Rețeta, în ordinea în care se citește pagina:
+Eroul și capitolul **sunt construite** - `src/components/AntetPagina.tsx` și
+`src/components/Capitol.tsx` - și sunt componente partajate: valul care rescrie paginile
+interioare le folosește, nu le rescrie. Ce urmează descrie ce există, cu cifrele citite din
+pagina construită; ce nu există încă e marcat ca atare, la finalul secțiunii.
+
+Ordinea în care se citește o pagină interioară:
 
 1. **Bara locală**, 52 px, lipicioasă, chiar sub bara globală: titlul paginii la stânga (21 px,
-   600), ancorele secțiunilor la 12 px și o pastilă de 24 px la dreapta. Sub 768 px trece pe două
-   rânduri, ca să nu ascundă nicio ancoră.
-2. **Erou alb**: eticheta, titlul de 48 px la stânga, paragraful de 21/29, un buton și, la
-   dreapta, fotografia într-un card cu raza de 28.
-3. **Capitole** în containerul de 980: etichetă de 24 px, afirmație de 80 px, paragraf de 21/29 la
-   600 în `cerneala-2`, apoi fotografie sau carduri.
+   600), ancorele secțiunilor la 12 px și o pastilă de 24 px la dreapta. Sub 768 px trece pe
+   două rânduri, ca să nu ascundă nicio ancoră. Se pune prin `SegmentAncore`, care îi citește
+   titlul din registrul de rute, nu din pagină.
+2. **Eroul**, pe alb, în containerul de 1247, tot textul la stânga: firul de navigare, numele
+   paginii, afirmația cu ultimul cuvânt albastru, rândul de sub ea, pastilele, iar fotografia
+   **sub text, pe toată lățimea**. Centrat e doar pe pagina de start, unde ecranul e țigla.
+3. **Capitole** în containerul de 980: etichetă de 24 px, afirmație de 80 px, paragraf de 21/29
+   la 600 în `cerneala-3`, apoi rama de ceață cu fotografia sau cardurile. Alinierea alternează
+   stânga / centrat, ca pe referință.
 4. **Carduri** cu raza 28, albe pe ceață sau ceață pe alb, fără umbră.
+5. **Subsolul** pe ceață, ca pe pagina de start.
 
 ```tsx
 import AntetPagina from "@/components/AntetPagina";
+import Capitol from "@/components/Capitol";
+import SegmentAncore from "@/components/SegmentAncore";
 import { FOTOGRAFII } from "@/content/fotografii";
 
 export const metadata = { alternates: { canonical: "/arhivare-fizica" } };
@@ -231,22 +242,117 @@ export default function Pagina() {
       <AntetPagina
         adresa="/arhivare-fizica"
         fir={[{ text: "Pagina de start", href: "/" }, { text: "Arhivare fizică" }]}
-        eticheta="Depozit și preluare"
-        titlu="Hârtia stă pe raft."
+        eticheta="Serviciul de bază"
+        titlu="Hârtia cere rafturi."
         lead="O propoziție care spune ce găsește omul pe pagina asta."
-        actiune={{ href: "/contact", text: "Discuție de 30 de minute" }}
-        secundar={{ href: "/cum-functioneaza", text: "Cum funcționează" }}
-        imagine={FOTOGRAFII.rafturi}
+        actiune={{ href: "/#discutie", text: "Discuție de 30 de minute" }}
+        secundar={{ href: "/cum-functioneaza", text: "Vedeți mecanismul complet" }}
+        imagine={FOTOGRAFII.cutii}
       />
+
+      <SegmentAncore ancore={[{ ancora: "depozit", eticheta: "Depozit" }]} eticheta="Secțiunile paginii" />
+
+      <Capitol
+        id="depozit"
+        eticheta="Depozit"
+        afirmatie="Hârtia stă pe raft."
+        text="Paragraful capitolului, la douăzeci și unu de pixeli, greutatea șase sute."
+      >
+        <picture className="w-full">
+          <source media="(max-width: 767px)" srcSet="/img/rafturi-960.webp" />
+          <img
+            src="/img/rafturi-1920.webp"
+            alt={FOTOGRAFII.rafturi.alt}
+            className="h-[320px] w-full object-cover md:h-full"
+            style={{ objectPosition: FOTOGRAFII.rafturi.pozitie }}
+          />
+        </picture>
+      </Capitol>
     </main>
   );
 }
 ```
 
-Componentele de pagină moștenite (`PaginaDeSegment`, `Fisa*`, `Juridic*`, `Mecanism*`, `Termene*`,
-`Comparatie*`, `Segment*`, `Investitie*`) au fost **retintuite mecanic** la felia de fundație: li
-s-a schimbat paleta, nu așezarea. Notele lor lungi descriu direcții anterioare, cu măsurătorile
-lor pe alte fundaluri; se citesc ca istorie. Gramatica lor se rescrie la valul următor.
+`titlu` și `afirmatie` primesc un **șir**, nu elemente: din șir componenta desparte ultimul
+cuvânt și îl scrie în `albastru-2`, cu punctul final în aceeași culoare, tăind la ultima
+înșiruire de spații - deci spațiul neîntreruptibil din `Actul se cere azi.` rămâne exact cum e
+scris în conținut. Un `titlu` compus din elemente se randează întreg, fără culoare: nu se poate
+ști unde se termină ultimul cuvânt într-un arbore, iar o ghicitoare ar colora ce nimerește.
+`h1`-ul rămâne un singur element cu toată propoziția.
+
+Copilul ramei de capitol trebuie să-și scrie singur înălțimea pe capătul îngust
+(`h-[320px] … md:h-full`): rama e o **podea**, nu o înălțime legată - un rând de carduri mai
+înalt decât ea trebuie să poată crește - iar sub 768 px un `h-full` singur nu are contra ce se
+rezolva și fotografia iese la înălțimea proprie a fișierului portret (măsurat: 358 x 537 în loc
+de 358 x 320).
+
+### Cifrele, măsurate pe pagina construită
+
+Playwright fără interfață, `next start`, `document.documentElement.clientWidth` citit din
+pagină la fiecare măsurătoare (1440 și 390), pe `/arhivare-fizica`, `/investitia`,
+`/solutii/notari` și `/instrumente/termene-de-pastrare`; capitolul, pe o pagină de probă
+ștearsă după măsurătoare. Derapaj orizontal: **0 px** pe toate, la amândouă lățimile.
+
+| Element | 1440 | 390 |
+|---|---|---|
+| numele paginii | 28,00 / 34,00 px, 600, `cerneala` | 19 / 23 px |
+| afirmația (h1) | 64,00 / 76,16 px, 600, `cerneala`, lățime 844 px (20ch) | 40 / 47,6 px, 358 px |
+| ultimul cuvânt | `albastru-2`, aceeași treaptă | la fel |
+| rândul de sub afirmație | 21,00 / 29,00 px, **400**, `cerneala`, 689 px (52ch) | 19 / 23 px, 358 px |
+| pastilele | 44 px înălțime, literă 17 px, una lângă alta | 36 px, literă 14 px, una sub alta |
+| fotografia eroului | 1183 x 700 px, rază 28, `object-cover` | 358 x 320 px |
+| eticheta de capitol | 24 / 28,56 px, 600, `cerneala` | la fel |
+| afirmația de capitol | 80 / 95,2 px, 600, lățime 897 px (17ch) | 40 px |
+| paragraful de capitol | 21 / 29 px, 600, `cerneala-3`, 817 px (59ch) | 19 / 23 px |
+| rama capitolului | 916 x 620 px, rază 28, `ceata`, `box-shadow: none` | 358 x 320 px |
+| captușeala capitolului | 110 px sus și jos | 64 px |
+
+Cele două înălțimi de fotografie sunt alese din **acoperire**, nu din gust. Fișierele de 1920
+sunt toate 1920x1280 (3:2). În cutia eroului, 1183 x 700, se vede 88,8% din înălțimea cadrului -
+în interiorul benzii de 84,4-95,7% pentru care s-au ales ancorele `pozitie` din
+`src/content/fotografii.ts`, deci niciuna nu trebuie remăsurată. În rama capitolului, 916 x 620,
+raportul cutiei e 1,477 față de 1,500 al cadrului: decupajul cade pe **lățime**, 1,5%, și se
+vede toată înălțimea - acolo `pozitie` nici nu are ce alege. Sub 768 px se servește fișierul de
+960, care e 960x1440 (portret 2:3): într-o cutie de 358 x 320 se vede 59,6% din înălțimea lui,
+față de 44,7% cât se vedea în cardul de 358 x 240 al direcției anterioare. Fereastra mai largă o
+**conține** pe cea măsurată, pentru orice ancoră: capătul de sus e `pozitie` x (1 - f), care
+scade când f crește, iar cel de jos e `pozitie` + f x (1 - `pozitie`), care crește.
+
+Contrastul, măsurat pe pagina construită (culoarea calculată a fiecărui bloc contra fundalului
+lui efectiv), cu martorii de lângă rezultat - alb pe negru 21,00, alb pe alb 1,00, iar griul
+refuzat al referinței 3,62:
+
+    firul de navigare       5,07   prag 4,5
+    pagina curentă în fir  16,83   prag 4,5
+    numele paginii         16,83   prag 3
+    afirmația              16,83   prag 3
+    ultimul cuvânt          5,57   prag 3
+    rândul de sub ea       16,83   prag 4,5
+    pastila plină           4,70   prag 4,5
+    pastila cu contur       5,57   prag 4,5
+    eticheta de capitol    16,83   prag 3
+    afirmația de capitol   16,83   prag 3
+    paragraful de capitol   5,07   prag 4,5
+
+Pragul se aplică pe mărimea și greutatea reale ale fiecărui bloc: 3:1 de la 24 px, sau de la
+18,66 px cu greutatea cel puțin 700; 4,5:1 în rest. Paragraful de capitol e la 21 px și 600,
+deci pragul lui e 4,5 - motivul pentru care griul referinței nu poate sta acolo.
+
+### Ce nu e încă construit - rămâne rețetă pentru S2-b
+
+Următoarele trei forme sunt descrise în fișa REF-A și **nu au componentă**; cine le construiește
+le măsoară el, ca pe erou și pe capitol, și le mută de aici în lista de sus:
+
+- **„Highlights"** - bandă pe ceață, padding 110/120, h2 de 56 px la stânga cu o legătură la
+  dreapta, carduri albe cu raza 28. Fără carusel: grilă sau rând derulabil, măsurat de agent.
+- **Rândul de carduri** pe ceață - h2 de 48 px la stânga, carduri albe de 372 x 452, raza 28.
+- **Comparația** - h2 de 64 px centrat, coloane cu h3 de 24 px și note de 14 px.
+
+Componentele de pagină moștenite (`PaginaDeSegment`, `Fisa*`, `Juridic*`, `Mecanism*`,
+`Termene*`, `Comparatie*`, `Segment*`, `Investitie*`) au fost **retintuite mecanic** la felia de
+fundație: li s-a schimbat paleta, nu așezarea. Notele lor lungi descriu direcții anterioare, cu
+măsurătorile lor pe alte fundaluri; se citesc ca istorie. Gramatica lor se rescrie la valul
+următor.
 
 ## Ce nu se face
 

@@ -1,38 +1,42 @@
-// RETINTUIT PENTRU REF-V (felia 1, val S1-a). S-a schimbat DOAR paleta si greutatea
-// literei, mecanic: gramatica, asezarea si marimile raman cele ale directiei
-// anterioare si se rescriu la valul S1-b. Comentariile de mai jos sunt ale acelei
-// directii, cu masuratorile ei pe fundal de noapte: se citesc ca istorie, nu ca
-// descriere a designului de acum.
 import Link from "next/link";
-import Ecran from "./Ecran";
+import Buton from "./Buton";
 import type { Fotografie } from "@/content/fotografii";
 
-// Antetul unei pagini interioare: acelasi ecran plin ca pe pagina de start (`Ecran`, nivel
-// `h1`), cu firul de navigare deasupra etichetei, singurul h1 al paginii, o linie, UN buton
-// si, optional, o legatura de text pentru drumul al doilea. Cu fotografie daca pagina da
-// una (`imagine`), altfel pe fundal de noapte-2.
+// EROUL DE PAGINA INTERIOARA, dupa REF-A §4 punctul 2 („pagina de produs"). Se citeste de sus
+// in jos, tot pe alb, tot in containerul de 1247 (`max-w-vitrina`), TOT LA STANGA:
 //
-// Firul de navigare nu e decor: e legatura inapoi, ceruta explicit in ambele sensuri.
-// Ultimul element e pagina curenta si NU are legatura - o legatura catre pagina in care
-// esti deja e zgomot pentru cititorul cu cititor de ecran, nu ajutor.
+//   firul de navigare        12,5 px `cerneala-3`
+//   numele paginii           28 / 34 la 1440, 19 / 23 la 390, greutatea 600, `cerneala`
+//   afirmatia (h1)           64 la 1440, 40 la 390, greutatea 600, cu ULTIMUL CUVANT albastru
+//   randul de sub ea (lead)  21 / 29 la 1440, 19 / 23 la 390, greutatea 400, `cerneala`
+//   pastilele                una plina de 44 px si, cand pagina da un al doilea drum, una cu contur
+//   fotografia               pe toata latimea celor 1247, raza 28, fara text peste ea
 //
-// Datele structurate BreadcrumbList se emit din aceeasi lista, ca sa nu existe doua
-// surse pentru acelasi fir. Tipurile folosite - BreadcrumbList, ListItem - sunt in
-// vocabularul pe care poarta S-09 il accepta.
+// CENTRAT E DOAR PE START. Pe referinta textul eroului de produs e aliniat la stanga, iar
+// centrarea e gestul tiglei de pe pagina de start. Erau doua asezari diferite pentru acelasi
+// lucru; a ramas cea a referintei.
 //
-// FOTOGRAFIA nu mai e optionala in practica, desi campul e opional in tipuri: pana pe
-// 2026-09-06 o dadea numai pagina de start, iar cele 21 de pagini interioare se deschideau
-// cu 800 px de negru plat - masurat, 91-92% fundal uniform in primul ecran la 1280 px, fata
-// de 18% pe pagina de start. Fotografia se alege din registrul `src/content/fotografii.ts`,
-// cheie cu cheie, ca textul alternativ sa aiba o singura sursa.
+// NOTELE DIRECTIEI ANTERIOARE NU S-AU PASTRAT „ca istorie": un comentariu care descrie ce nu
+// mai exista in fisier e un defect, iar ce a fost inainte se citeste din git. Din acelasi motiv
+// `Ecran` nu se mai importa aici deloc.
 //
-// FORMA. `ecran` e ecranul plin al vitrinei. `banda` e antetul scurt al paginilor care sunt
-// DOCUMENTE sau UNELTE (/termeni, /confidentialitate, /cookies, /instrumente): acolo omul a
-// venit dupa o clauza sau dupa un termen, si un afis de film de 800 px il tine departe de
-// raspuns. Ecranul plin ramane un gest al vitrinei, nu implicitul tuturor.
+// API-UL RAMANE COMPATIBIL. Semnatura (fir, eticheta, titlu, lead, actiune, secundar, adresa,
+// imagine, forma) e neatinsa: cele 20 de pagini interioare o dau azi asa si nu se ating la felia
+// asta. S-au schimbat doar rolurile pe care le joaca doua campuri, si amandoua sunt scrise in
+// tipuri: `eticheta` e NUMELE paginii (nu o eticheta mica deasupra titlului), iar `titlu` e
+// AFIRMATIA de 64 px.
 //
-// Semnatura veche (fir, eticheta, titlu, lead, actiune, secundar, adresa) e pastrata
-// intreaga; `imagine` si `forma` sunt campurile noi si sunt optionale.
+// FIRUL DE NAVIGARE nu e decor: e legatura inapoi, ceruta explicit in ambele sensuri. Ultimul
+// element e pagina curenta si NU are legatura - o legatura catre pagina in care esti deja e
+// zgomot pentru cititorul cu cititor de ecran, nu ajutor. Datele structurate BreadcrumbList se
+// emit din aceeasi lista, ca sa nu existe doua surse pentru acelasi fir; tipurile folosite -
+// BreadcrumbList, ListItem - sunt in vocabularul pe care poarta S-09 il accepta.
+//
+// FORMA. `ecran` e eroul intreg. `banda` e antetul scurt al paginilor care sunt DOCUMENTE sau
+// UNELTE (/termeni, /confidentialitate, /cookies, /instrumente): acolo omul a venit dupa o
+// clauza sau dupa un termen, si o fotografie de 700 px il tine departe de raspuns. Pe `banda`
+// fotografia NU se randeaza deloc, chiar daca pagina o da - campul ramane in semnatura fiindca
+// aceleasi pagini il trimit azi, iar valul S2-b le rescrie oricum.
 
 export type Veriga = {
   text: string;
@@ -42,28 +46,62 @@ export type Veriga = {
 
 type Props = {
   fir: Veriga[];
+  /** NUMELE paginii, randul de 28 px de deasupra afirmatiei. */
   eticheta: string;
+  /** AFIRMATIA paginii, h1 de 64 px. Cand e sir, ultimul cuvant se coloreaza. */
   titlu: React.ReactNode;
   /**
-   * Linia de sub titlu. Optionala DOAR pentru banda unei unelte, unde continutul urmeaza
-   * imediat sub h1; un ecran plin fara linie ar fi un afis fara text.
+   * Randul de sub afirmatie. Optional DOAR pentru banda unei unelte, unde continutul urmeaza
+   * imediat sub h1.
    */
   lead?: React.ReactNode;
   /**
-   * UN buton. Optional din acelasi motiv, si numai acolo: pe `/instrumente` raspunsul e
+   * UN buton primar. Optional din acelasi motiv, si numai acolo: pe `/instrumente` raspunsul e
    * chiar tabelul de dedesubt, iar butonul care statea aici era o ancora spre el.
    */
   actiune?: { href: string; text: string };
+  /** Drumul al doilea: pastila cu CONTUR, aceeasi inaltime de 44 px ca pastila plina. */
   secundar?: { href: string; text: string };
   /** Adresa canonica a paginii, ca ultima veriga din datele structurate sa aiba adresa. */
   adresa: string;
   /** Fotografie ilustrativa, luata din registrul `src/content/fotografii.ts`. */
   imagine?: Fotografie;
-  /** `banda` scurteaza antetul: paginile care sunt documente sau unelte. */
+  /** `banda` scurteaza eroul si ii scoate fotografia: paginile care sunt documente sau unelte. */
   forma?: "ecran" | "banda";
 };
 
 const GAZDA = "https://3s2.ke2.in";
+
+// ULTIMUL CUVANT AL AFIRMATIEI STA IN ALBASTRU, ca pe referinta, iar punctul final ramane in
+// aceeasi culoare cu el, fiindca e lipit de cuvant si nu e despartit de niciun spatiu.
+//
+// Se taie la ULTIMA insiruire de spatii, nu la un `split(" ")`, si nu din eleganta: doua
+// afirmatii din continut au un spatiu NEINTRERUPTIBIL inaintea ultimului cuvant - `Actul se
+// cere`, spatiul acela, `azi.` - si una are un rand nou in mijloc. `\s` din JavaScript prinde si
+// spatiul neintreruptibil si randul nou, iar taietura pastreaza caracterul EXACT asa cum e
+// scris in continut - un `join(" ")` l-ar fi inlocuit tacut cu un spatiu obisnuit si cuvintele
+// s-ar fi despartit tocmai acolo unde continutul cere sa nu se desparta.
+//
+// Cand `titlu` nu e sir (o pagina care isi compune singura afirmatia) se randeaza intreg, fara
+// culoare: nu avem cum sa stim unde se termina ultimul cuvant intr-un arbore de elemente, iar
+// o ghicitoare acolo ar colora ce nimereste. Cand afirmatia e UN SINGUR cuvant, tot fara
+// culoare: albastrul e un contrast fata de restul propozitiei, iar un h1 colorat in intregime
+// n-ar mai contrasta cu nimic.
+//
+// h1-UL RAMANE UN SINGUR ELEMENT cu tot textul: SEO-ul si cititorul de ecran citesc aceeasi
+// propozitie, iar span-ul e doar o vopsea inauntrul ei.
+function afirmatia(titlu: React.ReactNode) {
+  if (typeof titlu !== "string") return titlu;
+  const taietura = /\s+(?=\S+$)/.exec(titlu);
+  if (!taietura) return titlu;
+  const pana = taietura.index + taietura[0].length;
+  return (
+    <>
+      {titlu.slice(0, pana)}
+      <span className="text-albastru-2">{titlu.slice(pana)}</span>
+    </>
+  );
+}
 
 export default function AntetPagina({
   fir,
@@ -76,6 +114,9 @@ export default function AntetPagina({
   imagine,
   forma = "ecran",
 }: Props) {
+  const banda = forma === "banda";
+  const cuFoto = Boolean(imagine) && !banda;
+
   const firStructurat = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -87,57 +128,132 @@ export default function AntetPagina({
     })),
   };
 
-  const firNavigare = (
-    <nav aria-label="Firul de navigare" className="mb-8 md:mb-10">
-      <ol className="m-0 flex flex-wrap items-baseline gap-x-2 gap-y-1 p-0 font-mono text-[12.5px] text-cerneala-3">
-        {fir.map((v, i) => (
-          <li key={v.text} className="flex items-baseline gap-2">
-            {i > 0 ? (
-              // Bara oblica sta pe `cerneala-2`, nu pe `cerneala-3`, si nu din gust.
-              // Ea cade peste FOTOGRAFIE, unde tabelul de jetoane nu se aplica, iar acolo
-              // pragul de 4,5:1 il decide voalul. Masurat la 1280, pe fundalul curat de sub
-              // ea: cu `cerneala-3` ajungea la 4,38:1 pe /cum-functioneaza si la 4,89 pe
-              // /securitate, adica sub prag pe o pagina si la un fir de el pe alta; cu
-              // `cerneala-2` cea mai mica valoare de pe cele noua pagini masurate urca la
-              // 6,33. Ierarhia ramane citibila fara treapta a treia de culoare: veriga
-              // dinainte e SUBLINIATA, iar pagina curenta sta pe `cerneala`, cea mai
-              // deschisa dintre cele trei.
-              <span aria-hidden className="text-cerneala-3">
-                /
-              </span>
-            ) : null}
-            {v.href ? (
-              <Link
-                href={v.href}
-                className="text-cerneala-3 underline decoration-albastru-2 underline-offset-[3px] hover:text-cerneala"
-              >
-                {v.text}
-              </Link>
-            ) : (
-              <span aria-current="page" className="text-cerneala">
-                {v.text}
-              </span>
-            )}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
+  // Rezerva de sus acopera bara globala fixa (44 px de la 768, 48 pe telefon) plus o rasuflare.
+  const captuseala = banda
+    ? "pt-[96px] pb-10 md:pt-[104px] md:pb-12"
+    : "pt-[96px] pb-14 md:pt-[112px] md:pb-16";
 
   return (
     <>
-      <Ecran
-        nivel="h1"
-        forma={forma}
-        ton={imagine ? "foto" : "plin"}
-        imagine={imagine}
-        inainte={firNavigare}
-        eticheta={eticheta}
-        titlu={titlu}
-        text={lead}
-        actiune={actiune}
-        secundar={secundar}
-      />
+      <section className={"relative isolate bg-alb " + captuseala}>
+        <div className="mx-auto w-full max-w-vitrina px-4 md:px-8">
+          <nav aria-label="Firul de navigare" className="mb-8 md:mb-10">
+            <ol className="m-0 flex flex-wrap items-baseline gap-x-2 gap-y-1 p-0 text-[12.5px] text-cerneala-3">
+              {fir.map((v, i) => (
+                <li key={v.text} className="flex items-baseline gap-2">
+                  {i > 0 ? (
+                    <span aria-hidden className="text-cerneala-3">
+                      /
+                    </span>
+                  ) : null}
+                  {v.href ? (
+                    <Link
+                      href={v.href}
+                      className="text-cerneala-3 underline decoration-albastru-2 underline-offset-[3px] hover:text-cerneala"
+                    >
+                      {v.text}
+                    </Link>
+                  ) : (
+                    <span aria-current="page" className="text-cerneala">
+                      {v.text}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+
+          {/* Numele paginii e `span`, nu `p`, si nu e cosmetica de markup: doua-trei cuvinte
+              deasupra afirmatiei nu sunt proza, iar poarta S-17 cantareste paragrafele
+              adevarate, comparand textul randat cu cel citit fara JavaScript. Culoarea e
+              `cerneala` (16,83:1 pe alb) - pe referinta numele produsului are aceeasi cerneala
+              ca afirmatia de sub el, iar ierarhia o face marimea: 28 fata de 64. */}
+          <span className="mb-2 block text-subtitlu-tigla font-semibold text-cerneala md:mb-3">
+            {eticheta}
+          </span>
+
+          <h1 className="max-w-[20ch] text-titlu-1 text-cerneala">{afirmatia(titlu)}</h1>
+
+          {lead ? (
+            // 21 / 29 la greutatea 400, in `cerneala` (16,83:1 pe alb). NU `cerneala-2`:
+            // #86868b da 3,62:1, iar usa de 3:1 pentru text mare cere 24 px sau greutatea 700 -
+            // 600 nu e „bold" pentru WCAG, si la 400 nici atat. Povestea intreaga, cu cele trei
+            // iesiri cantarite: `globals.css`.
+            <p className="mt-5 max-w-[52ch] text-lead text-cerneala">{lead}</p>
+          ) : null}
+
+          {/* PASTILELE. UNA plina (drumul principal) si cel mult una cu CONTUR - amandoua de
+              44 px de la 768 px in sus, cele doua marimi masurate ale referintei fiind legate de
+              marimea literei, nu alese. Sub 768 px trec la 36 px, marimea pe care referinta o
+              masoara pe telefon (fisa REF-A §3, „Grila de start pe 390: butoane de 36 px"), si
+              stau UNA SUB ALTA, nu una langa alta care se rup unde nimereste.
+              Marimea nu poate fi un singur `marime`, fiindca `Buton` e INGHETAT si nu are
+              variante dupa latime: se cere cea mica si se ridica la cea mare prin `md:`, pe
+              poarta de `className` pe care componenta o expune. Variantele `md:` ies dupa
+              utilitarele de baza in foaia generata, deci ele castiga de la 768 px in sus -
+              masurat pe pagina construita, nu presupus. */}
+          {actiune ? (
+            <div className="mt-8 flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-4">
+              <Buton
+                href={actiune.href}
+                marime="mic"
+                className="md:px-[21px] md:py-[11px] md:text-corp md:leading-[22px]"
+              >
+                {actiune.text}
+              </Buton>
+              {secundar ? (
+                <Buton
+                  href={secundar.href}
+                  fel="contur"
+                  marime="mic"
+                  className="md:px-[21px] md:py-[11px] md:text-corp md:leading-[22px]"
+                >
+                  {secundar.text}
+                </Buton>
+              ) : null}
+            </div>
+          ) : null}
+
+          {/* FOTOGRAFIA, sub text, pe toata latimea celor 1247. Nu poarta text peste ea, deci nu
+              intra in niciun calcul de contrast.
+
+              INALTIMEA DE 700 px LA 1440 e aleasa dintr-o masuratoare, nu din gust, si cifra de
+              plecare e latimea REALA a cutiei, nu numele containerului: masurat pe pagina
+              construita, cu `clientWidth` 1440, fotografia are 1183 px, adica cei 1247 ai
+              vitrinei minus captuseala de 2 x 32. Fisierul de 1920 al fiecarei chei masoara
+              1920x1280 (3:2, verificat pe fisiere), deci intr-o cutie de 1183 x 700 se vede
+              700 / (1183 / 1,5) = 88,8% din inaltimea lui. Banda pentru care s-au ales ancorele
+              `pozitie` din `src/content/fotografii.ts` e 84,4-95,7%, si 88,8% cade in mijlocul
+              ei. La 560 px - celalalt capat al intervalului cerut - acoperirea ar fi fost 71,0%,
+              adica o fereastra pe care nimeni n-a masurat-o, iar registrul de fotografii nu se
+              atinge la felia asta. Deci cifra care nu cere o remasurare a registrului e 700.
+
+              SUB 768 px cutia are 320 px, aceeasi cifra ca fotografia tiglelor de pe start si
+              din acelasi motiv (82% din latimea de 390). Acolo se serveste fisierul de 960, care
+              e 960x1440, adica portret 2:3: intr-o cutie masurata de 358 x 320 se vede
+              320 / (358 / 0,667) = 59,6% din inaltimea lui, fata de 44,7% cat se vedea in cardul
+              de 358 x 240 al directiei anterioare - chiar cifra de 44,6% scrisa in registru.
+              Fereastra mai larga o CONTINE pe cea masurata, pentru ORICE ancora: capatul de sus
+              al ferestrei e `pozitie` x (1 - f), care scade cand f creste, iar cel de jos e
+              `pozitie` + f x (1 - `pozitie`), care creste. Deci nicio ancora din registru nu
+              pierde ce arata azi, si nimic nu trebuie remasurat. */}
+          {cuFoto && imagine ? (
+            <div className="mt-10 flex h-[320px] w-full overflow-hidden rounded-card md:mt-14 md:h-[700px]">
+              <picture className="w-full">
+                <source media="(max-width: 767px)" srcSet={"/img/" + imagine.nume + "-960.webp"} />
+                <img
+                  src={"/img/" + imagine.nume + "-1920.webp"}
+                  alt={imagine.alt}
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: imagine.pozitie ?? "center" }}
+                  loading="eager"
+                  decoding="async"
+                />
+              </picture>
+            </div>
+          ) : null}
+        </div>
+      </section>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(firStructurat) }}

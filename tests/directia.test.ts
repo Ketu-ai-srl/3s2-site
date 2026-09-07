@@ -1,4 +1,6 @@
-import { readFileSync, readdirSync } from 'node:fs'
+import { copyFileSync, mkdirSync, readFileSync, readdirSync, rmSync } from 'node:fs'
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 import { join, sep } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
@@ -726,5 +728,274 @@ describe('gramatica paginilor', () => {
     expect(pagina, 'exponentul nu trimite la nota').toMatch(/href=\{"#" \+ NOTE\[0\]\.id\}/)
     // Si nota despre ce NU detinem e scrisa, nu ocolita.
     expect(start, 'nota despre certificarea pe care nu o detinem a disparut').toMatch(/Nu deținem certificare/)
+  })
+})
+
+/**
+ * FELIA 3 (pre-valul S2-b0): eroul de pagina interioara si capitolul, construite o singura data
+ * ca sa nu le scrie diferit cele trei felii ale valului urmator.
+ *
+ * CE CLASA DE DEFECT INCHID CAZURILE DE AICI, si de ce nu o inchide nimic altceva:
+ *   - eroul se intoarce tacut la grila de doua coloane a directiei anterioare (fotografia intr-un
+ *     card la dreapta). `typecheck`, `lint` si `build` nu vad clase Tailwind, iar `axe` nu se uita
+ *     la asezare: totul ar ramane verde.
+ *   - ultimul cuvant al afirmatiei inceteaza sa mai fie colorat, sau - mai rau - se coloreaza si
+ *     acolo unde nu se poate sti unde se termina, adica pe un titlu compus din elemente.
+ *   - h1-ul se sparge in doua elemente ca sa se coloreze mai usor, si cititorul de ecran primeste
+ *     doua propozitii in loc de una.
+ *   - griul de 21 px al referintei se intoarce chiar in capitol, singurul loc din care a fost scos.
+ *
+ * CUM SE RANDEAZA COMPONENTELE INTR-O PROBA DE NOD, si de ce prin copie. `tsconfig.json` are
+ * `jsx: preserve` - asa cere Next - iar Vite, care transforma fisierele probei, citeste aceeasi
+ * setare si lasa JSX-ul netransformat: un `import` direct din `src/components` crapa la analiza,
+ * cu „content contains invalid JS syntax". `tsconfig.json` si `vitest.config.ts` sunt inghetate la
+ * felia asta. Ce se poate face fara sa le atinga: `exclude` din tsconfig contine `node_modules`,
+ * deci un fisier de acolo nu cade sub nicio setare de tsconfig si Vite il transforma cu implicitul
+ * lui (`jsx: automatic`). Copia e VERBATIM - se copiaza octet cu octet, si primul caz de mai jos o
+ * si verifica - deci ce se randeaza aici e chiar ce se livreaza, nu o repovestire a lui.
+ */
+describe('eroul de pagina interioara si capitolul', () => {
+  const COPIE = join(RADACINA, 'node_modules', '.cache', 'proba-felie-3')
+  const ANTET = readFileSync(join(COMPONENTE, 'AntetPagina.tsx'), 'utf8')
+  const CAPITOL = readFileSync(join(COMPONENTE, 'Capitol.tsx'), 'utf8')
+
+  rmSync(COPIE, { recursive: true, force: true })
+  mkdirSync(COPIE, { recursive: true })
+  for (const f of ['AntetPagina.tsx', 'Buton.tsx', 'Capitol.tsx']) {
+    copyFileSync(join(COMPONENTE, f), join(COPIE, f))
+  }
+
+  const AFIRMATIE = 'Actul se cere\u00a0azi.'
+  const textul = (html: string) => html.replace(/<[^>]*>/g, '')
+  const h1ul = (html: string): string[] => Array.from(html.match(/<h1[\s\S]*?<\/h1>/g) ?? [])
+
+  async function erou(prop: Record<string, unknown>) {
+    const m = await import('../node_modules/.cache/proba-felie-3/AntetPagina')
+    return renderToStaticMarkup(
+      createElement(m.default as never, {
+        adresa: '/proba',
+        fir: [{ text: 'Pagina de start', href: '/' }, { text: 'Proba' }],
+        eticheta: 'Numele paginii',
+        lead: 'Randul de sub afirmatie.',
+        actiune: { href: '/contact', text: 'Discutie de 30 de minute' },
+        secundar: { href: '/solutii', text: 'Toate domeniile' },
+        imagine: { nume: 'rafturi', alt: 'Rafturi, fotografie ilustrativa', pozitie: 'center 50%' },
+        ...prop,
+      } as never),
+    )
+  }
+
+  async function capitol(prop: Record<string, unknown>) {
+    const m = await import('../node_modules/.cache/proba-felie-3/Capitol')
+    return renderToStaticMarkup(
+      createElement(m.default as never, {
+        id: 'capitolul',
+        eticheta: 'Depozit',
+        afirmatie: 'Hartia sta pe raft.',
+        text: 'Paragraful capitolului.',
+        ...prop,
+      } as never),
+    )
+  }
+
+  it('copia randata e chiar sursa livrata, octet cu octet', () => {
+    // CONTROLUL intregului mecanism de mai jos. Fara el, cazurile care randeaza ar putea masura o
+    // copie invechita - de exemplu daca cineva muta copierea intr-un `beforeAll` care nu mai
+    // ruleaza - si ar raporta verde despre un fisier care nu mai exista in forma aceea.
+    for (const f of ['AntetPagina.tsx', 'Buton.tsx', 'Capitol.tsx']) {
+      expect(
+        readFileSync(join(COPIE, f), 'utf8'),
+        'copia lui ' + f + ' nu mai e identica cu sursa',
+      ).toBe(readFileSync(join(COMPONENTE, f), 'utf8'))
+    }
+  })
+
+  it('eroul nu mai are grila de doua coloane si nu mai trece prin Ecran', async () => {
+    const GRILA = /\bmd:grid-cols-|\bmd:grid\b/
+    const IMPORT_ECRAN = /import\s+Ecran\s+from\s+"\.\/Ecran"/
+    expect(faraComentarii(ANTET), 'eroul si-a recapatat grila de doua coloane').not.toMatch(GRILA)
+    expect(ANTET, 'eroul inca importa Ecran').not.toMatch(IMPORT_ECRAN)
+    // Si pe rezultatul randat, nu doar pe sursa: nicio clasa de grila in tot eroul.
+    const html = await erou({ titlu: AFIRMATIE })
+    expect(html, 'eroul randeaza o grila').not.toMatch(/class="[^"]*\bgrid\b/)
+    // MARTORI POZITIVI: tiparele prind chiar formele pe care le vaneaza - asezarea veche a
+    // antetului si importul vechi, amandoua citate din fisierul de dinainte de felia asta.
+    expect(
+      'md:grid md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] md:items-center'.match(GRILA),
+      'tiparul de grila nu prinde asezarea veche',
+    ).not.toBeNull()
+    expect(
+      'import Ecran from "./Ecran";'.match(IMPORT_ECRAN),
+      'tiparul de import nu prinde importul vechi',
+    ).not.toBeNull()
+    expect(
+      '<div class="mt-10 grid gap-4">'.match(/class="[^"]*\bgrid\b/),
+      'tiparul randat nu prinde martorul',
+    ).not.toBeNull()
+  })
+
+  it('fotografia eroului vine DUPA text si ocupa toata latimea, nu un card la dreapta', async () => {
+    const html = await erou({ titlu: AFIRMATIE })
+    const laH1 = html.indexOf('</h1>')
+    const laFoto = html.indexOf('<img')
+    expect(laH1, 'eroul nu mai are h1').toBeGreaterThan(-1)
+    expect(laFoto, 'eroul nu mai randeaza fotografia').toBeGreaterThan(-1)
+    expect(laFoto, 'fotografia a ajuns inaintea afirmatiei').toBeGreaterThan(laH1)
+    // Cutia fotografiei e pe toata latimea containerului si pastreaza raza de 28.
+    expect(html, 'cutia fotografiei nu mai e pe toata latimea').toMatch(
+      /<div class="[^"]*\bw-full\b[^"]*\brounded-card\b[^"]*"><picture/,
+    )
+    // MARTOR POZITIV: pe o insiruire in care fotografia sta INAINTEA titlului, comparatia de
+    // ordine trebuie sa cada. Fara el, „mai mare decat" ar trece si daca amandoua ar fi -1.
+    const invers = '<div><img src="x"/></div><h1>Titlu</h1>'
+    expect(invers.indexOf('<img') > invers.indexOf('</h1>'), 'martorul de ordine nu e prins').toBe(
+      false,
+    )
+  })
+
+  it('ultimul cuvant al afirmatiei sta intr-un span albastru cand titlul e sir', async () => {
+    const html = await erou({ titlu: AFIRMATIE })
+    const h1 = h1ul(html)
+    expect(h1.length, 'eroul randeaza alt numar de h1 decat unul').toBe(1)
+    expect(h1[0], 'afirmatia nu mai sta pe jetonul de 64 px').toContain('text-titlu-1')
+    expect(h1[0], 'ultimul cuvant nu mai e colorat').toContain(
+      '<span class="text-albastru-2">azi.</span>',
+    )
+    // Punctul final ramane in aceeasi culoare cu cuvantul: e in interiorul span-ului, nu dupa el.
+    expect(h1[0], 'punctul a ramas in afara cuvantului colorat').not.toMatch(/<\/span>\s*\./)
+    // h1-ul contine TOT textul, cu spatiul neintreruptibil pastrat exact asa cum e in continut.
+    expect(textul(h1[0]), 'h1-ul nu mai contine propozitia intreaga').toBe(AFIRMATIE)
+    expect(
+      textul(h1[0]).includes('\u00a0'),
+      'spatiul neintreruptibil s-a pierdut la taiere',
+    ).toBe(true)
+    // MARTOR POZITIV: un h1 in care cuvantul e lasat necolorat trebuie sa pice pe aceeasi cautare.
+    expect(
+      '<h1 class="text-titlu-1">Actul se cere azi.</h1>'.includes('text-albastru-2'),
+      'martorul necolorat nu e prins',
+    ).toBe(false)
+  })
+
+  it('un titlu care nu e sir se randeaza intreg, fara niciun cuvant colorat', async () => {
+    // Nu se poate sti unde se termina ultimul cuvant intr-un arbore de elemente, iar o ghicitoare
+    // ar colora ce nimereste. Deci regula e: se coloreaza NUMAI sirul.
+    const compus = createElement('em', null, 'Titlu compus fara sir.')
+    const html = await erou({ titlu: compus })
+    const h1 = h1ul(html)
+    expect(h1.length).toBe(1)
+    expect(h1[0], 'un titlu compus a primit totusi culoare pe un cuvant').not.toContain(
+      'text-albastru-2',
+    )
+    expect(textul(h1[0]), 'titlul compus nu se mai randeaza intreg').toBe('Titlu compus fara sir.')
+    // Si o afirmatie de UN SINGUR cuvant: albastrul e un contrast fata de restul propozitiei, iar
+    // un h1 colorat in intregime n-ar mai contrasta cu nimic.
+    const singur = h1ul(await erou({ titlu: 'Nemasurat.' }))
+    expect(singur[0], 'un titlu de un singur cuvant a fost colorat in intregime').not.toContain(
+      'text-albastru-2',
+    )
+    expect(textul(singur[0])).toBe('Nemasurat.')
+    // MARTOR NEGATIV al aceleiasi cautari: pe titlul de doua cuvinte ea TREBUIE sa gaseasca ceva,
+    // altfel cele doua afirmatii de mai sus ar trece si daca span-ul n-ar exista niciodata.
+    expect(
+      h1ul(await erou({ titlu: AFIRMATIE }))[0],
+      'cautarea nu gaseste culoarea nici acolo unde trebuie sa fie',
+    ).toContain('text-albastru-2')
+  })
+
+  it('numele paginii si randul de sub afirmatie stau pe treptele masurate', async () => {
+    const html = await erou({ titlu: AFIRMATIE })
+    // Numele: 28 px la 1440 (19 la 390), greutatea 600, `cerneala` - 16,83:1 pe alb.
+    expect(html, 'numele paginii nu mai e pe treapta de 28 px').toMatch(
+      /<span class="[^"]*\btext-subtitlu-tigla\b[^"]*\bfont-semibold\b[^"]*\btext-cerneala\b/,
+    )
+    // Randul de sub afirmatie: 21 / 29 la greutatea 400. NU `font-semibold` - la 400 si 21 px
+    // pragul e 4,5:1, iar `cerneala` da 16,83:1; griul de 3,62:1 al referintei n-ar trece nici
+    // la 600, motiv scris in globals.css.
+    const lead = html.match(/<p class="([^"]*)">Randul de sub afirmatie\.<\/p>/)
+    expect(lead, 'nu mai gasesc randul de sub afirmatie').not.toBeNull()
+    expect(lead![1], 'randul de sub afirmatie nu mai e pe jetonul de 21 / 29').toContain('text-lead')
+    expect(lead![1], 'randul de sub afirmatie a fost ingrosat').not.toContain('font-semibold')
+    expect(lead![1], 'randul de sub afirmatie a trecut pe alta cerneala').toContain('text-cerneala')
+    expect(lead![1], 'randul de sub afirmatie scrie cu griul retras').not.toMatch(
+      /\btext-cerneala-[23]\b/,
+    )
+    // MARTOR POZITIV pentru ultimele doua cautari, care sunt negatii: pe un sir care chiar poarta
+    // formele vanate ele trebuie sa gaseasca.
+    expect('mt-5 text-lead font-semibold text-cerneala-2'.includes('font-semibold')).toBe(true)
+    expect(/\btext-cerneala-[23]\b/.test('mt-5 text-lead text-cerneala-2')).toBe(true)
+  })
+
+  it('capitolul sta in containerul de 980, cu afirmatia de 80 px si fara umbra', async () => {
+    const html = await capitol({})
+    expect(html, 'capitolul nu mai sta in containerul de 980').toContain('max-w-registru')
+    expect(html, 'capitolul a primit alt container').not.toContain('max-w-vitrina')
+    expect(html, 'afirmatia capitolului nu mai foloseste jetonul de 80 px').toMatch(
+      /<h2 class="[^"]*\btext-afirmatie\b/,
+    )
+    expect(html, 'eticheta capitolului nu mai e pe treapta de 24 px').toMatch(
+      /<span class="[^"]*\btext-titlu-4\b/,
+    )
+    expect(html, 'capitolul nu mai sta pe alb').toContain('bg-alb')
+    // Rama copilului: raza 28, `ceata` pe alb, si NICIO umbra - nici ca jeton, nici ca clasa.
+    const cuCopil = await capitol({ children: createElement('img', { src: '/x.webp', alt: 'a' }) })
+    expect(cuCopil, 'rama capitolului si-a pierdut raza de 28').toMatch(
+      /<div class="[^"]*\brounded-card\b[^"]*\bbg-ceata\b/,
+    )
+    expect(cuCopil, 'rama capitolului a primit o umbra').not.toMatch(/\bshadow-[a-z]/)
+    expect(faraComentarii(CAPITOL), 'capitolul scrie o umbra in sursa').not.toMatch(/\bshadow-[a-z]/)
+    // MARTORI POZITIVI: fiecare cautare negativa prinde forma pe care o vaneaza.
+    expect(
+      '<div class="rounded-card bg-ceata shadow-plutitor">'.match(/\bshadow-[a-z]/),
+      'tiparul de umbra nu prinde martorul',
+    ).not.toBeNull()
+    expect(
+      '<div class="mx-auto max-w-vitrina">'.includes('max-w-vitrina'),
+      'tiparul de container nu prinde martorul',
+    ).toBe(true)
+  })
+
+  it('paragraful capitolului e cerneala-3, NU griul de 21 px al referintei', async () => {
+    // Singurul loc in care referinta foloseste #86868b e chiar paragraful asta. Rolul a fost
+    // retras dupa o masuratoare cu axe (3,62:1, `serious` pe 20 din 22 de rute), iar capitolul e
+    // prima componenta care il randeaza dupa retragere - deci si primul loc pe unde s-ar intoarce.
+    const html = await capitol({})
+    const p = html.match(/<p class="([^"]*)">/)
+    expect(p, 'capitolul nu mai are paragraf').not.toBeNull()
+    expect(p![1], 'paragraful capitolului nu mai e la 21 / 29').toContain('text-capitol')
+    expect(p![1], 'paragraful capitolului nu mai e la greutatea 600').toContain('font-semibold')
+    expect(p![1], 'paragraful capitolului a trecut pe griul retras').not.toMatch(
+      /\btext-cerneala-2\b/,
+    )
+    expect(p![1], 'paragraful capitolului nu mai scrie cu cerneala-3').toContain('text-cerneala-3')
+    // Cifra care sustine alegerea, recalculata aici din valori, cu martorii de la formula:
+    // #86868b da 3,62:1 pe alb (sub 4,5), iar `cerneala-3` da 5,07:1.
+    expect(contrast('#86868b', valoare('alb'))).toBeCloseTo(3.62, 2)
+    expect(contrast(valoare('cerneala-3'), valoare('alb'))).toBeCloseTo(5.07, 2)
+    // MARTOR POZITIV: pe clasa retrasa, cautarea trebuie sa se aprinda.
+    expect(
+      /\btext-cerneala-2\b/.test('mt-6 text-capitol font-semibold text-cerneala-2'),
+      'tiparul griului retras nu prinde martorul',
+    ).toBe(true)
+  })
+
+  it('capitolul centrat centreaza si cutiile, nu doar literele din ele', async () => {
+    // `text-center` singur aliniaza literele in cutie, dar cutia ramane lipita la stanga si
+    // afirmatia iese cu un umar mai lung decat celalalt. Amandoua clasele, sau niciuna.
+    const centrat = await capitol({ aliniere: 'centrat' })
+    const h2 = centrat.match(/<h2 class="([^"]*)">/)!
+    expect(h2[1], 'afirmatia centrata nu si-a centrat literele').toContain('text-center')
+    expect(h2[1], 'afirmatia centrata si-a lasat cutia la stanga').toContain('mx-auto')
+    // Iar implicitul ramane stanga, ca pe referinta: centrarea e un gest, nu norma.
+    const stanga = await capitol({})
+    expect(
+      stanga.match(/<h2 class="([^"]*)">/)![1],
+      'capitolul e centrat implicit',
+    ).not.toContain('text-center')
+    // MARTOR POZITIV: cautarea `mx-auto` prinde exact defectul pe care il vaneaza - o cutie
+    // centrata doar la litere.
+    expect(
+      'max-w-[17ch] text-afirmatie text-cerneala text-center'.includes('mx-auto'),
+      'martorul cutiei necentrate nu e prins',
+    ).toBe(false)
   })
 })
