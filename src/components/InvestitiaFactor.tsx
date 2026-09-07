@@ -25,6 +25,24 @@ import type { FactorCost } from "@/content/comparatie";
 //
 // FARA UMBRA. Cardul se desparte de rama de `ceata` prin culoarea lui de fundal, ca in
 // `Card.tsx`; o umbra pe un card static e chiar tiparul pe care directia il refuza.
+//
+// `self-start`, SI E MASURAT. Grupele au 2, 2 si 3 elemente, deci cardurile nu poarta aceeasi
+// cantitate de text. Cat timp randul le intindea la inaltimea celui mai inalt, surplusul cadea
+// INAUNTRUL unei suprafete colorate: la 1440, 488 px de alb gol sub „Marimea si starea" (33%
+// din card) si 445 px de negru gol sub „Timpul si frecventa" (30%), pe carduri de 1472 px.
+// Aici cardul ESTE elementul de grila si isi poarta fundalul, spre deosebire de
+// `InvestitieCarduri`, unde elementul de grila e transparent - de aceea argumentul de acolo,
+// „cardurile raman egale intre ele", nu se muta si aici: acolo golul cade pe rama, aici pe
+// cerneala. Cu `self-start` cardurile isi tin inaltimea data de text - 1017, 1060 si 1472 - si
+// sub cele scunde se vede rama de `ceata`, o suprafata neutra care spune adevarul: grupa aceea
+// are mai putin de spus.
+//
+// SCOATEREA LUI `h-full` NU ERA DE AJUNS, si am masurat-o inainte s-o cred: `<li>` e element de
+// grila, iar `align-items` implicit il intinde oricum, deci fara `h-full` cifrele au iesit
+// IDENTICE (488 / 445 / 32). Alinierea trebuie ceruta, nu doar ne-impiedicata.
+//
+// La 390 nu se schimba nimic: cardurile se stivuiesc, isi au deja inaltimea din text (864, 882,
+// 1209) si golul de la baza e captuseala de 24 px.
 
 type Props = {
   eticheta: string;
@@ -51,7 +69,7 @@ export default function InvestitiaFactor({
   const etichetaScade = inchis ? "text-ceata" : "text-cerneala-3";
 
   return (
-    <li className={"h-full rounded-card p-6 md:p-8 " + cutie}>
+    <li className={"self-start rounded-card p-6 md:p-8 " + cutie}>
       <span
         className={
           "inline-block rounded-pastila px-[10px] py-[3px] text-mic leading-[18px] font-semibold " +

@@ -33,8 +33,15 @@ import { INVESTITIA_INTERIOR as II } from "@/content/interior-investitia";
 // `src/content/interior-investitia.ts`, cu indici care acopera multimea de sapte exact o data;
 // `tests/interior-felie4.test.ts` o masoara, ca o regrupare viitoare sa nu piarda un element.
 //
-// BARA LOCALA STA DUPA EROU, si e o abatere DECLARATA de la ordinea REF-A §4, care o pune
-// inaintea lui. `AntetPagina` e componenta INGHETATA si isi rezerva 96 px in partea de sus
+// BARA LOCALA STA DUPA EROU, CA IN REF-A. Pe captura de produs a referintei, primul ecran e
+// bara globala plus eroul, iar bara cu numele paginii si ancorele apare abia in al doilea -
+// privita, nu presupusa. Fisa REF-A §4 punctul 1 o insiruie inaintea eroului; insiruirea
+// fisei e gresita, ca si punctul 2 pana la corectia din 07.09, si aici se masoara captura, nu
+// lista. Aici a stat pana acum o auto-acuzare de „abatere DECLARATA" fata de referinta; nu
+// exista abatere, si o retrag, ca urmatoarea felie sa nu „repare" ce e deja corect.
+//
+// ORDINEA ARE SI O A DOUA JUSTIFICARE, masurata la noi.
+// `AntetPagina` e componenta INGHETATA si isi rezerva 96 px in partea de sus
 // pentru bara globala fixa; asezata deasupra eroului, bara locala ar adauga inca 96 px (44 bara
 // globala + 52 bara locala) inaintea firului de navigare, iar numele paginii ar cobori de la
 // 842 px, cifra masurata la reconcilierea lotului S2-b0, spre 938 - adica sub linia de plutire
