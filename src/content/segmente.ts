@@ -142,30 +142,30 @@ export const NOTARI: PaginaSegment = {
   durere: [
     {
       titlu: "Fondul crește, spațiul nu.",
-      text: "Actele se adaugă în fiecare zi lucrătoare, iar rafturile ocupă metri de birou, deci plătiți chirie de birou pentru hârtie care nu se mai atinge.",
+      text: "Actele se adaugă în fiecare zi lucrătoare și rafturile cresc. Plătiți chirie de birou pentru hârtie care nu se mai atinge.",
     },
     {
       titlu: "Cheia e a hârtiei.",
-      text: "Actele se găsesc după nume, dată și număr de înregistrare, dar cererea vine cu un nume și un an aproximative, iar un opis pe hârtie se citește pe o singură cheie odată.",
+      text: "Actele se găsesc după nume, dată și număr de înregistrare. Cererea vine cu un nume și un an aproximative. Opisul pe hârtie se citește pe o singură cheie odată.",
     },
     {
       titlu: "Predarea nu suportă improvizație.",
-      text: "Arhiva se predă cu proces-verbal și inventar, iar dacă inventarul nu e la zi în ziua aceea, predarea devine o inventariere de avarie, făcută sub termen.",
+      text: "Arhiva se predă cu proces-verbal și inventar. Dacă inventarul nu e la zi în ziua aceea, predarea devine o inventariere de avarie, făcută sub termen.",
     },
   ],
 
   schimbare: [
     {
       titlu: "Dimineața, la ghișeu.",
-      text: "Cererea se pune ca întrebare, în română, de pe telefon sau din pagina de căutare, iar răspunsul vine cu documentul și pagina, deci se verifică pe loc.",
+      text: "Cererea se pune ca întrebare, în română, de pe telefon sau din pagina de căutare. Răspunsul vine cu documentul și pagina. Se verifică pe loc.",
     },
     {
       titlu: "Raftul, la Golești.",
-      text: "Fondul stă inventariat, cu cotă, în depozitul din județul Argeș, iar ce se cere des se scanează; originalul rămâne în raft și vine la birou când aveți nevoie de hârtie.",
+      text: "Fondul stă inventariat, cu cotă, în depozitul din județul Argeș. Ce se cere des se scanează. Originalul rămâne în raft și vine la birou când aveți nevoie de hârtie.",
     },
     {
       titlu: "Inventarul, permanent.",
-      text: "Opisul se ține la zi tot timpul, deci o predare cu proces-verbal se face din ce există deja, nu dintr-o numărătoare făcută în grabă.",
+      text: "Opisul se ține la zi tot timpul. O predare cu proces-verbal se face din ce există deja, nu dintr-o numărătoare făcută în grabă.",
     },
   ],
 
@@ -201,7 +201,7 @@ export const NOTARI: PaginaSegment = {
   notaTermene:
     "Nu scriem un termen în ani pentru actele notariale, fiindcă nu îl putem cita pe articol, la fel ca la dosarele cabinetelor de avocatură. Preferăm golul unei cifre pe care nu am putea să o susținem în fața unui control.",
   notaCerere:
-    "Termenul care vă obligă este cel din nomenclatorul arhivistic al biroului, avizat de Arhivele Naționale, iar dacă îi cunoașteți articolul, scrieți-ne și îl publicăm cu trimiterea la act.",
+    "Termenul care vă obligă este cel din nomenclatorul arhivistic al biroului, avizat de Arhivele Naționale. Dacă îi cunoașteți articolul, scrieți-ne și îl publicăm cu trimiterea la act.",
 
   titluIntrebari:
     "Ale cui sunt actele.",
@@ -210,28 +210,28 @@ export const NOTARI: PaginaSegment = {
     {
       intrebare: "Originalele rămân ale biroului?",
       raspuns:
-        "Da, fiindcă suntem custode, nu proprietar: fondul se preia cu proces-verbal și inventar semnate de dumneavoastră, iar originalul vine înapoi la cerere, în termenul scris în contract.",
+        "Da, fiindcă suntem custode, nu proprietar. Fondul se preia cu proces-verbal și inventar semnate de dumneavoastră. Originalul vine înapoi la cerere, în termenul din contract.",
     },
     {
       intrebare: "Cine vede actele și ce rămâne scris",
       raspuns:
-        "Accesul se dă nominal, pe persoană și pe fond, iar fiecare căutare și fiecare deschidere de document se jurnalizează, inclusiv pentru personalul nostru; jurnalul vi se pune la dispoziție.",
+        "Accesul se dă nominal, pe persoană și pe fond. Fiecare căutare și fiecare deschidere de document se jurnalizează, inclusiv pentru personalul nostru. Jurnalul vi se pune la dispoziție.",
     },
     {
       intrebare: "Ce se întâmplă dacă biroul își încetează activitatea",
       raspuns:
-        "Predarea arhivei se face în condițiile legii notariale, către cine indică ea, iar partea noastră este fondul complet și inventariat, cu proces-verbal, plus copiile digitale în format deschis, PDF cu index CSV.",
+        "Predarea arhivei se face în condițiile legii notariale, către cine indică ea. Partea noastră este fondul complet și inventariat, cu proces-verbal, plus copiile digitale în PDF cu index CSV.",
     },
     {
       intrebare: "Actele ajung la un model de limbaj",
       raspuns:
-        "Documentele dumneavoastră nu sunt folosite pentru antrenarea niciunui model, iar furnizorul de procesare, regiunea și politica de păstrare a interogărilor vi le arătăm la prima discuție.",
+        "Documentele dumneavoastră nu sunt folosite pentru antrenarea niciunui model. Furnizorul de procesare, regiunea și politica de păstrare a interogărilor vi le arătăm la prima discuție.",
     },
   ],
 
   incheiere: {
     titlu: "De luni, se întreabă.",
-    text: "Treizeci de minute în care ne uităm la arhiva biroului așa cum arată azi, iar la final plecați cu estimarea volumului, cu ordinea digitizării și cu un calendar de preluare scris.",
+    text: "Treizeci de minute în care ne uităm la arhiva biroului așa cum arată azi. La final plecați cu estimarea volumului, cu ordinea digitizării și cu un calendar de preluare scris.",
     buton: "Cereți calendarul de preluare",
   },
 };
@@ -261,30 +261,30 @@ export const PRIMARII: PaginaSegment = {
   durere: [
     {
       titlu: "Fondul e moștenit.",
-      text: "Cutiile din subsol vin de la mandate anterioare, uneori fără cotă și fără opis, iar nomenclatorul acoperă doar ce se creează de acum înainte, deci restanța nu o revendică nimeni.",
+      text: "Cutiile din subsol vin de la mandate anterioare, uneori fără cotă și fără opis. Nomenclatorul acoperă doar ce se creează de acum înainte. Restanța nu o revendică nimeni.",
     },
     {
       titlu: "Cetățeanul așteaptă în picioare.",
-      text: "Cererea de informații de interes public are termen scris în Legea nr. 544/2001, iar căutarea se face în altă clădire, de omul care știe unde e raftul și care poate lipsi o săptămână.",
+      text: "Cererea de informații de interes public are termen scris în Legea nr. 544/2001. Căutarea se face în altă clădire, de omul care știe unde e raftul și care poate lipsi o săptămână.",
     },
     {
       titlu: "Eliminarea greșită rămâne.",
-      text: "Hotărârile consiliului local și dispozițiile primarului au termen permanent, iar apariția unui asemenea document într-un proces-verbal de eliminare este cea mai gravă constatare a unui control.",
+      text: "Hotărârile consiliului local și dispozițiile primarului au termen permanent. Apariția unui asemenea document într-un proces-verbal de eliminare este cea mai gravă constatare a unui control.",
     },
   ],
 
   schimbare: [
     {
       titlu: "Ghișeul întreabă.",
-      text: "Funcționarul pune întrebarea în română, de la calculatorul de la ghișeu, iar răspunsul vine cu documentul și pagina, deci se verifică înainte de a fi spus cetățeanului.",
+      text: "Funcționarul pune întrebarea în română, de la calculatorul de la ghișeu. Răspunsul vine cu documentul și pagina. Se verifică înainte de a fi spus cetățeanului.",
     },
     {
       titlu: "Restanța primește aceeași cheie.",
-      text: "Fondul vechi se inventariază pe nomenclatorul instituției dumneavoastră, deci ce s-a strâns peste mandate ajunge să se caute la fel ca dosarul înregistrat luna trecută.",
+      text: "Fondul vechi se inventariază pe nomenclatorul instituției dumneavoastră. Ce s-a strâns peste mandate se caută la fel ca dosarul înregistrat luna trecută.",
     },
     {
       titlu: "Evidența există înainte.",
-      text: "Opisul, cotele și jurnalul de acces stau la zi tot timpul, deci la o verificare sau la o solicitare de la altă instituție se scoate ce există deja.",
+      text: "Opisul, cotele și jurnalul de acces stau la zi tot timpul. La o verificare sau la o solicitare de la altă instituție se scoate ce există deja.",
     },
   ],
 
@@ -297,7 +297,7 @@ export const PRIMARII: PaginaSegment = {
 
   deschise: [
     "Nu deținem certificare ISO 27001 și nu ne prezentăm ca și cum am avea",
-    "Nu avem o primărie pe care să o dăm ca referință: 3S este o firmă nouă, iar arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
+    "Nu avem o primărie pe care să o dăm ca referință: 3S este o firmă nouă. Arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
     "Nu publicăm preț: costul se face pe metri liniari și pe ce anume se digitizează",
     "Nu scriem în zile termenul din Legea nr. 544/2001: el obligă instituția, nu furnizorul de arhivă, și se citește din act",
     "Nu ne pronunțăm asupra procedurii de achiziție: forma contractului o stabiliți dumneavoastră, cu compartimentul juridic",
@@ -314,18 +314,18 @@ export const PRIMARII: PaginaSegment = {
     },
     {
       act: "Legea nr. 119/1996 cu privire la actele de stare civilă",
-      ce: "Regimul registrelor de stare civilă: se păstrează 100 de ani de la întocmire, iar după împlinirea termenului se predau Arhivelor Naționale, exemplarul al doilea având propriul regim de depunere.",
+      ce: "Regimul registrelor de stare civilă: se păstrează 100 de ani de la întocmire. După împlinirea termenului se predau Arhivelor Naționale, exemplarul al doilea având propriul regim de depunere.",
     },
     {
       act: "HG nr. 273/1994, Regulamentul de recepție a lucrărilor de construcții",
-      ce: "Cartea tehnică a construcției se păstrează pe toată durata existenței construcției și îl urmează pe proprietar la fiecare schimbare, iar lipsa ei se constată la o expertiză, la o vânzare sau după un eveniment.",
+      ce: "Cartea tehnică se păstrează pe toată durata existenței construcției și îl urmează pe proprietar la fiecare schimbare. Lipsa ei se constată la o expertiză, la o vânzare sau după un eveniment.",
     },
   ],
 
   notaTermene:
     "Termenele de mai sus le putem cita pe articol și stau, fiecare cu actul lui, în instrumentul de termene de păstrare. Nu scriem numărul de ani pentru fiecare categorie din nomenclatorul dumneavoastră, fiindcă acela vine din nomenclatorul instituției, avizat de Arhivele Naționale.",
   notaCerere:
-    "Dacă nomenclatorul dumneavoastră spune altceva decât o listă tipărită de un furnizor, nomenclatorul câștigă, iar noi ne aliniem la el.",
+    "Dacă nomenclatorul dumneavoastră spune altceva decât o listă tipărită de un furnizor, nomenclatorul câștigă. Noi ne aliniem la el.",
 
   titluIntrebari:
     "Ce rămâne instituției.",
@@ -334,12 +334,12 @@ export const PRIMARII: PaginaSegment = {
     {
       intrebare: "Fondul rămâne al instituției?",
       raspuns:
-        "Da, documentele rămân proprietate publică, iar noi suntem custode: preluarea se face cu proces-verbal și inventar semnate de dumneavoastră, iar originalul se aduce la cerere, în termenul din contract.",
+        "Da, documentele rămân proprietate publică și noi suntem custode. Preluarea se face cu proces-verbal și inventar semnate de dumneavoastră. Originalul se aduce la cerere, în termenul din contract.",
     },
     {
       intrebare: "Ce se întâmplă cu documentele cu termen permanent",
       raspuns:
-        "Nu se propun spre eliminare, indiferent câte rafturi ar elibera: le inventariem separat și le marcăm ca atare, iar predarea către Arhivele Naționale rămâne a instituției, în condițiile legii.",
+        "Nu se propun spre eliminare, indiferent câte rafturi ar elibera: le inventariem separat și le marcăm ca atare. Predarea către Arhivele Naționale rămâne a instituției, în condițiile legii.",
     },
     {
       intrebare: "Ce rămâne în sarcina instituției",
@@ -349,13 +349,13 @@ export const PRIMARII: PaginaSegment = {
     {
       intrebare: "Datele cetățenilor ajung la un model de limbaj",
       raspuns:
-        "Documentele instituției nu sunt folosite pentru antrenarea niciunui model, iar furnizorul de procesare, regiunea și politica de păstrare a interogărilor vi le arătăm la prima discuție, pentru evaluarea de impact.",
+        "Documentele instituției nu sunt folosite pentru antrenarea niciunui model. Furnizorul de procesare, regiunea și politica de păstrare a interogărilor vi le arătăm la prima discuție, pentru evaluarea de impact.",
     },
   ],
 
   incheiere: {
     titlu: "Începem de la ghișeu.",
-    text: "Treizeci de minute în care ne uităm la arhiva instituției așa cum arată azi, iar la final plecați cu estimarea volumului și cu ordinea digitizării, începând cu fondul care produce cozi.",
+    text: "Treizeci de minute în care ne uităm la arhiva instituției așa cum arată azi. La final plecați cu estimarea volumului și cu ordinea digitizării, începând cu fondul care produce cozi.",
     buton: "Cereți ordinea digitizării",
   },
 };
@@ -374,30 +374,30 @@ export const CONTABILITATE: PaginaSegment = {
   durere: [
     {
       titlu: "Două termene, un biblioraft.",
-      text: "Registrele și documentele justificative se păstrează cinci ani, statele de salarii cincizeci, iar amestecarea lor se vede abia când un fost angajat cere dovada vechimii.",
+      text: "Registrele și documentele justificative se păstrează cinci ani, statele de salarii cincizeci. Amestecarea lor se vede abia când un fost angajat cere dovada vechimii.",
     },
     {
       titlu: "Hârtia e a clientului.",
-      text: "Fiecare cutie aparține altei firme, iar când un client își mută contabilitatea trebuie predat fondul lui, complet și numai al lui, de obicei în săptămâna declarațiilor.",
+      text: "Fiecare cutie aparține altei firme. Când un client își mută contabilitatea trebuie predat fondul lui, complet și numai al lui, de obicei în săptămâna declarațiilor.",
     },
     {
       titlu: "Controlul cere un an.",
-      text: "Inspecția vine cu un an anume și cu o listă de documente, iar căutarea o fac aceiași oameni care duc termenele lunii.",
+      text: "Inspecția vine cu un an anume și cu o listă de documente. Căutarea o fac aceiași oameni care duc termenele lunii.",
     },
   ],
 
   schimbare: [
     {
       titlu: "Termenele se separă devreme.",
-      text: "Statele de salarii intră în alt fond, cu altă cotă, din ziua preluării, deci la selecționare separarea există deja și nu se face sub presiune.",
+      text: "Statele de salarii intră în alt fond, cu altă cotă, din ziua preluării. La selecționare separarea există deja și nu se face sub presiune.",
     },
     {
       titlu: "Un an, o firmă.",
-      text: "Întrebarea se pune în română, iar răspunsul vine cu documentul și pagina, filtrat pe firma-client și pe exercițiu financiar, deci un control care cere un singur an nu deschide restul.",
+      text: "Întrebarea se pune în română. Răspunsul vine cu documentul și pagina, filtrat pe firma-client și pe exercițiu financiar. Un control care cere un singur an nu deschide restul.",
     },
     {
       titlu: "Fondul pleacă întreg.",
-      text: "Inventarul pe firmă stă la zi permanent, deci când un client se mută predarea se face din ce există, cu proces-verbal, plus copiile digitale în format deschis.",
+      text: "Inventarul pe firmă stă la zi permanent. Când un client se mută, predarea se face din ce există, cu proces-verbal, plus copiile digitale în format deschis.",
     },
   ],
 
@@ -410,7 +410,7 @@ export const CONTABILITATE: PaginaSegment = {
 
   deschise: [
     "Nu deținem certificare ISO 27001 și nu ne prezentăm ca și cum am avea",
-    "Nu avem un birou de contabilitate pe care să îl dăm ca referință: 3S este o firmă nouă, iar arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
+    "Nu avem un birou de contabilitate pe care să îl dăm ca referință: 3S este o firmă nouă. Arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
     "Nu publicăm preț: costul se face pe metri liniari și pe ce anume se digitizează",
     "Nu dăm consultanță fiscală și nu vă spunem noi ce se poate elimina: propunerea rămâne a dumneavoastră și a comisiei de selecționare",
     "Nu prezentăm termenul dosarelor de personal ca literă de lege: cei 75 de ani sunt practica din nomenclatoarele avizate, nu un articol general",
@@ -436,9 +436,9 @@ export const CONTABILITATE: PaginaSegment = {
   ],
 
   notaTermene:
-    "Cifrele de mai sus le putem cita pe articol, dar nu scriem un termen unic pentru „arhiva biroului”, fiindcă fiecare categorie are actul ei.",
+    "Cifrele de mai sus le putem cita pe articol. Un termen unic pentru „arhiva biroului” nu scriem, fiindcă fiecare categorie are actul ei.",
   notaCerere:
-    "Atenție la o suprapunere care induce în eroare: prescripția dreptului organului fiscal este tot de cinci ani, dar poate curge de la altă dată decât termenul de arhivare. Termenul dosarelor de personal rămâne cel din nomenclatorul dumneavoastră avizat.",
+    "Atenție la o suprapunere care induce în eroare. Prescripția dreptului organului fiscal este tot de cinci ani, însă poate curge de la altă dată decât termenul de arhivare. Termenul dosarelor de personal rămâne cel din nomenclatorul dumneavoastră avizat.",
 
   titluIntrebari:
     "Când pleacă un client.",
@@ -447,7 +447,7 @@ export const CONTABILITATE: PaginaSegment = {
     {
       intrebare: "Ale cui rămân documentele",
       raspuns:
-        "Ale firmelor care le-au creat: biroul dumneavoastră răspunde față de ele, noi suntem custode, cu proces-verbal și inventar, iar originalul se aduce la cerere, în termenul din contract.",
+        "Ale firmelor care le-au creat: biroul dumneavoastră răspunde față de ele. Noi suntem custode, cu proces-verbal și inventar. Originalul se aduce la cerere, în termenul din contract.",
     },
     {
       intrebare: "Ce se întâmplă când un client își mută contabilitatea",
@@ -457,18 +457,18 @@ export const CONTABILITATE: PaginaSegment = {
     {
       intrebare: "Cum se face selecționarea, concret",
       raspuns:
-        "Comisia de selecționare rămâne a biroului dumneavoastră, iar noi pregătim listele pe categorii și pe termene, cu statele de salarii deja separate, și scoatem din propunere ce are termen mai lung.",
+        "Comisia de selecționare rămâne a biroului dumneavoastră. Noi pregătim listele pe categorii și pe termene, cu statele de salarii deja separate, și scoatem din propunere ce are termen mai lung.",
     },
     {
       intrebare: "Cine vede documentele și ce rămâne scris",
       raspuns:
-        "Accesul se dă nominal, pe persoană și pe fondul unei singure firme, iar fiecare căutare și fiecare deschidere de document se jurnalizează, inclusiv pentru personalul nostru.",
+        "Accesul se dă nominal, pe persoană și pe fondul unei singure firme. Fiecare căutare și fiecare deschidere de document se jurnalizează, inclusiv pentru personalul nostru.",
     },
   ],
 
   incheiere: {
     titlu: "Pornim de la control.",
-    text: "Treizeci de minute în care ne uităm la câte firme aveți, câți metri liniari, ce s-a cerut la ultima inspecție și cum stau statele de salarii, iar la final plecați cu ordinea preluării.",
+    text: "Treizeci de minute în care ne uităm la câte firme aveți, câți metri liniari și cum stau statele de salarii. La final plecați cu ordinea preluării.",
     buton: "Cereți ordinea preluării",
   },
 };
@@ -480,37 +480,37 @@ export const AVOCATURA: PaginaSegment = {
   eticheta: "Domenii · Case de avocatură",
   h1: "Termenul e\u00a0miercuri.",
   lead:
-    "Un dosar de instanță se măsoară în bibliorafturi, iar termenele care contează se măsoară în zile.",
+    "Un dosar de instanță se măsoară în bibliorafturi. Termenele care contează se măsoară în zile.",
   continuare:
     "Pagina scrie ce preluăm, cum se dă accesul pe dosar și de ce lăsăm gol, dinadins, rândul cu termenul de păstrare.",
 
   durere: [
     {
       titlu: "Volumul vine din dosar.",
-      text: "Un singur litigiu produce zeci de centimetri de hârtie, iar dosarele închise nu se micșorează și nu se aruncă, dar ocupă rafturi în biroul din centru, la chirie de birou.",
+      text: "Un singur litigiu produce zeci de centimetri de hârtie. Dosarele închise nu se micșorează și nu se aruncă. Ocupă rafturi în biroul din centru, la chirie de birou.",
     },
     {
       titlu: "Termenul nu așteaptă căutarea.",
-      text: "Când se cere un înscris dintr-un dosar de acum șase ani, căutarea intră pe drumul critic al termenului, iar diferența dintre răsfoire și întrebare directă este, în cazurile proaste, chiar termenul.",
+      text: "Când se cere un înscris dintr-un dosar de acum șase ani, căutarea intră pe drumul critic al termenului. Diferența dintre răsfoire și întrebare directă este, în cazurile proaste, chiar termenul.",
     },
     {
       titlu: "Contează și cine vede.",
-      text: "Secretul profesional nu se oprește la ușa depozitului, iar un furnizor care păstrează cutiile în siguranță, dar dă acces „echipei” la grămadă, a mutat problema în altă clădire.",
+      text: "Secretul profesional nu se oprește la ușa depozitului. Un furnizor care păstrează cutiile în siguranță și dă acces „echipei” la grămadă a mutat problema în altă clădire.",
     },
   ],
 
   schimbare: [
     {
       titlu: "Întrebarea în locul răsfoirii.",
-      text: "Puneți întrebarea în română, de pe telefon sau din pagina de căutare, iar răspunsul vine cu dosarul, documentul și pagina, fiindcă un citat aproximativ dintr-un înscris nu folosește la nimic.",
+      text: "Puneți întrebarea în română, de pe telefon sau din pagina de căutare. Răspunsul vine cu dosarul, documentul și pagina, fiindcă un citat aproximativ dintr-un înscris nu folosește la nimic.",
     },
     {
       titlu: "Acces pe dosar.",
-      text: "Fiecare persoană primește acces nominal, pe dosarele la care lucrează, iar colaboratorul intrat pentru un singur litigiu vede un singur fond, cu accesul retras la încetarea colaborării.",
+      text: "Fiecare persoană primește acces nominal, pe dosarele la care lucrează. Colaboratorul intrat pentru un singur litigiu vede un singur fond, cu accesul retras la încetarea colaborării.",
     },
     {
       titlu: "Originalul stă, copia circulă.",
-      text: "Ce se cere des se digitizează și devine căutabil, iar originalul rămâne în raft, la Golești, și vine înapoi la cabinet în termenul scris în contract.",
+      text: "Ce se cere des se digitizează și devine căutabil. Originalul rămâne în raft, la Golești, și vine înapoi la cabinet în termenul din contract.",
     },
   ],
 
@@ -523,7 +523,7 @@ export const AVOCATURA: PaginaSegment = {
 
   deschise: [
     "Nu deținem certificare ISO 27001 și nu ne prezentăm ca și cum am avea",
-    "Nu avem o casă de avocatură pe care să o dăm ca referință: 3S este o firmă nouă, iar arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
+    "Nu avem o casă de avocatură pe care să o dăm ca referință: 3S este o firmă nouă. Arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
     "Nu publicăm preț: costul se face pe metri liniari și pe ce anume se digitizează",
     "Nu scriem un termen de păstrare pentru dosarele unui cabinet, fiindcă nu am găsit o normă generală pe care să o putem cita cu articol",
     "Nu interpretăm ce impune statutul profesiei: acela se citește la barou, nu la furnizorul de arhivă",
@@ -540,14 +540,14 @@ export const AVOCATURA: PaginaSegment = {
     },
     {
       act: "Legea nr. 51/1995 pentru organizarea și exercitarea profesiei de avocat, cu statutul profesiei",
-      ce: "De aici vin secretul profesional și regimul dosarelor cabinetului, iar termenul concret se citește din statut, din contractul de asistență juridică și din nomenclatorul propriu, acte pe care le citiți dumneavoastră, la barou.",
+      ce: "De aici vin secretul profesional și regimul dosarelor cabinetului. Termenul concret se citește din statut, din contractul de asistență juridică și din nomenclatorul propriu, acte pe care le citiți la barou.",
     },
   ],
 
   notaTermene:
     "Rândul cu termenul de păstrare a dosarelor de cabinet este gol în instrumentul de termene și rămâne gol, fiindcă nu am găsit o normă generală, aplicabilă tuturor dosarelor, pe care să o putem cita cu articol.",
   notaCerere:
-    "Termenul se construiește din statutul profesiei, din contractul de asistență juridică și din nomenclatorul propriu, iar dacă lucrați într-un cabinet și cunoașteți temeiul, scrieți-ne și îl publicăm cu trimiterea la act.",
+    "Termenul se construiește din statutul profesiei, din contractul de asistență juridică și din nomenclatorul propriu. Dacă lucrați într-un cabinet și cunoașteți temeiul, scrieți-ne și îl publicăm cu trimiterea la act.",
 
   titluIntrebari:
     "Secretul profesional, la despărțire.",
@@ -556,17 +556,17 @@ export const AVOCATURA: PaginaSegment = {
     {
       intrebare: "Dosarele rămân ale cabinetului?",
       raspuns:
-        "Da, fiindcă suntem custode, nu proprietar: fondul se preia cu proces-verbal și inventar semnate de dumneavoastră, iar originalul vine înapoi la cerere, în termenul scris în contract.",
+        "Da, fiindcă suntem custode, nu proprietar. Fondul se preia cu proces-verbal și inventar semnate de dumneavoastră. Originalul vine înapoi la cerere, în termenul din contract.",
     },
     {
       intrebare: "Cum se împacă asta cu secretul profesional",
       raspuns:
-        "Accesul se dă nominal și pe dosar, personalul nostru semnează angajament de confidențialitate, iar fiecare deschidere rămâne în jurnal, cu nume și oră.",
+        "Accesul se dă nominal și pe dosar. Personalul nostru semnează angajament de confidențialitate. Fiecare deschidere rămâne în jurnal, cu nume și oră.",
     },
     {
       intrebare: "Cât de repede vine un dosar înapoi pe hârtie",
       raspuns:
-        "Termenul se stabilește pe categorii și se scrie în contract, înainte de prima ridicare, fiindcă depinde de distanță și de ora cererii, iar un număr pus pe pagină nu ajută în instanță.",
+        "Termenul se stabilește pe categorii și se scrie în contract, înainte de prima ridicare, fiindcă depinde de distanță și de ora cererii. Un număr pus pe pagină nu ajută în instanță.",
     },
     {
       intrebare: "Ce se întâmplă dacă încetează colaborarea",
@@ -577,7 +577,7 @@ export const AVOCATURA: PaginaSegment = {
 
   incheiere: {
     titlu: "Alegeți un dosar închis.",
-    text: "Treizeci de minute în care ne uităm la câți metri liniari aveți, ce se cere dintr-un dosar închis și cine are voie să vadă ce, iar la final plecați cu regulile de acces.",
+    text: "Treizeci de minute în care ne uităm la câți metri liniari aveți și cine are voie să vadă ce. La final plecați cu regulile de acces.",
     buton: "Cereți regulile de acces",
   },
 };
@@ -609,30 +609,30 @@ export const CONSTRUCTII: PaginaSegment = {
   durere: [
     {
       titlu: "Dosarul se naște afară.",
-      text: "Procesele-verbale de lucrări ascunse, buletinele de încercări și certificatele materialelor se semnează pe șantier, în exemplare care pleacă la firme diferite, iar la demontarea organizării de șantier dosarul ajunge unde apucă.",
+      text: "Procesele-verbale de lucrări ascunse, buletinele de încercări și certificatele materialelor se semnează pe șantier, în exemplare care pleacă la firme diferite. La demontarea organizării de șantier dosarul ajunge unde apucă.",
     },
     {
       titlu: "Cartea pleacă, răspunderea rămâne.",
-      text: "Cartea tehnică pleacă la proprietar, cum cere regulamentul de recepție, dar firma care a executat rămâne cea căreia i se cer explicații peste ani, deci are nevoie de propriul exemplar.",
+      text: "Cartea tehnică pleacă la proprietar, cum cere regulamentul de recepție. Firma care a executat rămâne cea căreia i se cer explicații peste ani. Are nevoie de propriul exemplar.",
     },
     {
       titlu: "Dovada stă sub tencuială.",
-      text: "La o infiltrație sau la o fisură se cere ce s-a executat acolo, în ce zi și cine a semnat înainte de acoperire, iar răspunsul stă într-un proces-verbal semnat de mai multe părți.",
+      text: "La o infiltrație sau la o fisură se cere ce s-a executat acolo, în ce zi și cine a semnat înainte de acoperire. Răspunsul stă într-un proces-verbal semnat de mai multe părți.",
     },
   ],
 
   schimbare: [
     {
       titlu: "Un fond pe obiectiv.",
-      text: "Fiecare șantier primește fondul lui, cu cotă proprie, de la autorizația de construire până la recepția finală, deci se caută într-un obiectiv, nu în arhiva firmei la grămadă.",
+      text: "Fiecare șantier primește fondul lui, cu cotă proprie, de la autorizația de construire până la recepția finală. Se caută într-un obiectiv, nu în arhiva firmei la grămadă.",
     },
     {
       titlu: "Predarea și copia, deodată.",
-      text: "Cartea tehnică se predă proprietarului, iar firma rămâne cu exemplarul digital complet și indexat; noi ducem inventarul, scanarea și predarea, nu răspunderea tehnică.",
+      text: "Cartea tehnică se predă proprietarului. Firma rămâne cu exemplarul digital complet și indexat. Noi ducem inventarul, scanarea și predarea, nu răspunderea tehnică.",
     },
     {
       titlu: "Întrebarea, în locul teancului.",
-      text: "Se întreabă în română ce proces-verbal acoperă hidroizolația de la corpul B și în ce zi s-a semnat, iar răspunsul vine cu documentul și pagina, deci ajunge la expert ca citat.",
+      text: "Se întreabă în română ce proces-verbal acoperă hidroizolația de la corpul B și în ce zi s-a semnat. Răspunsul vine cu documentul și pagina, așa cum ajunge la expert un citat.",
     },
   ],
 
@@ -645,11 +645,11 @@ export const CONSTRUCTII: PaginaSegment = {
 
   deschise: [
     "Nu deținem certificare ISO 27001 și nu ne prezentăm ca și cum am avea",
-    "Nu avem o firmă de construcții pe care să o dăm ca referință: 3S este o firmă nouă, iar arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
+    "Nu avem o firmă de construcții pe care să o dăm ca referință: 3S este o firmă nouă. Arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
     "Nu publicăm preț: costul se face pe metri liniari și pe ce anume se digitizează",
     "Nu întocmim cartea tehnică și nu ne substituim dirigintelui de șantier sau responsabilului tehnic cu execuția: ducem hârtia, evidența și predarea, nu răspunderea tehnică",
     "Nu scriem în ani durata răspunderii pentru vicii și nici perioada de garanție: sunt termene care se citesc din contract și din actul normativ, nu de pe pagina unui furnizor de arhivă",
-    "Nu dăm preț pe planșe fără să le vedem: peste formatul A3 se schimbă și scanerul, și felul în care stau pe raft, iar o estimare făcută înainte de măsurare nu ar ține",
+    "Nu dăm preț pe planșe fără să le vedem: peste formatul A3 se schimbă și scanerul, și felul în care stau pe raft. O estimare făcută înainte de măsurare nu ar ține",
     "Nu scriem un timp de răspuns în secunde, fiindcă nu l-am măsurat pe un fond real de șantier",
   ],
 
@@ -663,18 +663,18 @@ export const CONSTRUCTII: PaginaSegment = {
     },
     {
       act: "Legea nr. 10/1995 privind calitatea în construcții",
-      ce: "Actul care așază sistemul calității în construcții și obligațiile participanților, iar întinderea răspunderii și termenele concrete se citesc din el și din regulamentele lui de aplicare, nu dintr-o cifră scrisă de noi.",
+      ce: "Actul care așază sistemul calității în construcții și obligațiile participanților. Întinderea răspunderii și termenele concrete se citesc din el și din regulamentele lui de aplicare, nu dintr-o cifră scrisă de noi.",
     },
     {
       act: "Legea Arhivelor Naționale nr. 16/1996",
-      ce: "Evidența documentelor create și primite, gruparea pe termene într-un nomenclator avizat, condițiile de păstrare și selecționarea prin comisie. Obligă firma care creează documentele, deci și o societate de construcții.",
+      ce: "Evidența documentelor create și primite, gruparea pe termene într-un nomenclator avizat, condițiile de păstrare și selecționarea prin comisie. Obligă firma care creează documentele, inclusiv o societate de construcții.",
     },
   ],
 
   notaTermene:
     "O singură durată din dosarul unui șantier o putem cita pe articol: cartea tehnică se păstrează pe toată durata existenței construcției, potrivit HG nr. 273/1994. Pentru jurnalul de șantier, buletinele de încercări și dosarele subantreprenorilor nu punem un număr de ani pe pagină.",
   notaCerere:
-    "Termenul lor se compune din contract, din durata răspunderii pentru vicii și din nomenclatorul firmei, iar dacă lucrați în construcții și aveți articolul, scrieți-ne și îl publicăm cu trimiterea la act.",
+    "Termenul lor se compune din contract, din durata răspunderii pentru vicii și din nomenclatorul firmei. Dacă lucrați în construcții și aveți articolul, scrieți-ne și îl publicăm cu trimiterea la act.",
 
   titluIntrebari:
     "Cine ține cartea tehnică.",
@@ -683,7 +683,7 @@ export const CONSTRUCTII: PaginaSegment = {
     {
       intrebare: "Cartea tehnică o întocmiți dumneavoastră?",
       raspuns:
-        "Nu, întocmirea și semnarea rămân la cei pe care îi obligă regulamentul de recepție, iar noi adunăm, inventariem, scanăm și predăm ce ne dați, cu piesele lipsă scrise în inventar ca lipsă.",
+        "Nu, întocmirea și semnarea rămân la cei pe care îi obligă regulamentul de recepție. Noi adunăm, inventariem, scanăm și predăm ce ne dați, cu piesele lipsă scrise în inventar ca lipsă.",
     },
     {
       intrebare: "Ce se întâmplă cu dosarul unui subantreprenor care a dispărut",
@@ -693,18 +693,18 @@ export const CONSTRUCTII: PaginaSegment = {
     {
       intrebare: "Planurile și planșele mari intră în același fond",
       raspuns:
-        "Le preluăm, dar le vedem întâi: peste formatul A3 se schimbă și scanerul, și modul în care stau pe raft, iar ce nu se poate scana citibil rămâne pe hârtie, inventariat.",
+        "Le preluăm, însă le vedem întâi: peste formatul A3 se schimbă și scanerul, și modul în care stau pe raft. Ce nu se poate scana citibil rămâne pe hârtie, inventariat.",
     },
     {
       intrebare: "Ce se întâmplă cu documentele în timpul procesării",
       raspuns:
-        "Niciun document al dumneavoastră nu ajunge în antrenarea vreunui model, iar furnizorul care procesează, regiunea în care rulează și cât se păstrează interogările se scriu în contract, cu anexa semnată odată cu el.",
+        "Niciun document al dumneavoastră nu ajunge în antrenarea vreunui model. Furnizorul care procesează, regiunea în care rulează și cât se păstrează interogările se scriu în contract, cu anexa semnată odată cu el.",
     },
   ],
 
   incheiere: {
     titlu: "Începem cu un obiectiv.",
-    text: "Treizeci de minute în care ne uităm la câte șantiere închise aveți, unde au ajuns dosarele lor și ce s-a predat proprietarilor, iar la final plecați cu lista pieselor lipsă din primul dosar deschis.",
+    text: "Treizeci de minute în care ne uităm la câte șantiere închise aveți și unde au ajuns dosarele lor. La final plecați cu lista pieselor lipsă din primul dosar deschis.",
     buton: "Cereți lista pieselor lipsă",
   },
 };
@@ -718,7 +718,7 @@ export const LOGISTICA: PaginaSegment = {
   lead:
     "Hârtia unui transportator se produce pe drum, se semnează la rampă și se întoarce în geanta șoferului, cu întârziere.",
   continuare:
-    "Volumul e mare, formatul e mărunt și repetitiv, iar documentul care decide o reclamație de marfă este cel pe care cineva a scris trei rânduri cu pixul. Pagina scrie ce preluăm, cum se regăsește o cursă și unde încă nu avem un răspuns pe care să îl putem susține.",
+    "Volumul e mare, formatul e mărunt și repetitiv. Documentul care decide o reclamație de marfă este cel pe care cineva a scris trei rânduri cu pixul. Pagina scrie ce preluăm, cum se regăsește o cursă și unde încă nu avem un răspuns pe care să îl putem susține.",
 
   durere: [
     {
@@ -731,22 +731,22 @@ export const LOGISTICA: PaginaSegment = {
     },
     {
       titlu: "Cererea vine cu data.",
-      text: "Reclamația spune „transportul de pe 14 martie, către depozitul de la Deva”, controlul spune un an și un cod de client, iar teancul e ordonat după numărul de înregistrare pe care nu îl are nimeni.",
+      text: "Reclamația spune „transportul de pe 14 martie, către depozitul de la Deva”. Controlul spune un an și un cod de client. Teancul e ordonat după numărul de înregistrare pe care nu îl are nimeni.",
     },
   ],
 
   schimbare: [
     {
       titlu: "Cursa devine cheia.",
-      text: "Se întreabă cum se vorbește în depozit, ce a plecat pe 14 martie către clientul acela și cine a semnat la descărcare, iar răspunsul vine cu documentul și pagina.",
+      text: "Se întreabă cum se vorbește în depozit, ce a plecat pe 14 martie către clientul acela și cine a semnat la descărcare. Răspunsul vine cu documentul și pagina.",
     },
     {
       titlu: "Un an, un fond.",
-      text: "Documentele se grupează pe an financiar și pe client din ziua preluării, deci când un control cere un singur an se scoate un singur fond, iar restul arhivei rămâne închis.",
+      text: "Documentele se grupează pe an financiar și pe client din ziua preluării. Când un control cere un singur an se scoate un singur fond. Restul arhivei rămâne închis.",
     },
     {
       titlu: "Hârtia măruntă pleacă.",
-      text: "Cutiile cu scrisori de trăsură și avize ocupă spațiu plătit ca birou, iar la Golești stau inventariate, cu cotă, cu ce se cere des deja scanat.",
+      text: "Cutiile cu scrisori de trăsură și avize ocupă spațiu plătit ca birou. La Golești stau inventariate, cu cotă, cu ce se cere des deja scanat.",
     },
   ],
 
@@ -759,10 +759,10 @@ export const LOGISTICA: PaginaSegment = {
 
   deschise: [
     "Nu deținem certificare ISO 27001 și nu ne prezentăm ca și cum am avea",
-    "Nu avem o firmă de transport pe care să o dăm ca referință: 3S este o firmă nouă, iar arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
+    "Nu avem o firmă de transport pe care să o dăm ca referință: 3S este o firmă nouă. Arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
     "Nu publicăm preț: costul se face pe metri liniari și pe ce anume se digitizează",
-    "Nu promitem că citim orice scris de mână: o mențiune făcută cu pixul pe un exemplar la indigo poate rămâne necitibilă, iar atunci o marcăm ca atare în loc să o ghicim",
-    "Nu scriem termenul de păstrare pentru datele din tahograf și pentru evidența timpilor de conducere și odihnă: au alt regim decât documentele contabile, iar articolul nu îl putem cita încă",
+    "Nu promitem că citim orice scris de mână: o mențiune făcută cu pixul pe un exemplar la indigo poate rămâne necitibilă. Atunci o marcăm ca atare în loc să o ghicim",
+    "Nu scriem termenul de păstrare pentru datele din tahograf și pentru evidența timpilor de conducere și odihnă: au alt regim decât documentele contabile. Articolul nu îl putem cita încă",
     "Nu ne pronunțăm dacă un anume document justifică sau nu o înregistrare contabilă: acela e răspunsul contabilului dumneavoastră, nu al arhivarului",
     "Nu scriem un timp de răspuns în secunde, fiindcă nu l-am măsurat pe un fond real de firmă de transport",
   ],
@@ -777,18 +777,18 @@ export const LOGISTICA: PaginaSegment = {
     },
     {
       act: "Legea contabilității nr. 82/1991, art. 25 alin. (2)",
-      ce: "Statele de salarii se păstrează cincizeci de ani de la întocmire, ca excepție expresă de la termenul documentelor financiare, iar într-o firmă cu mulți șoferi acesta este fondul care supraviețuiește tuturor celorlalte.",
+      ce: "Statele de salarii se păstrează cincizeci de ani de la întocmire, ca excepție expresă de la termenul documentelor financiare. Într-o firmă cu mulți șoferi acesta este fondul care supraviețuiește tuturor celorlalte.",
     },
     {
       act: "Legea Arhivelor Naționale nr. 16/1996",
-      ce: "Evidența documentelor create și primite, gruparea pe termene într-un nomenclator avizat și selecționarea prin comisie. Nomenclatorul decide ce se întâmplă cu documentele de transport după împlinirea termenului contabil, iar decizia rămâne a firmei.",
+      ce: "Evidența documentelor create și primite, gruparea pe termene într-un nomenclator avizat și selecționarea prin comisie. Nomenclatorul decide ce se întâmplă cu documentele de transport după împlinirea termenului contabil. Decizia rămâne a firmei.",
     },
   ],
 
   notaTermene:
     "Cele trei termene de mai sus le putem cita pe articol și stau, fiecare cu actul lui, în instrumentul de termene. Rândul rămâne gol pentru datele din tahograf, foile de parcurs și evidența timpilor de conducere și odihnă, cu regim propriu pe care nu îl putem cita încă.",
   notaCerere:
-    "Mai este o graniță pe care nu o trecem: dacă un document justifică sau nu o înregistrare contabilă este răspunsul contabilului dumneavoastră, iar noi păstrăm ce ne dați, pe termenul din nomenclatorul propriu.",
+    "Mai este o graniță pe care nu o trecem. Dacă un document justifică sau nu o înregistrare contabilă este răspunsul contabilului dumneavoastră. Noi păstrăm ce ne dați, pe termenul din nomenclatorul propriu.",
 
   titluIntrebari:
     "Căutarea unei curse.",
@@ -807,18 +807,18 @@ export const LOGISTICA: PaginaSegment = {
     {
       intrebare: "Preluați și cutiile care nu au fost niciodată ordonate",
       raspuns:
-        "Da, dar nu ne prefacem că sunt ordonate: se inventariază așa cum vin, se cotează, iar ce nu se poate identifica se marchează ca atare, ca să nu descoperiți lipsa în ziua controlului.",
+        "Da, însă nu ne prefacem că sunt ordonate: se inventariază așa cum vin și se cotează. Ce nu se poate identifica se marchează ca atare, ca să nu descoperiți lipsa în ziua controlului.",
     },
     {
       intrebare: "Cine vede documentele și ce se întâmplă cu datele din ele",
       raspuns:
-        "Documentele de transport poartă nume și semnături de șoferi, deci prelucrarea se scrie în anexa semnată odată cu contractul. Nu intră în antrenarea niciunui model, iar accesul rămâne în jurnal.",
+        "Documentele de transport poartă nume și semnături de șoferi. Prelucrarea se scrie în anexa semnată odată cu contractul. Nu intră în antrenarea niciunui model. Accesul rămâne în jurnal.",
     },
   ],
 
   incheiere: {
     titlu: "Aduceți un teanc.",
-    text: "Treizeci de minute pornind de la ce a rămas în urma curselor de anul trecut, câte cutii și după ce anume căutați, iar la final plecați cu indexul propus.",
+    text: "Treizeci de minute pornind de la ce a rămas în urma curselor de anul trecut, câte cutii și după ce anume căutați. La final plecați cu indexul propus.",
     buton: "Cereți indexul propus",
   },
 };
@@ -830,37 +830,37 @@ export const IMOBILIARE: PaginaSegment = {
   eticheta: "Domenii · Agenții imobiliare și administrare de imobile",
   h1: "Dosarul rămâne după\u00a0vânzare.",
   lead:
-    "Un dosar de tranzacție se închide odată cu semnătura la notar, dar nu dispare din arhiva agenției.",
+    "Un dosar de tranzacție se închide odată cu semnătura la notar. Din arhiva agenției nu dispare.",
   continuare:
     "Rămâne cu actele de proprietate, cu documentația cadastrală și cu datele unor oameni care nu vă mai sunt clienți. Se caută după adresă, se cere la ani distanță și trebuie predat sau șters cum spune legea. Pagina scrie ce preluăm, ce rămâne obligația agenției și unde încă nu avem un răspuns pe care să îl putem susține.",
 
   durere: [
     {
       titlu: "Se caută după adresă.",
-      text: "Cererea vine în forma în care o ține minte omul, blocul de pe strada aceea și apartamentul de la etajul trei, iar dosarul e clasat după numărul de intrare sau după agentul care l-a lucrat.",
+      text: "Cererea vine în forma în care o ține minte omul: blocul de pe strada aceea, apartamentul de la etajul trei. Dosarul e clasat după numărul de intrare sau după agentul care l-a lucrat.",
     },
     {
       titlu: "Păstrați datele unor străini.",
-      text: "Într-un dosar stau copii de acte de identitate, extrase de carte funciară și documentații cadastrale ale ambelor părți, uneori și ale unor terți, iar obligația de a le ține în siguranță este a agenției.",
+      text: "Într-un dosar stau copii de acte de identitate, extrase de carte funciară și documentații cadastrale ale ambelor părți, uneori și ale unor terți. Obligația de a le ține în siguranță este a agenției.",
     },
     {
       titlu: "Predarea ține de bunăvoință.",
-      text: "Când pleacă agentul care a lucrat dosarul sau când o asociație schimbă administratorul, se predă ce își aduce cineva aminte, iar cel care rămâne află lipsurile pe rând, la fiecare telefon.",
+      text: "Când pleacă agentul care a lucrat dosarul sau când o asociație schimbă administratorul, se predă ce își aduce cineva aminte. Cel care rămâne află lipsurile pe rând, la fiecare telefon.",
     },
   ],
 
   schimbare: [
     {
       titlu: "Adresa devine cheie.",
-      text: "Se întreabă așa cum se vorbește la telefon, ce s-a semnat pentru apartamentul de pe strada aceea și cine a fost vânzătorul, iar răspunsul vine cu documentul și pagina.",
+      text: "Se întreabă așa cum se vorbește la telefon, ce s-a semnat pentru apartamentul de pe strada aceea și cine a fost vânzătorul. Răspunsul vine cu documentul și pagina.",
     },
     {
       titlu: "Accesul lasă jurnal.",
-      text: "Fondul se preia cu proces-verbal, accesul se dă nominal, pe persoană și pe dosar, iar fiecare deschidere de document rămâne în jurnal, inclusiv pentru personalul nostru.",
+      text: "Fondul se preia cu proces-verbal. Accesul se dă nominal, pe persoană și pe dosar. Fiecare deschidere de document rămâne în jurnal, inclusiv pentru personalul nostru.",
     },
     {
       titlu: "Inventarul există dinainte.",
-      text: "Evidența pe dosar și pe imobil se ține la zi tot timpul, deci când pleacă un agent sau se schimbă administratorul predarea se face din ce există deja, cu proces-verbal.",
+      text: "Evidența pe dosar și pe imobil se ține la zi tot timpul. Când pleacă un agent sau se schimbă administratorul, predarea se face din ce există deja, cu proces-verbal.",
     },
   ],
 
@@ -873,11 +873,11 @@ export const IMOBILIARE: PaginaSegment = {
 
   deschise: [
     "Nu deținem certificare ISO 27001 și nu ne prezentăm ca și cum am avea",
-    "Nu avem o agenție imobiliară pe care să o dăm ca referință: 3S este o firmă nouă, iar arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
+    "Nu avem o agenție imobiliară pe care să o dăm ca referință: 3S este o firmă nouă. Arhivarea din 2019 este a firmei-mamă, ADRIA Servicii Arhivare SRL",
     "Nu publicăm preț: costul se face pe metri liniari și pe ce anume se digitizează",
     "Nu scriem un termen de păstrare pentru dosarele de tranzacție: nu am găsit o normă generală pe care să o putem cita cu articol",
     "Nu facem evaluarea de impact și nu stabilim noi ce date aveți dreptul să păstrați: acela e răspunsul celui care răspunde de protecția datelor în agenție",
-    "Nu ștergem nimic din proprie inițiativă: la o cerere de ștergere executăm ce ne cereți în scris și vă dăm dovada, iar decizia rămâne a dumneavoastră",
+    "Nu ștergem nimic din proprie inițiativă: la o cerere de ștergere executăm ce ne cereți în scris și vă dăm dovada. Decizia rămâne a dumneavoastră",
     "Nu scriem un timp de răspuns în secunde, fiindcă nu l-am măsurat pe un fond real de agenție",
   ],
 
@@ -887,7 +887,7 @@ export const IMOBILIARE: PaginaSegment = {
   temeiuri: [
     {
       act: "Regulamentul (UE) 2016/679 privind protecția datelor, cu Legea nr. 190/2018",
-      ce: "Un dosar de tranzacție e plin de date ale unor oameni care nu vă mai sunt clienți, iar de aici vin temeiul păstrării, durata, obligația de a răspunde cererilor de acces și de ștergere și contractul de prelucrare. Operatorul rămâne agenția, noi suntem persoana împuternicită.",
+      ce: "Un dosar de tranzacție e plin de date ale unor oameni care nu vă mai sunt clienți. De aici vin temeiul păstrării, durata, obligația de a răspunde cererilor de acces și de ștergere și contractul de prelucrare. Operatorul rămâne agenția, noi suntem persoana împuternicită.",
     },
     {
       act: "Legea contabilității nr. 82/1991, art. 25 alin. (1)",
@@ -911,28 +911,28 @@ export const IMOBILIARE: PaginaSegment = {
     {
       intrebare: "Cum se caută un dosar după adresă",
       raspuns:
-        "Adresa imobilului intră ca și cheie de căutare la inventariere, alături de numele părților, de numărul de dosar și de an, iar răspunsul vine cu documentul și pagina.",
+        "Adresa imobilului intră ca și cheie de căutare la inventariere, alături de numele părților, de numărul de dosar și de an. Răspunsul vine cu documentul și pagina.",
     },
     {
       intrebare: "Ce faceți la o cerere de ștergere a datelor",
       raspuns:
-        "Decizia este a dumneavoastră, ca operator, iar noi executăm ce ne cereți în scris, pe dosarele indicate, și vă întoarcem dovada a ceea ce s-a șters și când, fără să interpretăm cererea.",
+        "Decizia este a dumneavoastră, ca operator. Noi executăm ce ne cereți în scris, pe dosarele indicate, și vă întoarcem dovada a ceea ce s-a șters și când, fără să interpretăm cererea.",
     },
     {
       intrebare: "Preluați și arhiva unei asociații de proprietari",
       raspuns:
-        "Da, cu aceleași reguli: preluare cu proces-verbal și inventar, cotă, jurnal de acces. Cine are dreptul să consulte se stabilește din actele asociației, nu de la depozitar, iar accesul se dă tot nominal.",
+        "Da, cu aceleași reguli: preluare cu proces-verbal și inventar, cotă, jurnal de acces. Cine are dreptul să consulte se stabilește din actele asociației, nu de la depozitar. Accesul se dă tot nominal.",
     },
     {
       intrebare: "Documentele ajung la un model de limbaj",
       raspuns:
-        "Nu intră în antrenarea niciunui model, iar fiindcă într-un dosar imobiliar stau date ale unor oameni care nu au dat niciun acord, prelucrarea se scrie în anexa semnată odată cu contractul.",
+        "Nu intră în antrenarea niciunui model. Într-un dosar imobiliar stau date ale unor oameni care nu au dat niciun acord, așa că prelucrarea se scrie în anexa semnată odată cu contractul.",
     },
   ],
 
   incheiere: {
     titlu: "Începem cu un dosar.",
-    text: "Treizeci de minute în care ne uităm la câte dosare închise aveți, unde stau ele acum și după ce anume le caută cineva, iar la final plecați cu lista câmpurilor după care veți putea întreba.",
+    text: "Treizeci de minute în care ne uităm la câte dosare închise aveți, unde stau ele acum și după ce anume le caută cineva. La final plecați cu lista câmpurilor după care veți putea întreba.",
     buton: "Cereți lista câmpurilor",
   },
 };
@@ -942,7 +942,7 @@ export const SEGMENTE: Segment[] = [
     slug: "notari",
     nume: "Birouri notariale",
     rezumat:
-      "Fond care crește în fiecare zi lucrătoare și se caută după nume, dată și număr de înregistrare, iar predarea lui cere inventar la zi.",
+      "Fond care crește în fiecare zi lucrătoare și se caută după nume, dată și număr de înregistrare. Predarea lui cere inventar la zi.",
     pagina: NOTARI,
   },
   {
@@ -956,7 +956,7 @@ export const SEGMENTE: Segment[] = [
     slug: "contabilitate",
     nume: "Birouri de contabilitate",
     rezumat:
-      "Un control fiscal se uită la un an vechi de cinci ani, iar statele de salarii au propriul termen, mult mai lung, iar amestecul lor costă.",
+      "Un control fiscal se uită la un an vechi de cinci ani. Statele de salarii au propriul termen, mult mai lung. Amestecul lor costă.",
     pagina: CONTABILITATE,
   },
   {
@@ -970,21 +970,21 @@ export const SEGMENTE: Segment[] = [
     slug: "constructii",
     nume: "Firme de construcții și dezvoltatori",
     rezumat:
-      "Dosarul de șantier se produce pe teren, în exemplare care pleacă la firme diferite, iar dovada se cere la ani după recepție.",
+      "Dosarul de șantier se produce pe teren, în exemplare care pleacă la firme diferite. Dovada se cere la ani după recepție.",
     pagina: CONSTRUCTII,
   },
   {
     slug: "logistica",
     nume: "Transport și logistică",
     rezumat:
-      "Foi aproape identice, care circulă cu marfa și se întorc târziu, iar cererea vine cu o dată și un client, nu cu numărul de înregistrare.",
+      "Foi aproape identice, care circulă cu marfa și se întorc târziu. Cererea vine cu o dată și un client, nu cu numărul de înregistrare.",
     pagina: LOGISTICA,
   },
   {
     slug: "imobiliare",
     nume: "Agenții imobiliare și administrare de imobile",
     rezumat:
-      "Dosarele se caută după adresă și poartă datele unor oameni care nu vă mai sunt clienți, iar predarea cade când pleacă cine le-a lucrat.",
+      "Dosarele se caută după adresă și poartă datele unor oameni care nu vă mai sunt clienți. Predarea cade când pleacă cine le-a lucrat.",
     pagina: IMOBILIARE,
   },
 ];
@@ -1003,7 +1003,7 @@ export const HUB = {
   // `listaLead`, ca linie a sectiunii cu lista - nu s-a taiat: acolo e chiar la locul ei,
   // deasupra listei despre care vorbeste.
   lead:
-    "Pașii sunt aceiași peste tot: ridicăm, inventariem, digitizăm, răspundem, iar ce diferă este ce se cere des, cine controlează și cât se păstrează.",
+    "Pașii sunt aceiași peste tot: ridicăm, inventariem, digitizăm, răspundem. Diferă ce se cere des, cine controlează și cât se păstrează.",
   /** Linia de deasupra listei de domenii. */
   listaLead:
     "Paginile de mai jos scriu diferența, domeniu cu domeniu, și spun pe față unde nu avem încă un răspuns.",
@@ -1013,14 +1013,14 @@ export const HUB = {
 export const INDIFERENT_DE_DOMENIU: Fapt[] = [
   {
     titlu: "Un singur furnizor.",
-    text: "Hârtia și căutarea vin de la aceeași firmă, deci dispare conversația în care depozitarul dă vina pe furnizorul de programe.",
+    text: "Hârtia și căutarea vin de la aceeași firmă. Dispare conversația în care depozitarul dă vina pe furnizorul de programe.",
   },
   {
     titlu: "Fiecare răspuns are sursă.",
-    text: "Document, pagină, fragment: deschideți originalul și citiți fraza pe care se sprijină răspunsul, iar fără sursă răspunsul nu se afișează.",
+    text: "Document, pagină, fragment: deschideți originalul și citiți fraza pe care se sprijină răspunsul. Fără sursă, răspunsul nu se afișează.",
   },
   {
     titlu: "Contractul se judecă aici.",
-    text: "Contract în limba română, sub lege română, cu instanțele din România, iar anexa de prelucrare a datelor se semnează odată cu el.",
+    text: "Contract în limba română, sub lege română, cu instanțele din România. Anexa de prelucrare a datelor se semnează odată cu el.",
   },
 ];

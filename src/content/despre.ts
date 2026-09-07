@@ -32,7 +32,7 @@ export const DESPRE = {
   eticheta: "Despre noi",
   h1: "Vechimea este a ADRIEI.",
   lead:
-    "Depozitul de la Golești, arhivarea fizică și anii de la 2019 încoace sunt ale ADRIA Servicii Arhivare SRL, firma-mamă, iar 3S construiește căutarea peste ele.",
+    "Depozitul de la Golești, arhivarea fizică și anii de la 2019 încoace sunt ale ADRIA Servicii Arhivare SRL, firma-mamă. 3S construiește căutarea peste ele.",
 };
 
 /** Ce exista azi, ce se construieste si ce lipseste. Trei fise, in ordinea asta. */
@@ -43,7 +43,7 @@ export const STAREA_DE_AZI: FaptDespre[] = [
   },
   {
     titlu: "Căutarea se construiește acum.",
-    text: "Documentele se scanează, se indexează și se întreabă în română, cu documentul și pagina alături de răspuns, iar aici este munca nouă și riscul pe care ni-l asumăm noi.",
+    text: "Documentele se scanează, se indexează și se întreabă în română, cu documentul și pagina alături de răspuns. Aici este munca nouă și riscul pe care ni-l asumăm noi.",
   },
   {
     titlu: "Datele firmei încă lipsesc.",
@@ -70,21 +70,21 @@ export const MOSTENIT: string[] = [
  * rescrierea in vocea noua; s-au schimbat propozitiile, nu felul textului.
  */
 export const CONSTRUIT =
-  "Se construiește căutarea: întrebarea pusă în română, ca unui coleg care cunoaște arhiva, iar răspunsul cu documentul și pagina citate sau cu un „nu am găsit” limpede. Tot acum se construiesc canalul de pe telefon, site-ul acesta și firma însăși, româno-moldovenească, aflată în curs de înființare.";
+  "Se construiește căutarea: întrebarea pusă în română, ca unui coleg care cunoaște arhiva. Răspunsul vine cu documentul și pagina citate sau cu un „nu am găsit” limpede. Tot acum se construiesc canalul de pe telefon, site-ul acesta și firma însăși, româno-moldovenească, aflată în curs de înființare.";
 
 /** Cele trei verbe din nume, in ordinea in care se intampla cu documentele dumneavoastra. */
 export const NUMELE: FaptDespre[] = [
   {
     titlu: "Scan",
-    text: "Scanăm ce se cere des, la o rezoluție care rezistă la citire automată, verificăm textul pe diacritice, iar originalul rămâne în raft.",
+    text: "Scanăm ce se cere des, la o rezoluție care rezistă la citire automată, și verificăm textul pe diacritice. Originalul rămâne în raft.",
   },
   {
     titlu: "Store",
-    text: "Hârtia stă în depozit, cu cotă și opis, iar copia digitală stă pe infrastructură din Uniunea Europeană, cu locul exact scris în contract.",
+    text: "Hârtia stă în depozit, cu cotă și opis. Copia digitală stă pe infrastructură din Uniunea Europeană, cu locul exact scris în contract.",
   },
   {
     titlu: "Solve",
-    text: "Răspundem la întrebarea pusă în română, cu documentul și pagina alături, iar când răspunsul nu se află în documente o spunem pe față.",
+    text: "Răspundem la întrebarea pusă în română, cu documentul și pagina alături. Când răspunsul nu se află în documente, o spunem pe față.",
   },
 ];
 

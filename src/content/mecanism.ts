@@ -64,22 +64,22 @@ export const CUM_FUNCTIONEAZA = {
   etape: [
     {
       titlu: "Ridicăm arhiva numărată.",
-      text: "Venim la sediu, măsurăm fondul în metri liniari, împachetăm și sigilăm cutiile de față cu persoana pe care o desemnați, iar transportul îl facem noi.",
+      text: "Venim la sediu, măsurăm fondul în metri liniari, împachetăm și sigilăm cutiile de față cu persoana pe care o desemnați. Transportul îl facem noi.",
       urma: "Proces-verbal de predare-primire, semnat pe loc, cu numărul de cutii, metrii liniari și anii acoperiți.",
     },
     {
       titlu: "Fiecare dosar primește cotă.",
-      text: "În depozit fondul se desface pe unități arhivistice, fiecare cu cota ei în inventar, după nomenclatorul instituției dumneavoastră. Când nomenclatorul lipsește, îl întocmim și îl pregătim pentru avizare, iar avizul îl dau Arhivele Naționale.",
+      text: "În depozit fondul se desface pe unități arhivistice, fiecare cu cota ei în inventar, după nomenclatorul instituției dumneavoastră. Când nomenclatorul lipsește, îl întocmim și îl pregătim pentru avizare. Avizul îl dau Arhivele Naționale.",
       urma: "Inventarul pe unități arhivistice, cu cota fiecăreia. O copie rămâne la dumneavoastră, în format editabil.",
     },
     {
       titlu: "Scanăm ce se cere.",
-      text: "Lista se face împreună și în scris, înainte de prima cutie deschisă, iar scanarea rezistă la recunoașterea automată a textului și se verifică pe diacritice, unde se pierd cele mai multe căutări în română.",
+      text: "Lista se face împreună și în scris, înainte de prima cutie deschisă. Scanarea rezistă la recunoașterea automată a textului și se verifică pe diacritice, unde se pierd cele mai multe căutări în română.",
       urma: "Lista de digitizare, convenită în scris înainte de scanare, cu ordinea loturilor.",
     },
     {
       titlu: "Întrebați, primiți pagina.",
-      text: "Fiecare pagină scanată rămâne legată de cota unității din care provine, deci de raftul real, iar răspunsul vine cu documentul și pagina. Când răspunsul nu se află în documentele dumneavoastră, primiți exact asta.",
+      text: "Fiecare pagină scanată rămâne legată de cota unității din care provine, adică de raftul real. Răspunsul vine cu documentul și pagina. Când răspunsul nu se află în documentele dumneavoastră, primiți exact asta.",
       urma: "Jurnalul căutărilor și al deschiderilor de documente, pus la dispoziția dumneavoastră, inclusiv pentru accesul personalului nostru.",
     },
     {
@@ -89,7 +89,7 @@ export const CUM_FUNCTIONEAZA = {
     },
     {
       titlu: "Plecați cu tot.",
-      text: "Fondul fizic se restituie cu proces-verbal și inventar, iar cel digital se predă în format deschis, PDF plus index CSV, ca preluarea lui de către altcineva să nu depindă de noi.",
+      text: "Fondul fizic se restituie cu proces-verbal și inventar. Cel digital se predă în format deschis, PDF plus index CSV, ca preluarea lui de către altcineva să nu depindă de noi.",
       urma: "Proces-verbal de restituire a fondului fizic, plus arhiva digitală pe suport, în format deschis.",
     },
   ] as Etapa[],
@@ -109,7 +109,7 @@ export const CUM_FUNCTIONEAZA = {
   ],
 
   notaDigitizare:
-    "Digitizarea integrală este varianta cea mai scumpă și rar cea mai utilă, deci nu o propunem ca implicit, deși o facem dacă o cereți. Pornim de la ce se caută, iar restul rămâne pe raft și vine la cerere. Preț pe pagină sau pe metru liniar nu publicăm: ar fi o cifră ruptă de fondul dumneavoastră.",
+    "Digitizarea integrală este varianta cea mai scumpă și rar cea mai utilă. Nu o propunem ca implicit, deși o facem dacă o cereți. Pornim de la ce se caută, restul rămâne pe raft și vine la cerere. Preț pe pagină sau pe metru liniar nu publicăm: ar fi o cifră ruptă de fondul dumneavoastră.",
 
   lant: [
     {
@@ -118,15 +118,15 @@ export const CUM_FUNCTIONEAZA = {
     },
     {
       titlu: "Fondul dumneavoastră, atât.",
-      text: "Nu se caută pe internet și nici în fondul altui client: fondurile rămân separate, iar accesul se dă nominal, pe persoană și pe fond.",
+      text: "Nu se caută pe internet și nici în fondul altui client. Fondurile rămân separate, iar accesul se dă nominal, pe persoană și pe fond.",
     },
     {
       titlu: "Ies pasajele cu răspunsul.",
-      text: "Fiecare fragment vine cu documentul și pagina din care provine, iar fără fragmente pasul următor nu se face deloc.",
+      text: "Fiecare fragment vine cu documentul și pagina din care provine. Fără fragmente, pasul următor nu se face deloc.",
     },
     {
       titlu: "Răspunsul vine cu sursa.",
-      text: "Se formulează pe fragmentele găsite și se afișează cu documentul și pagina alături, iar fără sursă nu se afișează deloc.",
+      text: "Se formulează pe fragmentele găsite și se afișează cu documentul și pagina alături. Fără sursă nu se afișează deloc.",
     },
     {
       titlu: "Verificați dumneavoastră.",
@@ -144,11 +144,11 @@ export const CUM_FUNCTIONEAZA = {
   hartie: [
     {
       titlu: "Fondul rămâne al dumneavoastră.",
-      text: "Noi suntem custode, iar custodia se dovedește cu procesul-verbal de preluare și cu inventarul semnat, nu cu o clauză generală în contract.",
+      text: "Noi suntem custode. Custodia se dovedește cu procesul-verbal de preluare și cu inventarul semnat, nu cu o clauză generală în contract.",
     },
     {
       titlu: "Se iese pe cotă.",
-      text: "Unitatea iese la cererea unei persoane cu drept de acces pe fondul acela, iar ieșirea, întoarcerea și fișa rămân la dosarul fondului. Se vede oricând pe mâna cui a trecut hârtia.",
+      text: "Unitatea iese la cererea unei persoane cu drept de acces pe fondul acela. Ieșirea, întoarcerea și fișa rămân la dosarul fondului. Se vede oricând pe mâna cui a trecut hârtia.",
     },
     {
       titlu: "Copia digitală se șterge.",
@@ -177,7 +177,7 @@ export const CUM_FUNCTIONEAZA = {
 
   incheiere: {
     titlu: "Discuția nu mută cutii.",
-    text: "Treizeci de minute în care ne uităm la arhiva dumneavoastră așa cum arată azi, iar la final plecați cu estimarea volumului, cu ordinea digitizării și cu un calendar de preluare scris.",
+    text: "Treizeci de minute în care ne uităm la arhiva dumneavoastră așa cum arată azi. La final plecați cu estimarea volumului, cu ordinea digitizării și cu un calendar de preluare scris.",
   },
 };
 
@@ -200,11 +200,11 @@ export const ARHIVARE_FIZICA = {
   depozit: [
     {
       titlu: "Depozitul are adresă.",
-      text: "Este la Golești, județul Argeș, lângă Pitești, și este al ADRIA Servicii Arhivare SRL, firma-mamă, care arhivează documente din 2019, iar vizita se face înainte de semnătură.",
+      text: "Este la Golești, județul Argeș, lângă Pitești, și este al ADRIA Servicii Arhivare SRL, firma-mamă, care arhivează documente din 2019. Vizita se face înainte de semnătură.",
     },
     {
       titlu: "Condițiile se văd.",
-      text: "Temperatură, umiditate, protecție împotriva focului și a apei, rafturi și spațiu de manipulare le vedeți pe teren, iar autorizația de funcționare, a firmei-mamă, v-o dăm scanată la cerere.",
+      text: "Temperatură, umiditate, protecție împotriva focului și a apei, rafturi și spațiu de manipulare le vedeți pe teren. Autorizația de funcționare, a firmei-mamă, v-o dăm scanată la cerere.",
     },
     {
       titlu: "Fondurile stau separate.",
@@ -212,24 +212,24 @@ export const ARHIVARE_FIZICA = {
     },
     {
       titlu: "Fiecare mișcare se consemnează.",
-      text: "Intrările în depozit se țin într-o evidență, iar scoaterea unei unități arhivistice se face pe cotă, cu fișă de ieșire, la fel și pentru personalul nostru.",
+      text: "Intrările în depozit se țin într-o evidență. Scoaterea unei unități arhivistice se face pe cotă, cu fișă de ieșire, la fel și pentru personalul nostru.",
     },
   ] as Fisa[],
 
   preluare: [
     {
       titlu: "Vedem fondul întâi.",
-      text: "Venim la dumneavoastră și ne uităm la ce există, câți metri liniari, în ce stare, ce e legat și ce e vrac, iar din vizită iese estimarea.",
+      text: "Venim la dumneavoastră și ne uităm la ce există: câți metri liniari, în ce stare, ce e legat și ce e vrac. Din vizită iese estimarea.",
       urma: "Notă de evaluare a fondului, cu volumul măsurat și cu ce am găsit deja inventariat.",
     },
     {
       titlu: "Numărăm de față.",
-      text: "Documentele se așază în cutii de arhivă, se numerotează și se sigilează în prezența persoanei pe care o desemnați, iar ce lipsește sau e deteriorat se scrie în ziua aceea.",
+      text: "Documentele se așază în cutii de arhivă, se numerotează și se sigilează în prezența persoanei pe care o desemnați. Ce lipsește sau e deteriorat se scrie în ziua aceea.",
       urma: "Lista cutiilor, cu numerotare și cu observațiile de stare, anexată la procesul-verbal.",
     },
     {
       titlu: "Semnătura dă un custode.",
-      text: "Procesul-verbal de predare-primire spune ce pleacă, în câte cutii, câți metri liniari și pe ce ani, iar din clipa semnării aveți hârtia care o dovedește.",
+      text: "Procesul-verbal de predare-primire spune ce pleacă, în câte cutii, câți metri liniari și pe ce ani. Din clipa semnării aveți hârtia care o dovedește.",
       urma: "Proces-verbal de predare-primire, în două exemplare semnate.",
     },
     {
@@ -265,15 +265,15 @@ export const ARHIVARE_FIZICA = {
   selectionare: [
     {
       titlu: "Comisia dumneavoastră decide.",
-      text: "Noi pregătim lucrarea, adică grupăm documentele pe termene, scoatem ce a împlinit termenul de păstrare și întocmim documentația, iar decizia rămâne unde o pune legea.",
+      text: "Noi pregătim lucrarea: grupăm documentele pe termene, scoatem ce a împlinit termenul de păstrare și întocmim documentația. Decizia rămâne unde o pune legea.",
     },
     {
       titlu: "Comisia semnează procesul-verbal.",
-      text: "Se semnează împreună cu inventarele documentelor propuse spre eliminare, iar acesta este documentul pe care îl arătați la un control, nu o adresă de la firma de arhivare.",
+      text: "Se semnează împreună cu inventarele documentelor propuse spre eliminare. Acesta este documentul pe care îl arătați la un control, nu o adresă de la firma de arhivare.",
     },
     {
       titlu: "Avizează Arhivele Naționale.",
-      text: "Avizul vine prin structura teritorială competentă, până la el nu se elimină nimic, iar termenul de răspuns nu depinde de noi și nu îl scriem nicăieri.",
+      text: "Avizul vine prin structura teritorială competentă și până la el nu se elimină nimic. Termenul de răspuns nu depinde de noi și nu îl scriem nicăieri.",
     },
     {
       titlu: "Distrugerea lasă urmă.",
@@ -282,7 +282,7 @@ export const ARHIVARE_FIZICA = {
   ] as Fisa[],
 
   notaSelectionare:
-    "Eliminarea fără avizul Arhivelor Naționale încalcă Legea Arhivelor Naționale nr. 16/1996, iar răspunderea rămâne a creatorului documentelor, adică a dumneavoastră. Cine vă promite eliminare rapidă și fără hârtii are de arătat cu ce document rămâneți în fața controlului.",
+    "Eliminarea fără avizul Arhivelor Naționale încalcă Legea Arhivelor Naționale nr. 16/1996. Răspunderea rămâne a creatorului documentelor, adică a dumneavoastră. Cine vă promite eliminare rapidă și fără hârtii are de arătat cu ce document rămâneți în fața controlului.",
 
   temeiuri: [
     {
@@ -295,12 +295,12 @@ export const ARHIVARE_FIZICA = {
     },
     {
       titlu: "Regulamentul (UE) 2016/679, cu legislația română de aplicare",
-      text: "Dosarele de personal, statele de salarii și documentele medicale conțin date cu caracter personal, iar prelucrarea lor de către noi, ca persoană împuternicită, se scrie în anexa la contract.",
+      text: "Dosarele de personal, statele de salarii și documentele medicale conțin date cu caracter personal. Prelucrarea lor de către noi, ca persoană împuternicită, se scrie în anexa la contract.",
     },
   ] as Fisa[],
 
   notaTemei:
-    "Actele de mai sus sunt numite ca să le puteți citi la sursă. Numerele de articol au fost culese odată cu termenele, din actele citate pe fiecare rând, și nu au fost recitite la sursă în ziua în care s-a scris pagina; un arhivist autorizat le confirmă înainte de publicare. Nu dăm consultanță juridică: termenul care vă obligă este cel din nomenclatorul propriu, avizat, iar legea specifică domeniului dumneavoastră are prioritate față de regula generală. Dacă o cunoașteți și lipsește de aici, scrieți-ne și o adăugăm cu trimiterea la act.",
+    "Actele de mai sus sunt numite ca să le puteți citi la sursă. Numerele de articol au fost culese odată cu termenele, din actele citate pe fiecare rând, și nu au fost recitite la sursă în ziua în care s-a scris pagina; un arhivist autorizat le confirmă înainte de publicare. Nu dăm consultanță juridică: termenul care vă obligă este cel din nomenclatorul propriu, avizat. Legea specifică domeniului dumneavoastră are prioritate față de regula generală. Dacă o cunoașteți și lipsește de aici, scrieți-ne și o adăugăm cu trimiterea la act.",
 
   aratam: [
     "Depozitul, rafturile și spațiul de manipulare, la o vizită anunțată din timp",
@@ -320,6 +320,6 @@ export const ARHIVARE_FIZICA = {
 
   incheiere: {
     titlu: "Începem cu o măsurătoare.",
-    text: "Venim, măsurăm fondul în metri liniari, iar din vizită ies estimarea volumului, ordinea de preluare a loturilor și un calendar scris. Dacă vă este mai bine cu arhiva la dumneavoastră, o spunem.",
+    text: "Venim și măsurăm fondul în metri liniari. Din vizită ies estimarea volumului, ordinea de preluare a loturilor și un calendar scris. Dacă vă este mai bine cu arhiva la dumneavoastră, o spunem.",
   },
 };

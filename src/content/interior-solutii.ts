@@ -50,30 +50,30 @@ export const SEGMENT = {
   // Invitatia la corectie sta SUB carduri, nu inaintea lor: e o reactie la ce tocmai s-a
   // citit. Textul e cel scris in directia anterioara, mutat aici din componenta.
   situatiaNota:
-    "Scriem problema așa cum arată ea dintr-un birou, iar dacă nu vă recunoașteți în rândurile de mai sus, spuneți-ne: înseamnă că am înțeles greșit domeniul.",
+    "Scriem problema așa cum arată ea dintr-un birou. Dacă nu vă recunoașteți în rândurile de mai sus, spuneți-ne: înseamnă că am înțeles greșit domeniul.",
 
   schimbare: {
     eticheta: "Ce se schimbă",
     titlu: "Aceleași documente, alt drum.",
-    lead: "Pașii serviciului sunt aceiași peste tot, iar aici scriem numai ce arată altfel în ziua de lucru a acestui domeniu.",
+    lead: "Pașii serviciului sunt aceiași peste tot. Aici scriem numai ce arată altfel în ziua de lucru a acestui domeniu.",
   } as CapSectiune,
 
   /** Randul text/imagine care duce la pagina de mecanism. */
   spreMecanism: {
     titlu: "Etapele sunt aceleași.",
-    text: "Fiecare etapă se închide cu documentul ei semnat, iar pagina despre mecanism scrie ce trece în grija noastră, ce rămâne la dumneavoastră și ce hârtie vă rămâne după fiecare pas.",
+    text: "Fiecare etapă se închide cu documentul ei semnat. Pagina despre mecanism scrie ce trece în grija noastră, ce rămâne la dumneavoastră și ce hârtie vă rămâne după fiecare pas.",
     legatura: { href: "/cum-functioneaza", text: "Vedeți mecanismul întreg" },
   },
 
   dovada: {
     eticheta: "Dovada",
-    lead: "Într-o relație care începe cu predarea unei arhive, afirmația nesusținută costă mai mult decât tăcerea, deci punem pe masă prima listă, iar pe a doua o scriem tot noi.",
+    lead: "Într-o relație care începe cu predarea unei arhive, afirmația nesusținută costă mai mult decât tăcerea. Punem pe masă prima listă. Pe a doua o scriem tot noi.",
   },
 
   /** Banda inchisa de sub sectiunea de dovada: ce se poate vedea inainte de semnatura. */
   bandaAratam: {
     eticheta: "Înainte de semnătură",
-    titlu: "Ce vă arătăm.",
+    titlu: "Le vedeți cu ochii dumneavoastră.",
   },
 
   listaDeschise: "Ce nu putem susține",
@@ -81,7 +81,7 @@ export const SEGMENT = {
   temei: {
     eticheta: "Temeiul legal",
     titlu: "Actele, numite pe față.",
-    lead: "Nu scriem un termen fără să spunem din ce act vine, iar unde nu putem cita articolul rândul rămâne gol și scriem de ce.",
+    lead: "Nu scriem un termen fără să spunem din ce act vine. Unde nu putem cita articolul, rândul rămâne gol și scriem de ce.",
   } as CapSectiune,
 
   etichetaTermenGol: "Termenul nescris",
@@ -89,7 +89,7 @@ export const SEGMENT = {
 
   intrebari: {
     eticheta: "Întrebări",
-    lead: "Apar în prima discuție sau în chestionarul de securitate, iar noi le punem primii, ca să nu pierdeți o săptămână pe corespondență.",
+    lead: "Apar în prima discuție sau în chestionarul de securitate. Le punem primii, ca să nu pierdeți o săptămână pe corespondență.",
   },
 
   // Eticheta butonului de antet. E scurta DIN MASURATOARE: forma lunga, „Programati o
@@ -112,11 +112,11 @@ export const HUB_INTERIOR = {
   },
 
   reguliLead:
-    "Restul paginii vorbește despre diferențe, iar rândurile de aici nu se negociază pe segment, fiindcă țin de felul în care e construit serviciul.",
+    "Restul paginii vorbește despre diferențe. Rândurile de aici nu se negociază pe segment, fiindcă țin de felul în care e construit serviciul.",
 
   onestitate: {
     eticheta: "Ce lipsește dinadins",
-    titlu: "Ce nu scriem nicăieri.",
+    titlu: "Nu scriem asta nicăieri.",
   } as CapSectiune,
 
   etichetaNota: "Ce nu scriem",
@@ -134,7 +134,7 @@ export const HUB_INTERIOR = {
 
   cta: {
     titlu: "Începem de la arhivă.",
-    text: "Treizeci de minute în care ne uităm la ce aveți azi, iar la final plecați cu o estimare a volumului și cu un calendar de preluare scris, nu cu o ofertă trimisă a doua zi.",
+    text: "Treizeci de minute în care ne uităm la ce aveți azi. La final plecați cu o estimare a volumului și cu un calendar de preluare scris, nu cu o ofertă trimisă a doua zi.",
     buton: "Cereți estimarea de volum",
   },
 
@@ -155,7 +155,7 @@ export const MECANISM_INTERIOR = {
   etape: {
     eticheta: "Etapele 1-6",
     titlu: "Șase etape, șase hârtii.",
-    lead: "Fiecare etapă se închide cu un document care spune ce s-a mutat, ce s-a numărat și cine răspunde de fondul dumneavoastră, iar unde un pas depinde de un aviz străin scriem asta pe față.",
+    lead: "Fiecare etapă se închide cu un document care spune ce s-a mutat, ce s-a numărat și cine răspunde de fondul dumneavoastră. Unde un pas depinde de un aviz străin, scriem asta pe față.",
   } as CapSectiune,
 
   spreFizica: {
@@ -167,7 +167,7 @@ export const MECANISM_INTERIOR = {
   digitizare: {
     eticheta: "Ce se scanează",
     titlu: "Scanăm ce se caută.",
-    lead: "Împărțirea de mai jos este punctul de plecare al discuției, iar lista finală o hotărâți dumneavoastră și intră în contract înainte să se deschidă prima cutie.",
+    lead: "Împărțirea de mai jos este punctul de plecare al discuției. Lista finală o hotărâți dumneavoastră și intră în contract înainte să se deschidă prima cutie.",
   } as CapSectiune,
 
   listaDigitizat: "Ce intră la scanat",
@@ -177,20 +177,20 @@ export const MECANISM_INTERIOR = {
   cautare: {
     eticheta: "Căutarea",
     titlu: "Întrebare, apoi pagină.",
-    lead: "Cinci verigi, în ordine, iar dacă una lipsește lanțul se oprește acolo și nu vedeți un răspuns pe care nu îl putem susține cu un document.",
+    lead: "Cinci verigi, în ordine. Dacă una lipsește, lanțul se oprește acolo și nu vedeți un răspuns pe care nu îl putem susține cu un document.",
   } as CapSectiune,
 
   listaNuFace: "Ce nu face căutarea",
 
   dovada: {
     eticheta: "Dovada",
-    titlu: "Ce se poate verifica.",
-    lead: "Prima listă se poate vedea înainte de semnătură, iar pe a doua o scriem tot noi, primii, fiindcă o afirmație nesusținută costă mai mult decât tăcerea.",
+    titlu: "Dovada stă la vedere.",
+    lead: "Prima listă se poate vedea înainte de semnătură. Pe a doua o scriem tot noi, primii, fiindcă o afirmație nesusținută costă mai mult decât tăcerea.",
   } as CapSectiune,
 
   bandaAratam: {
     eticheta: "Înainte de semnătură",
-    titlu: "Ce vă arătăm.",
+    titlu: "Le vedeți cu ochii dumneavoastră.",
   },
 
   listaDeschise: "Ce nu putem susține",
@@ -198,7 +198,7 @@ export const MECANISM_INTERIOR = {
   hartia: {
     eticheta: "Hârtia",
     titlu: "Întrebările despre hârtie.",
-    lead: "Sunt întrebările pe care le pune un serviciu juridic sau un auditor intern, iar noi le punem primii, cu răspunsul scris, ca să nu pierdeți o săptămână pe corespondență.",
+    lead: "Sunt întrebările pe care le pune un serviciu juridic sau un auditor intern. Le punem primii, cu răspunsul scris, ca să nu pierdeți o săptămână pe corespondență.",
   } as CapSectiune,
 
   butonCta: "Discuție de 30 de minute",
@@ -216,7 +216,7 @@ export const FIZICA_INTERIOR = {
   depozit: {
     eticheta: "Depozitul",
     titlu: "Hârtia stă la adresă.",
-    lead: "Un depozit se judecă după ce se vede la fața locului, deci vizita este primul lucru pe care îl propunem, nu ultimul.",
+    lead: "Un depozit se judecă după ce se vede la fața locului. Vizita este primul lucru pe care îl propunem, nu ultimul.",
   } as CapSectiune,
 
   preluare: {
@@ -227,7 +227,7 @@ export const FIZICA_INTERIOR = {
 
   spreMecanism: {
     titlu: "Partea fizică vine prima.",
-    text: "După ce fondul ajunge pe raft cu cotă, urmează ce se scanează, cum se întreabă în română și ce se întâmplă la încheierea contractului, iar mecanismul întreg stă pe pagina lui.",
+    text: "După ce fondul ajunge pe raft cu cotă, urmează ce se scanează, cum se întreabă în română și ce se întâmplă la încheierea contractului. Mecanismul întreg stă pe pagina lui.",
     legatura: { href: "/cum-functioneaza", text: "Vedeți mecanismul complet" },
   },
 
@@ -240,7 +240,7 @@ export const FIZICA_INTERIOR = {
   selectionare: {
     eticheta: "Selecționarea",
     titlu: "Eliminarea are procedură.",
-    lead: "Este partea în care o scurtătură costă cel mai mult, fiindcă răspunderea rămâne la instituția care a creat documentele, iar ordinea de mai jos nu se schimbă și nu se scurtează.",
+    lead: "Este partea în care o scurtătură costă cel mai mult, fiindcă răspunderea rămâne la instituția care a creat documentele. Ordinea de mai jos nu se schimbă și nu se scurtează.",
   } as CapSectiune,
 
   etichetaNotaSelectionare: "Fără aviz, nimic",
@@ -248,7 +248,7 @@ export const FIZICA_INTERIOR = {
   temei: {
     eticheta: "Temeiul legal",
     titlu: "Actele, numite pe față.",
-    lead: "Nu scriem o obligație fără să spunem din ce act vine, iar unde nu putem cita articolul rândul rămâne gol și scriem de ce.",
+    lead: "Nu scriem o obligație fără să spunem din ce act vine. Unde nu putem cita articolul, rândul rămâne gol și scriem de ce.",
   } as CapSectiune,
 
   etichetaNotaTemei: "Ce nu scriem aici",
@@ -275,7 +275,7 @@ export const SECURITATE_INTERIOR = {
 
   depozit: {
     eticheta: "Depozitul",
-    titlu: "Cine ajunge la hârtie.",
+    titlu: "Puțini ajung la hârtie.",
     lead: "Riscul care mută un dosar din locul lui vine rareori dintr-o rețea, ci dintr-un raft greșit, dintr-o cutie deschisă fără fișă și dintr-o cheie care circulă.",
   } as CapSectiune,
 
@@ -295,14 +295,14 @@ export const SECURITATE_INTERIOR = {
 
   acces: {
     eticheta: "Accesul",
-    titlu: "Cine vede ce document.",
-    lead: "Un depozit bine păzit din care oricine poate cere orice dosar nu păzește nimic, deci regula de acces se scrie nominal, se schimbă în scris și se aplică la fel personalului nostru.",
+    titlu: "Fiecare vede doar ce îi trebuie.",
+    lead: "Un depozit bine păzit din care oricine poate cere orice dosar nu păzește nimic. Regula de acces se scrie nominal, se schimbă în scris și se aplică la fel personalului nostru.",
   } as CapSectiune,
 
   iesire: {
     eticheta: "Ieșirea",
     titlu: "Plecarea are procedură.",
-    lead: "Sunt cele două momente în care un fond poate dispărea legal, deci exact cele două care se scriu înainte: unul ține de contract, celălalt de o comisie și de un aviz străine de noi.",
+    lead: "Sunt cele două momente în care un fond poate dispărea legal. Exact ele se scriu înainte: unul ține de contract, celălalt de o comisie și de un aviz străine de noi.",
   } as CapSectiune,
 
   etichetaNotaIesire: "Temeiul",
@@ -310,20 +310,20 @@ export const SECURITATE_INTERIOR = {
   digital: {
     eticheta: "Partea digitală",
     titlu: "Măsurat pe site.",
-    lead: "Prima listă se măsoară automat înainte de fiecare publicare, iar dacă o verificare se înroșește, versiunea aceea nu ajunge la dumneavoastră.",
+    lead: "Prima listă se măsoară automat înainte de fiecare publicare. Dacă o verificare se înroșește, versiunea aceea nu ajunge la dumneavoastră.",
   } as CapSectiune,
 
   listaMasurat: "Măsurat la fiecare publicare",
 
   bandaNuDetinem: {
     eticheta: "Lista scurtă",
-    titlu: "Ce nu putem dovedi.",
+    titlu: "Nu putem dovedi rândurile de mai jos.",
   },
 
   intrebari: {
     eticheta: "Fără răspuns scris",
     titlu: "Șase întrebări fără răspuns.",
-    lead: "Căutarea rulează pe o platformă care nu este scrisă de noi, iar despre infrastructura altcuiva nu afirmăm nimic pe baza unei discuții, deci întrebările stau aici, formulate ca de un serviciu juridic.",
+    lead: "Căutarea rulează pe o platformă care nu este scrisă de noi. Despre infrastructura altcuiva nu afirmăm nimic pe baza unei discuții. Întrebările stau aici, formulate ca de un serviciu juridic.",
   } as CapSectiune,
 
   etichetaNotaDigital: "De ce sunt întrebări",

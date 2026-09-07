@@ -75,15 +75,15 @@ export const SECURITATE = {
   depozit: [
     {
       titlu: "Locul fondului e scris.",
-      text: "Fondul fiecărei instituții stă separat, iar poziția fiecărei unități intră în evidența depozitului, legată de cota din inventar, deci dosarul se găsește după o adresă scrisă.",
+      text: "Fondul fiecărei instituții stă separat. Poziția fiecărei unități intră în evidența depozitului, legată de cota din inventar. Dosarul se găsește după o adresă scrisă.",
     },
     {
       titlu: "Nu se intră neînsoțit.",
-      text: "Accesul îl are personalul care lucrează efectiv pe fonduri, o vizită se face însoțit și anunțat, iar lista persoanelor cu acces se scrie în contract, unde nu îmbătrânește tăcut.",
+      text: "Accesul îl are personalul care lucrează efectiv pe fonduri, iar o vizită se face însoțit și anunțat. Lista persoanelor cu acces se scrie în contract, unde nu îmbătrânește tăcut.",
     },
     {
-      titlu: "Ce iese lasă fișă.",
-      text: "Scoaterea unei unități se face pe cotă, cu fișă de ieșire, la fel și pentru personalul nostru, deci dacă un dosar lipsește din raft un rând spune cine l-a luat.",
+      titlu: "Fiecare ieșire lasă fișă.",
+      text: "Scoaterea unei unități se face pe cotă, cu fișă de ieșire, la fel și pentru personalul nostru. Dacă un dosar lipsește din raft, un rând spune cine l-a luat.",
     },
     {
       titlu: "Condițiile se văd.",
@@ -98,12 +98,12 @@ export const SECURITATE = {
   drum: [
     {
       titlu: "Numărăm înainte de plecare.",
-      text: "Documentele se așază în cutii, se numerotează și se sigilează de față cu persoana pe care o desemnați, iar ce lipsește sau e deteriorat se consemnează cât timp lipsa mai poate fi explicată.",
+      text: "Documentele se așază în cutii, se numerotează și se sigilează de față cu persoana pe care o desemnați. Ce lipsește sau e deteriorat se consemnează cât timp lipsa mai poate fi explicată.",
       urma: "Lista cutiilor, cu numerotarea și cu observațiile de stare, anexată la procesul-verbal.",
     },
     {
       titlu: "Semnătura numește custodele.",
-      text: "Procesul-verbal de predare-primire spune ce pleacă, în câte cutii, câți metri liniari și pe ce ani, iar fără el o discuție de peste un an despre un dosar lipsă nu are pe ce se sprijini.",
+      text: "Procesul-verbal de predare-primire spune ce pleacă, în câte cutii, câți metri liniari și pe ce ani. Fără el, o discuție de peste un an despre un dosar lipsă nu are pe ce se sprijini.",
       urma: "Proces-verbal de predare-primire, în două exemplare semnate.",
     },
     {
@@ -113,7 +113,7 @@ export const SECURITATE = {
     },
     {
       titlu: "Originalul revine pe hârtie.",
-      text: "Unitatea arhivistică iese pe cotă și se predă cu fișă, iar copia digitală nu înlocuiește originalul acolo unde legea sau instanța cere hârtia, cu traseul scris în ambele sensuri.",
+      text: "Unitatea arhivistică iese pe cotă și se predă cu fișă, cu traseul scris în ambele sensuri. Copia digitală nu înlocuiește originalul acolo unde legea sau instanța cere hârtia.",
       urma: "Fișă de ieșire și, la întoarcere, consemnarea repunerii în raft.",
     },
   ] as Etapa[],
@@ -122,19 +122,19 @@ export const SECURITATE = {
   acces: [
     {
       titlu: "Lista o faceți dumneavoastră.",
-      text: "Cine are voie să ceară documente din fondul dumneavoastră se stabilește nominal și se schimbă tot în scris, iar la cerere verbală nu adăugăm pe nimeni, oricât de cunoscută ar fi persoana.",
+      text: "Cine are voie să ceară documente din fondul dumneavoastră se stabilește nominal și se schimbă tot în scris. La cerere verbală nu adăugăm pe nimeni, oricât de cunoscută ar fi persoana.",
     },
     {
       titlu: "Cererea merge pe fond.",
-      text: "Un solicitant vede documentele fondului pentru care este trecut pe listă, iar căutarea nu traversează fondurile mai multor clienți: separarea din raft se păstrează și în partea digitală.",
+      text: "Un solicitant vede documentele fondului pentru care este trecut pe listă. Căutarea nu traversează fondurile mai multor clienți: separarea din raft se păstrează și în partea digitală.",
     },
     {
       titlu: "Aceeași regulă la noi.",
-      text: "Arhivarul care manipulează fondul lucrează pe cote, cu fișă, și e ținut de o obligație de confidențialitate scrisă, deci nu scoate un dosar în afara procedurii fiindcă are cheia depozitului.",
+      text: "Arhivarul care manipulează fondul lucrează pe cote, cu fișă, și e ținut de o obligație de confidențialitate scrisă. Nu scoate un dosar în afara procedurii fiindcă are cheia depozitului.",
     },
     {
       titlu: "Împuternicirea se semnează.",
-      text: "Dosarele de personal, statele de salarii și documentele medicale conțin date personale, iar prelucrarea lor se scrie în anexa la contract. Dacă anexa lipsește dintr-o ofertă, cereți-o înainte de semnătură.",
+      text: "Dosarele de personal, statele de salarii și documentele medicale conțin date personale. Prelucrarea lor se scrie în anexa la contract. Dacă anexa lipsește dintr-o ofertă, cereți-o înainte de semnătură.",
     },
   ] as Fisa[],
 
@@ -142,24 +142,24 @@ export const SECURITATE = {
   iesire: [
     {
       titlu: "Fondul se întoarce inventariat.",
-      text: "Fondul se restituie pe baza aceluiași inventar cu care a fost preluat, cu proces-verbal, iar termenul și cine suportă transportul se scriu în contract înainte de prima cutie ridicată.",
+      text: "Fondul se restituie pe baza aceluiași inventar cu care a fost preluat, cu proces-verbal. Termenul și cine suportă transportul se scriu în contract înainte de prima cutie ridicată.",
     },
     {
       titlu: "Contractul spune ce rămâne.",
-      text: "Ce primiți, în ce format și ce rămâne la noi după încetare se hotărăsc la semnare, iar o firmă care nu vrea să scrie asta vă spune ceva despre ieșire.",
+      text: "Ce primiți, în ce format și ce rămâne la noi după încetare se hotărăsc la semnare. O firmă care nu vrea să scrie asta vă spune ceva despre ieșire.",
     },
     {
       titlu: "Comisia dumneavoastră elimină.",
-      text: "Documentele care au împlinit termenul se elimină prin comisia de selecționare a instituției dumneavoastră și cu avizul Arhivelor Naționale, iar noi pregătim lucrarea și întocmim documentația. Până la aviz nu se elimină nimic.",
+      text: "Documentele care au împlinit termenul se elimină prin comisia de selecționare a instituției dumneavoastră și cu avizul Arhivelor Naționale. Noi pregătim lucrarea și întocmim documentația. Până la aviz nu se elimină nimic.",
     },
     {
       titlu: "Urma rămâne după eliminare.",
-      text: "Documentele avizate se scot din evidența fondului și se distrug cu proces-verbal, astfel încât conținutul să nu mai poată fi reconstituit, iar în evidență rămâne ce s-a eliminat și pe baza cărui aviz.",
+      text: "Documentele avizate se scot din evidența fondului și se distrug cu proces-verbal, astfel încât conținutul să nu mai poată fi reconstituit. În evidență rămâne ce s-a eliminat și pe baza cărui aviz.",
     },
   ] as Fisa[],
 
   notaIesire:
-    "Eliminarea fără avizul Arhivelor Naționale încalcă Legea Arhivelor Naționale nr. 16/1996, iar răspunderea rămâne a creatorului documentelor. Dacă cineva vă promite eliminare rapidă și fără hârtii, cereți-i să vă arate cu ce document rămâneți în fața unui control.",
+    "Eliminarea fără avizul Arhivelor Naționale încalcă Legea Arhivelor Naționale nr. 16/1996. Răspunderea rămâne a creatorului documentelor. Dacă cineva vă promite eliminare rapidă și fără hârtii, cereți-i să vă arate cu ce document rămâneți în fața unui control.",
 
   // --- V. partea digitala -------------------------------------------------
   masurat: [
@@ -175,13 +175,13 @@ export const SECURITATE = {
     {
       intrebare: "Unde stau, fizic, copiile digitale ale documentelor?",
       deCeConteaza:
-        "O instituție publică trebuie să știe în ce țară ajung datele înainte de semnătură, iar răspunsul intră în anexa de prelucrare, nu într-o discuție.",
+        "O instituție publică trebuie să știe în ce țară ajung datele înainte de semnătură. Răspunsul intră în anexa de prelucrare, nu într-o discuție.",
       stare: "fără răspuns scris",
     },
     {
       intrebare: "Cum sunt protejate copiile la transport și la păstrare?",
       deCeConteaza:
-        "Este prima întrebare a oricărui serviciu juridic, iar un răspuns dat din memorie, fără document de la furnizorul platformei, nu rezistă la a doua întrebare.",
+        "Este prima întrebare a oricărui serviciu juridic. Un răspuns dat din memorie, fără document de la furnizorul platformei, nu rezistă la a doua întrebare.",
       stare: "fără răspuns scris",
     },
     {
@@ -193,13 +193,13 @@ export const SECURITATE = {
     {
       intrebare: "Cine are acces administrativ la platformă și ce jurnal rămâne după fiecare acces?",
       deCeConteaza:
-        "În depozit, ce iese din raft lasă o fișă, iar despre partea digitală nu putem afirma că are echivalentul ei cât timp nu am văzut cum arată.",
+        "În depozit, ce iese din raft lasă o fișă. Despre partea digitală nu putem afirma că are echivalentul ei cât timp nu am văzut cum arată.",
       stare: "fără răspuns scris",
     },
     {
       intrebare: "Ce se întâmplă cu copiile digitale în ziua în care contractul încetează?",
       deCeConteaza:
-        "Restituirea hârtiei are proces-verbal, iar pentru partea digitală procedura echivalentă trebuie scrisă înainte, nu descoperită la ieșire.",
+        "Restituirea hârtiei are proces-verbal. Pentru partea digitală, procedura echivalentă trebuie scrisă înainte, nu descoperită la ieșire.",
       stare: "se scrie în contract, procedura furnizorului nu ne-a fost confirmată",
     },
     {
@@ -211,7 +211,7 @@ export const SECURITATE = {
   ] as IntrebareDeschisa[],
 
   notaDigital:
-    "Sunt scrise ca întrebări fiindcă platforma pe care rulează căutarea nu este scrisă de noi, iar despre infrastructura altcuiva nu afirmăm nimic pe baza unei discuții. Le cerem în scris, de la furnizor, iar când primim răspunsurile rândurile trec în coloana măsurată, cu sursa lângă ele.",
+    "Sunt scrise ca întrebări fiindcă platforma pe care rulează căutarea nu este scrisă de noi. Despre infrastructura altcuiva nu afirmăm nimic pe baza unei discuții. Le cerem în scris, de la furnizor. Când primim răspunsurile, rândurile trec în coloana măsurată, cu sursa lângă ele.",
 
   nuDetinem: [
     "Nu deținem nicio certificare de securitate a informației și nu ne prezentăm ca și cum am avea",
@@ -222,7 +222,7 @@ export const SECURITATE = {
 
   incheiere: {
     titlu: "Veniți cu lista dumneavoastră.",
-    text: "Aduceți la discuție cerințele de securitate ale instituției, așa cum le formulează serviciul juridic sau auditorul intern; la cele la care avem răspuns răspundem pe loc, iar la restul spunem de la cine îl cerem.",
+    text: "Aduceți la discuție cerințele de securitate ale instituției, așa cum le formulează serviciul juridic sau auditorul intern. La cele la care avem răspuns răspundem pe loc. La restul spunem de la cine îl cerem.",
   },
 };
 
@@ -246,28 +246,28 @@ export const ACCESIBILITATE = {
   // accesibilitate sta in linia sectiunii II, unde e chiar argumentul ei, iar cuprinsul
   // paginii il dau titlurile sectiunilor. Nimic nu s-a pierdut.
   lead:
-    "Verificările de mai jos rulează automat pe fiecare pagină publică înainte de fiecare publicare, iar dacă una se înroșește, versiunea aceea nu ajunge la dumneavoastră.",
+    "Verificările de mai jos rulează automat pe fiecare pagină publică înainte de fiecare publicare. Dacă una se înroșește, versiunea aceea nu ajunge la dumneavoastră.",
 
   masurat: [
     {
       titlu: "Motorul deschide fiecare pagină.",
-      text: "Evaluează regulile de accesibilitate pe care le poate judeca o mașină, cu pragul la zero încălcări serioase sau critice. Ce apare la gravitate mică se tipărește în raport și se citește, dar nu oprește publicarea.",
+      text: "Evaluează regulile de accesibilitate pe care le poate judeca o mașină, cu pragul la zero încălcări serioase sau critice. Ce apare la gravitate mică se tipărește în raport și se citește. Publicarea nu se oprește pentru asta.",
     },
     {
       titlu: "Contrastul trece de 4,5.",
-      text: "Aceeași verificare cere cel puțin atât între text și fundal, iar culorile au fost alese pornind de la prag. Judecă perechi de culori, deci textul peste fotografie stă la nemăsurat.",
+      text: "Aceeași verificare cere cel puțin atât între text și fundal. Culorile au fost alese pornind de la prag. Judecă perechi de culori, așa că textul peste fotografie stă la nemăsurat.",
     },
     {
       titlu: "Nu apare derapaj lateral.",
-      text: "Fiecare pagină se deschide la lățimea unui telefon obișnuit și nimic nu are voie să vă oblige să trageți pagina lateral. Verificarea a și schimbat site-ul: bara de sus a rămas cu puține intrări.",
+      text: "Fiecare pagină se deschide la 390 de puncte, lățimea unui telefon obișnuit, și nimic nu are voie să vă oblige să trageți pagina lateral. Verificarea a și schimbat site-ul: bara de sus a rămas cu puține intrări.",
     },
     {
       titlu: "Textul există fără scripturi.",
-      text: "Conținutul fiecărei pagini există în documentul livrat de server, deci se citește și când scripturile sunt oprite, blocate sau nu se încarcă.",
+      text: "Conținutul fiecărei pagini există în documentul livrat de server. Se citește și când scripturile sunt oprite, blocate sau nu se încarcă.",
     },
     {
       titlu: "Săritura la conținut există.",
-      text: "Cine navighează de la tastatură sare peste bara de sus, iar legătura devine vizibilă în clipa în care ajunge pe ea focalizarea. Automat se verifică doar că ținta ei există pe fiecare pagină publică.",
+      text: "Cine navighează de la tastatură sare peste bara de sus. Legătura devine vizibilă în clipa în care ajunge pe ea focalizarea. Automat se verifică doar că ținta ei există pe fiecare pagină publică.",
     },
     {
       titlu: "Fiecare verificare are martori.",
@@ -277,13 +277,13 @@ export const ACCESIBILITATE = {
 
   neMasurat: [
     "Nu declarăm conformitatea cu un nivel dintr-un standard: nu s-a făcut niciun audit al site-ului, nici de noi, nici de altcineva",
-    "Contrastul textului așezat peste fotografie nu e judecat automat: motorul îl marchează drept nesigur, fiindcă nu poate ști ce pixel ajunge sub fiecare literă. Îl măsurăm noi, pe captura paginii, cu literele ascunse, deci cifra vine de la noi și nu oprește singură o publicare",
+    "Contrastul textului așezat peste fotografie nu e judecat automat: motorul îl marchează drept nesigur, fiindcă nu poate ști ce pixel ajunge sub fiecare literă. Îl măsurăm noi, pe captura paginii, cu literele ascunse. Cifra vine de la noi și nu oprește singură o publicare",
     "Verificarea automată acoperă o parte din criterii, nu pe toate; multe se pot judeca numai de un om",
-    "Nu am parcurs site-ul cu un cititor de ecran real, pe tot fluxul, deci nu putem spune cum sună",
+    "Nu am parcurs site-ul cu un cititor de ecran real, pe tot fluxul. Nu putem spune cum sună",
     "Nu am parcurs site-ul exclusiv de la tastatură, pagină cu pagină, ca probă separată",
-    "Nu l-am dat spre încercare niciunei persoane cu dizabilități, deci nu avem observații din folosire reală",
+    "Nu l-am dat spre încercare niciunei persoane cu dizabilități. Nu avem observații din folosire reală",
     "Nu există versiune în limbaj simplificat, nici variantă audio a textelor",
-    "Nu invocăm aici niciun act normativ: nu am stabilit care obligații ni se aplică, iar o trimitere nesigură la o lege e mai rea decât lipsa ei",
+    "Nu invocăm aici niciun act normativ, fiindcă nu am stabilit care obligații ni se aplică. O trimitere nesigură la o lege e mai rea decât lipsa ei",
   ],
 
   semnalare: [
@@ -293,11 +293,11 @@ export const ACCESIBILITATE = {
     },
     {
       titlu: "Trei detalii ajută.",
-      text: "Adresa paginii, ce încercați să faceți acolo și cu ce o citiți, dacă vă este comod să ne spuneți, iar o propoziție despre ce nu a mers ajută mai mult decât un raport tehnic.",
+      text: "Adresa paginii, ce încercați să faceți acolo și cu ce o citiți, dacă vă este comod să ne spuneți. O propoziție despre ce nu a mers ajută mai mult decât un raport tehnic.",
     },
     {
       titlu: "Reparăm și adăugăm verificarea.",
-      text: "Răspundem la mesaj, iar dacă problema ține de site o reparăm și, unde se poate, punem o verificare automată care să o prindă dacă revine. Termen nu promitem, fiindcă nu am măsurat unul.",
+      text: "Răspundem la mesaj. Dacă problema ține de site o reparăm și, unde se poate, punem o verificare automată care să o prindă dacă revine. Termen nu promitem, fiindcă nu am măsurat unul.",
     },
     {
       titlu: "Spuneți-ne dacă nu ajunge.",

@@ -90,7 +90,7 @@ export const INVESTITIA_INTERIOR = {
 
   structuraTitlu: "O dată și lunar.",
   structuraLead:
-    "Împărțirea contează mai mult decât suma: partea unică rămâne făcută, partea recurentă se adună cât ține contractul, deci două oferte cu același total pot fi foarte diferite aici.",
+    "Împărțirea contează mai mult decât suma: partea unică rămâne făcută, partea recurentă se adună cât ține contractul. Două oferte cu același total pot fi foarte diferite aici.",
 
   discutiaEticheta: "Discuția de 30 de minute",
   discutiaTitlu: "Ce iese din discuție.",
@@ -98,7 +98,7 @@ export const INVESTITIA_INTERIOR = {
     "Se măsoară, se scrie și pleacă la dumneavoastră, chiar dacă la final decideți să rămâneți la dulapul din birou.",
   refuzTitlu: "Ce nu promitem.",
   refuzLead:
-    "Le scriem aici fiindcă sunt exact lucrurile pe care le cere un cumpărător grăbit, iar un furnizor grăbit le promite.",
+    "Le scriem aici fiindcă sunt exact lucrurile pe care le cere un cumpărător grăbit. Un furnizor grăbit le promite.",
 
   ctaNota:
     "Nu afișăm număr de telefon: cererile intră prin poșta electronică, ca să rămână o urmă scrisă a cererii dumneavoastră și a răspunsului nostru.",
@@ -122,12 +122,12 @@ export const COMPARATIE_INTERIOR = {
   varianteEticheta: "Variantele",
   varianteTitlu: "Patru situații reale.",
   varianteLead:
-    "Comparăm ce comparați dumneavoastră de fapt, fiindcă documentele nu sunt încă fișiere, iar trei dintre cele patru variante nu sunt ale noastre și sunt descrise cum le-ar descrie cine le folosește.",
+    "Comparăm ce comparați dumneavoastră de fapt, fiindcă documentele nu sunt încă fișiere. Trei dintre cele patru variante nu sunt ale noastre și sunt descrise cum le-ar descrie cine le folosește.",
 
   tabelEticheta: "Comparația",
   tabelTitlu: "Șase întrebări de pus.",
   tabelLead:
-    "Sunt întrebările care apar în discuție, în ordinea lor: pe ecran lat se citesc pe coloane, iar pe telefon fiecare întrebare devine un card, cu numele variantei pe fiecare răspuns.",
+    "Sunt întrebările care apar în discuție, în ordinea lor. Pe ecran lat se citesc pe coloane. Pe telefon fiecare întrebare devine un card, cu numele variantei pe fiecare răspuns.",
 
   pierdemEticheta: "Unde pierdem",
   pierdemTitlu: "Ce pierdeți cu noi.",
@@ -135,7 +135,7 @@ export const COMPARATIE_INTERIOR = {
   nuMeritaEticheta: "Când nu merită",
   nuMeritaTitlu: "Patru situații de refuz.",
   nuMeritaLead:
-    "Le auzim oricum în prima jumătate de oră, când s-a consumat deja timpul dumneavoastră, deci se citesc mai bine aici.",
+    "Le auzim oricum în prima jumătate de oră, când s-a consumat deja timpul dumneavoastră. Se citesc mai bine aici.",
 };
 
 // ---------------------------------------------------------------------------
@@ -146,7 +146,7 @@ export const DESPRE_INTERIOR = {
   impartireaEticheta: "Împărțirea",
   impartireaTitlu: "Două firme, două vechimi.",
   impartireaLead:
-    "ADRIA arhivează din 2019, 3S se înființează anul acesta, iar cititorul care le confundă semnează cu impresia greșită despre cine îi ține hârtia, deci scriem întâi împărțirea.",
+    "ADRIA arhivează din 2019, 3S se înființează anul acesta. Cititorul care le confundă semnează cu impresia greșită despre cine îi ține hârtia. Scriem întâi împărțirea.",
 
   adriaTitlu: "ADRIA ține hârtia.",
   treiSTitlu: "3S construiește răspunsul.",
@@ -154,17 +154,17 @@ export const DESPRE_INTERIOR = {
   stareaEticheta: "Starea de azi",
   stareaTitlu: "Firma nu e înmatriculată.",
   stareaLead:
-    "Dosarul de înmatriculare este în lucru, iar până se încheie firma nu are cod fiscal, număr de registru, sediu declarat sau telefon, și site-ul scrie că lipsesc.",
+    "Dosarul de înmatriculare este în lucru. Până se încheie, firma nu are cod fiscal, număr de registru, sediu declarat sau telefon, și site-ul scrie că lipsesc.",
 
   numeleEticheta: "Numele",
   numeleTitlu: "Trei verbe, în ordine.",
   numeleLead:
-    "Scan, Store, Solve sunt lucrurile care se fac cu un document, de la cutia din subsol până la răspunsul de pe telefon, iar împărțirea de mai sus spune cine răspunde de fiecare.",
+    "Scan, Store, Solve sunt lucrurile care se fac cu un document, de la cutia din subsol până la răspunsul de pe telefon. Împărțirea de mai sus spune cine răspunde de fiecare.",
 
   limiteEticheta: "Limite",
   limiteTitlu: "Ce nu putem susține.",
   limiteLead:
-    "Într-o achiziție publică, afirmația nesusținută costă mai mult decât tăcerea, deci prima listă adună ce lipsește de pe site fiindcă nu putem dovedi, iar a doua spune ce punem în loc.",
+    "Într-o achiziție publică, afirmația nesusținută costă mai mult decât tăcerea. Prima listă adună ce lipsește de pe site fiindcă nu putem dovedi. A doua spune ce punem în loc.",
 
   /**
    * Banda inchisa: faptele atribuite firmei-mama. `BandaIncredere` cere perechi titlu-text,
@@ -189,17 +189,17 @@ export const CONTACT_INTERIOR = {
   drumuriEticheta: "Drumuri",
   drumuriTitlu: "Trei drumuri, unul deschis.",
   drumuriLead:
-    "Cardurile de mai jos se citesc din configurarea firmei, iar unde valoarea lipsește scrie că lipsește: nici substituent, nici datele firmei-mamă puse în locul lor.",
+    "Cardurile de mai jos se citesc din configurarea firmei. Unde valoarea lipsește, scrie că lipsește: nici substituent, nici datele firmei-mamă puse în locul lor.",
 
   mesajEticheta: "Primul mesaj",
   mesajTitlu: "Cinci rânduri scurtează discuția.",
   mesajLead:
-    "Scrieți cât vreți și în ce ordine vreți, iar prima listă este ce ne trebuie oricum ca să răspundem cu ceva concret din primul mesaj, nu de pe al treilea.",
+    "Scrieți cât vreți și în ce ordine vreți. Prima listă este ce ne trebuie oricum ca să răspundem cu ceva concret din primul mesaj, nu de pe al treilea.",
 
   dateleEticheta: "Datele din mesaj",
   dateleTitlu: "Ce facem cu mesajul.",
   dateleLead:
-    "Un mesaj către un furnizor de arhivare conține adesea numele instituției, ce se caută des și uneori un termen de control, deci merită spus dinainte ce se întâmplă cu el.",
+    "Un mesaj către un furnizor de arhivare conține adesea numele instituției, ce se caută des și uneori un termen de control. Merită spus dinainte ce se întâmplă cu el.",
   dateleIntrebari: [
     "Ce se întâmplă cu mesajul pe care ni-l trimiteți?",
     "Ce nu vă cerem în primul mesaj?",

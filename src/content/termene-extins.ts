@@ -73,7 +73,7 @@ export const PAGINA_TERMENE = {
 
   acoperire: {
     titlu: "România, atât.",
-    lead: "O listă cu optsprezece jurisdicții arată bine până în ziua în care cineva o folosește ca să apere o eliminare, deci am ales lista scurtă, pe care o ducem la sursă rând cu rând.",
+    lead: "O listă cu optsprezece jurisdicții arată bine până în ziua în care cineva o folosește ca să apere o eliminare. Am ales lista scurtă, pe care o ducem la sursă rând cu rând.",
     acoperit: [
       "Documente create sau deținute de organizații din România, sub lege română.",
       "Opt categorii frecvente: contabilitate, salarizare, personal, stare civilă, acte administrative locale, construcții, contracte comerciale, dosare de avocatură.",
@@ -97,7 +97,7 @@ export const PAGINA_TERMENE = {
     // nimeni departe de raspuns.
     subTabel: [
       "Opt categorii de documente, fiecare cu termenul ei, cu momentul din care începe să curgă și cu actul din care provine. Unde nu putem arăta articolul, rândul rămâne gol și scriem de ce.",
-      "Actul normativ stă pe rând, sub numele categoriei, la orice lățime de ecran, iar categoria duce la fișa întreagă, cu momentul din care curge termenul și cu nota lui.",
+      "Actul normativ stă pe rând, sub numele categoriei, la orice lățime de ecran. Categoria duce la fișa întreagă, cu momentul din care curge termenul și cu nota lui.",
     ],
     // Cele trei antete de coloana ale tabelului (categoria / termen / actul normativ) au
     // iesit odata cu tabelul, la reconcilierea lotului S1-b: DIRECTIA cere ca ce se taie din
@@ -117,14 +117,14 @@ export const PAGINA_TERMENE = {
     // si ordinea ei e ordinea fiselor - amandoua vin din `TERMENE_ROMANIA`, in aceeasi
     // iterare. Numele din text trebuie sa fie al lui; `tests/felie-juridic-referinte.test.ts`
     // masoara asta la fiecare rulare.
-    lead: "Ordinea este cea din lista de mai sus, iar rândul fără cifră nu are cifră fiindcă nu am găsit articolul, nu fiindcă am uitat de el.",
+    lead: "Ordinea este cea din lista de mai sus. Rândul fără cifră nu are cifră fiindcă nu am găsit articolul, nu fiindcă am uitat de el.",
   },
 
   moldova: {
     titlu: "Moldova nu e aici.",
     paragrafe: [
-      "Lucrăm pentru România și pentru Republica Moldova, iar întrebarea despre termenele moldovenești vine des, dar pe pagina aceasta nu apare niciun termen moldovenesc.",
-      "Motivul nu ne avantajează: nu am citit actele moldovenești la sursă, articol cu articol. Un termen luat din memorie arată la fel cu unul corect, deci e mai periculos decât un rând gol.",
+      "Lucrăm pentru România și pentru Republica Moldova. Întrebarea despre termenele moldovenești vine des. Pe pagina aceasta nu apare totuși niciun termen moldovenesc.",
+      "Motivul nu ne avantajează: nu am citit actele moldovenești la sursă, articol cu articol. Un termen luat din memorie arată la fel cu unul corect. E mai periculos decât un rând gol.",
       "Ne trebuie actul moldovenesc, articolul citit la sursă și confirmarea că forma citită este în vigoare. Când le avem, rândurile intră în aceeași listă, cu același temei pe rând.",
       "Dacă lucrați cu arhive în Republica Moldova și cunoașteți actul și articolul, scrieți-ne și adăugăm rândul cu trimiterea la act. Dacă ne arătați că un rând românesc contrazice actul citat, îl corectăm în pagină.",
     ],
@@ -136,19 +136,19 @@ export const PAGINA_TERMENE = {
     reguli: [
       {
         titlu: "Nomenclatorul propriu obligă.",
-        text: "Nomenclatorul avizat de Arhivele Naționale stabilește termenul fiecărei categorii, iar când el spune altceva decât o listă tipărită de un furnizor, el câștigă și noi ne aliniem la el.",
+        text: "Nomenclatorul avizat de Arhivele Naționale stabilește termenul fiecărei categorii. Când el spune altceva decât o listă tipărită de un furnizor, el câștigă și noi ne aliniem la el.",
       },
       {
         titlu: "Comisia și avizul obligă.",
-        text: "Eliminarea trece prin comisia de selecționare, cu proces-verbal și cu inventarele documentelor propuse, iar avizul Arhivelor Naționale vine înainte de distrugere. La control arătați procesul-verbal al comisiei.",
+        text: "Eliminarea trece prin comisia de selecționare, cu proces-verbal și cu inventarele documentelor propuse. Avizul Arhivelor Naționale vine înainte de distrugere. La control arătați procesul-verbal al comisiei.",
       },
       {
         titlu: "Termenul permanent nu curge.",
-        text: "Categoriile cu termen permanent fac parte din Fondul Arhivistic Național și nu se propun spre eliminare, indiferent câte rafturi ar elibera, iar apariția lor într-un proces-verbal de eliminare este eroarea cea mai gravă.",
+        text: "Categoriile cu termen permanent fac parte din Fondul Arhivistic Național și nu se propun spre eliminare, indiferent câte rafturi ar elibera. Apariția lor într-un proces-verbal de eliminare este eroarea cea mai gravă.",
       },
       {
         titlu: "Orientativul se confirmă întâi.",
-        text: "Un rând orientativ are temei general citabil, dar cifra din el vine din practica nomenclatoarelor avizate, iar diferența contează exact în clipa în care cineva vă cere temeiul.",
+        text: "Un rând orientativ are temei general citabil, însă cifra din el vine din practica nomenclatoarelor avizate. Diferența contează exact în clipa în care cineva vă cere temeiul.",
       },
     ],
     temeiuri: [
@@ -160,6 +160,6 @@ export const PAGINA_TERMENE = {
 
   incheiere: {
     titlu: "Plecați cu o listă.",
-    text: "Discuția începe de la fondul dumneavoastră, câți metri liniari, ce categorii, ce se cere des și ce are termen permanent, iar lista care iese o duceți la comisia de selecționare, indiferent dacă lucrăm împreună.",
+    text: "Discuția începe de la fondul dumneavoastră: câți metri liniari, ce categorii, ce se cere des și ce are termen permanent. Lista care iese o duceți la comisia de selecționare, indiferent dacă lucrăm împreună.",
   },
 };

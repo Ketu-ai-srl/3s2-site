@@ -78,7 +78,7 @@ export const TERMENE: Termen[] = [
     dela: "De la data întocmirii.",
     lege: "Legea contabilității nr. 82/1991, art. 25 alin. (2)",
     legeNota: "Excepție expresă de la termenul general al documentelor financiare.",
-    nota: "Este actul pe care îl cere un fost angajat pentru vechime, uneori la treizeci de ani după plecare, deci se ține separat de restul documentelor financiare. Amestecul lor este cauza cea mai frecventă a eliminărilor greșite.",
+    nota: "Este actul pe care îl cere un fost angajat pentru vechime, uneori la treizeci de ani după plecare. Se ține separat de restul documentelor financiare. Amestecul lor este cauza cea mai frecventă a eliminărilor greșite.",
   },
   {
     tip: "Dosare de personal",
@@ -99,7 +99,7 @@ export const TERMENE: Termen[] = [
     dela: "De la data întocmirii registrului.",
     lege: "Legea nr. 119/1996 cu privire la actele de stare civilă",
     legeNota: "După împlinirea termenului, registrele se predau Arhivelor Naționale.",
-    nota: "Pentru o primărie acesta este fondul cu cea mai lungă viață și cel mai cerut la ghișeu, iar exemplarul al doilea are propriul regim de păstrare și de depunere.",
+    nota: "Pentru o primărie acesta este fondul cu cea mai lungă viață și cel mai cerut la ghișeu. Exemplarul al doilea are propriul regim de păstrare și de depunere.",
   },
   {
     tip: "Hotărâri ale consiliului local și dispoziții ale primarului",
@@ -119,7 +119,7 @@ export const TERMENE: Termen[] = [
     dela: "De la recepția la terminarea lucrărilor.",
     lege: "HG nr. 273/1994, Regulamentul de recepție a lucrărilor de construcții",
     legeNota: "Se predă proprietarului și îl urmează la fiecare schimbare de proprietar.",
-    nota: "Lipsa ei se vede exact atunci când aveți nevoie de ea, la o expertiză, la o vânzare sau după un eveniment, iar reconstituirea costă de câteva ori mai mult decât păstrarea.",
+    nota: "Lipsa ei se vede exact atunci când aveți nevoie de ea: la o expertiză, la o vânzare sau după un eveniment. Reconstituirea costă de câteva ori mai mult decât păstrarea.",
   },
   {
     tip: "Contracte comerciale",
@@ -139,6 +139,6 @@ export const TERMENE: Termen[] = [
     dela: "",
     lege: "",
     legeNota: "",
-    nota: "Preferăm rândul gol unei cifre pe care nu am putea să o susținem în fața unui control: nu am găsit o normă generală, cu articol, valabilă pentru toate dosarele unui cabinet. Termenul se construiește din statutul profesiei, din contractul de asistență juridică și din nomenclatorul propriu, iar dacă îl cunoașteți, scrieți-ne și îl completăm cu trimiterea la act.",
+    nota: "Preferăm rândul gol unei cifre pe care nu am putea să o susținem în fața unui control: nu am găsit o normă generală, cu articol, valabilă pentru toate dosarele unui cabinet. Termenul se construiește din statutul profesiei, din contractul de asistență juridică și din nomenclatorul propriu. Dacă îl cunoașteți, scrieți-ne și îl completăm cu trimiterea la act.",
   },
 ];

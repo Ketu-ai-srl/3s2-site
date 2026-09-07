@@ -27,7 +27,7 @@ export const ANCORE_TERMENE = {
   eticheta: "Săriți la o categorie",
   /** Rezumatul listei de ancore, pentru cititorul de ecran. Nu e tabel: vezi `TermeneCuprins`. */
   descriere:
-    "Opt categorii de documente, fiecare cu termenul ei și cu actul din care vine, iar numele categoriei duce la fișa întreagă.",
+    "Opt categorii de documente, fiecare cu termenul ei și cu actul din care vine. Numele categoriei duce la fișa întreagă.",
 };
 
 /** Randul cu ancorele paginii de start, din harta site-ului. */
@@ -49,7 +49,7 @@ export const LIPSA = {
 export const NEGASITA = {
   eticheta: "Adresă negăsită",
   titlu: "Adresa nu duce nicăieri.",
-  text: "Fie a fost scrisă altfel, fie pagina pe care o căutați nu există pe acest site, iar mai jos sunt patru drumuri scurte.",
+  text: "Fie a fost scrisă altfel, fie pagina pe care o căutați nu există pe acest site. Mai jos sunt patru drumuri scurte.",
   drumuri: "Drumuri",
   buton: "Înapoi la pagina de start",
 };

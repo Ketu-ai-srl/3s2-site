@@ -34,7 +34,7 @@ export const EROU = {
   eticheta: "Arhivare fizică, digitizare, căutare cu sursă",
   titluRand1: "Hârtia stă la depozit.",
   titluRand2: "Răspunsul vine pe telefon.",
-  text: "Documentele rămân pe raft, cu cotă și inventar. Întrebarea o puneți în română, iar răspunsul vine cu documentul și pagina din care a fost scos.",
+  text: "Documentele rămân pe raft, cu cotă și inventar. Întrebarea o puneți în română. Răspunsul vine cu documentul și pagina din care a fost scos.",
   buton: { href: "/contact", text: "Discuție de 30 de minute" },
   garantie: "Fără ofertă a doua zi. Plecați cu o estimare de volum scrisă.",
 };
@@ -97,7 +97,7 @@ export const CARD_MARE = {
 export const CARDURI_MICI: CardMic[] = [
   {
     eticheta: "Termene",
-    titlu: "Cât se păstrează un document",
+    titlu: "Termenul de păstrare al fiecărui document",
     text: "Termenele uzuale, fiecare cu actul normativ lângă el. Unde norma lipsește, scrie că lipsește.",
     href: "/instrumente/termene-de-pastrare",
   },
@@ -117,7 +117,7 @@ export const ETAPE = {
       cheie: "scan",
       eticheta: "Scan",
       titlu: "Se digitizează ce se caută.",
-      text: "Nu se scanează tot. Se scanează ce se cere des, iar originalul rămâne pe raft, cu cotă, și se aduce pe hârtie atunci când este cerut.",
+      text: "Nu se scanează tot. Se scanează ce se cere des. Originalul rămâne pe raft, cu cotă, și se aduce pe hârtie atunci când este cerut.",
       legatura: { href: "/cum-functioneaza", text: "Cum funcționează" },
       // `pozitie` SI `alt` sunt copiile celor din `src/content/fotografii.ts`, pentru aceeasi
       // cheie, si o verificare din `tests/fotografii.test.ts` cere sa fie EGALE. Cifrele s-au
