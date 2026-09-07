@@ -219,9 +219,15 @@ Ordinea în care se citește o pagină interioară:
    600), ancorele secțiunilor la 12 px și o pastilă de 24 px la dreapta. Sub 768 px trece pe
    două rânduri, ca să nu ascundă nicio ancoră. Se pune prin `SegmentAncore`, care îi citește
    titlul din registrul de rute, nu din pagină.
-2. **Eroul**, pe alb, în containerul de 1247, tot textul la stânga: firul de navigare, numele
-   paginii, afirmația cu ultimul cuvânt albastru, rândul de sub ea, pastilele, iar fotografia
-   **sub text, pe toată lățimea**. Centrat e doar pe pagina de start, unde ecranul e țigla.
+2. **Eroul**, pe alb, în containerul de 1247, tot textul la stânga: firul de navigare, apoi
+   **fotografia, pe toată lățimea, ÎNAINTEA textului**, apoi numele paginii, afirmația cu
+   ultimul cuvânt albastru, rândul de sub ea și pastilele. Centrat e doar pe pagina de start,
+   unde ecranul e țigla. Ordinea e cea a **capturii** referinței (`produs-1440-fold`,
+   `produs-3-ecrane`: fotografia produsului ocupă ecranul, numele de 28 și afirmația de 64 vin
+   abia sub ea); fișa REF-A §4.2 o înșiruise invers, iar felia 3 a urmat fișa - la
+   reconcilierea lotului s2-b0 ordinea s-a întors după captură, cât costa o mutare de bloc.
+   Consecința: la 1440 afirmația intră sub linia de plutire (pe referință stă la ~840 px), iar
+   la 390 fotografia de 320 px e primul lucru văzut.
 3. **Capitole** în containerul de 980: etichetă de 24 px, afirmație de 80 px, paragraf de 21/29
    la 600 în `cerneala-3`, apoi rama de ceață cu fotografia sau cardurile. Alinierea alternează
    stânga / centrat, ca pe referință.
@@ -295,7 +301,7 @@ pagină la fiecare măsurătoare (1440 și 390), pe `/arhivare-fizica`, `/invest
 
 | Element | 1440 | 390 |
 |---|---|---|
-| numele paginii | 28,00 / 34,00 px, 600, `cerneala` | 19 / 23 px |
+| numele paginii | 28,00 / 34,00 px, 600, `cerneala` (referința: 28 / 32 - abatere, vezi sub tabel) | 19 / 23 px |
 | afirmația (h1) | 64,00 / 76,16 px, 600, `cerneala`, lățime 844 px (20ch) | 40 / 47,6 px, 358 px |
 | ultimul cuvânt | `albastru-2`, aceeași treaptă | la fel |
 | rândul de sub afirmație | 21,00 / 29,00 px, **400**, `cerneala`, 689 px (52ch) | 19 / 23 px, 358 px |
@@ -306,6 +312,16 @@ pagină la fiecare măsurătoare (1440 și 390), pe `/arhivare-fizica`, `/invest
 | paragraful de capitol | 21 / 29 px, 600, `cerneala-3`, 817 px (59ch) | 19 / 23 px |
 | rama capitolului | 916 x 620 px, rază 28, `ceata`, `box-shadow: none` | 358 x 320 px |
 | captușeala capitolului | 110 px sus și jos | 64 px |
+
+**Două abateri declarate față de cifrele fișei.** (1) Numele paginii are pasul de rând 34, nu
+32 cât măsoară referința: jetonul `--text-subtitlu-tigla` are pasul 1,214 (34/28), fiindcă
+regula diacriticelor din secțiunea „Litera" cere cel puțin 1,19 (28 x 1,19 = 33,3, rotunjit la
+34 - un pas de 33,32 ar tăia pixeli); tabelul de scară din `globals.css` scria „28 / 32" după
+referință și a fost corectat să spună ce servește jetonul. (2) Lățimile: containerele din fișă
+(1247, 980) sunt lățimi de **conținut** măsurate pe referință; la noi `max-w-vitrina` și
+`max-w-registru` **includ** căptușeala de 2 x 32, deci conținutul are 1183 și 916 px la 1440.
+Fotografia eroului (1183) și rama capitolului (916) sunt aliniate cu coloana de text, iar
+înălțimile de mai jos sunt calculate din aceste lățimi reale, nu din numele containerului.
 
 Cele două înălțimi de fotografie sunt alese din **acoperire**, nu din gust. Fișierele de 1920
 sunt toate 1920x1280 (3:2). În cutia eroului, 1183 x 700, se vede 88,8% din înălțimea cadrului -
