@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Acordeon from "@/components/Acordeon";
 import AntetPagina from "@/components/AntetPagina";
 import BandaCTA from "@/components/BandaCTA";
 import BlocDovada from "@/components/BlocDovada";
+import Capitol from "@/components/Capitol";
 import ContactDrumuri, { type Drum } from "@/components/ContactDrumuri";
+import InvestitieCardLista from "@/components/InvestitieCardLista";
+import InvestitieIntrebari from "@/components/InvestitieIntrebari";
 import ListaBifa from "@/components/ListaBifa";
+import SegmentAncore from "@/components/SegmentAncore";
 import { campLipsa, entitate } from "@/content/entitate";
 import { FOTOGRAFII } from "@/content/fotografii";
 import { CONTACT_INTERIOR as CT } from "@/content/interior-investitia";
 
-// PAGINA DE CONTACT, pe gramatica paginii interioare REF-V (val S1-b): antet alb scurt, trei
-// carduri cu iconita pe ceata, doua coloane de bife despre primul mesaj, acordeon despre ce
-// facem cu datele, banda CTA. Trei drumuri, din care unul singur ajunge la noi azi.
+// PAGINA DE CONTACT, pe gramatica paginii de PRODUS din REF-A, nu pe cea a unui act: erou cu
+// fotografie mare, doua capitole in containerul de 980 si intrebarile ca acordeon. Trei drumuri,
+// din care unul singur ajunge la noi azi.
 //
-// CE S-A SCHIMBAT LA FORMA. Drumurile stateau intr-un registru de randuri, cu valoarea intr-o
-// stampila de mono cu linie in stanga. Litera de mono nu mai exista pe site - toate cele trei
-// jetoane de familie arata catre aceeasi familie de cand fundatia REF-V a aterizat - deci
-// stampila nu mai era o stampila, era un chenar. Acum valoarea sta in `h3`, adica pe treapta
-// cea mai mare a cardului, iar numele drumului sta deasupra ei ca eticheta de nota: pe pagina
-// asta singurul lucru care se copiaza dintr-o privire este adresa.
+// DE CE EROU CU FOTOGRAFIE SI NU BANDA SCURTA. `AntetPagina` are forma `banda` pentru paginile
+// care sunt DOCUMENTE sau UNELTE - acolo omul a venit dupa o clauza sau dupa un termen, si o
+// fotografie il tine departe de raspuns. Contactul nu e nici document, nici unealta: nu se
+// consulta, se citeste o data, ca sa se afle pe ce drum ajunge un mesaj. Cadrul e `maini` -
+// mana care scoate un dosar - fiindca e singurul din registru in care se vede un GEST, nu un
+// depozit; pe pagina asta gestul e chiar subiectul.
 //
 // NU EXISTA NICIUN FORMULAR PE SITE, nici aici, nici pe pagina de start, si asta nu e o
 // omisiune. Un camp in care se scrie o cerere trebuie sa aiba un destinatar, iar 3S nu are inca
@@ -35,6 +38,8 @@ import { CONTACT_INTERIOR as CT } from "@/content/interior-investitia";
 // inmatriculare, cardul se umple singur, fara sa treaca nimeni prin fisierul acesta.
 // `campLipsa` recunoaste substituentii, deci `de completat` nu poate ajunge pe pagina aratand
 // ca un numar.
+//
+// Bara locala sta dupa erou, ca pe celelalte 21 de rute; motivul masurat e scris pe /investitia.
 export const metadata: Metadata = {
   title: "Contact",
   description:
@@ -105,13 +110,14 @@ const NU_CEREM = [
   "Inventarul complet al arhivei: îl măsurăm împreună, la fața locului",
 ];
 
-// Lista din acordeon se scrie o singura data, aici: `Acordeon` primeste noduri, iar bifa nu
-// are ce cauta pe un raspuns care e o insiruire de fapte, nu o lista de lucruri promise.
+// Lista din acordeon se scrie o singura data, aici: `Acordeon` primeste noduri, iar bifa nu are
+// ce cauta pe un raspuns care e o insiruire de fapte, nu o lista de lucruri promise. Firul din
+// stanga nu-si mai scrie culoarea: implicitul global e chiar #d2d2d7 al referintei.
 function Insiruire({ elemente }: { elemente: string[] }) {
   return (
     <ul className="m-0 list-none p-0">
       {elemente.map((e) => (
-        <li key={e} className="mb-2 border-l-2 border-linie pl-4">
+        <li key={e} className="mb-2 border-l-2 pl-4">
           {e}
         </li>
       ))}
@@ -124,18 +130,11 @@ export default function Contact() {
     <main id="continut">
       <AntetPagina
         adresa="/contact"
-        forma="banda"
-        imagine={FOTOGRAFII.sertare}
+        imagine={FOTOGRAFII.maini}
         fir={[{ text: "Pagina de start", href: "/" }, { text: "Contact" }]}
-        eticheta="Contact"
-        titlu={
-          <>
-            Ne scrieți pe e-mail.
-            <br />
-            Restul drumurilor nu există încă.
-          </>
-        }
-        lead="Scriem mai jos exact ce ajunge la noi și ce nu. 3S se înființează acum, deci telefonul și sediul lipsesc, iar cardurile lor spun de ce."
+        eticheta={CT.antetEticheta}
+        titlu={CT.antetTitlu}
+        lead={CT.antetLead}
         // Butonul al doilea RAMANE numai aici, din cele patru pagini ale lotului: /despre e
         // singura destinatie secundara care nu sta si in bara de sus, deci singura care nu
         // repeta un rand deja vizibil. Cand adresa lipseste din configurare, pagina nu are ce
@@ -148,93 +147,67 @@ export default function Contact() {
         secundar={ARE_EMAIL ? { href: "/despre", text: "Cine suntem" } : undefined}
       />
 
-      <section id="drumuri" className="bg-ceata">
-        <div className="mx-auto w-full max-w-vitrina px-4 py-20 md:px-8 md:py-24">
-          <div className="mb-12 text-center">
-            <span className="mb-4 block text-nota font-semibold text-violet">
-              {CT.drumuriEticheta}
-            </span>
-            <h2 className="mx-auto max-w-[22ch] text-titlu-2 text-cerneala">
-              {CT.drumuriTitlu}
-            </h2>
-            <p className="mx-auto mt-5 max-w-[62ch] text-corp text-cerneala-2">
-              {CT.drumuriLead}
-            </p>
-          </div>
+      <SegmentAncore ancore={CT.navigare} eticheta="Secțiunile paginii" />
 
-          <ContactDrumuri drumuri={DRUMURI} />
+      <Capitol
+        id="drumuri"
+        eticheta={CT.drumuriEticheta}
+        afirmatie={CT.drumuriTitlu}
+        text={CT.drumuriLead}
+      >
+        <ContactDrumuri
+          drumuri={DRUMURI}
+          sub={
+            // 53 de cuvinte, masurate pe pagina randata. Forma dinainte avea 69, adica zece
+            // randuri neintrerupte la 390 px - `BlocDovada` randeaza UN paragraf si e o
+            // componenta inghetata in valul asta, deci pauza vizuala nu se putea adauga
+            // inauntru; s-a scurtat textul, fara sa se piarda vreo propozitie de fond.
+            <BlocDovada>
+              <strong className="font-semibold text-cerneala">
+                Nu există niciun formular pe site:
+              </strong>{" "}
+              nici aici, nici pe pagina de start. Un câmp în care se scrie o cerere are nevoie de
+              un destinatar, iar 3S nu are încă unul. Până atunci, cererea se lasă pe poșta
+              electronică, unde se vede că a plecat. Când formularul are destinatar, apare și
+              aici.
+            </BlocDovada>
+          }
+        />
+      </Capitol>
 
-          {/* 53 de cuvinte, masurate pe pagina randata. Forma dinainte avea 69, adica zece
-              randuri neintrerupte la 390 px - `BlocDovada` randeaza UN paragraf si e o
-              componenta inghetata in valul asta, deci pauza vizuala nu se putea adauga
-              inauntru; s-a scurtat textul, fara sa se piarda vreo propozitie de fond. */}
-          <BlocDovada className="mt-10">
-            <strong className="font-semibold text-cerneala">
-              Nu există niciun formular pe site:
-            </strong>{" "}
-            nici aici, nici pe pagina de start. Un câmp în care se scrie o cerere are nevoie de
-            un destinatar, iar 3S nu are încă unul. Până atunci, cererea se lasă pe poșta
-            electronică, unde se vede că a plecat. Când formularul are destinatar, apare și
-            aici.
-          </BlocDovada>
-        </div>
-      </section>
+      <Capitol
+        id="primul-mesaj"
+        eticheta={CT.mesajEticheta}
+        afirmatie={CT.mesajTitlu}
+        text={CT.mesajLead}
+        aliniere="centrat"
+      >
+        <InvestitieCardLista>
+          <ListaBifa titlu="Ce ajută să scrieți" elemente={PRIMUL_MESAJ} />
+          <ListaBifa titlu="Ce primiți înapoi" elemente={CE_PRIMITI} />
+        </InvestitieCardLista>
+      </Capitol>
 
-      <section id="primul-mesaj" className="bg-alb">
-        <div className="mx-auto w-full max-w-vitrina px-4 py-20 md:px-8 md:py-24">
-          <div className="mb-12 text-center">
-            <span className="mb-4 block text-nota font-semibold text-violet">
-              {CT.mesajEticheta}
-            </span>
-            <h2 className="mx-auto max-w-[22ch] text-titlu-2 text-cerneala">
-              {CT.mesajTitlu}
-            </h2>
-            <p className="mx-auto mt-5 max-w-[62ch] text-corp text-cerneala-2">
-              {CT.mesajLead}
-            </p>
-          </div>
-
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-            <ListaBifa titlu="Ce ajută să scrieți" elemente={PRIMUL_MESAJ} />
-            <ListaBifa titlu="Ce primiți înapoi" elemente={CE_PRIMITI} />
-          </div>
-        </div>
-      </section>
-
-      <section id="datele" className="bg-ceata">
-        <div className="mx-auto w-full max-w-vitrina px-4 py-20 md:px-8 md:py-24">
-          <div className="mb-12 text-center">
-            <span className="mb-4 block text-nota font-semibold text-violet">
-              {CT.dateleEticheta}
-            </span>
-            <h2 className="mx-auto max-w-[22ch] text-titlu-2 text-cerneala">
-              {CT.dateleTitlu}
-            </h2>
-            <p className="mx-auto mt-5 max-w-[62ch] text-corp text-cerneala-2">
-              {CT.dateleLead}
-            </p>
-          </div>
-
-          <div className="mx-auto max-w-registru">
-            <Acordeon
-              elemente={[
-                {
-                  intrebare: CT.dateleIntrebari[0],
-                  raspuns: <Insiruire elemente={CU_MESAJUL} />,
-                },
-                {
-                  intrebare: CT.dateleIntrebari[1],
-                  raspuns: <Insiruire elemente={NU_CEREM} />,
-                },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
+      <InvestitieIntrebari
+        id="datele"
+        eticheta={CT.dateleEticheta}
+        titlu={CT.dateleTitlu}
+        lead={CT.dateleLead}
+        elemente={[
+          {
+            intrebare: CT.dateleIntrebari[0],
+            raspuns: <Insiruire elemente={CU_MESAJUL} />,
+          },
+          {
+            intrebare: CT.dateleIntrebari[1],
+            raspuns: <Insiruire elemente={NU_CEREM} />,
+          },
+        ]}
+      />
 
       <div id="discutie">
         <BandaCTA
-          titlu="Un mesaj de cinci rânduri este de ajuns ca să începem."
+          titlu="Cinci rânduri sunt de ajuns."
           text="Discuția de treizeci de minute se programează din același mesaj. Ne uităm peste umăr la arhiva dumneavoastră așa cum arată ea azi, nu la o prezentare a noastră."
           actiune={
             ARE_EMAIL
@@ -246,7 +219,7 @@ export default function Contact() {
               Termenele legale, cu actul normativ citat, stau în{" "}
               <Link
                 href="/instrumente/termene-de-pastrare"
-                className="text-alb underline decoration-violet-clar underline-offset-[3px]"
+                className="text-albastru-2 underline underline-offset-[3px]"
               >
                 instrumentul de termene
               </Link>

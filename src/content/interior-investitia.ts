@@ -16,10 +16,18 @@
 // `tests/interior-felie4.test.ts` masoara si ca sunt tot atatea etichete cate randuri, si ca
 // niciun text din `MOSTENIT` nu e copiat in fisierul asta.
 //
+// VALUL S2-b (felia 5) a adaugat campurile pe care le cere gramatica REF-A si care nu existau
+// in gramatica dinainte: ancorele barei locale (`navigare`), titlul si legatura benzii de
+// „highlights", notele celor trei garantii, etichetele capitolelor noi si cele doua randuri de
+// pe /despre care stateau scrise DIRECT in pagina. Ultimele doua sunt o mutare, nu un text nou:
+// un paragraf de interfata scris in `page.tsx` nu poate fi masurat de nicio proba de continut.
+//
 // VOCE REF-A (rescris 2026-09-07): titlul de sectiune e o AFIRMATIE de doua-patru cuvinte,
 // cu punct, iar linia de sub el e o singura propozitie, intre 15 si 35 de cuvinte. Etichetele
 // au unul pana la patru cuvinte si NU au punct - o eticheta cu punct e agramata, si a fost
 // defect reparat in valul S1-a. Adresarea ramane „dumneavoastra", diacriticele cu virgula.
+
+import type { Ancora } from "./interior-solutii";
 
 /** O grupa de elemente de cost, adica un card din sectiunea de factori a paginii /investitia. */
 export type GrupaFactori = {
@@ -44,6 +52,18 @@ export type IntrebareInterior = {
 // ---------------------------------------------------------------------------
 
 export const INVESTITIA_INTERIOR = {
+  /** Ancorele barei locale, in ordinea in care apar capitolele pe pagina. */
+  navigare: [
+    { ancora: "factori", eticheta: "Factorii" },
+    { ancora: "structura", eticheta: "Unic și lunar" },
+    { ancora: "discutia", eticheta: "Discuția" },
+    { ancora: "intrebari", eticheta: "Întrebări" },
+  ] as Ancora[],
+
+  /** Banda de sub erou: titlul ei la 56 px si legatura din dreapta. */
+  garantiiTitlu: "Trei lucruri ținute.",
+  garantiiLegatura: "Vedeți comparația",
+
   /**
    * Randul de garantii de sub antet. Fiecare rand rezuma ceva deja scris pe site:
    * primul e al doilea element din `INVESTITIA.nuPrimiti`, al doilea vine din
@@ -54,6 +74,16 @@ export const INVESTITIA_INTERIOR = {
     "Fără ofertă pripită",
     "Măsurăm înainte de cifră",
     "Contract în română",
+  ],
+
+  /**
+   * Rândul de sub fiecare garanție, în cardul de „highlights". Eticheta de deasupra rămâne
+   * fără punct, fiindcă e etichetă; propoziția de aici o are, fiindcă e propoziție.
+   */
+  garantiiNote: [
+    "Nicio cifră nu pleacă spre dumneavoastră înainte să vedem rafturile și să măsurăm fondul.",
+    "Metrii liniari se măsoară la fața locului, cu ruleta, iar rezultatul intră scris în estimare.",
+    "Contractul și anexa de prelucrare a datelor se citesc în română, înainte de prima cutie ridicată.",
   ],
 
   factoriEticheta: "Ce intră în cost",
@@ -88,6 +118,7 @@ export const INVESTITIA_INTERIOR = {
     },
   ] as GrupaFactori[],
 
+  structuraEticheta: "Structura costului",
   structuraTitlu: "O dată și lunar.",
   structuraLead:
     "Împărțirea contează mai mult decât suma: partea unică rămâne făcută, partea recurentă se adună cât ține contractul. Două oferte cu același total pot fi foarte diferite aici.",
@@ -96,6 +127,7 @@ export const INVESTITIA_INTERIOR = {
   discutiaTitlu: "Ce iese din discuție.",
   discutiaLead:
     "Se măsoară, se scrie și pleacă la dumneavoastră, chiar dacă la final decideți să rămâneți la dulapul din birou.",
+  refuzEticheta: "Promisiuni",
   refuzTitlu: "Ce nu promitem.",
   refuzLead:
     "Le scriem aici fiindcă sunt exact lucrurile pe care le cere un cumpărător grăbit. Un furnizor grăbit le promite.",
@@ -105,6 +137,8 @@ export const INVESTITIA_INTERIOR = {
 
   intrebariEticheta: "Întrebări despre preț",
   intrebariTitlu: "Întrebările despre bani.",
+  intrebariLead:
+    "Sunt cele cinci întrebări care vin oricum în prima discuție despre bani, cu răspunsurile scrise înainte să le puneți.",
   intrebari: [
     { intrebare: "De ce nu scrie un preț pe pagina asta?", cheie: "fara-pret-0" },
     { intrebare: "Ce se schimbă dacă publicați totuși o cifră?", cheie: "fara-pret-1" },
@@ -119,6 +153,13 @@ export const INVESTITIA_INTERIOR = {
 // ---------------------------------------------------------------------------
 
 export const COMPARATIE_INTERIOR = {
+  navigare: [
+    { ancora: "variante", eticheta: "Variantele" },
+    { ancora: "tabel", eticheta: "Tabelul" },
+    { ancora: "pierdem", eticheta: "Unde pierdem" },
+    { ancora: "cand-nu-merita", eticheta: "Când nu merită" },
+  ] as Ancora[],
+
   varianteEticheta: "Variantele",
   varianteTitlu: "Patru situații reale.",
   varianteLead:
@@ -143,13 +184,29 @@ export const COMPARATIE_INTERIOR = {
 // ---------------------------------------------------------------------------
 
 export const DESPRE_INTERIOR = {
+  navigare: [
+    { ancora: "impartirea", eticheta: "Împărțirea" },
+    { ancora: "starea", eticheta: "Starea de azi" },
+    { ancora: "numele", eticheta: "Numele" },
+    { ancora: "limite", eticheta: "Limite" },
+  ] as Ancora[],
+
   impartireaEticheta: "Împărțirea",
   impartireaTitlu: "Două firme, două vechimi.",
   impartireaLead:
     "ADRIA arhivează din 2019, 3S se înființează anul acesta. Cititorul care le confundă semnează cu impresia greșită despre cine îi ține hârtia. Scriem întâi împărțirea.",
 
+  /**
+   * Cele doua carduri ale impartirii. Textele stateau pana la valul S2-b scrise DIRECT in
+   * `src/app/despre/page.tsx`, adica intr-un loc pe care nicio proba de continut nu-l citeste;
+   * aici sunt masurabile. Faptele pe care le rezuma raman in `despre.ts` si pe banda inchisa.
+   */
   adriaTitlu: "ADRIA ține hârtia.",
+  adriaText:
+    "Vechimea, autorizațiile și depozitul aparțin firmei-mamă, deci o afirmație despre ele se verifică la ea, nu la noi. Cele cinci lucruri care vin de acolo sunt scrise pe banda neagră de mai jos.",
   treiSTitlu: "3S construiește răspunsul.",
+  treiSText:
+    "Ce urmează este muncă nouă și nu are în spate niciun an de funcționare. Riscul ei ni-l asumăm noi, nu firma-mamă.",
 
   stareaEticheta: "Starea de azi",
   stareaTitlu: "Firma nu e înmatriculată.",
@@ -186,6 +243,22 @@ export const DESPRE_INTERIOR = {
 export type IconitaDrum = "posta" | "telefon" | "sediu";
 
 export const CONTACT_INTERIOR = {
+  navigare: [
+    { ancora: "drumuri", eticheta: "Drumuri" },
+    { ancora: "primul-mesaj", eticheta: "Primul mesaj" },
+    { ancora: "datele", eticheta: "Datele" },
+  ] as Ancora[],
+
+  /**
+   * Eroul paginii. Afirmatia sta aici, ca sir de patru cuvinte, si nu compusa in pagina din
+   * doua propozitii legate cu un rand nou: `AntetPagina` coloreaza ultimul cuvant numai cand
+   * primeste un SIR, iar /contact ramanea altfel fara capatul albastru al afirmatiei.
+   */
+  antetEticheta: "Contact",
+  antetTitlu: "Ne scrieți un e-mail.",
+  antetLead:
+    "Scriem mai jos exact ce ajunge la noi și ce nu. 3S se înființează acum, deci telefonul și sediul lipsesc, iar cardurile lor spun de ce.",
+
   drumuriEticheta: "Drumuri",
   drumuriTitlu: "Trei drumuri, unul deschis.",
   drumuriLead:
