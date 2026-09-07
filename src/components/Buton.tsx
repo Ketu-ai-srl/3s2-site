@@ -10,7 +10,7 @@ import Link from "next/link";
 //   contur  drumul al doilea: transparent, litera `albastru-2`, contur de 0,8 px desenat ca
 //           `box-shadow` interior, nu ca chenar, ca sa nu mute inaltimea cu un pixel fata de
 //           pastila plina de langa el. Pe negru contururile si litera trec pe `albastru-clar`
-//           (6,96:1), fiindca `albastru-2` pe negru da 3,86:1.
+//           (6,96:1), fiindca `albastru-2` pe negru da 3,77:1.
 //   text    drumul al doilea cand nu merita greutatea unui buton: legatura `albastru-2` cu un
 //           chevron dupa cuvant. NU e subliniata: in REF-A legaturile de actiune se recunosc
 //           dupa culoare si dupa chevron. Sublinierea ramane pe legaturile din proza, unde nu

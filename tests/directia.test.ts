@@ -229,15 +229,34 @@ describe('paleta REF-A', () => {
     // Si motivul retragerii e SCRIS, nu doar aplicat: cifra masurata si pragul care o judeca.
     expect(CSS, 'globals.css nu scrie cifra masurata de axe').toContain('3,62')
     expect(DIRECTIA, 'DIRECTIA.md nu scrie de ce a fost retras rolul').toMatch(/700/)
+    // SI documentul nu are voie sa prescrie in alta parte chiar pragul pe care il refuta aici.
+    // Asa s-a intamplat: reteta de masurare de la finalul lui DIRECTIA.md cerea „18,66 px la
+    // greutatea 600", adica exact conditia referintei, nu a WCAG - un agent care o urma masura
+    // cu pragul larg si lasa griul de 3,62:1 sa treaca. Refutarea si reteta trebuie sa spuna
+    // acelasi lucru, si asta o tine proba, nu buna-credinta.
+    expect(DIRECTIA, 'DIRECTIA.md prescrie undeva pragul de 3:1 la greutatea 600, pe care tot el il refuta').not.toMatch(
+      /18,66\s*px\s*(?:cu|la)\s*greutatea\s*600/,
+    )
+    // Control pozitiv: tiparul chiar prinde forma pe care o vaneaza.
+    expect(
+      'de la 18,66 px la greutatea 600;'.match(/18,66\s*px\s*(?:cu|la)\s*greutatea\s*600/),
+      'tiparul pragului refuzat nu prinde martorul',
+    ).not.toBeNull()
   })
 
   it('cifrele de contrast si pragul diacriticelor sunt scrise in globals.css si in DIRECTIA.md', () => {
-    for (const cifra of ['16,83', '3,62', '5,07', '4,70', '5,57', '6,96', '19,29']) {
+    // `3,77` e cifra pe care se sprijina regula „albastru-2 nu se scrie pe negru". A stat scrisa
+    // `3,86` in patru locuri si nicio proba n-o cerea, deci nimeni n-a recalculat-o: valoarea
+    // reala a lui #0066cc pe #000000 e 3,7725. De aici incolo o cere lista de mai jos.
+    for (const cifra of ['16,83', '3,62', '5,07', '4,70', '5,57', '6,96', '19,29', '3,77']) {
       expect(CSS, 'globals.css nu scrie contrastul ' + cifra).toContain(cifra)
     }
-    for (const cifra of ['16,83', '3,62', '5,07', '6,96']) {
+    for (const cifra of ['16,83', '3,62', '5,07', '6,96', '3,77']) {
       expect(DIRECTIA, 'DIRECTIA.md nu scrie contrastul ' + cifra).toContain(cifra)
     }
+    // Si cifra scrisa trebuie sa fie CEA CALCULATA, nu una apropiata: se reface din valorile
+    // paletei, cu martorii alaturi.
+    expect(contrast(valoare('albastru-2'), valoare('negru'))).toBeCloseTo(3.77, 2)
     expect(CSS, 'globals.css nu scrie pragul masurat al diacriticelor').toContain('1,190')
     expect(DIRECTIA, 'DIRECTIA.md nu scrie urcarea masurata a lui I cu circumflex').toContain('0,945')
     expect(DIRECTIA, 'DIRECTIA.md nu scrie coborarea masurata a virgulei').toContain('0,245')
@@ -543,6 +562,38 @@ describe('gramatica paginilor', () => {
     expect(sectiune![1], 'banda CTA a ramas colorata').not.toMatch(/bg-(?:albastru|negru)/)
     // Si nu e chemata de pe pagina de start: chemarea la actiune sta in pastila fiecarei tigle.
     expect(pagina, 'pagina de start a ramas cu o banda CTA').not.toContain('BandaCTA')
+  })
+
+  it('inaltimea tiglei cu fotografie e legata la AMANDOUA capetele, nu doar la 1440', () => {
+    // Clasa de defect: `min-h-[500px]` e o PODEA, nu o inaltime. Sub 768 px nimic nu mai lega
+    // cutia fotografiei, ea crestea la inaltimea proprie a cadrului (585 px la 390) si tigla
+    // iesea 885-987 px in loc de 500 - cifra pe care o scriu si fisa REF-A, si DIRECTIA.md, de
+    // doua ori. Pagina masura atunci 9784 px la 390, fata de 7327 cat are referinta la aceeasi
+    // latime. Masurat dupa legare: tigle de 500 px si pagina de 6879 px. Poarta de browser nu
+    // vede asta - ea masoara culori si roluri, nu inaltimi - deci regula sta aici.
+    const tigla = faraComentarii(readFileSync(join(COMPONENTE, 'Ecran.tsx'), 'utf8'))
+    const pagina = faraComentarii(readFileSync(PAGINA, 'utf8'))
+    for (const [nume, cod] of [['Ecran.tsx', tigla], ['page.tsx', pagina]] as const) {
+      expect(cod, nume + ': tigla e legata doar cu o podea la capatul ingust').not.toMatch(
+        /min-h-\[500px\]/,
+      )
+      // Fara privirea inapoi tiparul ar fi inutil: `min-h-[500px]` il contine pe `h-[500px]`,
+      // deci exact forma refuzata ar fi trecut drept forma ceruta.
+      expect(cod, nume + ': tigla nu mai are inaltime legata la capatul ingust').toMatch(
+        /(?<!min-)h-\[500px\]/,
+      )
+    }
+    // Si cutia fotografiei nu are voie sa-si impuna o podea proprie sub 768 px: podeaua ei era
+    // chiar mecanismul prin care tigla crestea.
+    expect(tigla, 'cutia fotografiei si-a recapatat podeaua').not.toMatch(/min-h-\[2[0-9]{2}px\]/)
+    expect(pagina, 'cutia fotografiei din grila si-a recapatat podeaua').not.toMatch(
+      /min-h-\[200px\]/,
+    )
+    // Control pozitiv: tiparele prind formele pe care le vaneaza.
+    expect('flex min-h-[500px] flex-col'.match(/min-h-\[500px\]/), 'tiparul podelei nu prinde martorul').not.toBeNull()
+    expect('flex h-[500px] flex-col'.match(/(?<!min-)h-\[500px\]/), 'tiparul inaltimii nu prinde martorul').not.toBeNull()
+    // Control NEGATIV: tiparul inaltimii nu are voie sa se aprinda pe podea.
+    expect('flex min-h-[500px] flex-col'.match(/(?<!min-)h-\[500px\]/), 'tiparul inaltimii se aprinde si pe podea').toBeNull()
   })
 
   it('nu exista voal: fotografia nu poarta text peste ea nicaieri', () => {

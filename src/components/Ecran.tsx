@@ -113,7 +113,7 @@ export default function Ecran({
       <section
         id={id}
         className={
-          "relative isolate flex min-h-[500px] flex-col overflow-hidden md:h-[692px] " +
+          "relative isolate flex h-[500px] flex-col overflow-hidden md:h-[692px] " +
           FUNDAL[fundal] +
           " " +
           className
@@ -180,19 +180,24 @@ export default function Ecran({
         </div>
 
         {/* Fotografia umple restul tiglei, sub text, si ATAT. `flex-1` plus `min-h-0` ii dau
-            exact ce ramane din cele 692 px masurate; fara `min-h-0` cutia ar creste la
-            inaltimea proprie a cadrului si tigla ar ajunge la 1016 px - masurat inainte de
-            reparatie, pagina de start iesea 7460 px in loc de 6002, adica un sfert mai lunga
-            decat referinta. Sub 768 px inaltimea nu mai e fixa: acolo textul e mai inalt decat
-            fotografia, si o inaltime fixa l-ar taia. */}
+            exact ce ramane din inaltimea legata; fara `min-h-0` cutia ar creste la inaltimea
+            proprie a cadrului si tigla ar ajunge la 1016 px - masurat inainte de reparatie,
+            pagina de start iesea 7460 px in loc de 6002, adica un sfert mai lunga decat
+            referinta. ACELASI mecanism si sub 768 px, unde inaltimea a fost multa vreme doar o
+            podea (`min-h-`): atunci cutia fotografiei lua 585 px la 390, tiglele iesau 901-987
+            px in loc de 500 cat scrie fisa, si pagina masura 9784 px fata de 7327 cat are
+            referinta la aceeasi latime. Masurat dupa legare, cu `innerWidth` citit din pagina:
+            tigle de 500 px si pagina de 6879 px la 390. Podeaua era pusa ca sa nu taie textul
+            romanesc, mai lung decat cel al referintei; masurat, nu il taie - cazul cel mai
+            stramt e tigla-erou la 320 px, unde textul se termina la 385,2 px din cele 500. */}
         {cuFoto && imagine ? (
-          <div className="mt-10 min-h-[220px] w-full flex-1 md:mt-12 md:min-h-0">
+          <div className="mt-10 min-h-0 w-full flex-1 md:mt-12">
             <picture>
               <source media="(max-width: 767px)" srcSet={"/img/" + imagine.nume + "-960.webp"} />
               <img
                 src={"/img/" + imagine.nume + "-1920.webp"}
                 alt={imagine.alt}
-                className="h-full min-h-[220px] w-full object-cover md:min-h-0"
+                className="h-full w-full object-cover"
                 style={{ objectPosition: imagine.pozitie ?? "center" }}
                 loading={nivel === "h1" ? "eager" : "lazy"}
                 decoding="async"

@@ -33,7 +33,7 @@ finalul acestui document; controlul lui e alb pe negru, care trebuie să dea 21,
     cerneala      pe alb 16,83:1   pe ceata 15,46:1
     cerneala-3    pe alb  5,07:1   pe ceata  4,66:1
     albastru      alb pe el 4,70:1              pe ceata 4,31:1 (deci nu e literă)
-    albastru-2    pe alb  5,57:1   pe ceata  5,11:1   pe negru 3,86:1 (deci nu e literă acolo)
+    albastru-2    pe alb  5,57:1   pe ceata  5,11:1   pe negru 3,77:1 (deci nu e literă acolo)
     albastru-clar pe negru 6,96:1  pe alb    3,02:1 (deci nu e literă acolo)
     alb           pe negru 21,00:1
     ceata         pe negru 19,29:1
@@ -182,6 +182,18 @@ de culoare rămasă dintr-o direcție veche cade tot pe el, în loc să înnegre
 2. **Grilă de două coloane pe trei rânduri**, țigle de 580 px la 1440 și 500 px la 390, cu 12 px
    între ele: h3 de 40 px centrat, subtitlu de 21 px, o notă de 14 px în `cerneala-3`, pastile de
    36 px, fotografia sub text. Una dintre țigle e neagră, cu literă `ceata`.
+   Cele două înălțimi sunt **legate la amândouă capetele**, nu doar la 1440. Fotografia stă într-o
+   cutie cu `flex-1 min-h-0` și ia doar ce rămâne; țigla însăși are `h-[500px]` sub 768 px, nu
+   `min-h-[500px]`. Cât timp a fost doar o podea, cutia fotografiei creștea la înălțimea proprie a
+   cadrului - 585 px la 390 - și țiglele ieșeau 885-987 px, adică de aproape două ori cifra scrisă
+   chiar aici; pagina de start măsura atunci 9784 px la 390, față de 7327 cât are referința la
+   aceeași lățime. Măsurat după legare, cu `innerWidth` citit din pagină: țigle de 500 px și pagina
+   de 6879 px la 390, iar la 1440 nimic nu se schimbă (692 / 580 px, pagina 5014 px). Textul
+   românesc e mai lung decât cel al referinței, și de asta podeaua fusese pusă; măsurat, nu se taie
+   nicăieri - cazul cel mai strâmt e țigla-erou la 320 px, unde textul se termină la 385,2 px din
+   cele 500. Țiglele fără fotografie își păstrează podeaua, fiindcă n-au niciun element elastic care
+   să absoarbă un text mai lung.
+
 3. **Banda neagră** cu faptele atribuite ale firmei-mamă, cu titlul legat printr-un exponent de
    nota de la bază.
 4. **Notele numerotate**, 12 px, pe alb: locul în care pagina își scrie limitele.
@@ -318,7 +330,7 @@ def contrast(a, b):
 Lângă rezultat se pune întotdeauna un martor cu răspuns cunoscut - alb pe negru, care trebuie să
 dea 21,00, și alb pe alb, care trebuie să dea 1,00. Pe pagina construită se măsoară altfel: se
 citește culoarea calculată a fiecărui bloc de text și fundalul lui efectiv, se calculează raportul
-și se compară cu pragul care i se aplică (3:1 de la 24 px, sau de la 18,66 px la greutatea 600;
-4,5:1 în rest). Verificarea pe pagină se face **după** repornirea serverului: numele fișierului CSS
+și se compară cu pragul care i se aplică (3:1 de la 24 px, sau de la 18,66 px la greutatea cel
+puțin 700; 4,5:1 în rest). Verificarea pe pagină se face **după** repornirea serverului: numele fișierului CSS
 se schimbă la fiecare build, iar un server pornit înaintea lui servește o pagină fără foaie de
 stil, cu legături albastre implicite - și atunci toate blocurile ies perfect, din alt motiv.

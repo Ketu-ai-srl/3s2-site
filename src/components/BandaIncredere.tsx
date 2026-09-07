@@ -3,7 +3,7 @@
 // diferenta se vede - albul pur pe negru vibreaza la marimi mici.
 //
 // Legaturile de pe negru, cand exista, sunt `albastru-clar` (6,96:1). `albastru-2`, care duce
-// legaturile pe deschis, da pe negru 3,86:1 si nu are ce cauta aici; simetric, `albastru-clar`
+// legaturile pe deschis, da pe negru 3,77:1 si nu are ce cauta aici; simetric, `albastru-clar`
 // da pe alb 3,02:1 si nu are ce cauta pe deschis. Fiecare albastru are UN capat pe care trece.
 //
 // Ce scrie pe ea sunt afirmatii ATRIBUITE, din registrul `src/content/afirmatii/`: ce face
