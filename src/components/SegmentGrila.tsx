@@ -51,7 +51,7 @@ export default function SegmentGrila({
       {elemente.map((e) => (
         <li key={e.titlu}>
           <Card titlu={e.titlu} fundal={fundal} mare={mari}>
-            <p className="text-corp text-cerneala-2">{e.text}</p>
+            <p className="text-corp text-cerneala-3">{e.text}</p>
           </Card>
         </li>
       ))}

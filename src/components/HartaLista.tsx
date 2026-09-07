@@ -41,7 +41,7 @@ type Props = {
 
 export default function HartaLista({ rute, fundal = "alb", coloane = 3 }: Props) {
   const card =
-    "group flex h-full flex-col rounded-card p-6 no-underline transition-colors duration-200 hover:bg-violet-pal " +
+    "group flex h-full flex-col rounded-card p-6 no-underline transition-colors duration-200 hover:bg-ceata " +
     (fundal === "alb" ? "bg-ceata" : "bg-alb");
 
   return (
@@ -54,7 +54,7 @@ export default function HartaLista({ rute, fundal = "alb", coloane = 3 }: Props)
       {rute.map((r) => (
         <li key={r.cale}>
           <Link href={r.cale} className={card}>
-            <span className="flex items-baseline justify-between gap-3 text-corp font-semibold text-violet">
+            <span className="flex items-baseline justify-between gap-3 text-corp font-semibold text-albastru-2">
               {r.scurt}
               <span
                 aria-hidden="true"
@@ -63,8 +63,8 @@ export default function HartaLista({ rute, fundal = "alb", coloane = 3 }: Props)
                 →
               </span>
             </span>
-            <span className="mt-2 text-nota text-cerneala-2">{r.descriere}</span>
-            <span className="mt-3 text-nota text-cerneala-2">{r.cale}</span>
+            <span className="mt-2 text-nota text-cerneala-3">{r.descriere}</span>
+            <span className="mt-3 text-nota text-cerneala-3">{r.cale}</span>
           </Link>
         </li>
       ))}

@@ -48,8 +48,8 @@ function Lista({
             href={"#" + s.id}
             aria-current={s.id === activ ? "true" : undefined}
             className={
-              "text-nota no-underline transition-colors duration-200 hover:text-violet " +
-              (s.id === activ ? "text-violet" : "text-cerneala-2")
+              "text-nota no-underline transition-colors duration-200 hover:text-albastru-2 " +
+              (s.id === activ ? "text-albastru-2" : "text-cerneala-3")
             }
           >
             {s.titlu}

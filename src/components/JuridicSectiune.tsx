@@ -46,7 +46,7 @@ export default function JuridicSectiune({
             {/* `span`, nu `p`: un cuvant-doua deasupra titlului nu e proza, iar poarta
                 S-17 cantareste paragrafele adevarate. Aceeasi regula ca in `Ecran`. */}
             {eticheta ? (
-              <span className="mb-4 block text-nota font-semibold text-violet">{eticheta}</span>
+              <span className="mb-4 block text-nota font-semibold text-albastru-2">{eticheta}</span>
             ) : null}
             {titlu ? (
               <h2
@@ -60,7 +60,7 @@ export default function JuridicSectiune({
             {lead ? (
               <p
                 className={
-                  "mt-5 max-w-[62ch] text-corp text-cerneala-2 " + (centrat ? "mx-auto" : "")
+                  "mt-5 max-w-[62ch] text-corp text-cerneala-3 " + (centrat ? "mx-auto" : "")
                 }
               >
                 {lead}

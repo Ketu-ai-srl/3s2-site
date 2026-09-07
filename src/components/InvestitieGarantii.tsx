@@ -21,14 +21,14 @@ export default function InvestitieGarantii({ elemente }: Props) {
   return (
     <ul className="m-0 flex list-none flex-wrap justify-center gap-x-10 gap-y-3 p-0">
       {elemente.map((e) => (
-        <li key={e} className="flex items-start gap-2 text-nota text-cerneala-2">
+        <li key={e} className="flex items-start gap-2 text-nota text-cerneala-3">
           <svg
             width="16"
             height="16"
             viewBox="0 0 16 16"
             aria-hidden="true"
             focusable="false"
-            className="mt-[3px] shrink-0 text-violet"
+            className="mt-[3px] shrink-0 text-albastru-2"
           >
             <path
               d="M8 1.5 L13.5 3.5 V8 c0 3.2 -2.3 5.6 -5.5 6.5 C4.8 13.6 2.5 11.2 2.5 8 V3.5 Z"

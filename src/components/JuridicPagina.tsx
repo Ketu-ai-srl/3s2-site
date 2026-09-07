@@ -56,13 +56,13 @@ function SectiuneJuridica({ sectiune, numar }: { sectiune: Sectiune; numar: numb
   return (
     <section
       id={sectiune.id}
-      className="border-t border-linie py-12 first:border-t-0 first:pt-0 md:py-16"
+      className="border-t py-12 first:border-t-0 first:pt-0 md:py-16"
     >
       {/* Marcajul de sectiune, ascuns de la cititoarele de ecran: intelesul e purtat de
           titlul h2, iar o cifra citita inaintea lui nu adauga nimic. Cuvantul „Secțiunea"
           se scrie intreg, la orice latime: fara jgheabul care o explica, cifra singura ar
           parea un rest de formatare. */}
-      <span aria-hidden className="mb-3 block text-nota font-semibold text-violet">
+      <span aria-hidden className="mb-3 block text-nota font-semibold text-albastru-2">
         Secțiunea {numar}
       </span>
       <h2 className="mb-6 max-w-[30ch] text-titlu-4 text-cerneala">{sectiune.titlu}</h2>
@@ -75,14 +75,14 @@ function Incheiere({ pagina }: { pagina: PaginaJuridica }) {
   const celelalte = PAGINI_JURIDICE.filter((p) => p.cale !== pagina.cale);
 
   return (
-    <section className="border-t border-linie py-12 md:py-16">
+    <section className="border-t py-12 md:py-16">
       {/* Nota de redactare e o caseta pe ceata, ca celelalte casete ale actului: spune ce
           NU i s-a facut textului, deci sta la vedere, nu in subsol. */}
       <div className="rounded-card bg-ceata p-6">
-        <span className="mb-2 block text-nota font-semibold text-cerneala-2">
+        <span className="mb-2 block text-nota font-semibold text-cerneala-3">
           Despre textul acesta
         </span>
-        <p className={`${MASURA_ACT} text-corp text-cerneala-2`}>{pagina.redactat}</p>
+        <p className={`${MASURA_ACT} text-corp text-cerneala-3`}>{pagina.redactat}</p>
       </div>
 
       {/* UN singur buton primar. Celelalte doua acte sunt drumuri secundare, deci legaturi
@@ -98,11 +98,11 @@ function Incheiere({ pagina }: { pagina: PaginaJuridica }) {
         ))}
       </div>
 
-      <p className={`mt-8 ${MASURA_ACT} text-corp text-cerneala-2`}>
+      <p className={`mt-8 ${MASURA_ACT} text-corp text-cerneala-3`}>
         Dacă ceva din pagina aceasta este neclar sau vă pare greșit, scrieți-ne la{" "}
         <a
           href="mailto:contact@3s.ro"
-          className="text-violet underline decoration-violet-2 underline-offset-[3px]"
+          className="text-albastru-2 underline decoration-albastru-2 underline-offset-[3px]"
         >
           contact@3s.ro
         </a>
@@ -110,7 +110,7 @@ function Incheiere({ pagina }: { pagina: PaginaJuridica }) {
         Serviciile sunt descrise pe{" "}
         <Link
           href="/solutii"
-          className="text-violet underline decoration-violet-2 underline-offset-[3px]"
+          className="text-albastru-2 underline decoration-albastru-2 underline-offset-[3px]"
         >
           pagina de domenii
         </Link>

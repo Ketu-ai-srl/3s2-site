@@ -42,7 +42,7 @@ export default function SecuritateIntrebare({ intrebari, etichetaStare }: Props)
             <p className="m-0">{i.deCeConteaza}</p>
             <p className="m-0 mt-4 flex flex-wrap items-baseline gap-2">
               <span className="text-nota font-semibold text-cerneala">{etichetaStare}</span>
-              <span className="rounded-pastila bg-violet-pal px-3 py-1 text-nota font-semibold text-violet">
+              <span className="rounded-pastila bg-ceata px-3 py-1 text-nota font-semibold text-albastru-2">
                 {i.stare}
               </span>
             </p>

@@ -21,20 +21,20 @@ export default function MecanismLant({ verigi }: Props) {
       {verigi.map((v, i) => (
         <li key={v.titlu} className="relative flex gap-5 pb-8 last:pb-0 md:gap-7">
           <div className="relative shrink-0">
-            <span className="flex h-10 w-10 items-center justify-center rounded-pastila bg-violet-pal text-nota font-semibold text-violet">
+            <span className="flex h-10 w-10 items-center justify-center rounded-pastila bg-ceata text-nota font-semibold text-albastru-2">
               {i + 1}
             </span>
             {i < verigi.length - 1 ? (
               <span
                 aria-hidden
-                className="absolute top-11 bottom-[-32px] left-1/2 w-px -translate-x-1/2 bg-linie"
+                className="absolute top-11 bottom-[-32px] left-1/2 w-px -translate-x-1/2 bg-[#d2d2d7]"
               />
             ) : null}
           </div>
 
           <div className="pt-1.5">
             <h3 className="max-w-[28ch] text-subtitlu text-cerneala">{v.titlu}</h3>
-            <p className="mt-2 max-w-[58ch] text-corp text-cerneala-2">{v.text}</p>
+            <p className="mt-2 max-w-[58ch] text-corp text-cerneala-3">{v.text}</p>
           </div>
         </li>
       ))}

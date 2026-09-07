@@ -39,14 +39,14 @@ export default function InvestitiaFactor({
   elemente,
   inchis = false,
 }: Props) {
-  const cutie = inchis ? "bg-noapte-v" : "bg-alb";
-  const pastila = inchis ? "bg-violet text-alb" : "bg-violet-pal text-violet";
-  const titluCard = inchis ? "text-alb" : "text-cerneala";
-  const corp = inchis ? "text-violet-clar" : "text-cerneala-2";
-  const separator = inchis ? "border-violet-adanc" : "border-linie";
-  const numeElement = inchis ? "text-alb" : "text-cerneala";
-  const etichetaCreste = inchis ? "text-alb" : "text-violet";
-  const etichetaScade = inchis ? "text-violet-clar" : "text-cerneala-2";
+  const cutie = inchis ? "bg-negru" : "bg-alb";
+  const pastila = inchis ? "bg-albastru text-alb" : "bg-ceata text-albastru-2";
+  const titluCard = inchis ? "text-ceata" : "text-cerneala";
+  const corp = inchis ? "text-ceata" : "text-cerneala-3";
+  const separator = inchis ? "border-[#333336]" : "border-[#d2d2d7]";
+  const numeElement = inchis ? "text-ceata" : "text-cerneala";
+  const etichetaCreste = inchis ? "text-ceata" : "text-albastru-2";
+  const etichetaScade = inchis ? "text-ceata" : "text-cerneala-3";
 
   return (
     <li className={"h-full rounded-card-mare p-8 " + cutie}>

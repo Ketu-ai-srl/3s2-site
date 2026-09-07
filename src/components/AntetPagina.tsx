@@ -89,7 +89,7 @@ export default function AntetPagina({
 
   const firNavigare = (
     <nav aria-label="Firul de navigare" className="mb-8 md:mb-10">
-      <ol className="m-0 flex flex-wrap items-baseline gap-x-2 gap-y-1 p-0 font-mono text-[12.5px] text-cerneala-2">
+      <ol className="m-0 flex flex-wrap items-baseline gap-x-2 gap-y-1 p-0 font-mono text-[12.5px] text-cerneala-3">
         {fir.map((v, i) => (
           <li key={v.text} className="flex items-baseline gap-2">
             {i > 0 ? (
@@ -102,14 +102,14 @@ export default function AntetPagina({
               // 6,33. Ierarhia ramane citibila fara treapta a treia de culoare: veriga
               // dinainte e SUBLINIATA, iar pagina curenta sta pe `cerneala`, cea mai
               // deschisa dintre cele trei.
-              <span aria-hidden className="text-cerneala-2">
+              <span aria-hidden className="text-cerneala-3">
                 /
               </span>
             ) : null}
             {v.href ? (
               <Link
                 href={v.href}
-                className="text-cerneala-2 underline decoration-violet-2 underline-offset-[3px] hover:text-cerneala"
+                className="text-cerneala-3 underline decoration-albastru-2 underline-offset-[3px] hover:text-cerneala"
               >
                 {v.text}
               </Link>
