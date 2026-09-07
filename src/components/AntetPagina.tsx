@@ -6,11 +6,19 @@ import type { Fotografie } from "@/content/fotografii";
 // in jos, tot pe alb, tot in containerul de 1247 (`max-w-vitrina`), TOT LA STANGA:
 //
 //   firul de navigare        12,5 px `cerneala-3`
+//   fotografia               INTAI, pe toata latimea celor 1247, raza 28, fara text peste ea
 //   numele paginii           28 / 34 la 1440, 19 / 23 la 390, greutatea 600, `cerneala`
 //   afirmatia (h1)           64 la 1440, 40 la 390, greutatea 600, cu ULTIMUL CUVANT albastru
 //   randul de sub ea (lead)  21 / 29 la 1440, 19 / 23 la 390, greutatea 400, `cerneala`
 //   pastilele                una plina de 44 px si, cand pagina da un al doilea drum, una cu contur
-//   fotografia               pe toata latimea celor 1247, raza 28, fara text peste ea
+//
+// FOTOGRAFIA STA DEASUPRA TEXTULUI, nu dedesubt. Fisa REF-A.md §4.2 insiruise invers (nume ->
+// afirmatie -> rand -> fotografie), dar capturile din care a fost scrisa fisa - produs-1440-fold
+// si produs-3-ecrane - arata fotografia produsului ocupand ecranul si ABIA SUB EA numele de 28
+// si afirmatia de 64. Criticul pre-valului S2-b0 a vazut divergenta; ordinea s-a intors dupa
+// captura la reconcilierea lotului, cat costa o mutare de bloc, inainte ca S2-b sa rescrie 20 de
+// pagini peste erou. Consecinta masurata: la 1440 afirmatia intra sub linia de plutire (asa e si
+// pe referinta, unde sta la ~840 px), iar la 390 fotografia de 320 px e primul lucru vazut.
 //
 // CENTRAT E DOAR PE START. Pe referinta textul eroului de produs e aliniat la stanga, iar
 // centrarea e gestul tiglei de pe pagina de start. Erau doua asezari diferite pentru acelasi
@@ -163,6 +171,46 @@ export default function AntetPagina({
             </ol>
           </nav>
 
+          {/* FOTOGRAFIA, INTAI - sub firul de navigare, deasupra numelui - pe toata latimea celor
+              1247, ca pe captura referintei. Nu poarta text peste ea, deci nu intra in niciun
+              calcul de contrast.
+
+              INALTIMEA DE 700 px LA 1440 e aleasa dintr-o masuratoare, nu din gust, si cifra de
+              plecare e latimea REALA a cutiei, nu numele containerului: masurat pe pagina
+              construita, cu `clientWidth` 1440, fotografia are 1183 px, adica cei 1247 ai
+              vitrinei minus captuseala de 2 x 32. Fisierul de 1920 al fiecarei chei masoara
+              1920x1280 (3:2, verificat pe fisiere), deci intr-o cutie de 1183 x 700 se vede
+              700 / (1183 / 1,5) = 88,8% din inaltimea lui. Banda pentru care s-au ales ancorele
+              `pozitie` din `src/content/fotografii.ts` e 84,4-95,7%, si 88,8% cade in mijlocul
+              ei. La 560 px - celalalt capat al intervalului cerut - acoperirea ar fi fost 71,0%,
+              adica o fereastra pe care nimeni n-a masurat-o, iar registrul de fotografii nu se
+              atinge la felia asta. Deci cifra care nu cere o remasurare a registrului e 700.
+
+              SUB 768 px cutia are 320 px, aceeasi cifra ca fotografia tiglelor de pe start si
+              din acelasi motiv (82% din latimea de 390). Acolo se serveste fisierul de 960, care
+              e 960x1440, adica portret 2:3: intr-o cutie masurata de 358 x 320 se vede
+              320 / (358 / 0,667) = 59,6% din inaltimea lui, fata de 44,7% cat se vedea in cardul
+              de 358 x 240 al directiei anterioare - chiar cifra de 44,6% scrisa in registru.
+              Fereastra mai larga o CONTINE pe cea masurata, pentru ORICE ancora: capatul de sus
+              al ferestrei e `pozitie` x (1 - f), care scade cand f creste, iar cel de jos e
+              `pozitie` + f x (1 - `pozitie`), care creste. Deci nicio ancora din registru nu
+              pierde ce arata azi, si nimic nu trebuie remasurat. */}
+          {cuFoto && imagine ? (
+            <div className="mb-10 flex h-[320px] w-full overflow-hidden rounded-card md:mb-14 md:h-[700px]">
+              <picture className="w-full">
+                <source media="(max-width: 767px)" srcSet={"/img/" + imagine.nume + "-960.webp"} />
+                <img
+                  src={"/img/" + imagine.nume + "-1920.webp"}
+                  alt={imagine.alt}
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: imagine.pozitie ?? "center" }}
+                  loading="eager"
+                  decoding="async"
+                />
+              </picture>
+            </div>
+          ) : null}
+
           {/* Numele paginii e `span`, nu `p`, si nu e cosmetica de markup: doua-trei cuvinte
               deasupra afirmatiei nu sunt proza, iar poarta S-17 cantareste paragrafele
               adevarate, comparand textul randat cu cel citit fara JavaScript. Culoarea e
@@ -211,45 +259,6 @@ export default function AntetPagina({
                   {secundar.text}
                 </Buton>
               ) : null}
-            </div>
-          ) : null}
-
-          {/* FOTOGRAFIA, sub text, pe toata latimea celor 1247. Nu poarta text peste ea, deci nu
-              intra in niciun calcul de contrast.
-
-              INALTIMEA DE 700 px LA 1440 e aleasa dintr-o masuratoare, nu din gust, si cifra de
-              plecare e latimea REALA a cutiei, nu numele containerului: masurat pe pagina
-              construita, cu `clientWidth` 1440, fotografia are 1183 px, adica cei 1247 ai
-              vitrinei minus captuseala de 2 x 32. Fisierul de 1920 al fiecarei chei masoara
-              1920x1280 (3:2, verificat pe fisiere), deci intr-o cutie de 1183 x 700 se vede
-              700 / (1183 / 1,5) = 88,8% din inaltimea lui. Banda pentru care s-au ales ancorele
-              `pozitie` din `src/content/fotografii.ts` e 84,4-95,7%, si 88,8% cade in mijlocul
-              ei. La 560 px - celalalt capat al intervalului cerut - acoperirea ar fi fost 71,0%,
-              adica o fereastra pe care nimeni n-a masurat-o, iar registrul de fotografii nu se
-              atinge la felia asta. Deci cifra care nu cere o remasurare a registrului e 700.
-
-              SUB 768 px cutia are 320 px, aceeasi cifra ca fotografia tiglelor de pe start si
-              din acelasi motiv (82% din latimea de 390). Acolo se serveste fisierul de 960, care
-              e 960x1440, adica portret 2:3: intr-o cutie masurata de 358 x 320 se vede
-              320 / (358 / 0,667) = 59,6% din inaltimea lui, fata de 44,7% cat se vedea in cardul
-              de 358 x 240 al directiei anterioare - chiar cifra de 44,6% scrisa in registru.
-              Fereastra mai larga o CONTINE pe cea masurata, pentru ORICE ancora: capatul de sus
-              al ferestrei e `pozitie` x (1 - f), care scade cand f creste, iar cel de jos e
-              `pozitie` + f x (1 - `pozitie`), care creste. Deci nicio ancora din registru nu
-              pierde ce arata azi, si nimic nu trebuie remasurat. */}
-          {cuFoto && imagine ? (
-            <div className="mt-10 flex h-[320px] w-full overflow-hidden rounded-card md:mt-14 md:h-[700px]">
-              <picture className="w-full">
-                <source media="(max-width: 767px)" srcSet={"/img/" + imagine.nume + "-960.webp"} />
-                <img
-                  src={"/img/" + imagine.nume + "-1920.webp"}
-                  alt={imagine.alt}
-                  className="h-full w-full object-cover"
-                  style={{ objectPosition: imagine.pozitie ?? "center" }}
-                  loading="eager"
-                  decoding="async"
-                />
-              </picture>
             </div>
           ) : null}
         </div>

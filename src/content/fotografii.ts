@@ -76,11 +76,20 @@
 // nu. Masurat pe pagina construita la clientWidth 1440, cu `getBoundingClientRect` si
 // `naturalWidth/naturalHeight`, cat la suta din inaltimea fisierului de 1920 incape in card:
 //
+//   (Randurile de mai jos sunt masurate pe asezarea de DINAINTEA valului S2: cardurile
+//   directiei anterioare. Randul eroului e remasurat la S2-b0; celelalte carduri interioare
+//   se remasoara la S2-b, cand paginile trec pe gramatica REF-A. Pe start, tiglele arata
+//   fotografia pe 1440x329-373 la 1440 si pe 390x320 la 390 - vezi Ecran.tsx.)
 //   card                                       marime    acoperire   unde
 //   carduri mici de erou                       282x180   95,7%       `/`
 //   rand text/imagine (`InvestitieRandFoto`)   569x360   95,0%       `/investitia`, `/comparatie`, `/despre`
-//   card de fila (`TabPastila`)                577x360   93,7%       `/`
-//   antet de pagina (`AntetPagina`)            555x340   92,0%       toate paginile interioare
+//   card de fila (`TabPastila`)                577x360   93,7%       `/` - DISPARUT la S2-a (componenta stearsa)
+//   antet de pagina (`AntetPagina`)            1183x700  88,8%       toate paginile interioare cu erou - REMASURAT la
+//                                                                    S2-b0 (fotografia pe toata latimea vitrinei, 1247
+//                                                                    minus 2x32); la 390: 358x320 = 59,6% din fisierul
+//                                                                    de 960 (portret 2:3), fereastra care o CONTINE pe
+//                                                                    cea a cardului vechi de 358x240 (44,6%), deci
+//                                                                    ancorele `pozitie` raman valabile fara remasurare
 //   rand de fisa (`SegmentRandTextImagine`)    569x320   84,4%       `/solutii`, `/solutii/<domeniu>`, `/arhivare-fizica`, `/cum-functioneaza`, `/securitate`
 //
 // ACOPERIREA E O SINGURA CIFRA PER CARD, nu un interval, si asta e o schimbare fata de setul

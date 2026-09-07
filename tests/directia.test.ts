@@ -834,21 +834,27 @@ describe('eroul de pagina interioara si capitolul', () => {
     ).not.toBeNull()
   })
 
-  it('fotografia eroului vine DUPA text si ocupa toata latimea, nu un card la dreapta', async () => {
+  it('fotografia eroului vine INAINTEA textului si ocupa toata latimea, nu un card la dreapta', async () => {
+    // Ordinea e cea a capturii referintei (produs-1440-fold: fotografia, apoi numele si
+    // afirmatia), nu cea pe care o insiruise fisa REF-A.md §4.2 - vezi antetul din AntetPagina.
     const html = await erou({ titlu: AFIRMATIE })
-    const laH1 = html.indexOf('</h1>')
+    const laH1 = html.indexOf('<h1')
     const laFoto = html.indexOf('<img')
+    const laFir = html.indexOf('</nav>')
     expect(laH1, 'eroul nu mai are h1').toBeGreaterThan(-1)
     expect(laFoto, 'eroul nu mai randeaza fotografia').toBeGreaterThan(-1)
-    expect(laFoto, 'fotografia a ajuns inaintea afirmatiei').toBeGreaterThan(laH1)
+    expect(laFir, 'eroul nu mai are firul de navigare').toBeGreaterThan(-1)
+    expect(laFoto, 'fotografia a ajuns dupa afirmatie').toBeLessThan(laH1)
+    expect(laFoto, 'fotografia a ajuns inaintea firului de navigare').toBeGreaterThan(laFir)
     // Cutia fotografiei e pe toata latimea containerului si pastreaza raza de 28.
     expect(html, 'cutia fotografiei nu mai e pe toata latimea').toMatch(
       /<div class="[^"]*\bw-full\b[^"]*\brounded-card\b[^"]*"><picture/,
     )
-    // MARTOR POZITIV: pe o insiruire in care fotografia sta INAINTEA titlului, comparatia de
-    // ordine trebuie sa cada. Fara el, „mai mare decat" ar trece si daca amandoua ar fi -1.
-    const invers = '<div><img src="x"/></div><h1>Titlu</h1>'
-    expect(invers.indexOf('<img') > invers.indexOf('</h1>'), 'martorul de ordine nu e prins').toBe(
+    // MARTOR POZITIV: pe o insiruire in care fotografia sta DUPA titlu (forma veche), comparatia
+    // de ordine trebuie sa cada. Fara el, „mai mic decat" ar trece si daca fotografia ar lipsi
+    // (-1) - de asta e verificata si prezenta ei, mai sus.
+    const invers = '</nav><h1>Titlu</h1><div><img src="x"/></div>'
+    expect(invers.indexOf('<img') < invers.indexOf('<h1'), 'martorul de ordine nu e prins').toBe(
       false,
     )
   })
