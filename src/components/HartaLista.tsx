@@ -21,6 +21,14 @@ import Link from "next/link";
 //
 // COLOANELE. Doua de la 768 px, trei de la 1024 px, una pe telefon. Grupa se vede intreaga
 // dintr-o privire, ceea ce e chiar sarcina unei harti, iar randurile raman randuri.
+//
+// FIRELE SUNT ALE GRUPEI, NU ALE FIECARUI RAND, si e o corectura facuta pe captura la valul
+// S2-b. Cu firul pe celula, ultimul rand al grilei ramane incomplet cand numarul de rute nu se
+// imparte la numarul de coloane, iar linia de sub el se opreste la o treime sau la doua: pe
+// /harta-site se vedea la trei grupe din cinci - zece rute pe trei coloane, unsprezece pe trei,
+// una singura la instrumente. Numarul de coloane se schimba cu latimea, deci nicio regula
+// scrisa pe „ultimul copil" nu il acopera la toate trei. Firele urca pe lista, unde nu depind
+// de cate elemente au ramas pe ultimul rand, si randurile se despart prin spatiu.
 
 export type RandHarta = {
   cale: string;
@@ -44,12 +52,12 @@ export default function HartaLista({ rute, coloane = 3 }: Props) {
   return (
     <ul
       className={
-        "m-0 grid list-none border-t p-0 md:grid-cols-2 " +
+        "m-0 grid list-none gap-x-8 gap-y-6 border-t border-b py-6 pl-0 md:grid-cols-2 " +
         (coloane === 3 ? "lg:grid-cols-3" : "")
       }
     >
       {rute.map((r) => (
-        <li key={r.cale} className="border-b py-4 md:pr-8">
+        <li key={r.cale}>
           <Link href={r.cale} className="block no-underline">
             <span className="block text-corp font-semibold text-albastru-2">{r.scurt}</span>
             <span className="mt-1 block text-nota text-cerneala-3">{r.descriere}</span>
