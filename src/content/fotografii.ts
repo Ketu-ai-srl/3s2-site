@@ -84,9 +84,10 @@
 //   carduri mici de erou                       282x180   95,7%       `/`
 //   rand text/imagine (`InvestitieRandFoto`)   569x360   95,0%       `/investitia`, `/comparatie`, `/despre`
 //   card de fila (`TabPastila`)                577x360   93,7%       `/` - DISPARUT la S2-a (componenta stearsa)
-//   antet de pagina (`AntetPagina`)            1183x700  88,8%       toate paginile interioare cu erou - REMASURAT la
+//   antet de pagina (`AntetPagina`)            1183x640  81,1%       toate paginile interioare cu erou - REMASURAT la
 //                                                                    S2-b0 (fotografia pe toata latimea vitrinei, 1247
-//                                                                    minus 2x32); la 390: 358x320 = 59,6% din fisierul
+//                                                                    minus 2x32; 640 = subset al ferestrei de 84,4%, ca
+//                                                                    textul sa intre in linia de plutire); la 390: 358x320 = 59,6% din fisierul
 //                                                                    de 960 (portret 2:3), fereastra care o CONTINE pe
 //                                                                    cea a cardului vechi de 358x240 (44,6%), deci
 //                                                                    ancorele `pozitie` raman valabile fara remasurare

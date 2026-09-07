@@ -139,7 +139,7 @@ export default function AntetPagina({
   // Rezerva de sus acopera bara globala fixa (44 px de la 768, 48 pe telefon) plus o rasuflare.
   const captuseala = banda
     ? "pt-[96px] pb-10 md:pt-[104px] md:pb-12"
-    : "pt-[96px] pb-14 md:pt-[112px] md:pb-16";
+    : "pt-[96px] pb-14 md:pt-[96px] md:pb-16";
 
   return (
     <>
@@ -175,16 +175,21 @@ export default function AntetPagina({
               1247, ca pe captura referintei. Nu poarta text peste ea, deci nu intra in niciun
               calcul de contrast.
 
-              INALTIMEA DE 700 px LA 1440 e aleasa dintr-o masuratoare, nu din gust, si cifra de
+              INALTIMEA DE 640 px LA 1440 e aleasa dintr-o masuratoare, nu din gust, si cifra de
               plecare e latimea REALA a cutiei, nu numele containerului: masurat pe pagina
               construita, cu `clientWidth` 1440, fotografia are 1183 px, adica cei 1247 ai
               vitrinei minus captuseala de 2 x 32. Fisierul de 1920 al fiecarei chei masoara
-              1920x1280 (3:2, verificat pe fisiere), deci intr-o cutie de 1183 x 700 se vede
-              700 / (1183 / 1,5) = 88,8% din inaltimea lui. Banda pentru care s-au ales ancorele
-              `pozitie` din `src/content/fotografii.ts` e 84,4-95,7%, si 88,8% cade in mijlocul
-              ei. La 560 px - celalalt capat al intervalului cerut - acoperirea ar fi fost 71,0%,
-              adica o fereastra pe care nimeni n-a masurat-o, iar registrul de fotografii nu se
-              atinge la felia asta. Deci cifra care nu cere o remasurare a registrului e 700.
+              1920x1280 (3:2, verificat pe fisiere), deci intr-o cutie de 1183 x 640 se vede
+              640 / (1183 / 1,5) = 81,1% din inaltimea lui. Banda pentru care s-au ales ancorele
+              `pozitie` din `src/content/fotografii.ts` e 84,4-95,7%; fereastra de 81,1% e, la
+              aceeasi ancora, un SUBSET al ferestrei de 84,4% (capatul de sus `pozitie` x (1 - f)
+              creste cand f scade, cel de jos `pozitie` + f x (1 - `pozitie`) scade), deci nu
+              arata nimic din ce n-a fost privit la 1:1 - poate doar sa taie putin din margini.
+              De ce nu 700 (88,8%, in mijlocul benzii): cu fotografia INAINTEA textului, la 700
+              numele ajungea la y 926 si afirmatia la 972 pe un ecran de 1440 x 900, adica nimic
+              din text nu se vedea fara derulare; pe referinta numele sta la ~780 si afirmatia la
+              ~840. Cu 640 si captuseala de sus de 96 (nu 112), masurat: nume la 842, afirmatie
+              la 888 - amandoua in linia de plutire, ca pe referinta.
 
               SUB 768 px cutia are 320 px, aceeasi cifra ca fotografia tiglelor de pe start si
               din acelasi motiv (82% din latimea de 390). Acolo se serveste fisierul de 960, care
@@ -196,7 +201,7 @@ export default function AntetPagina({
               `pozitie` + f x (1 - `pozitie`), care creste. Deci nicio ancora din registru nu
               pierde ce arata azi, si nimic nu trebuie remasurat. */}
           {cuFoto && imagine ? (
-            <div className="mb-10 flex h-[320px] w-full overflow-hidden rounded-card md:mb-14 md:h-[700px]">
+            <div className="mb-10 flex h-[320px] w-full overflow-hidden rounded-card md:mb-12 md:h-[640px]">
               <picture className="w-full">
                 <source media="(max-width: 767px)" srcSet={"/img/" + imagine.nume + "-960.webp"} />
                 <img

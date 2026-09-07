@@ -306,7 +306,7 @@ pagină la fiecare măsurătoare (1440 și 390), pe `/arhivare-fizica`, `/invest
 | ultimul cuvânt | `albastru-2`, aceeași treaptă | la fel |
 | rândul de sub afirmație | 21,00 / 29,00 px, **400**, `cerneala`, 689 px (52ch) | 19 / 23 px, 358 px |
 | pastilele | 44 px înălțime, literă 17 px, una lângă alta | 36 px, literă 14 px, una sub alta |
-| fotografia eroului | 1183 x 700 px, rază 28, `object-cover` | 358 x 320 px |
+| fotografia eroului | 1183 x 640 px, rază 28, `object-cover` (700 la felia 3; 640 la reconciliere, vezi sub tabel) | 358 x 320 px |
 | eticheta de capitol | 24 / 28,56 px, 600, `cerneala` | la fel |
 | afirmația de capitol | 80 / 95,2 px, 600, lățime 897 px (17ch) | 40 px |
 | paragraful de capitol | 21 / 29 px, 600, `cerneala-3`, 817 px (59ch) | 19 / 23 px |
@@ -323,10 +323,15 @@ referință și a fost corectat să spună ce servește jetonul. (2) Lățimile:
 Fotografia eroului (1183) și rama capitolului (916) sunt aliniate cu coloana de text, iar
 înălțimile de mai jos sunt calculate din aceste lățimi reale, nu din numele containerului.
 
-Cele două înălțimi de fotografie sunt alese din **acoperire**, nu din gust. Fișierele de 1920
-sunt toate 1920x1280 (3:2). În cutia eroului, 1183 x 700, se vede 88,8% din înălțimea cadrului -
-în interiorul benzii de 84,4-95,7% pentru care s-au ales ancorele `pozitie` din
-`src/content/fotografii.ts`, deci niciuna nu trebuie remăsurată. În rama capitolului, 916 x 620,
+Cele două înălțimi de fotografie sunt alese din **acoperire** și din **linia de plutire**, nu
+din gust. Fișierele de 1920 sunt toate 1920x1280 (3:2). Felia 3 a pus 700 px (88,8% din
+înălțimea cadrului, în mijlocul benzii de 84,4-95,7% pentru care s-au ales ancorele `pozitie`
+din `src/content/fotografii.ts`). Cu fotografia mutată **înaintea** textului, la 700 numele
+ajungea la y 926 și afirmația la 972 pe un ecran de 1440 x 900 - niciun cuvânt vizibil fără
+derulare, pe când referința ține numele la ~780 și afirmația la ~840. Reconcilierea a coborât
+cutia la **640** (81,1%) și căptușeala de sus a eroului la 96 px: măsurat, numele stă la 842 și
+afirmația la 888. Fereastra de 81,1% e, la aceeași ancoră, un subset al celei de 84,4%, deci nu
+arată nimic neprivit la 1:1; ancorele rămân valabile. În rama capitolului, 916 x 620,
 raportul cutiei e 1,477 față de 1,500 al cadrului: decupajul cade pe **lățime**, 1,5%, și se
 vede toată înălțimea - acolo `pozitie` nici nu are ce alege. Sub 768 px se servește fișierul de
 960, care e 960x1440 (portret 2:3): într-o cutie de 358 x 320 se vede 59,6% din înălțimea lui,
