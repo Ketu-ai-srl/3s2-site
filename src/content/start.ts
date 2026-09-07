@@ -1,177 +1,175 @@
-// Textele NOI ale paginii de start, cerute de gramatica REF-V: eroul, banda de intrebare,
-// cele doua carduri, tab-urile celor trei etape, introducerea grilei de domenii, banda de
-// incredere si banda de incheiere.
+// Textele NOI ale paginii de start, cerute de gramatica REF-A: cele trei tigle mari, grila de
+// sase tigle, banda neagra a faptelor atribuite si notele de subsol.
 //
 // CE STA AICI SI CE NU. Aici stau doar textele pe care structura noua le cere si care nu
-// existau in continutul de azi. Tot ce exista deja se CITESTE de unde e: numele si
-// rezumatele domeniilor din `segmente.ts`, numele paginilor din `rute.ts`, identitatea
-// firmei din `entitate.ts`. Nu se copiaza aici, fiindca o copie si originalul diverg la
-// prima editare, iar textul lor se rescrie in paralel, in alta felie, sub aceleasi chei.
+// existau in continutul de azi. Tot ce exista deja se CITESTE de unde e: numele paginilor din
+// `rute.ts`, identitatea firmei din `entitate.ts`, textul domeniilor din `segmente.ts`. Nu se
+// copiaza aici, fiindca o copie si originalul diverg la prima editare, iar textul lor se
+// rescrie in paralel, in alta felie, sub aceleasi chei.
 //
-// VOCEA, dupa REF-V: propozitii scurte, litera obisnuita, punct la final, beneficiul
-// inaintea mecanismului, adresare la persoana a doua plural. Fara majuscule de afis, fara
-// ton de depozit, fara liniute lungi.
+// VOCEA, dupa REF-A: o afirmatie de doua-patru cuvinte cu PUNCT, apoi o propozitie de
+// explicatie. Litera obisnuita, fara majuscule de afis, fara ton de reclama, fara liniute
+// lungi. Titlul spune ce se intampla, nu cat de buni suntem.
 //
-// ADEVARUL. Nicio cifra noua si nicio certificare. Faptele din banda de incredere sunt
-// afirmatiile deja inregistrate in `src/content/afirmatii/pagina-principala.json`, scrise
-// atribuit: ce face ADRIA, firma-mama, si ce se intampla la preluare. Ce nu detinem se
-// scrie pe pagina, nu se ocoleste.
+// ADEVARUL. Nicio cifra noua si nicio certificare. Faptele din banda neagra sunt afirmatiile
+// deja inregistrate in `src/content/afirmatii/pagina-principala.json`, scrise atribuit: ce face
+// ADRIA, firma-mama, si ce se intampla la preluare. Ce nu detinem se scrie pe pagina, in notele
+// numerotate de la final, nu se ocoleste.
+//
+// FOTOGRAFIILE. Fiecare cheie a registrului apare EXACT o data pe pagina: `maini`, `rafturi` si
+// `sertare` in cele trei tigle mari, `legatura`, `cutii`, `dulapuri` si `dosare` in grila. Nu e
+// simetrie de dragul simetriei: pe o pagina in care fotografia e mare cat tigla, acelasi cadru
+// aparut de doua ori se citeste ca greseala de montaj.
+//
+// TEXTUL ALTERNATIV e scris aici, nu citit din `src/content/fotografii.ts`, fiindca pagina de
+// start isi tine textele in fisierul asta. Cheile sunt aceleasi, deci cand se schimba setul de
+// fotografii se rescriu AMBELE locuri, altfel alt-ul descrie o fotografie care nu mai exista.
+// De asta se ocupa `tests/fotografii.test.ts`: cere ca fiecare `alt` de aici sa fie cuvant cu
+// cuvant cel din registru.
+//
+// ANCORA DECUPAJULUI NU SE SCRIE AICI. Pagina o citeste din `FOTOGRAFII`, cu cheia de mai jos.
+// O a doua copie a unei cifre masurate ar diverge la prima remasurare, si nimic nu se uita la ea.
 
-export type CardImagine = {
+export type Legatura = { href: string; text: string };
+
+export type ImagineTigla = {
   nume: string;
   alt: string;
-  eticheta: string;
 };
 
-export type CardMic = {
-  eticheta: string;
+export type TiglaMare = {
+  /** ancora sectiunii; `rute.ts` o inscrie in `SECTIUNI_ACASA` si subsolul trimite la ea */
+  cheie: string;
   titlu: string;
-  text: string;
-  href: string;
+  subtitlu: string;
+  actiune: Legatura;
+  secundar: Legatura;
+  imagine: ImagineTigla;
+  fundal: "alb" | "ceata" | "negru";
 };
 
-export const EROU = {
-  eticheta: "Arhivare fizică, digitizare, căutare cu sursă",
-  titluRand1: "Hârtia stă la depozit.",
-  titluRand2: "Răspunsul vine pe telefon.",
-  text: "Documentele rămân pe raft, cu cotă și inventar. Întrebarea o puneți în română, iar răspunsul vine cu documentul și pagina din care a fost scos.",
-  buton: { href: "/contact", text: "Discuție de 30 de minute" },
-  garantie: "Fără ofertă a doua zi. Plecați cu o estimare de volum scrisă.",
+export type TiglaMica = {
+  cheie?: string;
+  titlu: string;
+  subtitlu: string;
+  /** randul de 14 px de sub subtitlu: precizarea care tine afirmatia in adevar */
+  nota: string;
+  actiune: Legatura;
+  secundar?: Legatura;
+  imagine?: ImagineTigla;
+  fundal: "alb" | "ceata" | "negru";
 };
 
-// Cele patru carduri-imagine care ies din banda eroului. Fotografiile sunt cele din
-// `public/img/`, ilustrative, cu licenta in `public/img/LICENTA.md`.
-//
-// Textul alternativ e scris aici, nu citit din `src/content/fotografii.ts`, fiindca pagina de
-// start isi tine textele in fisierul asta. Cheile sunt aceleasi, deci cand se schimba setul de
-// fotografii - cum s-a intamplat pe 2026-09-06, ca site-ul sa nu mai poarte cadrele site-ului
-// din care a fost copiat - se rescriu AMBELE locuri, altfel alt-ul descrie o fotografie care
-// nu mai exista. De
-// asta se ocupa acum o verificare: `tests/fotografii.test.ts` cere ca fiecare `alt` de aici sa
-// fie cuvant cu cuvant cel din registru.
-//
-// ANCORA DECUPAJULUI NU SE SCRIE AICI. Cardurile astea nu poarta `pozitie`: pagina de start o
-// citeste din `FOTOGRAFII`, cu cheia de mai jos. O a treia copie a unei cifre masurate ar
-// diverge la prima remasurare, si nimic nu se uita la ea.
-export const CARDURI_EROU: CardImagine[] = [
+// Butonul primar e acelasi pe fiecare tigla, si asta e chiar gramatica referintei: fiecare tigla
+// e un ecran, fiecare ecran are UN buton primar, si el duce mereu in acelasi loc. Ce se schimba
+// de la o tigla la alta e drumul al doilea - pastila cu contur, care duce la fisa.
+const DISCUTIE: Legatura = { href: "/contact", text: "Discuție de 30 de minute" };
+
+export const TIGLE: TiglaMare[] = [
   {
-    nume: "rafturi",
-    alt: "Rafturi metalice înalte de depozit, pe mai multe niveluri, încărcate cu cutii de carton și cu paleți înfoliați, fotografie ilustrativă",
-    eticheta: "Depozit",
+    cheie: "scan",
+    titlu: "Se digitizează ce se caută.",
+    subtitlu: "Nu tot fondul. Se scanează documentele cerute des, iar originalul rămâne pe raft.",
+    actiune: DISCUTIE,
+    secundar: { href: "/cum-functioneaza", text: "Cum funcționează" },
+    imagine: {
+      nume: "maini",
+      alt: "Mână care scoate un dosar dintr-un suport de documente din carton, cu file de hârtie ieșind dintre despărțitoare, fotografie ilustrativă",
+    },
+    fundal: "alb",
   },
   {
-    nume: "cutii",
-    alt: "Trei cutii de arhivă din carton kraft, așezate pe un birou alb, cu dosare suspendate prinse în ele; o mână așază unul dintre dosare, fotografie ilustrativă",
-    eticheta: "Preluare",
+    cheie: "store",
+    titlu: "Hârtia stă la depozit.",
+    subtitlu: "Fiecare cutie are o cotă. Depozitul este la Golești, județul Argeș, și poate fi vizitat.",
+    actiune: DISCUTIE,
+    secundar: { href: "/arhivare-fizica", text: "Arhivare fizică" },
+    imagine: {
+      nume: "rafturi",
+      alt: "Rafturi metalice înalte de depozit, pe mai multe niveluri, încărcate cu cutii de carton și cu paleți înfoliați, fotografie ilustrativă",
+    },
+    fundal: "ceata",
   },
   {
-    nume: "dosare",
-    alt: "Teancuri de dosare vechi de carton, cu filele ieșind dintre coperți, în lumină caldă de prim-plan, fotografie ilustrativă",
-    eticheta: "Digitizare",
-  },
-  {
-    // Alt-ul s-a rescris pe 2026-09-07 fiindca s-a schimbat CADRUL, nu formularea: cadrul vechi
-    // (6550462) arata aceeasi sala de catalog ca site-ul precedent, iar rezervele lui purtau
-    // etichete intr-un alfabet nelatin. Fila „Cautare" e chiar cardul in care se vede, deci un
-    // alt lasat neschimbat ar fi descris o fotografie care nu mai exista. De ce cadrul asta si ce
-    // NU afirma alt-ul despre el: in registru, langa cheie.
-    nume: "sertare",
-    alt: "Fronturile mai multor sertare plate suprapuse, cu mânere de sârmă, văzute în prim-plan apropiat și oblic; benzile lor merg de la negru și maro închis la tonuri de nisip, alb, gri și un galben, fotografie ilustrativă",
-    eticheta: "Căutare",
+    cheie: "solve",
+    titlu: "Răspunsul vine cu pagina.",
+    subtitlu: "Întrebați în română. Fraza se deschide la documentul și pagina din care a fost scoasă.",
+    actiune: DISCUTIE,
+    secundar: { href: "/instrumente/termene-de-pastrare", text: "Termene de păstrare" },
+    imagine: {
+      nume: "sertare",
+      alt: "Fronturile mai multor sertare plate suprapuse, cu mânere de sârmă, văzute în prim-plan apropiat și oblic; benzile lor merg de la negru și maro închis la tonuri de nisip, alb, gri și un galben, fotografie ilustrativă",
+    },
+    fundal: "negru",
   },
 ];
 
-export const INTREBARE = {
-  titluNegru: "Întrebați în română.",
-  titluViolet: "Răspunsul citează pagina.",
-  text: "Un rezumat fără sursă nu se afișează. Fiecare frază se deschide la documentul și pagina din care a fost scoasă, ca să puteți verifica singuri.",
-};
-
-export const CARD_MARE = {
-  eticheta: "Investiția",
-  titlu: "Plătiți volumul real, nu un pachet.",
-  text: "Costul pornește de la metrii liniari măsurați la preluare și de la ce se cere des. Factorii sunt scriși, unul câte unul.",
-  buton: { href: "/investitia", text: "Vedeți cum se calculează" },
-};
-
-export const CARDURI_MICI: CardMic[] = [
+export const GRILA: TiglaMica[] = [
   {
-    eticheta: "Termene",
-    titlu: "Cât se păstrează un document",
-    text: "Termenele uzuale, fiecare cu actul normativ lângă el. Unde norma lipsește, scrie că lipsește.",
-    href: "/instrumente/termene-de-pastrare",
+    cheie: "domenii",
+    titlu: "Aceeași arhivă, alte întrebări.",
+    subtitlu: "Un notar caută altceva decât o primărie.",
+    nota: "Fiecare domeniu are pagina lui, cu termenele și actele care i se aplică.",
+    actiune: { href: "/solutii", text: "Toate domeniile" },
+    imagine: {
+      nume: "legatura",
+      alt: "Bibliorafturi negre așezate în evantai pe un birou alb, cu semne colorate între file, alături de o mapă cu fermoar, fotografie ilustrativă",
+    },
+    fundal: "alb",
   },
   {
-    eticheta: "Comparație",
-    titlu: "Depozit propriu sau serviciu",
-    text: "Ce se schimbă la cost, la spațiu și la răspundere, dacă arhiva rămâne în sediu.",
-    href: "/comparatie",
+    titlu: "Trei pași, în ordine.",
+    subtitlu: "Preluarea, depozitarea și căutarea sunt lucruri diferite.",
+    nota: "Se pot lua separat. Preluarea se face cu proces-verbal și cu măsurarea metrilor liniari.",
+    actiune: { href: "/cum-functioneaza", text: "Vedeți mecanismul" },
+    imagine: {
+      nume: "cutii",
+      alt: "Trei cutii de arhivă din carton kraft, așezate pe un birou alb, cu dosare suspendate prinse în ele; o mână așază unul dintre dosare, fotografie ilustrativă",
+    },
+    fundal: "ceata",
+  },
+  {
+    titlu: "Cine intră în arhivă.",
+    subtitlu: "Acces pe persoană, cu urmă scrisă a fiecărei scoateri.",
+    nota: "Pagina de securitate scrie și ce nu deținem, nu doar ce facem.",
+    actiune: { href: "/securitate", text: "Ce protejăm" },
+    imagine: {
+      nume: "dulapuri",
+      alt: "Ușa albă a unui dulap de birou, cu cheia lăsată în broască, prim-plan în lumină de zi, fotografie ilustrativă",
+    },
+    fundal: "negru",
+  },
+  {
+    titlu: "Plătiți volumul real.",
+    subtitlu: "Costul pornește de la metrii liniari măsurați la preluare.",
+    nota: "Factorii sunt scriși unul câte unul, cu ce îi mărește și ce îi micșorează.",
+    actiune: { href: "/investitia", text: "Cum se calculează" },
+    imagine: {
+      nume: "dosare",
+      alt: "Teancuri de dosare vechi de carton, cu filele ieșind dintre coperți, în lumină caldă de prim-plan, fotografie ilustrativă",
+    },
+    fundal: "alb",
+  },
+  {
+    titlu: "3S vine din ADRIA.",
+    subtitlu: "Firma-mamă arhivează documente din 2019, la Golești.",
+    nota: "Ce ține de ADRIA scrie ADRIA. Firma 3S nu este încă înregistrată.",
+    actiune: { href: "/despre", text: "Despre noi" },
+    fundal: "ceata",
+  },
+  {
+    cheie: "discutie",
+    titlu: "Treizeci de minute.",
+    subtitlu: "Ne uităm la câți metri liniari aveți și la ce se cere des.",
+    nota: "Plecați cu o estimare de volum și un calendar de preluare, scrise. Fără ofertă a doua zi.",
+    actiune: DISCUTIE,
+    fundal: "alb",
   },
 ];
-
-export const ETAPE = {
-  titlu: "Trei pași, în ordinea în care se întâmplă.",
-  text: "Preluarea, depozitarea și căutarea sunt trei lucruri diferite. Se pot lua separat.",
-  file: [
-    {
-      cheie: "scan",
-      eticheta: "Scan",
-      titlu: "Se digitizează ce se caută.",
-      text: "Nu se scanează tot. Se scanează ce se cere des, iar originalul rămâne pe raft, cu cotă, și se aduce pe hârtie atunci când este cerut.",
-      legatura: { href: "/cum-functioneaza", text: "Cum funcționează" },
-      // `pozitie` SI `alt` sunt copiile celor din `src/content/fotografii.ts`, pentru aceeasi
-      // cheie, si o verificare din `tests/fotografii.test.ts` cere sa fie EGALE. Cifrele s-au
-      // rescris odata cu setul de fotografii al site-ului (2026-09-06): masurate pe cadrele
-      // NOI, la clientWidth 390 si card 358x240, ies dosare 50%, cutii 45% si maini 30%.
-      // Motivul fiecareia e scris o singura data, langa cadru, in registru.
-      //
-      // Pe 2026-09-07 s-a schimbat si alt-ul lui `maini`: numea „un caiet cu spirala", care e in
-      // fisierul de 1920 dar nu si in cel de 960, servit sub 768 px. Fila „Solve" e chiar cardul
-      // care se vede pe telefon, deci aici alt-ul mintea exact pe marimea livrata. De ce, cu
-      // cifrele ferestrei: in registru, langa cheie.
-      imagine: {
-        nume: "dosare",
-        alt: "Teancuri de dosare vechi de carton, cu filele ieșind dintre coperți, în lumină caldă de prim-plan, fotografie ilustrativă",
-        pozitie: "center 50%",
-      },
-    },
-    {
-      cheie: "store",
-      eticheta: "Store",
-      titlu: "Fiecare cutie are o cotă.",
-      text: "Depozitul este la Golești, județul Argeș. Preluarea se face cu proces-verbal, cu măsurarea metrilor liniari și sigilarea cutiilor. Depozitul poate fi vizitat înainte de semnare.",
-      legatura: { href: "/arhivare-fizica", text: "Arhivare fizică" },
-      imagine: {
-        nume: "cutii",
-        alt: "Trei cutii de arhivă din carton kraft, așezate pe un birou alb, cu dosare suspendate prinse în ele; o mână așază unul dintre dosare, fotografie ilustrativă",
-        pozitie: "center 45%",
-      },
-    },
-    {
-      cheie: "solve",
-      eticheta: "Solve",
-      titlu: "Răspunsul vine cu pagina.",
-      text: "Întrebarea se pune în română, de pe telefon. Răspunsul arată documentul, pagina și articolul din care a fost scos, ca să se poată verifica.",
-      legatura: { href: "/instrumente/termene-de-pastrare", text: "Termene de păstrare" },
-      imagine: {
-        nume: "maini",
-        alt: "Mână care scoate un dosar dintr-un suport de documente din carton, cu file de hârtie ieșind dintre despărțitoare, fotografie ilustrativă",
-        pozitie: "center 30%",
-      },
-    },
-  ],
-};
-
-export const DOMENII = {
-  eticheta: "Domenii",
-  titlu: "Aceeași arhivă, alte întrebări.",
-  text: "Un notar caută altceva decât o primărie. Fiecare domeniu are pagina lui, cu termenele și actele care i se aplică.",
-  buton: { href: "/solutii", text: "Toate domeniile" },
-};
 
 export const INCREDERE = {
   eticheta: "Ce se poate verifica",
-  titlu: "Faptele stau în acte, nu în promisiuni.",
+  titlu: "Faptele stau în acte.",
   elemente: [
     {
       titlu: "Depozit care se poate vedea",
@@ -192,9 +190,17 @@ export const INCREDERE = {
   ],
 };
 
-export const INCHEIERE = {
-  titlu: "Treizeci de minute, fără ofertă a doua zi.",
-  text: "Ne uităm împreună la ce aveți: câți metri liniari, ce se cere des, ce termene se aplică. Plecați cu o estimare de volum și un calendar de preluare scris.",
-  buton: { href: "/contact", text: "Contact" },
-  nota: "Nu deținem certificare ISO 27001. Scrie pe pagina de securitate, cu tot ce lipsește.",
-};
+// Notele numerotate de la baza paginii, la 12 px, exact ca in referinta. Sunt locul in care
+// pagina isi spune limitele: cine sustine faptele de mai sus si ce nu detinem. Prima nota e
+// legata de titlul benzii negre printr-un exponent; a doua sta pe cont propriu, fiindca e
+// despre tot ce scrie pe pagina.
+export const NOTE = [
+  {
+    id: "nota-1",
+    text: "Faptele de mai sus sunt ale ADRIA Servicii Arhivare SRL, firma-mamă, și se verifică în contractul de prestări servicii și în procesul-verbal de preluare.",
+  },
+  {
+    id: "nota-2",
+    text: "Nu deținem certificare ISO 27001. Ce nu deținem este scris pe pagina de securitate, nu ocolit.",
+  },
+];
