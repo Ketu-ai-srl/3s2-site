@@ -1,49 +1,50 @@
+import { LIPSA, MASURA_LISTA } from "@/content/interior-juridic";
+
 // Lista lucrurilor care LIPSESC, ca perechea negativa a lui `ListaBifa`.
 //
-// REF-V are amandoua formele si le tine diferite dinadins: ce e inclus primeste bifa verde,
-// ce lipseste dintr-un plan primeste o liniuta gri. Aici fiecare rand e un CARD, fiindca pe
-// paginile feliei randurile astea sunt fraze intregi, nu doua cuvinte de plan tarifar: opt
-// randuri de cate treizeci de cuvinte intr-o lista cu marcatori se citesc ca un perete.
+// CARDURILE AU DISPARUT la valul S2-b. Fiecare rand era un card pe ceata, iar opt carduri de
+// cate treizeci de cuvinte formau o grila care citea a plan tarifar. `ListaBifa` a devenit,
+// la felia de fundatie, exact ce cere REF-A pentru o lista: randuri despartite de firul de
+// 1 px, la 17 / 25, fara nicio icoana colorata. Perechea negativa trebuie sa fie aceeasi
+// forma, altfel cele doua liste de pe /instrumente/termene-de-pastrare - „ce este acoperit"
+// si „ce nu este acoperit" - stau una langa alta in doua gramatici diferite.
 //
-// DE CE NU SE REFOLOSESTE `ListaBifa`. Ea deseneaza bifa, si bifa spune „asta exista".
-// Aceleasi randuri cu bifa in fata erau chiar defectul de pe /accesibilitate: opt afirmatii
-// despre ce NU am masurat, fiecare bifata, adica semnul care spune contrariul textului.
+// CE RAMANE DIFERIT FATA DE `ListaBifa`: LINIUTA din fata randului. Ea e singurul semn care
+// spune „asta lipseste", iar `ListaBifa` nu-l are - randurile ei sunt lucruri care exista.
+// Nu se refoloseste componenta aceea tocmai fiindca aceleasi randuri fara liniuta ar citi
+// invers decat scriu, si asta a fost defectul masurat pe /accesibilitate inainte: opt
+// afirmatii despre ce NU am masurat, fiecare cu o bifa in fata.
 //
-// CULOAREA. Liniuta e `cerneala-3`, textul `cerneala-2`. Nu `cerneala-3` pe text: pe ceata
-// da 4,79:1, deci ar trece, dar randurile astea sunt continut, nu note, si stau la aceeasi
-// treapta ca restul corpului. Liniuta e ICOANA, ca bifa verde din `ListaBifa`: informatia
-// sta in cuvant, nu in ea.
+// CULOAREA. Liniuta si textul sunt `cerneala`, ca in `ListaBifa`. Informatia sta in cuvant, nu
+// in culoare, iar `cerneala` trece pe amandoua suprafetele deschise (16,83:1 pe alb, 15,46:1
+// pe ceata).
 
 type Props = {
+  /** Titlul listei, ca h3 de 20 px. Lipseste cand sectiunea il da ea. */
   titlu?: string;
   elemente: React.ReactNode[];
-  /** pe ce sta lista: `alb` = sectiune alba, deci cardul e ceata; `ceata` = invers */
+  /**
+   * `fundal` si `oColoana` raman in semnatura fiindca paginile feliei le dau inca, si fiindca
+   * o semnatura schimbata odata cu forma face doua schimbari intr-un singur pas. Lista nu mai
+   * are card, deci suprafata pe care sta nu-i mai schimba nimic, iar randurile stau oricum pe
+   * o singura coloana - forma pe care REF-A o da oricarei liste.
+   */
   fundal?: "alb" | "ceata";
-  /** o singura coloana, cand lista sta langa alta lista intr-o grila deja impartita */
   oColoana?: boolean;
 };
 
-export default function JuridicListaLipsa({
-  titlu,
-  elemente,
-  fundal = "alb",
-  oColoana = false,
-}: Props) {
-  const card =
-    "flex h-full gap-3 rounded-card p-5 " + (fundal === "alb" ? "bg-ceata" : "bg-alb");
-
+export default function JuridicListaLipsa({ titlu, elemente }: Props) {
   return (
     <div>
-      {titlu ? <h3 className="mb-5 text-titlu-4 text-cerneala">{titlu}</h3> : null}
-      <ul
-        className={
-          "m-0 grid list-none gap-4 p-0 " + (oColoana ? "" : "md:grid-cols-2")
-        }
-      >
+      <h3 className="mb-5 text-titlu-card font-semibold text-cerneala">
+        {titlu ?? LIPSA.eticheta}
+      </h3>
+      <ul className="m-0 list-none border-t p-0">
         {elemente.map((e, i) => (
-          <li key={i} className={card}>
-            <span aria-hidden className="mt-[11px] h-px w-[10px] shrink-0 bg-cerneala-3" />
-            <span className="text-corp text-cerneala-3">{e}</span>
+          <li key={i} className="flex gap-3 border-b py-3 text-corp text-cerneala">
+            {/* Plafonul e pe textul randului, nu pe rand: firul de 1 px ramane lat cat lista. */}
+            <span aria-hidden className="mt-[12px] h-px w-[10px] shrink-0 bg-cerneala-3" />
+            <span className={MASURA_LISTA}>{e}</span>
           </li>
         ))}
       </ul>

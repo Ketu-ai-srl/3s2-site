@@ -1,61 +1,53 @@
 import type { TermenCuAncora } from "@/content/termene-extins";
 import { ANCORE_TERMENE } from "@/content/interior-juridic";
 
-// Cuprinsul instrumentului de termene: un RAND DE ANCORE catre cele opt fise, fiecare cu
-// termenul si cu actul scrise pe el.
+// Cuprinsul instrumentului de termene: LISTA DE ANCORE catre cele opt fise, fiecare cu
+// termenul si cu actul scrise pe ea.
 //
-// DE CE NU MAI E TABEL. Tabelul avea doua coloane si repeta, in forma stransa, exact ce scrie
-// mai jos pe fisa: categoria, termenul, actul. Cu fisele rescrise ca DATE - cifra la 36 px,
-// temeiul pe rand, nota dedesubt - tabelul devenise a doua randare a acelorasi opt randuri,
-// la un ecran distanta una de alta. Ce facea el si nu face fisa e NAVIGAREA: sa vezi cele opt
-// categorii deodata si sa sari la a ta. Aia a ramas, si e tot ce a ramas.
+// DE CE NU STA PE BARA LOCALA, desi acolo e locul navigarii in pagina la REF-A. Bara e o
+// singura linie de 52 px de la 768 px in sus, iar numele categoriilor sunt lungi („Registre
+// și documente justificative", „Acte administrative ale autorităților locale"): opt dintre
+// ele, la 12 px, trec de coloana de 1183 px si impinge pagina lateral, fiindca bara poarta
+// `flex-nowrap`. Pe bara au ramas cele PATRU sectiuni ale paginii - exact cate ancore are
+// bara referintei - iar categoriile au ramas aici, unde au loc sa poarte trei lucruri.
 //
 // CE NU S-A PIERDUT, si de asta randul poarta trei lucruri, nu unul: actul normativ sta SUB
 // numele categoriei, la orice latime, iar numele duce la fisa intreaga. Amandoua sunt scrise
-// in `cuprins.subTabel`, adica in continut, deci un rand de pastile cu numele singur ar fi
-// facut textul acela fals. O ancora care poarta si temeiul nu il face.
+// in `cuprins.subTabel`, adica in continut, deci un rand cu numele singur ar fi facut textul
+// acela fals.
 //
-// LATIMEA. Patru coloane la 1440, doua la tableta, una pe telefon: opt carduri scurte incap
-// pe doua randuri, deci cuprinsul se vede intreg fara derulare. Tabelul de dinainte isi
-// pastra derularea proprie pe orizontala tocmai fiindca era tabel; o grila nu se trage
-// lateral, deci grija aceea dispare cu el.
+// CE S-A SCHIMBAT LA VALUL S2-b. Cardurile au disparut. Cele opt intrari erau carduri de ceata
+// cu raza 28 si sageata la capat; REF-A pune carduri acolo unde cardul e continutul (fisa,
+// domeniul, capitolul), nu la un cuprins. Aici raman randuri despartite de firul de 1 px -
+// aceeasi forma cu a oricarei liste din pagina - pe patru coloane la 1440 si pe una la 390.
 
 export default function TermeneCuprins({
   termene,
   fara,
   faraTemei,
-  fundal = "alb",
 }: {
   termene: TermenCuAncora[];
   fara: string;
   faraTemei: string;
-  /** pe ce sta grila: `alb` = sectiune alba, deci cardul e ceata; `ceata` = invers */
+  /** Ramas in semnatura pentru pagina care il da inca; lista nu mai are card. */
   fundal?: "alb" | "ceata";
 }) {
-  const card =
-    "group flex h-full flex-col rounded-card p-5 no-underline transition-colors duration-200 hover:bg-ceata " +
-    (fundal === "alb" ? "bg-ceata" : "bg-alb");
-
   return (
     <nav aria-label={ANCORE_TERMENE.eticheta}>
       <p className="sr-only">{ANCORE_TERMENE.descriere}</p>
-      <ul className="m-0 grid list-none gap-4 p-0 md:grid-cols-2 lg:grid-cols-4">
+      {/* Firul de 1 px desparte randurile, si atat: fara linii verticale intre coloane.
+          O grila de patru coloane cu chenar la stanga cere o regula pentru primul element al
+          FIECARUI rand, iar numarul de coloane se schimba cu latimea - deci regula ar fi
+          trebuit scrisa de trei ori, pentru trei praguri, si ar fi gresit la al patrulea. */}
+      <ul className="m-0 grid list-none border-t p-0 md:grid-cols-2 lg:grid-cols-4">
         {termene.map((t) => (
-          <li key={t.ancora}>
-            <a href={"#" + t.ancora} className={card}>
-              <span className="flex items-baseline justify-between gap-3 text-corp font-semibold text-albastru-2">
-                {t.scurt}
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-200 group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </span>
-              <span className="mt-2 text-nota font-semibold text-cerneala">
+          <li key={t.ancora} className="border-b py-4 md:pr-8">
+            <a href={"#" + t.ancora} className="block no-underline">
+              <span className="block text-corp font-semibold text-albastru-2">{t.scurt}</span>
+              <span className="mt-1 block text-nota font-semibold text-cerneala">
                 {t.termen ? t.termen : fara}
               </span>
-              <span className="mt-1 text-nota text-cerneala-3">
+              <span className="mt-1 block text-nota text-cerneala-3">
                 {t.lege ? t.lege : faraTemei}
               </span>
             </a>
