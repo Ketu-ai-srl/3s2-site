@@ -4,34 +4,49 @@ import Acordeon from "@/components/Acordeon";
 import AntetPagina from "@/components/AntetPagina";
 import BandaCTA from "@/components/BandaCTA";
 import BlocDovada from "@/components/BlocDovada";
+import Capitol from "@/components/Capitol";
 import ListaBifa from "@/components/ListaBifa";
 import MecanismEtapa from "@/components/MecanismEtapa";
 import MecanismLant from "@/components/MecanismLant";
 import SegmentAncore from "@/components/SegmentAncore";
 import SegmentBandaDovezi from "@/components/SegmentBandaDovezi";
+import SegmentCadru from "@/components/SegmentCadru";
 import SegmentIncredere from "@/components/SegmentIncredere";
 import SegmentListaLipsa from "@/components/SegmentListaLipsa";
 import SegmentRandTextImagine from "@/components/SegmentRandTextImagine";
-import SegmentSectiune from "@/components/SegmentSectiune";
 import { FOTOGRAFII } from "@/content/fotografii";
-import { MECANISM_INTERIOR as M, NOTA_CONTACT } from "@/content/interior-solutii";
+import {
+  ETAPA,
+  HIGHLIGHTS,
+  MECANISM_INTERIOR as M,
+  NOTA_CONTACT,
+} from "@/content/interior-solutii";
 import { CUM_FUNCTIONEAZA as C } from "@/content/mecanism";
 import { INDIFERENT_DE_DOMENIU } from "@/content/segmente";
 
 // Pagina de mecanism. Aici ajunge butonul secundar de pe fisele de domeniu si de pe hub, deci
 // sarcina ei e sa raspunda o singura data, complet, la intrebarea pe care o pune oricine preda
-// o arhiva: ce se intampla cu ea, in ce ordine, si ce hartie imi ramane dupa fiecare pas.
+// o arhiva: ce se intampla cu arhiva, in ce ordine, si ce hartie ii ramane dupa fiecare pas.
 //
-// CE S-A SCHIMBAT LA VALUL S1-b. Cele sase etape stateau in DOUA sectiuni de registru, taiate
-// la mijlocul drumului (1-3 pleaca, 4-6 se intorc), fiindca intr-un singur bloc faceau 3494 px
-// la 1280 px, adica 4,37 ecrane. In grila REF-V de doua coloane incap toate sase intr-o
-// singura sectiune, ceva mai lunga de un ecran, si taietura nu mai e nevoie: numerotarea
-// continua 1..6 se vede dintr-o privire, asa cum promite h1-ul. Textul e neatins - continutul
-// sta in `src/content/mecanism.ts`, inghetat in valul asta.
+// GRAMATICA, dupa REF-A §4: bara locala -> erou -> highlights pe ceata -> cinci capitole, cu
+// un rand text / fotografie intre primul si al doilea -> banda neagra -> banda CTA. Fiecare
+// capitol are eticheta de 24, afirmatia de 80 si continutul in rama de ceata de 980.
+//
+// CE S-A SCHIMBAT LA VALUL S2-b: asezarea, nu textul. Sectiunile stateau pe `SegmentSectiune`
+// - titlu de 48 px centrat, eticheta albastra, alternanta alb / ceata - iar cardurile de etapa
+// purtau numarul intr-o pastila. Continutul e neatins: sta in `src/content/mecanism.ts`,
+// inghetat in valul asta.
+//
+// CELE SASE ETAPE RAMAN INTR-UN SINGUR CAPITOL, si nu s-au impartit in trei dupa Scan / Store
+// / Solve, cum sugera lotul. Motivul e in date: `mecanism.ts` nu grupeaza etapele pe cele trei
+// verbe, iar gruparea lor ar fi fost o afirmatie noua despre serviciu, scrisa de mine. Etapele
+// 1 si 2 tin de preluare si asezare, 3 de scanare, 4 de raspuns, 5 si 6 de intoarcere - adica
+// taietura nu cade curat pe niciunul dintre cele trei nume. Numerotarea continua 1..6 se
+// citeste dintr-o privire, asa cum promite h1-ul.
 //
 // Cele cinci verigi ale cautarii NU au trecut in grila, si asta e o alegere de forma, nu o
-// scapare: sunt un lant, iar o grila care se citeste in Z ii rupe ordinea. Motivul intreg,
-// in `MecanismLant.tsx`.
+// scapare: sunt un lant, iar o grila care se citeste in Z ii rupe ordinea. Motivul intreg, in
+// `MecanismLant.tsx`.
 //
 // Canonical auto-referential: fara el, pagina ar mosteni canonical-ul layout-ului si ar arata
 // spre pagina de start, ceea ce o scoate din index.
@@ -41,115 +56,114 @@ export const metadata: Metadata = {
   alternates: { canonical: "/cum-functioneaza" },
 };
 
-const LEGATURA = "text-violet underline decoration-violet-2 underline-offset-[3px]";
+const LEGATURA = "text-albastru-2 underline decoration-albastru-2 underline-offset-[3px]";
 
 export default function CumFunctioneaza() {
   return (
     <main id="continut">
+      <SegmentAncore ancore={M.navigare} eticheta="Secțiunile paginii" />
+
       <AntetPagina
         adresa="/cum-functioneaza"
-        // Ancora locala de 20% s-a SCOS pe 2026-09-06, odata cu setul de fotografii al
-        // site-ului. Motivul ei fusese masurat pe un `maini-1920.webp` PORTRET de 1920x2880,
-        // fisier care nu mai exista: cel de acum e peisaj, 1920x1280, si e alt cadru. O cifra
-        // ramasa din masuratoarea altei fotografii nu e o preferinta de pagina, e o nota
-        // devenita falsa - la a treia editare cineva ar fi aparat-o ca pe o decizie.
-        //
-        // Ce ramane e valoarea din registru, 30%, masurata pe cadrul NOU (motivul, langa
-        // cadru, in `src/content/fotografii.ts`). Verificat ca nu pierde nimic aici: pe
-        // antetul de 555x340 se vede 92,0% din inaltimea fisierului de 1920, deci fereastra
-        // cade la 2,4-94,4% si mana - care tine 16,7-53,8% - intra oricum intreaga.
         imagine={FOTOGRAFII.maini}
         fir={[{ text: "Pagina de start", href: "/" }, { text: "Cum funcționează" }]}
         eticheta={C.eticheta}
         titlu={C.h1}
         lead={C.lead}
-        actiune={{ href: "/#discutie", text: "Discuție de 30 de minute" }}
-        secundar={{ href: "/arhivare-fizica", text: "Vedeți partea fizică" }}
+        actiune={{ href: "/#discutie", text: M.butonCta }}
+        secundar={HIGHLIGHTS.spreFizica}
       />
 
-      <SegmentIncredere fapte={INDIFERENT_DE_DOMENIU} />
+      <SegmentIncredere
+        fapte={INDIFERENT_DE_DOMENIU}
+        eticheta={HIGHLIGHTS.eticheta}
+        titlu={HIGHLIGHTS.titlu}
+        legatura={HIGHLIGHTS.spreDomenii}
+      />
 
-      <SegmentAncore ancore={M.navigare} eticheta="Secțiunile paginii" />
-
-      <SegmentSectiune
+      <Capitol
         id="etape"
-        ton="alb"
         eticheta={M.etape.eticheta}
-        titlu={M.etape.titlu}
-        lead={M.etape.lead}
+        afirmatie={M.etape.titlu}
+        text={M.etape.lead}
       >
-        <ol className="m-0 grid list-none gap-5 p-0 md:grid-cols-2">
-          {C.etape.map((e, i) => (
-            <MecanismEtapa
-              key={e.titlu}
-              numar={i + 1}
-              titlu={e.titlu}
-              text={e.text}
-              urma={e.urma}
-              fundal="alb"
-            />
-          ))}
-        </ol>
+        <SegmentCadru>
+          <ol className="m-0 grid list-none gap-4 p-0 md:grid-cols-2">
+            {C.etape.map((e, i) => (
+              <MecanismEtapa
+                key={e.titlu}
+                numar={i + 1}
+                titlu={e.titlu}
+                text={e.text}
+                urma={e.urma}
+                etichetaEtapa={ETAPA.index}
+                etichetaUrma={ETAPA.urma}
+              />
+            ))}
+          </ol>
+        </SegmentCadru>
+      </Capitol>
 
-        <div className="mt-16 md:mt-20">
-          <SegmentRandTextImagine
-            titlu={M.spreFizica.titlu}
-            text={M.spreFizica.text}
-            legatura={M.spreFizica.legatura}
-            imagine={FOTOGRAFII.cutii}
-          />
-        </div>
-      </SegmentSectiune>
+      <SegmentRandTextImagine
+        eticheta={M.spreFizica.eticheta}
+        titlu={M.spreFizica.titlu}
+        text={M.spreFizica.text}
+        legatura={M.spreFizica.legatura}
+        imagine={FOTOGRAFII.cutii}
+      />
 
-      <SegmentSectiune
+      <Capitol
         id="digitalizare"
-        ton="ceata"
         eticheta={M.digitalizare.eticheta}
-        titlu={M.digitalizare.titlu}
-        lead={M.digitalizare.lead}
+        afirmatie={M.digitalizare.titlu}
+        text={M.digitalizare.lead}
+        aliniere="centrat"
       >
-        {/* Amandoua listele poarta bifa, si asta e corect aici: nu e „ce avem" contra „ce nu
-            avem", ci doua drumuri legitime, alese impreuna. Lista cu liniuta e rezervata
-            lucrurilor care LIPSESC. */}
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-card-mare bg-alb p-8">
-            <ListaBifa titlu={M.listaDigitalizat} elemente={C.digitalizat} />
+        <SegmentCadru>
+          {/* Amandoua listele poarta bifa, si asta e corect aici: nu e „ce avem" contra „ce nu
+              avem", ci doua drumuri legitime, alese impreuna. Lista cu liniuta e rezervata
+              lucrurilor care LIPSESC. */}
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-card bg-alb p-8">
+              <ListaBifa titlu={M.listaDigitalizat} elemente={C.digitalizat} />
+            </div>
+            <div className="rounded-card bg-alb p-8">
+              <ListaBifa titlu={M.listaPeHartie} elemente={C.peHartie} />
+            </div>
           </div>
-          <div className="rounded-card-mare bg-alb p-8">
-            <ListaBifa titlu={M.listaPeHartie} elemente={C.peHartie} />
+
+          <div className="mt-8">
+            <BlocDovada eticheta={M.etichetaNotaDigitalizare}>{C.notaDigitalizare}</BlocDovada>
           </div>
-        </div>
+        </SegmentCadru>
+      </Capitol>
 
-        <div className="mx-auto mt-12 max-w-[46rem]">
-          <BlocDovada eticheta={M.etichetaNotaDigitalizare}>{C.notaDigitalizare}</BlocDovada>
-        </div>
-      </SegmentSectiune>
-
-      <SegmentSectiune
+      <Capitol
         id="cautare"
-        ton="alb"
         eticheta={M.cautare.eticheta}
-        titlu={M.cautare.titlu}
-        lead={M.cautare.lead}
+        afirmatie={M.cautare.titlu}
+        text={M.cautare.lead}
       >
-        <MecanismLant verigi={C.lant} />
+        <SegmentCadru>
+          <MecanismLant verigi={C.lant} />
 
-        <div className="mx-auto mt-14 max-w-[46rem] rounded-card-mare bg-ceata p-8 md:p-10">
-          <SegmentListaLipsa titlu={M.listaNuFace} elemente={C.nuFace} />
-        </div>
-      </SegmentSectiune>
+          <div className="mt-10 rounded-card bg-alb p-8">
+            <SegmentListaLipsa titlu={M.listaNuFace} elemente={C.nuFace} />
+          </div>
+        </SegmentCadru>
+      </Capitol>
 
-      <SegmentSectiune
+      <Capitol
         id="dovada"
-        ton="ceata"
         eticheta={M.dovada.eticheta}
-        titlu={M.dovada.titlu}
-        lead={M.dovada.lead}
+        afirmatie={M.dovada.titlu}
+        text={M.dovada.lead}
+        aliniere="centrat"
       >
-        <div className="mx-auto max-w-[46rem] rounded-card-mare bg-alb p-8 md:p-10">
+        <SegmentCadru>
           <SegmentListaLipsa titlu={M.listaDeschise} elemente={C.deschise} />
-        </div>
-      </SegmentSectiune>
+        </SegmentCadru>
+      </Capitol>
 
       <SegmentBandaDovezi
         eticheta={M.bandaAratam.eticheta}
@@ -157,19 +171,16 @@ export default function CumFunctioneaza() {
         elemente={C.aratam}
       />
 
-      <SegmentSectiune
+      <Capitol
         id="hartia"
-        ton="alb"
         eticheta={M.hartia.eticheta}
-        titlu={M.hartia.titlu}
-        lead={M.hartia.lead}
+        afirmatie={M.hartia.titlu}
+        text={M.hartia.lead}
       >
-        <div className="mx-auto max-w-[52rem]">
-          <Acordeon
-            elemente={C.hartie.map((f) => ({ intrebare: f.titlu, raspuns: f.text }))}
-          />
+        <SegmentCadru>
+          <Acordeon elemente={C.hartie.map((f) => ({ intrebare: f.titlu, raspuns: f.text }))} />
 
-          <p className="mt-10 text-corp text-cerneala-2">
+          <p className="mt-8 max-w-[62ch] text-corp text-cerneala-3">
             Termenele de păstrare, cu actul normativ din care vin, stau în{" "}
             <Link href="/instrumente/termene-de-pastrare" className={LEGATURA}>
               verificatorul de termene
@@ -180,8 +191,8 @@ export default function CumFunctioneaza() {
             </Link>
             .
           </p>
-        </div>
-      </SegmentSectiune>
+        </SegmentCadru>
+      </Capitol>
 
       <BandaCTA
         titlu={C.incheiere.titlu}
@@ -192,7 +203,7 @@ export default function CumFunctioneaza() {
             {NOTA_CONTACT.inainte}
             <a
               href={"mailto:" + NOTA_CONTACT.adresa}
-              className="text-alb underline underline-offset-[3px]"
+              className="text-albastru-2 underline underline-offset-[3px]"
             >
               {NOTA_CONTACT.adresa}
             </a>

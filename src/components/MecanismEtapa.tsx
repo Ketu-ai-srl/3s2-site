@@ -1,25 +1,25 @@
-// O etapa a mecanismului, ca CARD in grila paginii interioare.
+// O etapa a mecanismului, ca CARD in rama unui capitol: eticheta etapei, afirmatia ei,
+// paragraful, si dedesubt hartia care ramane dupa pas.
 //
-// CE S-A SCHIMBAT LA VALUL S1-b. Etapa era un rand lat de registru: numarul in litera
-// monospatiata pe o coloana de 7rem, titlul la pana la 40 px si, sub el, o caseta cu bara
-// verticala. Sase randuri asa faceau 3494 px la 1280, adica 4,37 ecrane sub un singur titlu.
-// REF-V aseaza aceeasi multime in carduri de doua coloane, deci sase etape intra in ceva mai
-// mult de un ecran si se citesc doua cate doua.
+// CE S-A SCHIMBAT LA VALUL S2-b. Numarul statea intr-o pastila de `ceata` pe un card care, in
+// rama de capitol, e chiar el pe ceata: pastila disparea. Acum e o eticheta de 14 px la
+// greutatea 600, ca orice alta eticheta din felie. DIRECTIA.md, la „Ce nu se face", refuza
+// numerele mari de ornament; cifra de aici e indexul pasului, si arata ca atare.
 //
-// HARTIA CARE RAMANE E JUMATATE DIN ARGUMENT, deci nu a coborat la 14 px intr-un colt: sta
-// sub o linie, cu eticheta ei, in acelasi card. Cine citeste etapa citeste si ce semneaza.
+// Cardul e alb pe rama de `ceata`, cu raza 28 si fara umbra - separarea se face prin culoarea
+// de fundal. Titlul e pe treapta cardului (20 / 29, greutatea 600), corpul la 17 / 25.
 //
-// Cardul e scris aici, nu luat din `Card`, dintr-un singur motiv: are trei etaje (pastila,
-// corp, hartia de sub linie), iar `Card` are doua. Razele, captuseala si regula „fara umbra
-// pe card static" sunt aceleasi.
+// „Ramane scris" se desparte de restul printr-un fir de 1 px, nu printr-o a doua cutie: e a
+// doua jumatate a aceleiasi etape, nu o nota alaturata.
 
 type Props = {
   numar: number;
   titlu: string;
   text: string;
   urma: string;
-  /** pe ce sta cardul: `alb` = sectiune alba, deci cardul e ceata; `ceata` = invers */
-  fundal?: "alb" | "ceata";
+  /** Eticheta indexului si a hartiei, citite din continut de pagina care cheama cardul. */
+  etichetaEtapa: string;
+  etichetaUrma: string;
 };
 
 export default function MecanismEtapa({
@@ -27,24 +27,20 @@ export default function MecanismEtapa({
   titlu,
   text,
   urma,
-  fundal = "alb",
+  etichetaEtapa,
+  etichetaUrma,
 }: Props) {
   return (
-    <li
-      className={
-        "flex h-full list-none flex-col rounded-card-mare p-8 " +
-        (fundal === "alb" ? "bg-ceata" : "bg-alb")
-      }
-    >
-      <span className="mb-4 inline-flex w-fit rounded-pastila bg-ceata px-3 py-1 text-nota font-semibold text-albastru-2">
-        Etapa {numar}
+    <li className="flex h-full list-none flex-col rounded-card bg-alb p-8">
+      <span className="mb-4 block text-nota font-semibold text-cerneala-3">
+        {etichetaEtapa} {numar}
       </span>
 
-      <h3 className="max-w-[22ch] text-titlu-4 text-cerneala">{titlu}</h3>
-      <p className="mt-3 text-corp text-cerneala-3">{text}</p>
+      <h3 className="max-w-[22ch] text-titlu-card text-cerneala">{titlu}</h3>
+      <p className="mt-3 grow text-corp text-cerneala-3">{text}</p>
 
       <div className="mt-6 border-t pt-5">
-        <span className="mb-1.5 block text-nota font-semibold text-albastru-2">Rămâne scris</span>
+        <span className="mb-1.5 block text-nota font-semibold text-cerneala">{etichetaUrma}</span>
         <p className="text-nota text-cerneala-3">{urma}</p>
       </div>
     </li>

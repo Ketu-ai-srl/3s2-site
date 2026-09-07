@@ -3,15 +3,16 @@ import Acordeon from "./Acordeon";
 import AntetPagina from "./AntetPagina";
 import BandaCTA from "./BandaCTA";
 import BlocDovada from "./BlocDovada";
+import Capitol from "./Capitol";
 import SegmentAncore from "./SegmentAncore";
 import SegmentBandaDovezi from "./SegmentBandaDovezi";
+import SegmentCadru from "./SegmentCadru";
 import SegmentGrila from "./SegmentGrila";
 import SegmentIncredere from "./SegmentIncredere";
 import SegmentListaLipsa from "./SegmentListaLipsa";
 import SegmentRandTextImagine from "./SegmentRandTextImagine";
-import SegmentSectiune from "./SegmentSectiune";
 import { FOTOGRAFII, type CheieFotografie } from "@/content/fotografii";
-import { NOTA_CONTACT, SEGMENT } from "@/content/interior-solutii";
+import { HIGHLIGHTS, NOTA_CONTACT, SEGMENT } from "@/content/interior-solutii";
 import { HUB, INDIFERENT_DE_DOMENIU, type PaginaSegment } from "@/content/segmente";
 
 // Corpul unei pagini de segment, o singura data pentru toate cele sapte.
@@ -20,36 +21,37 @@ import { HUB, INDIFERENT_DE_DOMENIU, type PaginaSegment } from "@/content/segmen
 // segment sa se adauge FARA sa rescrie cineva paginile. Cu sablonul aici, un segment nou
 // inseamna o constanta in `segmente.ts` si un fisier de ruta de vreo douazeci de randuri.
 //
-// GRAMATICA, dupa valul S1-b (pagina interioara REF-V, §4):
-//   antet alb cu fotografia in card la dreapta
-//   rand de incredere: cele trei fapte care nu tin de domeniu, scurt
-//   file-pastila de navigare in pagina
-//   I    situatia    grila de carduri - ce se intampla azi in domeniul asta
-//   II   schimbarea  grila de carduri + un rand text / imagine care duce la mecanism
-//   III  dovada      ce nu putem sustine inca, intr-un card
-//        banda inchisa: ce se poate verifica inainte de semnatura
-//   IV   temeiul     actele numite, ca grila, plus cele doua note despre randul gol
-//   V    intrebarile acordeon
-//        banda CTA violeta
+// GRAMATICA PAGINII DE PRODUS (REF-A §4), in ordinea citirii:
+//   bara locala          52 px, lipicioasa, cu ancorele celor cinci sectiuni
+//   erou                 AntetPagina: fotografia intai, apoi numele, afirmatia, randul, pastilele
+//   highlights pe ceata  cele trei fapte care nu tin de domeniu, ca trei carduri albe
+//   Capitol „Situatia"   grila de carduri: ce se intampla azi in domeniul asta
+//   Capitol „Ce se schimba"  grila de carduri: ce arata altfel dupa
+//   rand text / fotografie   duce la pagina de mecanism
+//   Capitol „Dovada"     ce NU putem sustine, ca lista cu liniuta
+//   banda NEAGRA         cele patru fapte atribuite pe care le poate verifica oricine
+//   Capitol „Temeiul legal"  actele numite, plus cele doua note despre randul gol
+//   Capitol „Intrebari"  FAQ ca acordeon
+//   banda CTA            o tigla pe ceata cu o singura pastila
 //
-// CE INLOCUIESTE. Pana acum pagina era un REGISTRU: sase `SectiuneRegistru` cu cota in cifre
-// romane, titluri la stanga, randuri de `dl` cu linii orizontale si intrebarile ca randuri de
-// raspundere. Textul e acelasi, pana la virgula - continutul sta in `segmente.ts`, care e
-// inghetat in valul asta - dar asezarea e cea masurata pe pagina interioara REF-V. Proza care
-// statea scrisa de mana AICI (titluri de sectiune, linii, nota de sub carduri, paragraful care
-// trimite la mecanism) s-a mutat in `src/content/interior-solutii.ts`: nu s-a pierdut niciun
-// rand, doar nu mai sta intr-o componenta.
+// UN SINGUR BUTON PRIMAR PE ECRAN: pastila plina din erou si cea din banda de incheiere. Restul
+// drumurilor sunt contur (erou) sau legaturi cu chevron.
+//
+// CE INLOCUIESTE. Pagina statea pe `SegmentSectiune` - titlu de 48 px centrat, eticheta
+// albastra de 14 px, sectiuni alternate alb / ceata - gramatica directiei anterioare. Acum
+// fiecare sectiune e un `Capitol` (componenta partajata): eticheta 24, afirmatie 80, paragraf
+// 21 / 29 la 600, si continutul intr-o rama de ceata cu raza 28, in containerul de 980.
+// Textul e acelasi, pana la virgula: continutul sta in `segmente.ts`, inghetat in valul asta.
+//
+// ABATERE DECLARATA fata de cererea feliei. Cerinta scria intrebarile segmentului ca grila de
+// carduri, si lista „ce nu detinem" in acordeonul de FAQ. S-a facut invers, si motivul e in
+// date: `intrebari` sunt perechi intrebare / raspuns, adica exact forma pe care o cere un
+// acordeon, iar `deschise` sunt cinci propozitii fara intrebare - taiate in perechi, jumatatile
+// ar fi fost text NOU pus in gura continutului inghetat. Acordeonul ramane deci FAQ-ul cerut de
+// gramatica, cu intrebarile reale in el.
 //
 // FOTOGRAFIA DE ANTET se alege dupa slug, aici si nu in `segmente.ts`, fiindca e o decizie de
 // vitrina, nu un fapt despre domeniu.
-//
-// `constructii` A PRIMIT FOTOGRAFIE, si motivul vechi chiar a disparut. Statea fara cadru
-// fiindca `rafturi` era eroul paginii de start si nu avea voie sa reapara: masurat atunci, cele
-// doua capturi de prim ecran aveau diferenta medie absoluta ZERO. In directia REF-V eroul
-// paginii de start e GRADIENT, fara nicio fotografie (`src/app/page.tsx` cheama `ton="erou"`
-// fara `imagine`, iar `tests/directia.test.ts` cere explicit sa ramana asa), deci `rafturi` nu
-// mai deschide nimic si nu se mai poate ciocni de nimic. Argumentul a fost verificat, nu
-// mostenit.
 const FOTO_ANTET: Record<string, CheieFotografie> = {
   notari: "maini",
   primarii: "sertare",
@@ -60,10 +62,8 @@ const FOTO_ANTET: Record<string, CheieFotografie> = {
   imobiliare: "dulapuri",
 };
 
-// Al doilea cadru al paginii, cel din randul text / imagine. E ALTUL decat cel de antet pe
-// fiecare fisa: doua carduri cu aceeasi poza pe acelasi ecran ar arata ca o greseala de
-// randare. Intre pagini diferite cadrul se repeta, si asta e in regula acum - fotografia nu
-// mai umple ecranul, sta intr-un card de 320 px inaltime.
+// Al doilea cadru al paginii, cel din randul text / fotografie. E ALTUL decat cel de antet pe
+// fiecare fisa: doua cadre identice pe aceeasi pagina se citesc ca greseala de montaj.
 const FOTO_RAND: Record<string, CheieFotografie> = {
   notari: "dosare",
   primarii: "dulapuri",
@@ -86,6 +86,8 @@ export default function PaginaDeSegment({ segment, nume, slug }: Props) {
 
   return (
     <main id="continut">
+      <SegmentAncore ancore={SEGMENT.navigare} eticheta="Secțiunile paginii" />
+
       <AntetPagina
         adresa={adresa}
         imagine={FOTOGRAFII[FOTO_ANTET[slug]]}
@@ -98,60 +100,62 @@ export default function PaginaDeSegment({ segment, nume, slug }: Props) {
         titlu={segment.h1}
         lead={segment.lead}
         actiune={{ href: "/#discutie", text: SEGMENT.butonCta }}
-        secundar={{ href: "/solutii", text: "Vedeți toate domeniile" }}
+        secundar={HIGHLIGHTS.spreDomenii}
       />
 
-      <SegmentIncredere fapte={INDIFERENT_DE_DOMENIU} />
+      <SegmentIncredere
+        fapte={INDIFERENT_DE_DOMENIU}
+        eticheta={HIGHLIGHTS.eticheta}
+        titlu={HIGHLIGHTS.titlu}
+        legatura={HIGHLIGHTS.spreMecanism}
+      />
 
-      <SegmentAncore ancore={SEGMENT.navigare} eticheta="Secțiunile paginii" />
-
-      <SegmentSectiune
+      <Capitol
         id="situatia"
-        ton="alb"
         eticheta={SEGMENT.situatia.eticheta}
-        titlu={SEGMENT.situatia.titlu}
+        afirmatie={SEGMENT.situatia.titlu}
         // Restul deschiderii, mutat de pe ecran (campul `continuare` din `segmente.ts`):
-        // ecranul pastreaza prima propozitie, aici vine ce nu incapea in cele 40 de cuvinte.
-        lead={segment.continuare}
+        // eroul pastreaza prima propozitie, aici vine ce nu incapea in cele 40 de cuvinte.
+        text={segment.continuare}
       >
-        <SegmentGrila elemente={segment.durere} fundal="alb" />
+        <SegmentCadru>
+          <SegmentGrila elemente={segment.durere} />
 
-        {/* Invitatia la corectie sta SUB carduri: e o reactie la ce tocmai s-a citit. */}
-        <p className="mx-auto mt-10 max-w-[62ch] text-corp text-cerneala-3">
-          {SEGMENT.situatiaNota}
-        </p>
-      </SegmentSectiune>
+          {/* Invitatia la corectie sta SUB carduri: e o reactie la ce tocmai s-a citit. */}
+          <p className="mt-8 max-w-[62ch] text-corp text-cerneala-3">{SEGMENT.situatiaNota}</p>
+        </SegmentCadru>
+      </Capitol>
 
-      <SegmentSectiune
+      <Capitol
         id="schimbare"
-        ton="ceata"
         eticheta={SEGMENT.schimbare.eticheta}
-        titlu={SEGMENT.schimbare.titlu}
-        lead={SEGMENT.schimbare.lead}
+        afirmatie={SEGMENT.schimbare.titlu}
+        text={SEGMENT.schimbare.lead}
+        aliniere="centrat"
       >
-        <SegmentGrila elemente={segment.schimbare} fundal="ceata" />
+        <SegmentCadru>
+          <SegmentGrila elemente={segment.schimbare} />
+        </SegmentCadru>
+      </Capitol>
 
-        <div className="mt-16 md:mt-20">
-          <SegmentRandTextImagine
-            titlu={SEGMENT.spreMecanism.titlu}
-            text={SEGMENT.spreMecanism.text}
-            legatura={SEGMENT.spreMecanism.legatura}
-            imagine={FOTOGRAFII[FOTO_RAND[slug]]}
-          />
-        </div>
-      </SegmentSectiune>
+      <SegmentRandTextImagine
+        eticheta={SEGMENT.spreMecanism.eticheta}
+        titlu={SEGMENT.spreMecanism.titlu}
+        text={SEGMENT.spreMecanism.text}
+        legatura={SEGMENT.spreMecanism.legatura}
+        imagine={FOTOGRAFII[FOTO_RAND[slug]]}
+      />
 
-      <SegmentSectiune
+      <Capitol
         id="dovada"
-        ton="alb"
         eticheta={SEGMENT.dovada.eticheta}
-        titlu={segment.titluDovada}
-        lead={SEGMENT.dovada.lead}
+        afirmatie={segment.titluDovada}
+        text={SEGMENT.dovada.lead}
       >
-        <div className="mx-auto max-w-[46rem] rounded-card-mare bg-ceata p-8 md:p-10">
+        <SegmentCadru>
           <SegmentListaLipsa titlu={SEGMENT.listaDeschise} elemente={segment.deschise} />
-        </div>
-      </SegmentSectiune>
+        </SegmentCadru>
+      </Capitol>
 
       <SegmentBandaDovezi
         eticheta={SEGMENT.bandaAratam.eticheta}
@@ -159,62 +163,59 @@ export default function PaginaDeSegment({ segment, nume, slug }: Props) {
         elemente={segment.aratam}
       />
 
-      <SegmentSectiune
+      <Capitol
         id="temei"
-        ton="ceata"
         eticheta={SEGMENT.temei.eticheta}
-        titlu={SEGMENT.temei.titlu}
-        lead={SEGMENT.temei.lead}
+        afirmatie={SEGMENT.temei.titlu}
+        text={SEGMENT.temei.lead}
+        aliniere="centrat"
       >
-        <SegmentGrila
-          elemente={segment.temeiuri.map((t) => ({ titlu: t.act, text: t.ce }))}
-          fundal="ceata"
-        />
+        <SegmentCadru>
+          <SegmentGrila elemente={segment.temeiuri.map((t) => ({ titlu: t.act, text: t.ce }))} />
 
-        {/* Doua blocuri, nu unul. Masurat pe cele sapte fise, nota asta era SINGURUL bloc care
-            trecea de cele 60 de cuvinte ale directiei - intre 70 si 115 - si e chiar blocul pe
-            care pagina isi sprijina onestitatea, deci cel mai pagubos de sarit. Taietura e la
-            granita celor doua miscari ale ei: de ce randul ramane gol, si ce se aplica in
-            locul lui. */}
-        <div className="mx-auto mt-12 max-w-[46rem]">
-          <BlocDovada eticheta={SEGMENT.etichetaTermenGol}>{segment.notaTermene}</BlocDovada>
-          <BlocDovada eticheta={SEGMENT.etichetaTermenCerere} className="mt-5">
-            {segment.notaCerere}
-          </BlocDovada>
+          {/* Doua blocuri, nu unul. Masurat pe cele sapte fise, nota asta era SINGURUL bloc
+              care trecea de cele 60 de cuvinte ale directiei - intre 70 si 115 - si e chiar
+              blocul pe care pagina isi sprijina onestitatea, deci cel mai pagubos de sarit.
+              Taietura e la granita celor doua miscari ale ei: de ce randul ramane gol, si ce se
+              aplica in locul lui. */}
+          <div className="mt-10">
+            <BlocDovada eticheta={SEGMENT.etichetaTermenGol}>{segment.notaTermene}</BlocDovada>
+            <BlocDovada eticheta={SEGMENT.etichetaTermenCerere} className="mt-5">
+              {segment.notaCerere}
+            </BlocDovada>
 
-          <p className="mt-8 text-corp text-cerneala-3">
-            Termenele pe care le putem cita pe articol stau în{" "}
-            <Link
-              href="/instrumente/termene-de-pastrare"
-              className="text-albastru-2 underline decoration-albastru-2 underline-offset-[3px]"
-            >
-              verificatorul de termene
-            </Link>
-            , fiecare cu actul normativ și cu data la care a fost citit.
-          </p>
-        </div>
-      </SegmentSectiune>
+            <p className="mt-8 max-w-[62ch] text-corp text-cerneala-3">
+              Termenele pe care le putem cita pe articol stau în{" "}
+              <Link
+                href="/instrumente/termene-de-pastrare"
+                className="text-albastru-2 underline decoration-albastru-2 underline-offset-[3px]"
+              >
+                verificatorul de termene
+              </Link>
+              , fiecare cu actul normativ și cu data la care a fost citit.
+            </p>
+          </div>
+        </SegmentCadru>
+      </Capitol>
 
-      <SegmentSectiune
+      <Capitol
         id="intrebari"
-        ton="alb"
         eticheta={SEGMENT.intrebari.eticheta}
-        titlu={segment.titluIntrebari}
-        lead={SEGMENT.intrebari.lead}
+        afirmatie={segment.titluIntrebari}
+        text={SEGMENT.intrebari.lead}
       >
-        <div className="mx-auto max-w-[52rem]">
+        <SegmentCadru>
           <Acordeon
             elemente={segment.intrebari.map((i) => ({
               intrebare: i.intrebare,
               raspuns: i.raspuns,
             }))}
           />
-        </div>
-      </SegmentSectiune>
+        </SegmentCadru>
+      </Capitol>
 
-      {/* UN buton, si spune ce se cere AICI: nu repeta „Programati o discutie de 30 de minute"
-          din antet. Fiecare fisa isi scrie textul butonului din propriul paragraf de
-          incheiere. */}
+      {/* UN buton, si spune ce se cere AICI: nu repeta „Discutie de 30 de minute" din erou.
+          Fiecare fisa isi scrie textul butonului din propriul paragraf de incheiere. */}
       <BandaCTA
         titlu={segment.incheiere.titlu}
         text={segment.incheiere.text}
@@ -222,7 +223,10 @@ export default function PaginaDeSegment({ segment, nume, slug }: Props) {
         nota={
           <>
             {NOTA_CONTACT.inainte}
-            <a href={"mailto:" + NOTA_CONTACT.adresa} className="text-albastru-2 underline underline-offset-[3px]">
+            <a
+              href={"mailto:" + NOTA_CONTACT.adresa}
+              className="text-albastru-2 underline underline-offset-[3px]"
+            >
               {NOTA_CONTACT.adresa}
             </a>
             {NOTA_CONTACT.dupa}

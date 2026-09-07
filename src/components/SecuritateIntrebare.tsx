@@ -1,34 +1,22 @@
 import Acordeon from "./Acordeon";
 import type { IntrebareDeschisa } from "@/content/securitate";
 
-// Cele sase intrebari deschise ale partii digitale, ca ACORDEON pe linii (REF-V.md §4,
-// „Pagina interioara": FAQ, acordeon, linii `linie`).
+// Cele sase intrebari fara raspuns scris, ca acordeon: intrebarea in capul randului, iar sub
+// ea de ce conteaza si starea ei de azi.
 //
-// CE S-A SCHIMBAT LA VALUL S1-b. Fiecare intrebare era un rand de registru pe doua coloane,
-// cu starea in marginea din stanga in litera monospatiata. Sase randuri asa ocupau cat o
-// pagina, iar sectiunea era ultima inainte de incheiere. Acordeonul le strange la sase linii
-// si lasa intrebarile sa se citeasca dintr-o privire - care e chiar scopul lor: cine vine cu
-// un chestionar de securitate isi cauta intrebarea in lista, nu citeste eseul.
+// `Acordeon` e componenta partajata si da liniile de #d2d2d7, deci forma vine de acolo. Ce
+// adauga fisierul asta e randul de stare: eticheta la 14 px si pastila cu raspunsul de azi.
 //
-// UNDE A AJUNS STAREA, si ce se pierde. `Acordeon` e inghetat si primeste `intrebare` ca
-// SIR, deci in randul de sumar nu incape o pastila: starea a coborat in panoul pliat, langa
-// motivul pentru care intrebarea conteaza. Se pierde citirea starii dintr-o privire, pe sase
-// randuri deodata. Ce tine locul: titlul sectiunii spune raspunsul colectiv pe fata - sase
-// intrebari la care nu avem raspuns in scris - deci cifra care conteaza se vede fara sa
-// deschida nimeni nimic; in panou raman cele doua stari care difera de restul. Daca se
-// hotaraste vreodata ca randul de sumar trebuie sa poarte pastila, se schimba `Acordeon`, nu
-// se dubleaza aici lista in afara lui.
+// PASTILA E ALBA, nu de ceata. Acordeonul sta in rama de capitol, care e chiar ceata, si o
+// pastila de aceeasi culoare cu fundalul nu se vede - defect masurat pe pagina construita la
+// mutarea sectiunilor in capitole.
 //
-// RASPUNSUL E IN HTML-UL SERVIT. `Acordeon` foloseste `details` / `summary`, deci textul
-// pliat exista in documentul livrat de server si se citeste cu scripturile oprite. Poarta
-// S-17 il masoara.
-//
-// Componenta primeste TOATA lista, nu o intrebare, fiindca acordeonul e un singur element cu
-// linii comune: sase acordeoane de cate un rand ar desena sase chenare.
+// Continutul, si tacerea din el, raman intocmai: nu inventam un raspuns fiindca sectiunea e
+// chiar lista intrebarilor la care nu avem unul.
 
 type Props = {
   intrebari: IntrebareDeschisa[];
-  /** eticheta de deasupra pastilei de stare, ca sa se stie ce spune cifra din dreptul ei */
+  /** eticheta de deasupra pastilei de stare, ca sa se stie ce spune randul de langa ea */
   etichetaStare: string;
 };
 
@@ -42,7 +30,7 @@ export default function SecuritateIntrebare({ intrebari, etichetaStare }: Props)
             <p className="m-0">{i.deCeConteaza}</p>
             <p className="m-0 mt-4 flex flex-wrap items-baseline gap-2">
               <span className="text-nota font-semibold text-cerneala">{etichetaStare}</span>
-              <span className="rounded-pastila bg-ceata px-3 py-1 text-nota font-semibold text-albastru-2">
+              <span className="rounded-pastila bg-alb px-3 py-1 text-nota font-semibold text-cerneala">
                 {i.stare}
               </span>
             </p>

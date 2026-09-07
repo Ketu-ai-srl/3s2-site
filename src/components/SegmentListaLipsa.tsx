@@ -1,19 +1,16 @@
-// Lista a ceea ce LIPSESTE, in idiomul REF-V: liniuta gri in loc de bifa verde.
+// Lista a ceea ce LIPSESTE: liniuta in loc de bifa.
 //
-// REF-V.md §3 o scrie asa: „Liste de caracteristici: bifa verde `#009e5b` + text 16 px; ce
-// lipseste din plan = liniuta gri + text `cerneala-3`." `ListaBifa`, componenta inghetata,
-// e jumatatea cu bifa. Asta e cealalta jumatate, si exista fiindca paginile feliei foloseau
-// bifa VERDE pe listele „Ce nu putem sustine inca" - o bifa de izbanda in dreptul fiecarui
-// lucru pe care nu il putem dovedi.
+// `ListaBifa`, componenta partajata, e jumatatea cu bifa - ce exista, ce se face, ce se poate
+// arata. Asta e cealalta jumatate, si exista fiindca paginile feliei foloseau bifa si pe
+// listele „Ce nu putem sustine": un semn de izbanda in dreptul fiecarui lucru pe care nu il
+// putem dovedi.
 //
-// LINIUTA NU E UN CARACTER, e un dreptunghi de 12 x 1 px. Doua motive, amandoua masurate in
-// alta parte: poarta de tipografie refuza liniile lungi, iar un caracter de liniuta ales
-// gresit s-ar citi cu voce tare de un cititor de ecran in dreptul fiecarui rand. Marcajul e
-// `aria-hidden`, deci lista se aude ca lista.
+// LINIUTA NU E UN CARACTER, e un dreptunghi de 12 x 1 px. Doua motive: poarta de tipografie
+// refuza liniile lungi, iar un caracter de liniuta ales gresit s-ar citi cu voce tare in
+// dreptul fiecarui rand. Marcajul e `aria-hidden`, deci lista se aude ca lista.
 //
-// Litera e `cerneala-2`, nu `cerneala-3`: 7,06:1 pe alb si 6,48:1 pe ceata, fata de 5,22 si
-// 4,79. Randurile astea sunt chiar partea onesta a paginii, deci nu se scriu mai palid decat
-// restul. Liniuta ramane `cerneala-3`, fiindca e semn, nu litera.
+// Titlul e pe treapta etichetei de capitol (24), litera la 17 / 25 in `cerneala-3`: 5,07:1 pe
+// alb si 4,66:1 pe ceata, deci trece pe amandoua suprafetele pe care sta lista.
 
 type Props = {
   titlu: string;

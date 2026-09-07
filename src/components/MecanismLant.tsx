@@ -1,15 +1,14 @@
 import type { Veriga } from "@/content/mecanism";
 
-// Cele cinci verigi ale cautarii: de la intrebarea pusa in romana pana la pagina citita.
+// Cele cinci verigi ale cautarii, ca LANT vertical, in rama unui capitol.
 //
-// DE CE NU E O GRILA DE CARDURI, ca etapele de deasupra. Verigile sunt un LANT: fiecare are
-// sens numai dupa cea dinainte, iar argumentul paginii e ca lantul se opreste acolo unde
-// lipseste o veriga. O grila de doua coloane citeste in Z si rupe ordinea; o coloana ingusta
-// cu numere legate printr-o linie verticala o pastreaza. Doua forme diferite pe aceeasi
-// pagina, fiindca poarta doua feluri de continut.
+// DE CE NU O GRILA, ca restul multimilor din felie. Verigile nu sunt fapte alaturate, ci o
+// ordine: „daca una lipseste, lantul se opreste acolo" e chiar textul sectiunii. O grila de
+// doua coloane se citeste in Z, deci ar rupe ordinea pe care sectiunea o afirma.
 //
-// Linia verticala e desenata cu un `span` absolut, nu cu un caracter, si e `aria-hidden`:
-// lista se aude ca lista numerotata, nu ca un sir de liniute.
+// Pastila numarului e ALBA, nu de ceata: lantul sta in rama de capitol, care e chiar ceata, si
+// o pastila de aceeasi culoare cu fundalul nu se vede. Firul dintre verigi e #d2d2d7, firul de
+// 1 px al referintei - acelasi cu al chenarelor, prin regula de baza din globals.css.
 
 type Props = {
   verigi: Veriga[];
@@ -17,11 +16,11 @@ type Props = {
 
 export default function MecanismLant({ verigi }: Props) {
   return (
-    <ol className="m-0 mx-auto max-w-[46rem] list-none p-0">
+    <ol className="m-0 list-none p-0">
       {verigi.map((v, i) => (
         <li key={v.titlu} className="relative flex gap-5 pb-8 last:pb-0 md:gap-7">
           <div className="relative shrink-0">
-            <span className="flex h-10 w-10 items-center justify-center rounded-pastila bg-ceata text-nota font-semibold text-albastru-2">
+            <span className="flex h-10 w-10 items-center justify-center rounded-pastila bg-alb text-nota font-semibold text-cerneala">
               {i + 1}
             </span>
             {i < verigi.length - 1 ? (
@@ -33,7 +32,7 @@ export default function MecanismLant({ verigi }: Props) {
           </div>
 
           <div className="pt-1.5">
-            <h3 className="max-w-[28ch] text-subtitlu text-cerneala">{v.titlu}</h3>
+            <h3 className="max-w-[28ch] text-titlu-card text-cerneala">{v.titlu}</h3>
             <p className="mt-2 max-w-[58ch] text-corp text-cerneala-3">{v.text}</p>
           </div>
         </li>

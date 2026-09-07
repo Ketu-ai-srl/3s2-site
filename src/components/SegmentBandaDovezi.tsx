@@ -1,24 +1,24 @@
-// Banda inchisa `noapte-v` a paginii interioare (REF-V.md §4, „Pagina interioara"), cu
-// afirmatiile pe care le poate verifica cineva inainte sa ne creada pe cuvant.
+// Banda NEAGRA a paginii de produs: afirmatiile atribuite pe care le poate verifica cineva
+// inainte sa ne creada pe cuvant.
 //
-// DE CE NU E `BandaIncredere`. Aceea cere perechi titlu / text si le aseaza pe patru
-// coloane. Listele pe care le poarta banda asta - `aratam` de pe fisele de domeniu,
-// `nuDetinem` de pe pagina de securitate - sunt siruri simple, propozitii intregi, fara
-// titlu. Le-as fi putut taia in doua ca sa incapa in forma aceea, dar taietura ar fi fost
-// text NOU pus in gura continutului inghetat. Componenta e alaturi, nu in locul ei:
-// `BandaIncredere` ramane neatinsa si o folosesc mai departe hub-ul si pagina de start.
+// DE CE NU `BandaIncredere`, componenta partajata. Aceea cere perechi titlu / text si le
+// aseaza pe coloane. Listele pe care le poarta banda asta - `aratam` de pe fisele de domeniu
+// si de pe pagina partii fizice, `nuDetinem` de pe pagina de securitate - sunt siruri simple,
+// propozitii intregi, fara titlu. Taiate in doua ca sa incapa in forma aceea, jumatatile ar fi
+// text NOU pus in gura continutului inghetat. Componenta e alaturi, nu in locul ei.
 //
-// CONTRAST, din valorile paletei: alb pe `noapte-v` 18,95:1, `violet-clar` pe `noapte-v`
-// 7,61:1. Eticheta de 14 px e `violet-clar`, litera listei e alba.
+// CONTRAST, din valorile paletei: pe `negru`, `ceata` da 19,29:1 si `albastru-clar` 6,96:1.
+// Pe negru se scrie `ceata`, nu alb - albul pur vibreaza la marimi mici - iar semnul liniutei
+// ia `albastru-clar`, singura culoare de accent care trece pe fundal inchis.
 
 type Props = {
   eticheta: string;
   titlu: React.ReactNode;
   elemente: string[];
   /**
-   * Semnul din dreptul fiecarui rand. `bifa` pentru ce se poate verifica, `liniuta` pentru
-   * ce LIPSESTE - aceeasi impartire ca intre `ListaBifa` si `SegmentListaLipsa`. O bifa in
-   * dreptul unui lucru pe care nu il putem dovedi ar fi o izbanda desenata pe o lipsa.
+   * Semnul din dreptul fiecarui rand. `bifa` pentru ce se poate verifica, `liniuta` pentru ce
+   * LIPSESTE. O bifa in dreptul unui lucru pe care nu il putem dovedi ar fi o izbanda
+   * desenata pe o lipsa.
    */
   semn?: "bifa" | "liniuta";
 };
@@ -31,10 +31,10 @@ export default function SegmentBandaDovezi({
 }: Props) {
   return (
     <section className="bg-negru">
-      <div className="mx-auto w-full max-w-vitrina px-4 py-16 md:px-8 md:py-20">
+      <div className="mx-auto w-full max-w-vitrina px-4 py-16 md:px-8 md:py-[110px]">
         <div className="md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:items-start md:gap-x-16">
           <div>
-            <span className="mb-4 block text-nota font-semibold text-ceata">
+            <span className="mb-4 block text-mic font-semibold text-albastru-clar">
               {eticheta}
             </span>
             <h2 className="max-w-[18ch] text-titlu-2 text-ceata">{titlu}</h2>

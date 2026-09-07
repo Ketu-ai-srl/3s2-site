@@ -1,72 +1,63 @@
+import Buton from "./Buton";
 import type { Fapt } from "@/content/segmente";
 
-// Randul de incredere de sub antet (REF-V.md §4, „Pagina interioara": erou alb scurt, apoi
-// un rand de incredere, apoi filele-pastila).
+// BANDA DE „HIGHLIGHTS" a paginii de produs REF-A (§4): stă pe `ceata`, imediat sub erou.
+// Capul benzii are afirmatia la STANGA si o legatura la DREAPTA, pe acelasi rand de la 768 px
+// in sus; sub ele, carduri albe cu raza 28.
 //
-// CE PUNE IN EL. In sursa, randul acela poarta un rating si un „recomandat de". Noi nu avem
-// nici rating, nici recomandare, si nu inventam: randul poarta cele trei fapte care nu tin
-// de domeniu, scrise deja in `INDIFERENT_DE_DOMENIU` (segmente.ts). Aici se vad SCURT, doar
-// titlurile lor; textul intreg sta pe hub, la sectiunea care le explica. Acelasi text nu
-// apare de doua ori pe aceeasi pagina.
+// CE PUNE IN CARDURI. Cele trei fapte care nu tin de domeniu, scrise in
+// `INDIFERENT_DE_DOMENIU` (segmente.ts). Pana la valul asta se vedeau de DOUA ori pe hub -
+// titlurile lor intr-un rand de iconite sub erou, si perechea intreaga pe o banda inchisa mai
+// jos. Aici apar o singura data, cu textul intreg, si banda inchisa a hub-ului dispare.
 //
-// ICONITELE SUNT DESENATE AICI, nu importate. REF-V.md §6 spune „la noi Lucide (MIT),
-// aceeasi grosime" (1,5 px), dar `lucide-react` NU e in `package.json` si `pnpm-lock.yaml`
-// nu e un fisier al feliei mele: nu adaug o dependinta ca sa desenez trei contururi. Sunt
-// `svg` in linie, cu grosimea de 1,5 px ceruta, ca bifa din `ListaBifa` si scutul din
-// `Ecran`. Daca vreodata intra Lucide in proiect, se schimba aici, intr-un singur loc.
+// FARA ICONITE. Randul de dinainte desena trei contururi svg in componenta, fiindca directia
+// anterioara cerea un semn in dreptul fiecarui fapt. REF-A nu pune iconite decorative in
+// highlights: cardul poarta text, si atat.
 //
-// Culoarea conturului e `violet`: 6,20:1 pe alb. Litera e `cerneala-2`: 7,06:1 pe alb.
-
-const CONTURURI = [
-  // cutie de arhiva cu capac
-  <>
-    <rect x="3" y="4" width="18" height="4" rx="1" />
-    <path d="M5 8v11h14V8" />
-    <path d="M10 12h4" />
-  </>,
-  // document cu bifa
-  <>
-    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
-    <path d="M14 3v5h5" />
-    <path d="M9 15l2 2 4-4" />
-  </>,
-  // balanta
-  <>
-    <path d="M12 4v16" />
-    <path d="M6 8h12" />
-    <path d="M6 8l-3 6h6z" />
-    <path d="M18 8l3 6h-6z" />
-    <path d="M8 20h8" />
-  </>,
-];
+// LITERA CARDULUI, dupa fisa REF-A: 17 px la pasul 21 si greutatea 600 pentru randul de sus,
+// apoi explicatia la 17 / 25 in `cerneala-3` (4,66:1 pe alb; cardul e alb, banda e ceata).
+// Pasul de 21 e sub pragul de 1,19 al diacriticelor doar pe hartie: randul de sus are
+// doua-patru cuvinte si nu se rupe niciodata la latimea cardului - masurat la 390, cel mai
+// lung („Fiecare răspuns are sursă.") intra pe un rand. Explicatia, care CHIAR se rupe, sta la
+// 17 / 25, adica 1,47.
 
 type Props = {
   fapte: Fapt[];
+  /** Eticheta de 12 px de deasupra afirmatiei. */
+  eticheta: string;
+  /** Afirmatia benzii, h2 de 56 px la stanga. */
+  titlu: string;
+  /** Legatura din dreapta capului. Pagina alege incotro duce, ca sa nu arate spre ea insasi. */
+  legatura: { href: string; text: string };
+  /** Un rand de explicatie sub afirmatie, unde pagina are ce spune. */
+  lead?: string;
 };
 
-export default function SegmentIncredere({ fapte }: Props) {
+export default function SegmentIncredere({ fapte, eticheta, titlu, legatura, lead }: Props) {
   return (
-    <section className="bg-alb">
-      <div className="mx-auto w-full max-w-vitrina px-4 pb-14 md:px-8 md:pb-16">
-        <ul className="m-0 flex list-none flex-col items-start gap-4 p-0 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-x-10 md:gap-y-4">
-          {fapte.map((f, i) => (
-            <li key={f.titlu} className="flex items-start gap-2.5 text-nota text-cerneala-3">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mt-[1px] shrink-0 text-albastru-2"
-              >
-                {CONTURURI[i % CONTURURI.length]}
-              </svg>
-              <span>{f.titlu}</span>
+    <section className="bg-ceata">
+      <div className="mx-auto w-full max-w-vitrina px-4 py-16 md:px-8 md:py-[110px]">
+        <div className="md:flex md:items-end md:justify-between md:gap-10">
+          <div>
+            <span className="mb-3 block text-mic font-semibold text-cerneala-3">{eticheta}</span>
+            <h2 className="max-w-[20ch] text-tigla text-cerneala">{titlu}</h2>
+          </div>
+          <div className="mt-5 shrink-0 md:mt-0 md:pb-2">
+            <Buton href={legatura.href} fel="text">
+              {legatura.text}
+            </Buton>
+          </div>
+        </div>
+
+        {lead ? (
+          <p className="mt-6 max-w-[62ch] text-capitol font-semibold text-cerneala-3">{lead}</p>
+        ) : null}
+
+        <ul className="m-0 mt-10 grid list-none gap-4 p-0 md:mt-12 md:grid-cols-3">
+          {fapte.map((f) => (
+            <li key={f.titlu} className="rounded-card bg-alb p-8">
+              <h3 className="text-corp leading-[21px] font-semibold text-cerneala">{f.titlu}</h3>
+              <p className="mt-3 text-corp text-cerneala-3">{f.text}</p>
             </li>
           ))}
         </ul>
