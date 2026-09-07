@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, readFileSync, readdirSync, rmSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { join, sep } from 'node:path'
@@ -745,32 +745,26 @@ describe('gramatica paginilor', () => {
  *     doua propozitii in loc de una.
  *   - griul de 21 px al referintei se intoarce chiar in capitol, singurul loc din care a fost scos.
  *
- * CUM SE RANDEAZA COMPONENTELE INTR-O PROBA DE NOD, si de ce prin copie. `tsconfig.json` are
- * `jsx: preserve` - asa cere Next - iar Vite, care transforma fisierele probei, citeste aceeasi
- * setare si lasa JSX-ul netransformat: un `import` direct din `src/components` crapa la analiza,
- * cu „content contains invalid JS syntax". `tsconfig.json` si `vitest.config.ts` sunt inghetate la
- * felia asta. Ce se poate face fara sa le atinga: `exclude` din tsconfig contine `node_modules`,
- * deci un fisier de acolo nu cade sub nicio setare de tsconfig si Vite il transforma cu implicitul
- * lui (`jsx: automatic`). Copia e VERBATIM - se copiaza octet cu octet, si primul caz de mai jos o
- * si verifica - deci ce se randeaza aici e chiar ce se livreaza, nu o repovestire a lui.
+ * CUM SE RANDEAZA COMPONENTELE INTR-O PROBA DE NOD. `tsconfig.json` are `jsx: preserve` - asa
+ * cere Next - iar Vite, care transforma fisierele probei, ar citi aceeasi setare si ar lasa JSX-ul
+ * netransformat. `vitest.config.ts` ii da probei `oxc.jsx.runtime = 'automatic'` (Vite 8 transforma cu
+ * oxc) si aliasul `@/`, deci
+ * componentele se importa DIRECT din `src/components`, cu calea lor reala. Prima varianta copia
+ * fisierele in node_modules/.cache si le importa de acolo cu o cale literala: local trecea (copia
+ * exista de la rularea dinainte), iar in CI `typecheck` - care ruleaza inaintea probelor - a picat
+ * cu TS2307, fiindca acolo copia nu exista inca. O cale care exista doar dupa ce a rulat proba nu
+ * poate fi verificata static de nimeni.
  */
 describe('eroul de pagina interioara si capitolul', () => {
-  const COPIE = join(RADACINA, 'node_modules', '.cache', 'proba-felie-3')
   const ANTET = readFileSync(join(COMPONENTE, 'AntetPagina.tsx'), 'utf8')
   const CAPITOL = readFileSync(join(COMPONENTE, 'Capitol.tsx'), 'utf8')
-
-  rmSync(COPIE, { recursive: true, force: true })
-  mkdirSync(COPIE, { recursive: true })
-  for (const f of ['AntetPagina.tsx', 'Buton.tsx', 'Capitol.tsx']) {
-    copyFileSync(join(COMPONENTE, f), join(COPIE, f))
-  }
 
   const AFIRMATIE = 'Actul se cere\u00a0azi.'
   const textul = (html: string) => html.replace(/<[^>]*>/g, '')
   const h1ul = (html: string): string[] => Array.from(html.match(/<h1[\s\S]*?<\/h1>/g) ?? [])
 
   async function erou(prop: Record<string, unknown>) {
-    const m = await import('../node_modules/.cache/proba-felie-3/AntetPagina')
+    const m = await import('../src/components/AntetPagina')
     return renderToStaticMarkup(
       createElement(m.default as never, {
         adresa: '/proba',
@@ -786,7 +780,7 @@ describe('eroul de pagina interioara si capitolul', () => {
   }
 
   async function capitol(prop: Record<string, unknown>) {
-    const m = await import('../node_modules/.cache/proba-felie-3/Capitol')
+    const m = await import('../src/components/Capitol')
     return renderToStaticMarkup(
       createElement(m.default as never, {
         id: 'capitolul',
@@ -798,16 +792,16 @@ describe('eroul de pagina interioara si capitolul', () => {
     )
   }
 
-  it('copia randata e chiar sursa livrata, octet cu octet', () => {
-    // CONTROLUL intregului mecanism de mai jos. Fara el, cazurile care randeaza ar putea masura o
-    // copie invechita - de exemplu daca cineva muta copierea intr-un `beforeAll` care nu mai
-    // ruleaza - si ar raporta verde despre un fisier care nu mai exista in forma aceea.
-    for (const f of ['AntetPagina.tsx', 'Buton.tsx', 'Capitol.tsx']) {
-      expect(
-        readFileSync(join(COPIE, f), 'utf8'),
-        'copia lui ' + f + ' nu mai e identica cu sursa',
-      ).toBe(readFileSync(join(COMPONENTE, f), 'utf8'))
-    }
+  it('componentele randate sunt chiar cele din src/components, nu o copie', async () => {
+    // CONTROLUL mecanismului de mai jos: proba importa sursa livrata, cu calea ei reala, si
+    // functia randata poarta numele exportului din fisier. Prima varianta randa o copie din
+    // node_modules/.cache; daca cineva reintroduce copia, calea de aici nu se mai potriveste.
+    const antet = await import('../src/components/AntetPagina')
+    const capitol = await import('../src/components/Capitol')
+    expect(typeof antet.default, 'AntetPagina nu exporta o componenta').toBe('function')
+    expect(typeof capitol.default, 'Capitol nu exporta o componenta').toBe('function')
+    expect(ANTET, 'sursa nu mai exporta implicit AntetPagina').toMatch(/export default function AntetPagina/)
+    expect(CAPITOL, 'sursa nu mai exporta implicit Capitol').toMatch(/export default function Capitol/)
   })
 
   it('eroul nu mai are grila de doua coloane si nu mai trece prin Ecran', async () => {
