@@ -64,16 +64,16 @@ export const TERMENE_ROMANIA: TermenCuAncora[] = TERMENE.map((t) => ({
 export const PAGINA_TERMENE = {
   titluMeta: "Termene de păstrare a documentelor",
   descriereMeta:
-    "Cât se păstrează registrele contabile, statele de salarii sau actele de stare civilă, cu actul normativ și articolul pe fiecare rând. România, atât.",
+    "Cât se păstrează registrele contabile, statele de salarii sau actele de stare civilă, cu actul normativ și cu articolul pe fiecare rând. Acoperim România, atât.",
   eticheta: "Instrument",
-  h1: "Vedeți cât se păstrează un document și din ce articol vine termenul.",
+  h1: "Termenul vine cu articolul.",
   // Nu mai exista camp `lead` pentru antet, si nu s-a pierdut niciun cuvant din el: textul
   // a coborat in `cuprins.subTabel`, sub randul de ancore. Motivul e masurat, nu de gust - vezi nota
   // din `src/app/instrumente/termene-de-pastrare/page.tsx`.
 
   acoperire: {
-    titlu: "România, atât. O scriem pe pagină, nu la subsol.",
-    lead: "Un tabel cu optsprezece jurisdicții arată bine până în ziua în care cineva îl folosește ca să apere o eliminare. Am ales lista scurtă, pe care o ducem la sursă rând cu rând.",
+    titlu: "România, atât.",
+    lead: "O listă cu optsprezece jurisdicții arată bine până în ziua în care cineva o folosește ca să apere o eliminare, deci am ales lista scurtă, pe care o ducem la sursă rând cu rând.",
     acoperit: [
       "Documente create sau deținute de organizații din România, sub lege română.",
       "Opt categorii frecvente: contabilitate, salarizare, personal, stare civilă, acte administrative locale, construcții, contracte comerciale, dosare de avocatură.",
@@ -82,12 +82,12 @@ export const PAGINA_TERMENE = {
     ],
     neacoperit: [
       "Republica Moldova. Motivul este mai jos, pe aceeași pagină.",
-      "Celelalte jurisdicții europene. Nu le-am citit la sursă, deci nu le scriem.",
-      "Nomenclatorul arhivistic al organizației dumneavoastră, care este termenul ce obligă efectiv.",
+      "Celelalte jurisdicții europene, pe care nu le-am citit la sursă.",
+      "Nomenclatorul arhivistic al organizației dumneavoastră, adică termenul care obligă efectiv.",
       "Termenele speciale din legislația sectorială: medical, farmaceutic, bancar, energetic.",
       "Prescripția fiscală și cea civilă, care pot curge din alte momente decât termenul de arhivare.",
     ],
-    nota: "Pagina nu este consultanță juridică și nu ține loc de aviz. Este lista actelor pe care le citim, scrisă astfel încât să le deschideți singur. Unde termenul practic vine din nomenclatorul propriu, nu dintr-o lege generală, rândul o spune pe el.",
+    nota: "Pagina nu este consultanță juridică și nu ține loc de aviz: este lista actelor pe care le citim, scrisă astfel încât să le deschideți singur. Unde termenul practic vine din nomenclatorul propriu, rândul o spune pe el.",
   },
 
   cuprins: {
@@ -96,8 +96,8 @@ export const PAGINA_TERMENE = {
     // antet, celalalt de deasupra tabelului - se citesc dupa randuri, unde nu mai tin pe
     // nimeni departe de raspuns.
     subTabel: [
-      "Opt categorii de documente, fiecare cu termenul, cu momentul din care începe să curgă și cu actul din care provine. Acoperim România. Unde nu putem arăta articolul, rândul rămâne gol și scriem de ce.",
-      "Actul normativ stă pe rând, sub numele categoriei, la orice lățime de ecran. Categoria duce la fișa întreagă, cu momentul din care curge termenul și cu nota lui.",
+      "Opt categorii de documente, fiecare cu termenul ei, cu momentul din care începe să curgă și cu actul din care provine. Unde nu putem arăta articolul, rândul rămâne gol și scriem de ce.",
+      "Actul normativ stă pe rând, sub numele categoriei, la orice lățime de ecran, iar categoria duce la fișa întreagă, cu momentul din care curge termenul și cu nota lui.",
     ],
     // Cele trei antete de coloana ale tabelului (categoria / termen / actul normativ) au
     // iesit odata cu tabelul, la reconcilierea lotului S1-b: DIRECTIA cere ca ce se taie din
@@ -108,7 +108,7 @@ export const PAGINA_TERMENE = {
   },
 
   fise: {
-    titlu: "Fiecare rând, cu actul lui.",
+    titlu: "Fiecare rând, actul lui.",
     // Propozitia asta a trimis de doua ori la un obiect care nu e pe pagina. Intai
     // „verificatorul de pe pagina de start" (`id="termene"` da zero potriviri, iar
     // `VerificatorTermene` nu e importat de nicio pagina), apoi „tabelul de mai sus", scris
@@ -117,49 +117,49 @@ export const PAGINA_TERMENE = {
     // si ordinea ei e ordinea fiselor - amandoua vin din `TERMENE_ROMANIA`, in aceeasi
     // iterare. Numele din text trebuie sa fie al lui; `tests/felie-juridic-referinte.test.ts`
     // masoara asta la fiecare rulare.
-    lead: "Ordinea este cea din lista de mai sus. Rândul fără cifră nu are cifră fiindcă nu am găsit articolul, nu fiindcă am uitat de el.",
+    lead: "Ordinea este cea din lista de mai sus, iar rândul fără cifră nu are cifră fiindcă nu am găsit articolul, nu fiindcă am uitat de el.",
   },
 
   moldova: {
-    titlu: "Republica Moldova urmează. Încă nu este aici.",
+    titlu: "Moldova nu e aici.",
     paragrafe: [
-      "Lucrăm pentru România și pentru Republica Moldova, iar întrebarea despre termenele moldovenești vine des. Pe pagina aceasta nu apare niciun termen moldovenesc.",
-      "Motivul nu ne avantajează: nu am citit actele moldovenești la sursă, articol cu articol. Un termen luat din memorie arată la fel cu unul corect, și tocmai de asta este mai periculos decât un rând gol. Cine îl folosește ca să apere o eliminare află diferența prea târziu.",
-      "Ne trebuie trei lucruri ca să apară aici: actul moldovenesc, articolul citit la sursă și confirmarea că forma citită este în vigoare. Când le avem, rândurile intră în aceeași listă, cu același temei pe rând, și se vede pe ele de unde vin.",
-      "Dacă lucrați cu arhive în Republica Moldova și cunoașteți actul și articolul, scrieți-ne. Adăugăm rândul cu trimiterea la act. Iar dacă ne arătați că un rând românesc contrazice actul citat, îl corectăm în pagină.",
+      "Lucrăm pentru România și pentru Republica Moldova, iar întrebarea despre termenele moldovenești vine des, dar pe pagina aceasta nu apare niciun termen moldovenesc.",
+      "Motivul nu ne avantajează: nu am citit actele moldovenești la sursă, articol cu articol. Un termen luat din memorie arată la fel cu unul corect, deci e mai periculos decât un rând gol.",
+      "Ne trebuie actul moldovenesc, articolul citit la sursă și confirmarea că forma citită este în vigoare. Când le avem, rândurile intră în aceeași listă, cu același temei pe rând.",
+      "Dacă lucrați cu arhive în Republica Moldova și cunoașteți actul și articolul, scrieți-ne și adăugăm rândul cu trimiterea la act. Dacă ne arătați că un rând românesc contrazice actul citat, îl corectăm în pagină.",
     ],
   },
 
   folosire: {
-    titlu: "Folosiți lista fără să vă puneți în pericol.",
+    titlu: "Folosiți lista cu grijă.",
     lead: "Patru lucruri pe care le întreabă un control și pe care o listă de termene, oricât de corectă, nu le rezolvă singură.",
     reguli: [
       {
-        titlu: "Termenul care obligă este cel din nomenclatorul propriu",
-        text: "Nomenclatorul avizat de Arhivele Naționale stabilește termenul pentru fiecare categorie. Când el spune altceva decât o listă tipărită de un furnizor, el câștigă, iar noi ne aliniem la el. Lista de aici este punctul de plecare al discuției cu comisia de selecționare.",
+        titlu: "Nomenclatorul propriu obligă.",
+        text: "Nomenclatorul avizat de Arhivele Naționale stabilește termenul fiecărei categorii, iar când el spune altceva decât o listă tipărită de un furnizor, el câștigă și noi ne aliniem la el.",
       },
       {
-        titlu: "Nimic nu se elimină fără comisie și fără aviz",
-        text: "Eliminarea trece prin comisia de selecționare, cu proces-verbal și cu inventarele documentelor propuse. Avizul Arhivelor Naționale vine înainte de distrugere. La control arătați procesul-verbal al comisiei, nu o adresă primită de la firma de arhivare.",
+        titlu: "Comisia și avizul obligă.",
+        text: "Eliminarea trece prin comisia de selecționare, cu proces-verbal și cu inventarele documentelor propuse, iar avizul Arhivelor Naționale vine înainte de distrugere. La control arătați procesul-verbal al comisiei.",
       },
       {
-        titlu: "Termenul permanent nu curge niciodată",
-        text: "Categoriile cu termen permanent fac parte din Fondul Arhivistic Național și nu se propun spre eliminare, indiferent câte rafturi ar elibera. Un asemenea document apărut într-un proces-verbal de eliminare este eroarea cea mai gravă pe care o găsește un control.",
+        titlu: "Termenul permanent nu curge.",
+        text: "Categoriile cu termen permanent fac parte din Fondul Arhivistic Național și nu se propun spre eliminare, indiferent câte rafturi ar elibera, iar apariția lor într-un proces-verbal de eliminare este eroarea cea mai gravă.",
       },
       {
-        titlu: "Rândurile orientative se confirmă înainte de orice decizie",
-        text: "Un rând orientativ are temei general citabil, dar cifra din el vine din practica nomenclatoarelor avizate, nu dintr-un articol care o scrie ca atare. Diferența contează exact în clipa în care cineva vă cere temeiul, deci se confirmă înainte, nu atunci.",
+        titlu: "Orientativul se confirmă întâi.",
+        text: "Un rând orientativ are temei general citabil, dar cifra din el vine din practica nomenclatoarelor avizate, iar diferența contează exact în clipa în care cineva vă cere temeiul.",
       },
     ],
     temeiuri: [
       "Legea Arhivelor Naționale nr. 16/1996: evidența documentelor create și primite, gruparea lor pe termene într-un nomenclator avizat, condițiile de păstrare și selecționarea numai prin comisie, cu aviz.",
       "Instrucțiunile privind activitatea de arhivă la creatorii și deținătorii de documente, aprobate prin Ordinul de zi nr. 217/1996 al Arhivelor Naționale: partea practică a aceleiași obligații.",
     ],
-    nota: "Instrumentul nu înlocuiește nomenclatorul avizat și nu este temei pentru eliminarea vreunui document. Numerele de articol sunt cele culese odată cu termenele, din actele citate pe fiecare rând; nu le-am recitit la sursă în ziua în care s-a scris pagina, iar un arhivist autorizat confirmă lista înainte de publicare. Dacă găsiți un rând care contrazice actul citat, scrieți-ne: corectăm în pagină, ca să vadă și următorul cititor corectura.",
+    nota: "Instrumentul nu înlocuiește nomenclatorul avizat și nu este temei pentru eliminarea vreunui document. Numerele de articol au fost culese odată cu termenele, din actele citate pe fiecare rând, și nu au fost recitite la sursă în ziua scrierii paginii; un arhivist autorizat confirmă lista înainte de publicare. Dacă găsiți un rând care contrazice actul citat, scrieți-ne și corectăm în pagină.",
   },
 
   incheiere: {
-    titlu: "Plecați cu o listă de categorii și termene, în treizeci de minute.",
-    text: "Discuția începe de la fondul dumneavoastră, nu de la ofertă: câți metri liniari, ce categorii, ce se cere des, ce are termen permanent. Lista care iese o duceți la comisia de selecționare, indiferent dacă lucrăm împreună mai departe.",
+    titlu: "Plecați cu o listă.",
+    text: "Discuția începe de la fondul dumneavoastră, câți metri liniari, ce categorii, ce se cere des și ce are termen permanent, iar lista care iese o duceți la comisia de selecționare, indiferent dacă lucrăm împreună.",
   },
 };

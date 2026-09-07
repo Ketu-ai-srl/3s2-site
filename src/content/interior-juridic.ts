@@ -1,4 +1,4 @@
-// Textele NOI de interfata cerute de gramatica paginii interioare REF-V pe paginile
+// Textele NOI de interfata cerute de gramatica paginii interioare pe paginile
 // feliei juridice: acte (/termeni, /confidentialitate, /cookies), declaratia de
 // accesibilitate, instrumentul de termene, harta site-ului si pagina de 404.
 //
@@ -9,9 +9,10 @@
 // cuprinsul lipicios, nici randul de ancore, nici pastilele de stare. Tinute separat, se
 // vede dintr-o privire ce a adaugat valul S1-b si ce a mostenit.
 //
-// VOCEA: propozitii scurte, litera obisnuita, „dumneavoastra" ca adresare. Eticheta NU are
-// punct la final - o eticheta cu punct e agramata, si a fost defect reparat la valul S1-a.
-// Propozitiile intregi au punct.
+// VOCEA REF-A (rescris 2026-09-07): titlul e o AFIRMATIE de doua-patru cuvinte cu punct,
+// urmata de o singura propozitie de explicatie. Litera obisnuita, „dumneavoastra" ca
+// adresare. Eticheta NU are punct la final - o eticheta cu punct e agramata, si a fost
+// defect reparat la valul S1-a. Propozitiile intregi au punct.
 
 /** Cuprinsul unui act: coloana lipicioasa la 1440, acordeon deasupra textului la 390. */
 export const CUPRINS = {
@@ -26,12 +27,12 @@ export const ANCORE_TERMENE = {
   eticheta: "Săriți la o categorie",
   /** Rezumatul listei de ancore, pentru cititorul de ecran. Nu e tabel: vezi `TermeneCuprins`. */
   descriere:
-    "Cele opt categorii de documente din pagina aceasta, fiecare cu termenul și cu actul normativ din care vine. Numele categoriei duce la fișa ei întreagă.",
+    "Opt categorii de documente, fiecare cu termenul ei și cu actul din care vine, iar numele categoriei duce la fișa întreagă.",
 };
 
 /** Randul cu ancorele paginii de start, din harta site-ului. */
 export const ANCORE_ACASA = {
-  eticheta: "Locuri din pagina de start",
+  eticheta: "Din pagina de start",
 };
 
 /** Lista lucrurilor care lipsesc: liniuta, nu bifa. */
@@ -41,13 +42,14 @@ export const LIPSA = {
 };
 
 /**
- * Pagina de 404. Textele sunt cele scrise deja in `src/app/not-found.tsx`, mutate aici
- * cuvant cu cuvant: nu s-a rescris niciun rand, s-a schimbat doar locul in care sta.
+ * Pagina de 404. Textele au venit din `src/app/not-found.tsx` si au fost rescrise in vocea
+ * REF-A la valul S2-a: titlul e afirmatie scurta, explicatia o singura propozitie. Cheile si
+ * numarul de campuri sunt cele de dinainte, fiindca pagina le citeste pe nume.
  */
 export const NEGASITA = {
   eticheta: "Adresă negăsită",
-  titlu: "Adresa asta nu duce la nicio pagină.",
-  text: "Fie adresa a fost scrisă altfel, fie pagina pe care o căutați nu există pe acest site. Mai jos sunt patru drumuri scurte.",
+  titlu: "Adresa nu duce nicăieri.",
+  text: "Fie a fost scrisă altfel, fie pagina pe care o căutați nu există pe acest site, iar mai jos sunt patru drumuri scurte.",
   drumuri: "Drumuri",
   buton: "Înapoi la pagina de start",
 };

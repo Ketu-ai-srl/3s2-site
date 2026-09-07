@@ -17,9 +17,11 @@
 // Fiecare afirmatie verificabila de mai jos are o intrare in
 // `src/content/afirmatii/comparatie-investitia.json`, cu stare `neconfirmat`.
 //
-// VOCE (rescris 2026-09-06): propozitii scurte, raspunsul intai. Numele celor patru
-// variante raman NUME - sunt etichete de coloana, nu afirmatii; titlurile care sustin
-// ceva sunt propozitii cu punct.
+// VOCE REF-A (rescris 2026-09-07): titlul care sustine ceva e o AFIRMATIE de doua-patru
+// cuvinte, cu punct, urmata de o singura propozitie de explicatie, intre 15 si 35 de
+// cuvinte. Numele celor patru variante raman NUME - sunt etichete de coloana, nu afirmatii,
+// deci nu au punct si nu se transforma in propozitii. Celulele tabelului raspund pe scurt,
+// fara superlative si fara comparatie de reclama.
 
 /** O coloana din tabelul de comparatie: una dintre cele patru variante reale. */
 export type ColoanaComparatie = {
@@ -67,35 +69,35 @@ export type FactorCost = {
 export const COMPARATIE = {
   titluMeta: "Dulap propriu sau arhivă administrată",
   descriereMeta:
-    "Patru feluri de a ține arhiva: dulapul din birou, colegul care se ocupă și de ea, depozitarea fără căutare, arhiva administrată. Și când nu merită.",
+    "Patru feluri de a ține arhiva: dulapul din birou, colegul care se ocupă de ea, depozitarea fără căutare și arhiva administrată. Plus cazurile în care nu merită.",
   eticheta: "Comparație",
-  h1: "Dulapul din birou nu vă trimite factură. Costul lui este în altă parte.",
+  h1: "Dulapul nu trimite factură.",
   // Sub 40 de cuvinte, regula directiei. Motivul pentru care nu comparam spatii de stocare
   // intre ele - documentele clientului sunt inca hartie - sta in linia sectiunii I, unde sunt
   // si cele patru variante descrise pe indelete. Nimic nu s-a pierdut.
   lead:
-    "Documentele dumneavoastră sunt încă hârtie, în dulapuri, la câțiva pași de birou. Comparăm cele patru situații reale dintre care alegeți. Rândul pe care îl pierdem este scris înaintea celor pe care le câștigăm.",
+    "Documentele dumneavoastră sunt încă hârtie, la câțiva pași de birou, deci comparăm cele patru situații reale dintre care alegeți, cu rândul pe care îl pierdem scris primul.",
 
   variante: [
     {
       titlu: "Dulapul din birou",
       text:
-        "Documentele rămân la câțiva pași. Nu semnați nimic, nu plătiți lunar și nu cereți voie ca să deschideți un biblioraft. Ordinea, condițiile de păstrare și evidența ies însă din timpul dumneavoastră, iar rafturile stau pe metri pătrați de birou.",
+        "Documentele rămân la câțiva pași, fără contract și fără plată lunară, dar ordinea, condițiile de păstrare și evidența ies din timpul dumneavoastră, iar rafturile ocupă metri pătrați de birou.",
     },
     {
-      titlu: "Colegul care se ocupă și de arhivă",
+      titlu: "Colegul care se ocupă",
       text:
-        "Cineva din firmă cunoaște fondul și găsește repede ce a aranjat singur. Sarcina nu are fișă separată, deci se face după celelalte. Felul în care este ordonat fondul nu este scris nicăieri: stă în memoria unei singure persoane.",
+        "Cineva din firmă cunoaște fondul și găsește repede ce a aranjat singur, dar sarcina nu are fișă separată, iar ordinea fondului stă în memoria unei singure persoane.",
     },
     {
       titlu: "Depozitare fără căutare",
       text:
-        "Cutiile pleacă din birou, spațiul se eliberează, iar condițiile de păstrare devin problema depozitului. Drumul până la un act rămâne același: cereți o cutie după inventar și așteptați. Dacă nu știți în care cutie se află, nici depozitul nu știe.",
+        "Cutiile pleacă din birou și condițiile de păstrare devin problema depozitului, însă drumul până la un act rămâne același: cereți o cutie după inventar și așteptați.",
     },
     {
       titlu: "Arhivă administrată",
       text:
-        "Fondul intră pe cote, ce se cere des se scanează, iar întrebarea pusă în română primește documentul și pagina. Originalul rămâne al dumneavoastră și se aduce la cerere, cu ieșirea și cu returul consemnate.",
+        "Fondul intră pe cote, ce se cere des se scanează, întrebarea pusă în română primește documentul și pagina, iar originalul rămâne al dumneavoastră și se aduce la cerere.",
     },
   ] as FisaComparatie[],
 
@@ -125,114 +127,114 @@ export const COMPARATIE = {
 
   randuri: [
     {
-      axa: "Cine răspunde dacă un act lipsește",
+      axa: "Cine răspunde la o lipsă",
       celule: [
-        "Dumneavoastră, în fața celui care îl cere. Nimeni nu poate spune când a ieșit actul din raft și cine l-a scos.",
-        "Tot dumneavoastră. Persoana care se ocupă poartă sarcina, nu răspunderea, iar dacă nu s-a semnat nimic la preluare nu se reconstituie nimic.",
-        "Depozitul răspunde de cutia predată, în limitele procesului-verbal. Ce era în cutie și nu s-a numărat la preluare rămâne o discuție fără hârtie.",
-        "Răspundem de ce am preluat numărat. Procesul-verbal și inventarul spun exact ce am preluat, iar ieșirile și returul originalelor se consemnează pe cotă.",
+        "Dumneavoastră, în fața celui care cere actul, fiindcă nimeni nu poate spune când a ieșit din raft și cine l-a scos.",
+        "Tot dumneavoastră: persoana care se ocupă poartă sarcina, iar fără o semnătură la preluare nu se reconstituie nimic.",
+        "Depozitul răspunde de cutia predată, în limitele procesului-verbal, iar ce nu s-a numărat la preluare rămâne o discuție fără hârtie.",
+        "Răspundem de ce am preluat numărat, iar ieșirile și returul originalelor se consemnează pe cotă.",
       ],
     },
     {
-      axa: "Ce se întâmplă la un control",
+      axa: "Ce se vede la control",
       celule: [
-        "Documentul există, dovada ordinii lui nu. Nomenclatorul și inventarul ajung să fie căutate chiar în ziua în care sunt cerute.",
-        "Depinde de cât a apucat să scrie persoana care se ocupă. De obicei fondul este ordonat în capul ei, nu într-un inventar semnat.",
-        "Aveți procesul-verbal și inventarul cutiilor. Lipsește legătura dintre cererea inspectorului și pagina din document.",
-        "Inventarul pe cote și nomenclatorul există înainte de control, iar actul cerut vine cu documentul și pagina. Unde nomenclatorul are nevoie de avizul Arhivelor Naționale, termenul avizului nu este al nostru.",
+        "Documentul există, dovada ordinii lui nu, iar nomenclatorul și inventarul ajung să fie căutate chiar în ziua în care sunt cerute.",
+        "Depinde de cât a apucat să scrie persoana care se ocupă, fiindcă de obicei fondul e ordonat în capul ei.",
+        "Aveți procesul-verbal și inventarul cutiilor, dar lipsește legătura dintre cererea inspectorului și pagina din document.",
+        "Inventarul pe cote și nomenclatorul există înainte de control, iar actul cerut vine cu documentul și pagina; termenul avizului rămâne al Arhivelor Naționale.",
       ],
     },
     {
-      axa: "Cât durează găsirea unui act din 2009",
+      axa: "Cât ia un act din 2009",
       celule: [
-        "Cât îi ia cuiva să urce la rafturi și să deschidă bibliorafturile, în ordinea în care își amintește. Dacă anul este greșit în minte, se reia.",
-        "Puțin, dacă persoana este la birou și a aranjat ea fondul. Altfel, cât ia unui coleg să reconstituie logica ei.",
-        "Cât ia să identificați cutia în inventar, să o cereți și să sosească. Dacă actul nu este în cutia bănuită, ciclul se reia.",
-        "Cât ia să scrieți întrebarea. Răspunsul vine cu documentul și pagina; originalul se cere separat, atunci când vă trebuie hârtia semnată.",
+        "Cât îi ia cuiva să urce la rafturi și să deschidă bibliorafturile în ordinea în care își amintește, iar dacă anul e greșit în minte se reia.",
+        "Puțin, dacă persoana e la birou și a aranjat ea fondul; altfel, cât ia unui coleg să reconstituie logica ei.",
+        "Cât ia să identificați cutia în inventar, să o cereți și să sosească, iar dacă actul nu e acolo ciclul se reia.",
+        "Cât ia să scrieți întrebarea, fiindcă răspunsul vine cu documentul și pagina; originalul se cere separat, când vă trebuie hârtia semnată.",
       ],
     },
     {
-      axa: "Ce rămâne când pleacă omul care știa unde e fiecare cutie",
+      axa: "Ce rămâne când pleacă omul",
       celule: [
-        "Rămâne dulapul, fără cheia lui de citire. Ordinea era în memoria cuiva, iar memoria a plecat cu preavizul.",
-        "Pleacă deodată și sarcina, și harta fondului. Cine vine după reconstituie ordinea de la zero, cutie cu cutie.",
-        "Inventarul cutiilor rămâne, deci nu se pierde tot. Se pierde legătura dintre o cerere concretă și cutia potrivită.",
-        "Cota, inventarul și indexul rămân scrise. Cine vine după nu moștenește o memorie, ci un inventar pe care îl citește din prima zi.",
+        "Rămâne dulapul, fără cheia lui de citire, fiindcă ordinea era în memoria cuiva care a plecat cu preavizul.",
+        "Pleacă deodată și sarcina, și harta fondului, iar cine vine după reconstituie ordinea de la zero, cutie cu cutie.",
+        "Inventarul cutiilor rămâne, deci nu se pierde tot, dar se pierde legătura dintre o cerere concretă și cutia potrivită.",
+        "Cota, inventarul și indexul rămân scrise, deci cine vine după citește un inventar din prima zi.",
       ],
     },
     {
-      axa: "Ce cost ascuns are spațiul ocupat de rafturi",
+      axa: "Cât costă spațiul ocupat",
       celule: [
-        "Metrii pătrați ocupați de arhivă se plătesc la prețul biroului, nu la cel al unui depozit. Costul nu apare pe nicio factură: este deja în chirie.",
+        "Metrii pătrați ocupați de arhivă se plătesc la prețul biroului, iar costul nu apare pe nicio factură fiindcă e deja în chirie.",
         "Același cost al spațiului, plus orele în care cineva plătit pentru altceva caută prin cutii.",
-        "Spațiul se eliberează, iar costul devine vizibil: apare pe factură, măsurat pe metru liniar.",
-        "La fel ca la depozitare, spațiul se eliberează și costul devine o linie pe care o comparați. Se adaugă digitizarea a ceea ce se caută des.",
+        "Spațiul se eliberează, iar costul devine vizibil pe factură, măsurat pe metru liniar.",
+        "Spațiul se eliberează și costul devine o linie pe care o comparați, la care se adaugă digitizarea a ceea ce se caută des.",
       ],
     },
     {
       axa: "Ce rămâne dacă vă opriți",
       celule: [
-        "Nimic de desfăcut. Documentele sunt deja la dumneavoastră și nu depind de nimeni.",
-        "La fel. Riscul aici este plecarea persoanei, nu încheierea unui contract.",
-        "Se cere restituirea și se așteaptă termenul din contract. Cutiile se întorc așa cum au plecat.",
-        "Fondul fizic se restituie cu proces-verbal și inventar. Fondul digital se predă în format deschis, ca preluarea lui de către altcineva să nu depindă de noi.",
+        "Nimic de desfăcut, fiindcă documentele sunt deja la dumneavoastră și nu depind de nimeni.",
+        "La fel, iar riscul aici este plecarea persoanei, nu încheierea unui contract.",
+        "Se cere restituirea și se așteaptă termenul din contract, iar cutiile se întorc așa cum au plecat.",
+        "Fondul fizic se restituie cu proces-verbal și inventar, iar cel digital se predă în format deschis, ca preluarea lui să nu depindă de noi.",
       ],
     },
   ] as RandComparatie[],
 
   notaTabel:
-    "Rândurile de mai sus descriu mecanisme, nu măsurători. Nu punem durate și nu punem sume pentru niciuna dintre cele patru variante: nu am măsurat fondul dumneavoastră, iar o cifră luată din media altor arhive ar arăta a dovadă fără să fie.",
+    "Rândurile de mai sus descriu mecanisme, nu măsurători: nu punem durate și nu punem sume pentru niciuna dintre cele patru variante, fiindcă nu am măsurat fondul dumneavoastră, iar o cifră luată din media altor arhive ar arăta a dovadă fără să fie.",
 
   pierdem: [
     {
-      titlu: "Costul apare înainte de primul răspuns.",
+      titlu: "Costul vine înainte.",
       text:
-        "Un dulap în birou nu are factură lunară. Preluarea, inventarierea și digitizarea se plătesc înainte să vedeți primul răspuns cu pagina citată. Dacă bugetul de anul acesta nu are loc pentru ele, comparația se oprește aici. Este un răspuns corect, nu o obiecție de tratat.",
+        "Preluarea, inventarierea și digitizarea se plătesc înainte să vedeți primul răspuns cu pagina citată, iar dacă bugetul de anul acesta nu are loc pentru ele, comparația se oprește aici.",
     },
     {
-      titlu: "Originalul nu mai este la doi pași.",
+      titlu: "Originalul pleacă din birou.",
       text:
-        "Dacă folosiți zilnic hârtia semnată, mâna dumneavoastră va fi mai rapidă decât orice depozit. Aducem originalul la cerere, cu termen scris în contract, dar termenul acela se adaugă la fiecare cerere. Pentru fondul viu, cel de anul în curs, dulapul din birou câștigă.",
+        "Aducem originalul la cerere, cu termen scris în contract, dar termenul acela se adaugă la fiecare cerere, deci pentru fondul viu, cel din anul în curs, dulapul din birou câștigă.",
     },
     {
-      titlu: "Apare un contract și încă cineva în lanț.",
+      titlu: "Apare un contract.",
       text:
-        "Astăzi nu cereți voie nimănui ca să deschideți un biblioraft. După preluare, între dumneavoastră și cutie stau un contract, un termen și o persoană de la noi. Câștigați evidență scrisă și pierdeți imediatețe. Schimbul merită numai dacă evidența vă lipsește cu adevărat.",
+        "După preluare, între dumneavoastră și cutie stau un contract, un termen și o persoană de la noi, deci câștigați evidență scrisă și pierdeți imediatețea unui biblioraft deschis pe loc.",
     },
     {
-      titlu: "Colegul care ține arhiva știe ce nu scrie în documente.",
+      titlu: "Colegul știe contextul.",
       text:
-        "Omul care se ocupă de fond de ani buni știe de ce s-a făcut un lucru, nu doar că s-a făcut. Contextul acela nu este în niciun document, deci nu îl găsește nici căutarea noastră. Pe un fond mic, el bate orice index.",
+        "Omul care ține fondul de ani buni știe de ce s-a făcut un lucru, iar contextul acela nu stă în niciun document, deci pe un fond mic el bate orice index.",
     },
   ] as FisaComparatie[],
 
   nuMerita: [
     {
-      titlu: "Arhiva încape într-un dulap și se cere rar.",
+      titlu: "Arhiva încape într-un dulap.",
       text:
-        "Dacă tot fondul stă într-un dulap, dacă îl caută cineva de câteva ori pe an și dacă persoana care îl ține nu are de gând să plece, un contract de arhivare vă adaugă cost și hârtii, nu liniște. Cutii de arhivă, un inventar scris de mână și puțină disciplină rezolvă mai bine decât noi.",
+        "Când fondul stă într-un dulap, se caută rar și îl ține cineva care nu pleacă, un contract de arhivare adaugă cost și hârtii; cutii, un inventar de mână și puțină disciplină rezolvă mai bine.",
     },
     {
-      titlu: "Documentele sunt deja scanate și ordonate.",
+      titlu: "Documentele sunt deja scanate.",
       text:
-        "Dacă fondul este deja digital, cu nume de fișier care înseamnă ceva, și lipsește doar căutarea, partea de rafturi, transport și inventariere nu vă folosește. Comparați numai stratul de căutare, cu furnizorii care vând asta. O spunem din prima discuție, nu după ofertă.",
+        "Când fondul e deja digital, cu nume de fișier care înseamnă ceva, rafturile, transportul și inventarierea nu vă folosesc, deci comparați numai stratul de căutare, cu furnizorii care vând asta.",
     },
     {
-      titlu: "Fondul urmează la selecționare chiar anul acesta.",
+      titlu: "Fondul iese la selecționare.",
       text:
-        "Nu se plătește depozitarea și digitizarea a ceea ce se elimină legal peste câteva luni. Întâi selecționarea, cu avizul cerut de lege, apoi discuția despre ce rămâne. Invers, plătiți transport și rafturi pentru hârtie care se distruge.",
+        "Nu se plătesc depozitarea și digitizarea a ceea ce se elimină legal peste câteva luni, deci întâi selecționarea, cu avizul cerut de lege, apoi discuția despre ce rămâne.",
     },
     {
-      titlu: "Caietul de sarcini cere o certificare pe care nu o deținem.",
+      titlu: "Caietul cere o certificare.",
       text:
-        "Dacă achiziția dumneavoastră condiționează contractul de o certificare anume, spuneți-o în prima discuție. Nu afișăm certificări pe care nu le avem. Dacă cerința nu se poate acoperi, o aflați în ziua în care aflăm și noi, nu la sfârșitul procedurii.",
+        "Când achiziția condiționează contractul de o certificare anume, spuneți-o în prima discuție: nu afișăm certificări pe care nu le avem, iar dacă cerința nu se poate acoperi, aflați în aceeași zi cu noi.",
     },
   ] as FisaComparatie[],
 
   incheiere: {
-    titlu: "Dacă niciun rând de mai sus nu vă descrie situația, măsurăm împreună.",
+    titlu: "Măsurăm împreună.",
     text:
-      "O comparație publică nu știe câți metri liniari aveți, ce se cere din ei și cât de des. Jumătatea de oră există exact pentru asta: se măsoară fondul împreună și se spune, inclusiv, dacă nu merită.",
+      "O comparație publică nu știe câți metri liniari aveți, ce se cere din ei și cât de des, iar jumătatea de oră există ca să măsurăm fondul și să spunem, inclusiv, dacă nu merită.",
   },
 };
 
@@ -243,45 +245,45 @@ export const COMPARATIE = {
 export const INVESTITIA = {
   titluMeta: "Ce determină costul arhivării",
   descriereMeta:
-    "Ce intră în cost înainte să existe o cifră: metri liniari, cât se scanează, cât de des se cere un act, termenele legale, transportul. Ce e unic și ce e lunar.",
+    "Ce intră în cost înainte de orice cifră: metri liniari, cât se scanează, cât de des se cere un act, termenele legale, transportul. Ce e unic și ce e lunar.",
   eticheta: "Investiția",
-  h1: "Un preț dat înainte de a măsura rafturile este un preț inventat.",
+  h1: "Prețul vine după măsurătoare.",
   // Sub 40 de cuvinte. Ce primeste omul din discutia de treizeci de minute e chiar
   // sectiunea IV, iar motivul pentru care cifra vine dupa masuratoare e chiar sectiunea III.
   // Nimic nu s-a pierdut.
   lead:
-    "Pagina aceasta nu conține prețuri și nici intervale. Conține ce determină costul, ce se plătește o singură dată și ce se plătește lună de lună.",
+    "Fără prețuri și fără intervale: mai jos stau elementele care determină costul, cele care se plătesc o singură dată și cele care se plătesc lună de lună.",
 
   factori: [
     {
       titlu: "Metrii liniari de arhivă",
       text:
-        "Un fond se măsoară în metri liniari de raft ocupat, nu în număr de dosare și nici în ani. Măsurătoarea se face la fața locului, cu ruleta, înainte de orice discuție despre bani.",
+        "Un fond se măsoară în metri liniari de raft ocupat, nu în dosare și nici în ani, iar măsurătoarea se face la fața locului, cu ruleta, înainte de orice discuție despre bani.",
       creste:
         "fondul este împrăștiat în mai multe sedii, prin dulapuri și subsoluri, și nu a fost niciodată inventariat",
       scade:
         "fondul stă deja în cutii, ordonat pe ani, și se poate măsura dintr-o singură trecere",
     },
     {
-      titlu: "Cât se scanează și cât rămâne doar depozitat",
+      titlu: "Cât se scanează",
       text:
-        "Digitizarea este partea cea mai scumpă, iar o pagină scanată și niciodată căutată este bani cheltuiți degeaba. Împărțirea între ce se scanează și ce rămâne pe raft se face înainte de prima cutie deschisă și intră în contract.",
+        "Digitizarea este partea cea mai scumpă, iar împărțirea între ce se scanează și ce rămâne pe raft se face înainte de prima cutie deschisă și intră în contract.",
       creste:
         "se cere digitizarea integrală a fondului, inclusiv a ceea ce nu s-a mai deschis de ani buni",
       scade:
         "se scanează întâi categoriile cerute des, iar restul rămâne pe raft și vine la cerere",
     },
     {
-      titlu: "Cât de des se cere un act din arhivă",
+      titlu: "Frecvența cererilor",
       text:
-        "Un fond care se atinge rar înseamnă în principal depozitare. Un fond din care se cere zilnic ceva înseamnă acces, căutare și scoateri de originale, adică muncă recurentă.",
+        "Un fond care se atinge rar înseamnă în principal depozitare, iar unul din care se cere zilnic ceva înseamnă acces, căutare și scoateri de originale, adică muncă recurentă.",
       creste: "cererile vin zilnic, de la mai multe persoane, și au termen legal de răspuns",
       scade: "fondul se caută de câteva ori pe an, iar cererile nu au termen",
     },
     {
-      titlu: "Termenele legale și nomenclatorul",
+      titlu: "Termenele și nomenclatorul",
       text:
-        "Categoriile cu termen lung stau în depozit mult după ce restul fondului a fost eliminat legal, deci se plătesc mai mult timp. Nomenclatorul arhivistic decide ce categorie este fiecare document, iar fără el nu se poate elimina nimic.",
+        "Categoriile cu termen lung stau în depozit mult după ce restul fondului a fost eliminat legal, iar nomenclatorul arhivistic decide ce categorie este fiecare document.",
       creste:
         "nomenclatorul lipsește sau nu a fost avizat, deci se întocmește, iar avizul Arhivelor Naționale nu depinde de noi",
       scade:
@@ -290,24 +292,24 @@ export const INVESTITIA = {
     {
       titlu: "Starea fizică a fondului",
       text:
-        "Hârtia curată, în format obișnuit, se scanează dintr-o trecere. Documentele legate strâns, capsate, mucegăite sau în formate mari cer manipulare separată, iar manipularea separată este timp de om, nu timp de scaner.",
+        "Hârtia curată, în format obișnuit, se scanează dintr-o trecere, iar documentele legate strâns, capsate, mucegăite sau în formate mari cer manipulare separată, adică timp de om.",
       creste:
         "dosare cusute, capse, hârtie deteriorată, planuri și formate mari, documente lipite între ele",
       scade:
         "hârtie în stare bună, format obișnuit, deja scoasă din bibliorafturi și așezată în cutii",
     },
     {
-      titlu: "Transportul și accesul la sediul dumneavoastră",
+      titlu: "Transportul și accesul",
       text:
-        "Fondul trebuie să ajungă în depozit. Costul transportului nu vine din distanță, ci din câte curse sunt necesare și din cât durează încărcarea la dumneavoastră.",
+        "Fondul trebuie să ajungă în depozit, iar costul transportului iese din numărul de curse și din cât durează încărcarea la sediul dumneavoastră.",
       creste: "mai multe sedii, subsol fără lift, program de acces limitat, mai multe curse",
       scade:
         "un singur punct de preluare, acces la nivelul străzii, o zi în care se poate lucra fără întrerupere",
     },
     {
-      titlu: "Urgența cu care trebuie eliberat spațiul",
+      titlu: "Urgența eliberării spațiului",
       text:
-        "Un calendar convenit din timp înseamnă loturi așezate pe săptămâni și oameni programați normal. Un termen impus de altcineva înseamnă echipă suplimentară și lucru în afara programului.",
+        "Un calendar convenit din timp înseamnă loturi așezate pe săptămâni și oameni programați normal, iar un termen impus de altcineva înseamnă echipă suplimentară și lucru în afara programului.",
       creste:
         "termenul vine de la un control anunțat, de la o mutare de sediu sau de la sfârșitul unui contract de chirie",
       scade: "preluarea se poate așeza într-un calendar convenit împreună, pe loturi",
@@ -331,29 +333,29 @@ export const INVESTITIA = {
   ],
 
   notaCosturi:
-    "Un element nu intră în nicio coloană: avizul Arhivelor Naționale, cerut la nomenclator și la selecționare. Nu îl emitem noi, nu îl grăbim și nu îi promitem termenul. Îl pregătim și îl depunem, iar restul se așteaptă.",
+    "Un element nu intră în nicio coloană: avizul Arhivelor Naționale, cerut la nomenclator și la selecționare. Nu îl emitem, nu îl grăbim și nu îi promitem termenul; îl pregătim, îl depunem, iar restul se așteaptă.",
 
   deCeFaraPret: [
     {
-      titlu: "Nu am măsurat fondul dumneavoastră.",
+      titlu: "Nu am măsurat fondul.",
       text:
-        "Un preț pe metru liniar scris pe un site este media altor arhive, ale altor firme, cu altă stare a hârtiei. Pus lângă fondul dumneavoastră, arată a dovadă fără să fie. Preferăm o pagină fără cifre unei pagini cu cifre pe care nu le putem susține.",
+        "Un preț pe metru liniar scris pe un site este media altor arhive, cu altă stare a hârtiei, iar pus lângă fondul dumneavoastră arată a dovadă fără să fie.",
     },
     {
-      titlu: "Prima cifră citită rămâne ancora discuției.",
+      titlu: "Prima cifră devine ancoră.",
       text:
-        "Dacă publicăm un număr, el devine reperul întregii discuții, chiar dacă fondul dumneavoastră nu seamănă cu cel din care a ieșit numărul. Ancorarea lucrează în favoarea celui care publică cifra, deci nu v-ar fi de folos.",
+        "Un număr publicat devine reperul întregii discuții, chiar dacă fondul dumneavoastră nu seamănă cu cel din care a ieșit, iar ancorarea lucrează în favoarea celui care publică cifra.",
     },
     {
-      titlu: "Cu patru întrebări comparați orice ofertă.",
+      titlu: "Patru întrebări ajung.",
       text:
-        "Cereți fiecărui furnizor: în ce unitate se măsoară tariful, ce intră în el și ce se facturează separat, în cât timp ajunge la dumneavoastră un original cerut, ce se întâmplă cu fondul la încheierea contractului. La aceleași patru răspundem și noi, în scris.",
+        "Cereți fiecărui furnizor unitatea în care se măsoară tariful, ce intră în el și ce se facturează separat, în cât timp ajunge un original cerut și ce se întâmplă cu fondul la încheierea contractului.",
     },
   ] as FisaComparatie[],
 
   primiti: [
-    "O estimare de volum: metrii liniari, măsurați împreună sau estimați pe ce ne arătați",
-    "Un calendar de preluare scris: ce lot pleacă primul, când, și ce rămâne pe loc la dumneavoastră",
+    "O estimare de volum, cu metrii liniari măsurați împreună sau estimați pe ce ne arătați",
+    "Un calendar de preluare scris: ce lot pleacă primul, când, și ce rămâne pe loc",
     "Lista categoriilor care se pot elimina legal acum, ca să nu plătiți depozitarea lor",
     "Împărțirea de plecare între ce se scanează și ce rămâne pe raft, cu motivul fiecărei alegeri",
     "Răspunsul scris la cele patru întrebări de mai sus, ca să ne puteți compara cu altcineva",
@@ -361,14 +363,14 @@ export const INVESTITIA = {
 
   nuPrimiti: [
     "Un preț, cât timp nu s-a văzut arhiva și nu s-au măsurat rafturile",
-    "O ofertă trimisă a doua zi, ca să pară promptă, construită pe presupuneri despre fondul dumneavoastră",
+    "O ofertă trimisă a doua zi, construită pe presupuneri despre fondul dumneavoastră",
     "Un termen pentru avizul Arhivelor Naționale, fiindcă nu îl dăm noi",
     "O reducere condiționată de semnătura de astăzi",
   ],
 
   incheiere: {
-    titlu: "Cifra vine după măsurătoare, în scris.",
+    titlu: "Estimarea pleacă în scris.",
     text:
-      "Jumătatea de oră servește la asta: se vede unde stă arhiva, cât ocupă, ce se cere din ea și ce se poate elimina legal chiar acum. Estimarea și calendarul de preluare pleacă spre dumneavoastră în scris, iar prețul vine după, pe ce s-a măsurat.",
+      "În jumătatea de oră se vede unde stă arhiva, cât ocupă, ce se cere din ea și ce se poate elimina legal acum, iar estimarea și calendarul de preluare pleacă spre dumneavoastră scrise.",
   },
 };
