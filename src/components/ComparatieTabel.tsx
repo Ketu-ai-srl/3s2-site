@@ -1,15 +1,18 @@
 import { Fragment } from "react";
 import type { ColoanaComparatie, RandComparatie } from "@/content/comparatie";
 
-// Tabelul de comparatie, asezat pe gramatica REF-V: un card mare, alb, cu raza de 16 px, pus
-// pe o sectiune de ceata; linii `linie`; capul de tabel la 14 px, greutatea 600; coloana
-// noastra marcata o singura data, cu `violet-pal`. Fara umbra - cardul se desparte de
-// sectiune prin culoarea lui de fundal, ca in `Card.tsx`.
+// TABELUL DE COMPARATIE, in gramatica REF-A: un card mare, ALB, cu raza 28, pus pe o sectiune
+// de `ceata`; liniile sunt implicitul global #d2d2d7 al referintei; capul de tabel la 14 px si
+// greutatea 600; coloana noastra marcata O SINGURA DATA, prin FUNDAL de `ceata` si prin litera
+// `albastru-2` in cap. Fara umbra - cardul se desparte de sectiune prin culoarea lui de fundal,
+// ca in `Card.tsx`. Fata de valul dinainte s-au schimbat raza (16 -> 28) si culoarea marcajului
+// (nu mai exista culoare de brand in paleta); asezarea masurata mai jos a ramas, fiindca
+// masuratoarea care a produs-o nu s-a schimbat.
 //
-// RAMANE O GRILA, NU UN `<table>`, si motivul e cel masurat la felia dinainte: patru coloane
-// de proza nu incap la 390 px in niciun fel. Ori tabelul depaseste latimea ferestrei si poarta
-// de derapaj opreste lotul, ori intra intr-un recipient care se deruleaza lateral, si atunci
-// pe telefon se citeste o coloana pe rand, orbeste, fara sa se vada cu ce compari.
+// RAMANE O GRILA, NU UN `<table>`, si motivul e cel masurat: patru coloane de proza nu incap la
+// 390 px in niciun fel. Ori tabelul depaseste latimea ferestrei si poarta de derapaj opreste
+// lotul, ori intra intr-un recipient care se deruleaza lateral, si atunci pe telefon se citeste
+// o coloana pe rand, orbeste, fara sa se vada cu ce compari.
 //
 // PRETUL ALEGERII, scris ca sa nu para gratuit: se pierde semantica de tabel, deci un cititor
 // de ecran nu anunta „coloana 3 din 4". Se plateste inapoi punand numele variantei IN FIECARE
@@ -17,14 +20,14 @@ import type { ColoanaComparatie, RandComparatie } from "@/content/comparatie";
 // `lg:sr-only`, iar capul de tabel vizual e marcat `aria-hidden`, fiindca ar repeta acelasi
 // lucru a doua oara.
 //
-// CE E NOU: PE TELEFON FIECARE RAND E UN CARD, si asta fara sa se randeze nimic de doua ori.
-// Grila ramane PLATA - celulele sunt copii directi ai ei, deci nu e nevoie nici de
-// `display: contents`, scos ani buni din arborele de accesibilitate de mai multe motoare,
-// nici de doua randari ascunse una cate una. Cardul se obtine din culoarea de fundal: intr-o
-// grila cu o singura coloana si fara jgheab, intrebarea si cele patru raspunsuri ale ei stau
-// lipite pe acelasi `ceata`, primul colt sus rotunjit si ultimul jos. Distanta dintre carduri
-// vine din marginea de sus a intrebarii, pusa pe toate randurile in afara de primul; de aceea
-// componenta are nevoie de indicele randului, si de aceea nu se poate scrie cu `first:`.
+// PE TELEFON FIECARE RAND E UN CARD, si asta fara sa se randeze nimic de doua ori. Grila ramane
+// PLATA - celulele sunt copii directi ai ei, deci nu e nevoie nici de `display: contents`, scos
+// ani buni din arborele de accesibilitate de mai multe motoare, nici de doua randari ascunse
+// una cate una. Cardul se obtine din culoarea de fundal: intr-o grila cu o singura coloana si
+// fara jgheab, intrebarea si cele patru raspunsuri ale ei stau lipite pe acelasi `ceata`,
+// primul colt sus rotunjit si ultimul jos. Distanta dintre carduri vine din marginea de sus a
+// intrebarii, pusa pe toate randurile in afara de primul; de aceea componenta are nevoie de
+// indicele randului, si de aceea nu se poate scrie cu `first:`.
 //
 // UN RAND INCOMPLET OPRESTE CONSTRUCTIA, nu se deseneaza pe jumatate: o celula lipsa intr-un
 // tabel de comparatie se citeste ca „varianta aia nu are raspuns", ceea ce e o afirmatie, nu
