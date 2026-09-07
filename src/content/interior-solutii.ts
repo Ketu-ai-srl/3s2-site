@@ -28,9 +28,28 @@ export type CapSectiune = {
   lead?: string;
 };
 
-// Cele trei fapte care nu tin de domeniu se scriu deja in `INDIFERENT_DE_DOMENIU`
-// (segmente.ts). Randul de incredere de sub antet le arata SCURT, deci foloseste titlurile
-// lor; banda de dedesubt arata altceva, ca sa nu se repete acelasi text pe aceeasi pagina.
+// BANDA DE „HIGHLIGHTS", capul ei. Sta pe ceata, imediat sub erou, pe toate cele
+// unsprezece pagini ale feliei, si poarta cele trei fapte care nu tin de domeniu
+// (`INDIFERENT_DE_DOMENIU` din segmente.ts) ca trei carduri albe.
+//
+// TEXTELE NU SUNT NOI. Eticheta si afirmatia sunt chiar cele pe care le purta banda inchisa a
+// hub-ului pana la valul asta, iar cele doua legaturi sunt sirurile deja folosite in felie.
+// Se scriu o singura data fiindca banda e aceeasi peste tot; pagina alege doar INCOTRO duce
+// legatura din dreapta, ca sa nu trimita niciodata catre ea insasi.
+export const HIGHLIGHTS = {
+  eticheta: "Ce nu se schimbă",
+  titlu: "Aceleași reguli peste tot.",
+  spreMecanism: { href: "/cum-functioneaza", text: "Vedeți mecanismul întreg" },
+  spreDomenii: { href: "/solutii", text: "Vedeți toate domeniile" },
+  spreFizica: { href: "/arhivare-fizica", text: "Vedeți partea fizică" },
+};
+
+// Cele doua etichete ale unui card de etapa. Erau scrise de mana in `MecanismEtapa.tsx`;
+// acelasi card e chemat de trei pagini, deci textul lui sta o singura data, aici.
+export const ETAPA = {
+  index: "Etapa",
+  urma: "Rămâne scris",
+};
 
 export const SEGMENT = {
   /** Filele de navigare in pagina. Ordinea lor e ordinea sectiunilor de mai jos. */
@@ -58,8 +77,9 @@ export const SEGMENT = {
     lead: "Pașii serviciului sunt aceiași peste tot. Aici scriem numai ce arată altfel în ziua de lucru a acestui domeniu.",
   } as CapSectiune,
 
-  /** Randul text/imagine care duce la pagina de mecanism. */
+  /** Randul text / fotografie care duce la pagina de mecanism. */
   spreMecanism: {
+    eticheta: "Mecanismul",
     titlu: "Etapele sunt aceleași.",
     text: "Fiecare etapă se închide cu documentul ei semnat. Pagina despre mecanism scrie ce trece în grija noastră, ce rămâne la dumneavoastră și ce hârtie vă rămâne după fiecare pas.",
     legatura: { href: "/cum-functioneaza", text: "Vedeți mecanismul întreg" },
@@ -94,9 +114,8 @@ export const SEGMENT = {
 
   // Eticheta butonului de antet. E scurta DIN MASURATOARE: forma lunga, „Programati o
   // discutie de 30 de minute", are 36 de caractere si se rupe pe doua randuri la 390 px,
-  // ducand butonul la 72 px inaltime in loc de 48 cati cere REF-V.md §3. Cu textul de mai
-  // jos butonul intra pe un rand si masoara 48. Cererea nu se schimba, doar numarul de
-  // cuvinte: ora si durata raman scrise in el.
+  // ducand pastila la doua randuri in loc de unul. Cu textul de mai jos butonul intra pe un
+  // rand. Cererea nu se schimba, doar numarul de cuvinte: ora si durata raman scrise in el.
   butonCta: "Discuție de 30 de minute",
 };
 
@@ -106,10 +125,8 @@ export const HUB_INTERIOR = {
     titlu: "Fiecare domeniu, fișa lui.",
   } as CapSectiune,
 
-  banda: {
-    eticheta: "Ce nu se schimbă",
-    titlu: "Aceleași reguli peste tot.",
-  },
+  /** Textul legaturii din cardul unui domeniu. Chevronul il deseneaza componenta. */
+  legaturaFisa: "Vedeți fișa",
 
   reguliLead:
     "Restul paginii vorbește despre diferențe. Rândurile de aici nu se negociază pe segment, fiindcă țin de felul în care e construit serviciul.",
@@ -127,6 +144,7 @@ export const HUB_INTERIOR = {
   nota: "Nu deținem certificare ISO 27001, nu afișăm sigle de clienți, nu publicăm un număr de firme deservite și nu punem preț pe pagină. 3S este o firmă nouă, crescută din ADRIA Servicii Arhivare SRL, care arhivează documente din 2019. Vechimea și autorizarea sunt ale firmei-mamă și se citesc așa.",
 
   spreTermene: {
+    eticheta: "Termenele",
     titlu: "Termenul legal se verifică.",
     text: "Cât se păstrează fiecare categorie de documente, cu actul normativ din care vine termenul, stă într-o listă pe care o puteți deschide acum.",
     legatura: { href: "/instrumente/termene-de-pastrare", text: "Verificați un termen legal" },
@@ -159,6 +177,7 @@ export const MECANISM_INTERIOR = {
   } as CapSectiune,
 
   spreFizica: {
+    eticheta: "Partea fizică",
     titlu: "Primele etape cer rafturi.",
     text: "Cum arată depozitul, cum se măsoară un fond în metri liniari și cum se elimină legal ce nu mai trebuie păstrat sunt scrise pe pagina părții fizice.",
     legatura: { href: "/arhivare-fizica", text: "Vedeți partea fizică" },
@@ -226,6 +245,7 @@ export const FIZICA_INTERIOR = {
   } as CapSectiune,
 
   spreMecanism: {
+    eticheta: "Mecanismul",
     titlu: "Partea fizică vine prima.",
     text: "După ce fondul ajunge pe raft cu cotă, urmează ce se scanează, cum se întreabă în română și ce se întâmplă la încheierea contractului. Mecanismul întreg stă pe pagina lui.",
     legatura: { href: "/cum-functioneaza", text: "Vedeți mecanismul complet" },
@@ -282,6 +302,7 @@ export const SECURITATE_INTERIOR = {
   etichetaNotaDepozit: "Ce nu publicăm, dinadins",
 
   spreFizica: {
+    eticheta: "Depozitul",
     titlu: "Depozitul se vede.",
     text: "Cum arată, cum se măsoară un fond în metri liniari și ce înseamnă cota unei unități arhivistice sunt scrise pe pagina părții fizice, cu tot cu ce vă arătăm la o vizită.",
     legatura: { href: "/arhivare-fizica", text: "Vedeți depozitul și inventarul" },

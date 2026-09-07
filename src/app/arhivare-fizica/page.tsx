@@ -4,16 +4,22 @@ import Acordeon from "@/components/Acordeon";
 import AntetPagina from "@/components/AntetPagina";
 import BandaCTA from "@/components/BandaCTA";
 import BlocDovada from "@/components/BlocDovada";
+import Capitol from "@/components/Capitol";
 import MecanismEtapa from "@/components/MecanismEtapa";
 import SegmentAncore from "@/components/SegmentAncore";
 import SegmentBandaDovezi from "@/components/SegmentBandaDovezi";
+import SegmentCadru from "@/components/SegmentCadru";
 import SegmentGrila from "@/components/SegmentGrila";
 import SegmentIncredere from "@/components/SegmentIncredere";
 import SegmentListaLipsa from "@/components/SegmentListaLipsa";
 import SegmentRandTextImagine from "@/components/SegmentRandTextImagine";
-import SegmentSectiune from "@/components/SegmentSectiune";
 import { FOTOGRAFII } from "@/content/fotografii";
-import { FIZICA_INTERIOR as F, NOTA_CONTACT } from "@/content/interior-solutii";
+import {
+  ETAPA,
+  FIZICA_INTERIOR as F,
+  HIGHLIGHTS,
+  NOTA_CONTACT,
+} from "@/content/interior-solutii";
 import { ARHIVARE_FIZICA as A } from "@/content/mecanism";
 import { INDIFERENT_DE_DOMENIU } from "@/content/segmente";
 
@@ -25,16 +31,19 @@ import { INDIFERENT_DE_DOMENIU } from "@/content/segmente";
 // deci nu are ce sa fie autorizat. Regula sta in `.claude/rules/afirmatii-atribuite.md` si e
 // aparata de `poarta-afirmatii.py`.
 //
-// CE S-A SCHIMBAT LA VALUL S1-b. Sase sectiuni de registru, fiecare cu cota in cifre romane si
-// cu randuri de fisa pe doua coloane, au devenit gramatica interioara REF-V: grile de carduri
-// pe sectiuni alternate alb / ceata, cei patru pasi ai preluarii ca sirag de carduri numerotate,
-// cele cinci cuvinte ca acordeon.
+// GRAMATICA, dupa REF-A §4: bara locala -> erou -> highlights pe ceata -> cinci capitole, cu
+// un rand text / fotografie dupa al doilea -> banda neagra -> lista limitelor -> banda CTA.
 //
 // DE CE ACORDEON TOCMAI LA CUVINTE. Sectiunea aceea e un glosar: cine stie deja ce e un metru
-// liniar nu are ce citi acolo, si pana acum trecea peste cinci randuri late ca sa ajunga la
+// liniar nu are ce citi acolo, si ar trece peste cinci randuri late ca sa ajunga la
 // selectionare. Pliate, cele cinci definitii ocupa cinci linii si raman la un clic distanta.
 // Textul e in HTML-ul servit oricum - `details` / `summary` - deci nu se pierde pentru cine
 // citeste fara scripturi.
+//
+// LISTA LIMITELOR nu are capitol propriu, si asta e deliberat: e o incheiere, nu o sectiune -
+// nu are ancora in bara locala, si un titlu de 80 px deasupra ei ar promite o a sasea parte a
+// paginii. Sta intr-un card alb pe ceata, cu titlul ei de 24, imediat dupa banda neagra care
+// spune ce PUTEM arata. Cele doua se citesc ca o pereche.
 //
 // Continutul sta in `src/content/mecanism.ts`; aici e numai forma paginii.
 export const metadata: Metadata = {
@@ -43,11 +52,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "/arhivare-fizica" },
 };
 
-const LEGATURA = "text-violet underline decoration-violet-2 underline-offset-[3px]";
+const LEGATURA = "text-albastru-2 underline decoration-albastru-2 underline-offset-[3px]";
 
 export default function ArhivareFizica() {
   return (
     <main id="continut">
+      <SegmentAncore ancore={F.navigare} eticheta="Secțiunile paginii" />
+
       <AntetPagina
         adresa="/arhivare-fizica"
         imagine={FOTOGRAFII.cutii}
@@ -55,106 +66,112 @@ export default function ArhivareFizica() {
         eticheta={A.eticheta}
         titlu={A.h1}
         lead={A.lead}
-        actiune={{ href: "/#discutie", text: "Discuție de 30 de minute" }}
-        secundar={{ href: "/cum-functioneaza", text: "Vedeți mecanismul complet" }}
+        actiune={{ href: "/#discutie", text: F.butonCta }}
+        secundar={HIGHLIGHTS.spreMecanism}
       />
 
-      <SegmentIncredere fapte={INDIFERENT_DE_DOMENIU} />
+      <SegmentIncredere
+        fapte={INDIFERENT_DE_DOMENIU}
+        eticheta={HIGHLIGHTS.eticheta}
+        titlu={HIGHLIGHTS.titlu}
+        legatura={HIGHLIGHTS.spreDomenii}
+      />
 
-      <SegmentAncore ancore={F.navigare} eticheta="Secțiunile paginii" />
-
-      <SegmentSectiune
+      <Capitol
         id="depozit"
-        ton="alb"
         eticheta={F.depozit.eticheta}
-        titlu={F.depozit.titlu}
-        lead={F.depozit.lead}
+        afirmatie={F.depozit.titlu}
+        text={F.depozit.lead}
       >
-        <SegmentGrila elemente={A.depozit} fundal="alb" />
-      </SegmentSectiune>
+        <SegmentCadru>
+          <SegmentGrila elemente={A.depozit} />
+        </SegmentCadru>
+      </Capitol>
 
-      <SegmentSectiune
+      <Capitol
         id="preluare"
-        ton="ceata"
         eticheta={F.preluare.eticheta}
-        titlu={F.preluare.titlu}
-        lead={F.preluare.lead}
+        afirmatie={F.preluare.titlu}
+        text={F.preluare.lead}
+        aliniere="centrat"
       >
-        <ol className="m-0 grid list-none gap-5 p-0 md:grid-cols-2">
-          {A.preluare.map((e, i) => (
-            <MecanismEtapa
-              key={e.titlu}
-              numar={i + 1}
-              titlu={e.titlu}
-              text={e.text}
-              urma={e.urma}
-              fundal="ceata"
-            />
-          ))}
-        </ol>
+        <SegmentCadru>
+          <ol className="m-0 grid list-none gap-4 p-0 md:grid-cols-2">
+            {A.preluare.map((e, i) => (
+              <MecanismEtapa
+                key={e.titlu}
+                numar={i + 1}
+                titlu={e.titlu}
+                text={e.text}
+                urma={e.urma}
+                etichetaEtapa={ETAPA.index}
+                etichetaUrma={ETAPA.urma}
+              />
+            ))}
+          </ol>
+        </SegmentCadru>
+      </Capitol>
 
-        <div className="mt-16 md:mt-20">
-          <SegmentRandTextImagine
-            titlu={F.spreMecanism.titlu}
-            text={F.spreMecanism.text}
-            legatura={F.spreMecanism.legatura}
-            imagine={FOTOGRAFII.rafturi}
-            invers
-          />
-        </div>
-      </SegmentSectiune>
+      <SegmentRandTextImagine
+        eticheta={F.spreMecanism.eticheta}
+        titlu={F.spreMecanism.titlu}
+        text={F.spreMecanism.text}
+        legatura={F.spreMecanism.legatura}
+        imagine={FOTOGRAFII.rafturi}
+        invers
+      />
 
-      <SegmentSectiune
+      <Capitol
         id="inventar"
-        ton="alb"
         eticheta={F.inventar.eticheta}
-        titlu={F.inventar.titlu}
-        lead={F.inventar.lead}
+        afirmatie={F.inventar.titlu}
+        text={F.inventar.lead}
       >
-        <div className="mx-auto max-w-[52rem]">
-          <Acordeon
-            elemente={A.cuvinte.map((f) => ({ intrebare: f.titlu, raspuns: f.text }))}
-          />
-        </div>
-      </SegmentSectiune>
+        <SegmentCadru>
+          <Acordeon elemente={A.cuvinte.map((f) => ({ intrebare: f.titlu, raspuns: f.text }))} />
+        </SegmentCadru>
+      </Capitol>
 
-      <SegmentSectiune
+      <Capitol
         id="selectionare"
-        ton="ceata"
         eticheta={F.selectionare.eticheta}
-        titlu={F.selectionare.titlu}
-        lead={F.selectionare.lead}
+        afirmatie={F.selectionare.titlu}
+        text={F.selectionare.lead}
+        aliniere="centrat"
       >
-        <SegmentGrila elemente={A.selectionare} fundal="ceata" />
+        <SegmentCadru>
+          <SegmentGrila elemente={A.selectionare} />
 
-        <div className="mx-auto mt-12 max-w-[46rem]">
-          <BlocDovada eticheta={F.etichetaNotaSelectionare}>{A.notaSelectionare}</BlocDovada>
-        </div>
-      </SegmentSectiune>
+          <div className="mt-8">
+            <BlocDovada eticheta={F.etichetaNotaSelectionare}>{A.notaSelectionare}</BlocDovada>
+          </div>
+        </SegmentCadru>
+      </Capitol>
 
-      <SegmentSectiune
+      <Capitol
         id="temei"
-        ton="alb"
         eticheta={F.temei.eticheta}
-        titlu={F.temei.titlu}
-        lead={F.temei.lead}
+        afirmatie={F.temei.titlu}
+        text={F.temei.lead}
       >
-        <SegmentGrila elemente={A.temeiuri} fundal="alb" coloane={3} mari={false} />
+        <SegmentCadru>
+          <SegmentGrila elemente={A.temeiuri} coloane={3} />
 
-        <div className="mx-auto mt-12 max-w-[46rem]">
-          <BlocDovada fel="limite" eticheta={F.etichetaNotaTemei}>
-            {A.notaTemei}
-          </BlocDovada>
+          <div className="mt-8">
+            <BlocDovada fel="limite" eticheta={F.etichetaNotaTemei}>
+              {A.notaTemei}
+            </BlocDovada>
 
-          <p className="mt-8 text-corp text-cerneala-2">
-            Termenele pe care le putem cita pe articol stau în{" "}
-            <Link href="/instrumente/termene-de-pastrare" className={LEGATURA}>
-              verificatorul de termene
-            </Link>
-            , fiecare cu actul normativ și cu data la care a fost citit.
-          </p>
-        </div>
-      </SegmentSectiune>
+            <p className="mt-8 max-w-[62ch] text-corp text-cerneala-3">
+              Termenele pe care le putem cita pe articol stau în{" "}
+              <Link href="/instrumente/termene-de-pastrare" className={LEGATURA}>
+                verificatorul de termene
+              </Link>
+              , fiecare cu actul normativ și cu data la care a fost citit.
+            </p>
+          </div>
+        </SegmentCadru>
+      </Capitol>
 
       <SegmentBandaDovezi
         eticheta={F.bandaAratam.eticheta}
@@ -162,11 +179,13 @@ export default function ArhivareFizica() {
         elemente={A.aratam}
       />
 
-      <SegmentSectiune ton="ceata">
-        <div className="mx-auto max-w-[46rem] rounded-card-mare bg-alb p-8 md:p-10">
-          <SegmentListaLipsa titlu={F.listaDeschise} elemente={A.deschise} />
+      <section className="bg-ceata py-16 md:py-[110px]">
+        <div className="mx-auto w-full max-w-registru px-4 md:px-8">
+          <div className="rounded-card bg-alb p-8 md:p-10">
+            <SegmentListaLipsa titlu={F.listaDeschise} elemente={A.deschise} />
+          </div>
         </div>
-      </SegmentSectiune>
+      </section>
 
       <BandaCTA
         titlu={A.incheiere.titlu}
@@ -177,7 +196,7 @@ export default function ArhivareFizica() {
             {NOTA_CONTACT.inainte}
             <a
               href={"mailto:" + NOTA_CONTACT.adresa}
-              className="text-alb underline underline-offset-[3px]"
+              className="text-albastru-2 underline underline-offset-[3px]"
             >
               {NOTA_CONTACT.adresa}
             </a>
