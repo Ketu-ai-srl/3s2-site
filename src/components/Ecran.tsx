@@ -113,7 +113,7 @@ export default function Ecran({
       <section
         id={id}
         className={
-          "relative isolate flex h-[500px] flex-col overflow-hidden md:h-[692px] " +
+          "relative isolate flex flex-col overflow-hidden md:h-[692px] " +
           FUNDAL[fundal] +
           " " +
           className
@@ -179,19 +179,22 @@ export default function Ecran({
           ) : null}
         </div>
 
-        {/* Fotografia umple restul tiglei, sub text, si ATAT. `flex-1` plus `min-h-0` ii dau
-            exact ce ramane din inaltimea legata; fara `min-h-0` cutia ar creste la inaltimea
-            proprie a cadrului si tigla ar ajunge la 1016 px - masurat inainte de reparatie,
+        {/* De la 768 px in sus fotografia umple restul tiglei, sub text, si ATAT: `flex-1` plus
+            `min-h-0` ii dau exact ce ramane din inaltimea legata (692 px); fara `min-h-0` cutia
+            ar creste la inaltimea proprie a cadrului si tigla ar ajunge la 1016 px - masurat,
             pagina de start iesea 7460 px in loc de 6002, adica un sfert mai lunga decat
-            referinta. ACELASI mecanism si sub 768 px, unde inaltimea a fost multa vreme doar o
-            podea (`min-h-`): atunci cutia fotografiei lua 585 px la 390, tiglele iesau 901-987
-            px in loc de 500 cat scrie fisa, si pagina masura 9784 px fata de 7327 cat are
-            referinta la aceeasi latime. Masurat dupa legare, cu `innerWidth` citit din pagina:
-            tigle de 500 px si pagina de 6879 px la 390. Podeaua era pusa ca sa nu taie textul
-            romanesc, mai lung decat cel al referintei; masurat, nu il taie - cazul cel mai
-            stramt e tigla-erou la 320 px, unde textul se termina la 385,2 px din cele 500. */}
+            referinta.
+            SUB 768 px tigla NU mai e legata la 500 px, cat masoara fisa pe referinta: acolo
+            textul are doua randuri, al nostru are titlu pe doua randuri, subtitlu pe trei si
+            doua pastile una sub alta, adica 385 px de text din 500, si fotografiei ii ramaneau
+            97,8 px la 390 (74,8 la 320) - o fasie, nu o fotografie mare, contra filosofiei pe
+            care o urmarim. Asa ca sub 768 tigla creste cu textul, iar fotografia are 320 px
+            FICSI (82% din latimea de 390); podeaua veche (`min-h-`) nu se intoarce, fiindca ea
+            lasa cutia sa creasca la inaltimea proprie a cadrului (585 px) si tigla ajungea la
+            987 px. Cifrele de dupa sunt scrise in docs/design/DIRECTIA.md, „Gramatica paginii
+            de start". */}
         {cuFoto && imagine ? (
-          <div className="mt-10 min-h-0 w-full flex-1 md:mt-12">
+          <div className="mt-10 h-[320px] w-full md:mt-12 md:h-auto md:min-h-0 md:flex-1">
             <picture>
               <source media="(max-width: 767px)" srcSet={"/img/" + imagine.nume + "-960.webp"} />
               <img

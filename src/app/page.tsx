@@ -75,10 +75,12 @@ export default function Acasa() {
               key={t.titlu}
               id={t.cheie}
               className={
-                // Tiglele CU fotografie au 580 px la 1440 si 500 px sub 768, cifrele masurate
-                // pe referinta, si inaltimea e LEGATA la amandoua capetele: fotografia are
-                // `flex-1 min-h-0`, deci ia doar ce ramane. Cu podea (`min-h-`) la capatul
-                // ingust, cutia fotografiei lua 585 px la 390 si tigla iesea 885-900 px.
+                // Tiglele CU fotografie au 580 px la 1440, cifra masurata pe referinta, cu
+                // fotografia pe `flex-1 min-h-0` (ia doar ce ramane). Sub 768 tigla NU e legata
+                // la cei 500 px ai referintei: textul romanesc e mai lung si fotografiei ii
+                // ramanea o fasie; tigla creste cu textul si fotografia are 320 px ficsi (vezi
+                // Ecran.tsx si DIRECTIA.md). Podeaua veche (`min-h-`) nu se intoarce: cu ea
+                // cutia fotografiei lua 585 px la 390 si tigla iesea 885-900 px.
                 // Cele fara fotografie pastreaza podeaua, fiindca n-au niciun element elastic
                 // care sa absoarba un text mai lung; masurat, ele dau oricum exact 320 px.
                 // Sunt mai scunde, si nu din economie: masurat pe captura, o tigla de 580 px cu
@@ -86,7 +88,7 @@ export default function Acasa() {
                 // adica un gol care se citeste ca lipsa, nu ca ritm. Cele doua tigle fara cadru
                 // stau pe acelasi rand, deci randul ramane drept.
                 "flex flex-col overflow-hidden " +
-                (t.imagine ? "h-[500px] md:h-[580px] " : "min-h-[320px] md:h-[380px] ") +
+                (t.imagine ? "md:h-[580px] " : "min-h-[320px] md:h-[380px] ") +
                 fundal
               }
             >
@@ -146,7 +148,7 @@ export default function Acasa() {
               </div>
 
               {t.imagine ? (
-                <div className="mt-10 min-h-0 w-full flex-1">
+                <div className="mt-10 h-[320px] w-full md:h-auto md:min-h-0 md:flex-1">
                   <picture>
                     <source
                       media="(max-width: 767px)"

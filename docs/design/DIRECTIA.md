@@ -175,23 +175,27 @@ de culoare rămasă dintr-o direcție veche cade tot pe el, în loc să înnegre
 
 ## Gramatica paginii de start
 
-1. **Trei țigle mari**, pe toată lățimea, 692 px la 1440 și 500 px la 390: h2 de 56 px centrat,
+1. **Trei țigle mari**, pe toată lățimea, 692 px la 1440 (sub 768 px cresc cu textul, fotografia
+   are 320 px ficși): h2 de 56 px centrat,
    subtitlu de 28 px, o pastilă plină și una cu contur, fotografia mare dedesubt, în țiglă.
    Fundalul alternează alb, ceață, negru. Cele trei sunt Scan, Store și Solve, și poartă chiar
    ancorele `#scan`, `#store`, `#solve`.
-2. **Grilă de două coloane pe trei rânduri**, țigle de 580 px la 1440 și 500 px la 390, cu 12 px
+2. **Grilă de două coloane pe trei rânduri**, țigle de 580 px la 1440 (sub 768 px la fel: cresc cu
+   textul, fotografia 320 px), cu 12 px
    între ele: h3 de 40 px centrat, subtitlu de 21 px, o notă de 14 px în `cerneala-3`, pastile de
    36 px, fotografia sub text. Una dintre țigle e neagră, cu literă `ceata`.
-   Cele două înălțimi sunt **legate la amândouă capetele**, nu doar la 1440. Fotografia stă într-o
-   cutie cu `flex-1 min-h-0` și ia doar ce rămâne; țigla însăși are `h-[500px]` sub 768 px, nu
-   `min-h-[500px]`. Cât timp a fost doar o podea, cutia fotografiei creștea la înălțimea proprie a
-   cadrului - 585 px la 390 - și țiglele ieșeau 885-987 px, adică de aproape două ori cifra scrisă
-   chiar aici; pagina de start măsura atunci 9784 px la 390, față de 7327 cât are referința la
-   aceeași lățime. Măsurat după legare, cu `innerWidth` citit din pagină: țigle de 500 px și pagina
-   de 6879 px la 390, iar la 1440 nimic nu se schimbă (692 / 580 px, pagina 5014 px). Textul
-   românesc e mai lung decât cel al referinței, și de asta podeaua fusese pusă; măsurat, nu se taie
-   nicăieri - cazul cel mai strâmt e țigla-erou la 320 px, unde textul se termină la 385,2 px din
-   cele 500. Țiglele fără fotografie își păstrează podeaua, fiindcă n-au niciun element elastic care
+   Înălțimile de 692 și 580 sunt **legate de la 768 px în sus**: fotografia stă într-o cutie cu
+   `md:flex-1 md:min-h-0` și ia doar ce rămâne. **Sub 768 px țigla NU e legată la cei 500 px pe care
+   îi măsoară fișa REF-A pe referință.** Textul referinței are două rânduri; al nostru are titlul pe
+   două, subtitlul pe trei și două pastile una sub alta, adică 385 px de text din 500, și cu țigla
+   legată la 500 fotografiei îi rămâneau 97,8 px la 390 (74,8 la 320) - o fâșie, nu o fotografie
+   mare. Așa că sub 768 țigla crește cu textul și fotografia are `h-[320px]` (82% din lățimea de
+   390). Nici podeaua veche (`min-h-[500px]`) nu se întoarce: cu ea cutia fotografiei creștea la
+   înălțimea proprie a cadrului (585 px la 390) și țiglele ieșeau 885-987 px, pagina 9784 px.
+   Măsurat pe pagina construită, cu `innerWidth` citit din pagină, la 390: țiglele mari
+   722 / 636 / 697 px, țiglele de grilă cu fotografie 620-658 px, pagina 7968 px
+   (referința: 7327 px); la 1440 nimic nu se schimbă (692 / 580 px, pagina 5014 px). Țiglele fără
+   fotografie își păstrează podeaua (`min-h-[320px]`), fiindcă n-au niciun element elastic care
    să absoarbă un text mai lung.
 
 3. **Banda neagră** cu faptele atribuite ale firmei-mamă, cu titlul legat printr-un exponent de

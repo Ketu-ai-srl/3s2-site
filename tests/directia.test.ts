@@ -564,36 +564,48 @@ describe('gramatica paginilor', () => {
     expect(pagina, 'pagina de start a ramas cu o banda CTA').not.toContain('BandaCTA')
   })
 
-  it('inaltimea tiglei cu fotografie e legata la AMANDOUA capetele, nu doar la 1440', () => {
-    // Clasa de defect: `min-h-[500px]` e o PODEA, nu o inaltime. Sub 768 px nimic nu mai lega
-    // cutia fotografiei, ea crestea la inaltimea proprie a cadrului (585 px la 390) si tigla
-    // iesea 885-987 px in loc de 500 - cifra pe care o scriu si fisa REF-A, si DIRECTIA.md, de
-    // doua ori. Pagina masura atunci 9784 px la 390, fata de 7327 cat are referinta la aceeasi
-    // latime. Masurat dupa legare: tigle de 500 px si pagina de 6879 px. Poarta de browser nu
-    // vede asta - ea masoara culori si roluri, nu inaltimi - deci regula sta aici.
+  it('tigla cu fotografie: legata la 1440, iar sub 768 fotografia are 320 px ficsi', () => {
+    // Doua clase de defect, amandoua vazute pe pagina construita la 390:
+    // (a) `min-h-[500px]` pe tigla e o PODEA, nu o inaltime: cutia fotografiei crestea la
+    //     inaltimea proprie a cadrului (585 px) si tigla iesea 885-987 px, pagina 9784 px.
+    // (b) `h-[500px]` pe tigla (cifra referintei) lasa fotografiei 97,8 px la 390: textul
+    //     romanesc are 385 px, deci fotografia devenea o fasie - contra filosofiei „fotografii
+    //     mari in tigle". Reparatia: sub 768 tigla creste cu textul si fotografia are 320 px
+    //     ficsi; de la 768 ramane legata (692 / 580) cu fotografia pe `md:flex-1 md:min-h-0`.
+    // Poarta de browser nu vede asta - ea masoara culori si roluri, nu inaltimi - deci regula
+    // sta aici.
     const tigla = faraComentarii(readFileSync(join(COMPONENTE, 'Ecran.tsx'), 'utf8'))
     const pagina = faraComentarii(readFileSync(PAGINA, 'utf8'))
-    for (const [nume, cod] of [['Ecran.tsx', tigla], ['page.tsx', pagina]] as const) {
-      expect(cod, nume + ': tigla e legata doar cu o podea la capatul ingust').not.toMatch(
+    for (const [nume, cod, legata] of [
+      ['Ecran.tsx', tigla, 'md:h-[692px]'],
+      ['page.tsx', pagina, 'md:h-[580px]'],
+    ] as const) {
+      expect(cod, nume + ': tigla e legata cu o podea la capatul ingust').not.toMatch(
         /min-h-\[500px\]/,
       )
-      // Fara privirea inapoi tiparul ar fi inutil: `min-h-[500px]` il contine pe `h-[500px]`,
-      // deci exact forma refuzata ar fi trecut drept forma ceruta.
-      expect(cod, nume + ': tigla nu mai are inaltime legata la capatul ingust').toMatch(
+      // Privirea inapoi conteaza: `min-h-[500px]` il contine pe `h-[500px]`.
+      expect(cod, nume + ': tigla e legata la 500 px sub 768, fotografia ramane o fasie').not.toMatch(
         /(?<!min-)h-\[500px\]/,
       )
+      expect(cod, nume + ': tigla nu mai e legata de la 768 in sus').toContain(legata)
+      // Cutia fotografiei: 320 px ficsi sub 768 (nu podea), elastica de la 768.
+      expect(cod, nume + ': fotografia nu are 320 px ficsi sub 768').toMatch(/(?<!min-)(?<!md:)h-\[320px\]/)
+      expect(cod, nume + ': fotografia nu e elastica de la 768').toContain('md:flex-1')
+      expect(cod, nume + ': fotografia poate creste peste tigla de la 768').toContain('md:min-h-0')
     }
-    // Si cutia fotografiei nu are voie sa-si impuna o podea proprie sub 768 px: podeaua ei era
+    // Cutia fotografiei nu are voie sa-si impuna o podea proprie sub 768 px: podeaua ei era
     // chiar mecanismul prin care tigla crestea.
-    expect(tigla, 'cutia fotografiei si-a recapatat podeaua').not.toMatch(/min-h-\[2[0-9]{2}px\]/)
+    expect(tigla, 'cutia fotografiei si-a recapatat podeaua').not.toMatch(/(?<!md:)min-h-\[[0-9]{3}px\]/)
     expect(pagina, 'cutia fotografiei din grila si-a recapatat podeaua').not.toMatch(
       /min-h-\[200px\]/,
     )
     // Control pozitiv: tiparele prind formele pe care le vaneaza.
     expect('flex min-h-[500px] flex-col'.match(/min-h-\[500px\]/), 'tiparul podelei nu prinde martorul').not.toBeNull()
     expect('flex h-[500px] flex-col'.match(/(?<!min-)h-\[500px\]/), 'tiparul inaltimii nu prinde martorul').not.toBeNull()
-    // Control NEGATIV: tiparul inaltimii nu are voie sa se aprinda pe podea.
+    expect('mt-10 h-[320px] w-full'.match(/(?<!min-)(?<!md:)h-\[320px\]/), 'tiparul celor 320 px nu prinde martorul').not.toBeNull()
+    // Control NEGATIV: tiparele nu au voie sa se aprinda pe podea sau pe forma de la 768.
     expect('flex min-h-[500px] flex-col'.match(/(?<!min-)h-\[500px\]/), 'tiparul inaltimii se aprinde si pe podea').toBeNull()
+    expect('min-h-[320px] md:h-[320px]'.match(/(?<!min-)(?<!md:)h-\[320px\]/), 'tiparul celor 320 px se aprinde pe podea sau pe md').toBeNull()
   })
 
   it('nu exista voal: fotografia nu poarta text peste ea nicaieri', () => {

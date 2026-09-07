@@ -129,7 +129,7 @@ export const GRILA: TiglaMica[] = [
     fundal: "ceata",
   },
   {
-    titlu: "Cine intră în arhivă.",
+    titlu: "Intrarea se consemnează.",
     subtitlu: "Acces pe persoană, cu urmă scrisă a fiecărei scoateri.",
     nota: "Pagina de securitate scrie și ce nu deținem, nu doar ce facem.",
     actiune: { href: "/securitate", text: "Ce protejăm" },
