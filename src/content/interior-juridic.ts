@@ -20,14 +20,20 @@
  * `whitespace-nowrap`, deci ce nu incape nu se rupe pe randul urmator, ci impinge pagina
  * lateral. Titlurile actelor sunt propozitii, iar cele noua ale paginii de termeni insumeaza
  * in jur de 200 de caractere: la 12 px inseamna peste 1200 px numai ancorele, pe o coloana de
- * 1183 px care mai poarta si titlul de 21 px, si pastila. Referinta pune PATRU ancore pe bara
- * paginii ei juridice; noi avem noua sectiuni si nu le taiem, fiindca taierea scoate exact
- * informatia pentru care exista bara.
+ * 1183 px care mai poarta si titlul de 21 px, si pastila.
  *
  * Deci ancora poarta un NUME SCURT, iar propozitia ramane titlul sectiunii, la locul ei, pe
  * pagina. Cheia e `id`-ul sectiunii: cine adauga o sectiune fara eticheta o vede lipsa la
  * proba, nu o descopera pe pagina. Cand eticheta lipseste, bara scrie titlul intreg - o
  * absenta vizibila, nu una tacuta.
+ *
+ * NUMELE SCURT N-A FOST DE AJUNS, si cifra o spune: cu toate cele noua etichete pe bara,
+ * `document.documentElement.scrollWidth` masura 927 px pe /termeni si 993 px pe
+ * /confidentialitate la o fereastra de 768 si de 834 px - adica pagina intreaga se trage
+ * lateral, nu doar bara. Controlul care inchide cauza: cu bara pe `display:none` scrollWidth
+ * cobora la exact 768. Elementul care iesea era pastila „Contact", impinsa de un `ul` de
+ * 700 px. Etichetele raman toate scrise aici, fiindca toate se citesc - dar pe BARA urca doar
+ * grupele din `GRUPE_ACT`, iar lista intreaga sta sub titlu (`JuridicAncore`).
  *
  * `moldova` e cheie in doua acte (termeni si confidentialitate) si poarta acelasi nume in
  * amandoua, deci o singura intrare o acopera.
@@ -58,6 +64,41 @@ export const ANCORE_ACT: Record<string, string> = {
   "cum-verificam": "Cum verificăm",
   gazduirea: "Găzduirea",
   "daca-adaugam": "Dacă adăugăm",
+};
+
+/**
+ * GRUPELE care urca pe BARA LOCALA a fiecarui act, pe calea actului, ca `id`-uri de sectiune.
+ *
+ * Aceeasi parghie pe care felia o foloseste deja pe unealta de termene, unde bara poarta cele
+ * PATRU sectiuni ale paginii si cele opt categorii stau in lista de sub ea. Pe acte lipsea, si
+ * acolo chiar musca: noua ancore pe un rand de 52 px impingeau pagina la 927 px pe /termeni si
+ * la 993 px pe /confidentialitate, la ferestre de 768 si 834 px.
+ *
+ * PATRU, ca la referinta, si patru masurat: la 768 px randul are 704 px utili, din care titlul
+ * actului ia 187-220 px, pastila in jur de 66, iar cele doua spatii dintre grupuri 64 - deci
+ * ancorelor le raman in jur de 350 px, adica patru etichete scurte cu spatiile dintre ele.
+ *
+ * NIMIC NU SE PIERDE, si asta e conditia care face taierea legitima: toate sectiunile raman
+ * ancore, in lista de sub titlu, unde fiecare poarta si numele scurt, si propozitia intreaga a
+ * titlului. Bara ramane ce e la REF-A - reperele mari ale actului, vizibile tot timpul - iar
+ * cuprinsul e cuprins.
+ *
+ * Cand un act nu e in tabelul asta, bara ii poarta toate sectiunile: un act nou se vede la
+ * proba (`tests/felie6-bara-acte.test.ts`), nu se strica tacut.
+ */
+export const GRUPE_ACT: Record<string, string[]> = {
+  "/termeni": ["cine-raspunde", "ce-face-site-ul", "raspunderea", "legea-aplicabila"],
+  "/confidentialitate": ["cine-prelucreaza", "ce-date", "temeiul", "drepturi"],
+  "/cookies": ["ce-stocam", "de-ce-fara-caseta", "cum-verificam", "gazduirea"],
+};
+
+/** Lista de ancore catre toate sectiunile actului, asezata sub titlu. */
+export const ANCORE_SECTIUNI = {
+  /** Eticheta randului de deasupra listei. Fara punct: e eticheta, nu propozitie. */
+  eticheta: "Săriți la o secțiune",
+  /** Rezumatul listei pentru cititorul de ecran. */
+  descriere:
+    "Toate secțiunile actului, în ordinea din pagină. Numele scurt este cel din bara de sus; sub el stă titlul întreg al secțiunii.",
 };
 
 /** Bara locala a unui act: numele ei pentru cititorul de ecran si pastila din dreapta. */

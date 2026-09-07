@@ -1,11 +1,13 @@
 import Link from "next/link";
 import BaraLocala from "./BaraLocala";
 import Buton from "./Buton";
+import JuridicAncore from "./JuridicAncore";
 import JuridicBlocuri from "./JuridicBlocuri";
 import {
   ANCORE_ACT,
   BARA_ACT,
   BUTON_DISCUTIE,
+  GRUPE_ACT,
   INCHEIERE_ACT,
   MASURA_ACT,
 } from "@/content/interior-juridic";
@@ -32,8 +34,17 @@ import { RUTE } from "@/content/rute";
 //
 //   CUPRINSUL LIPICIOS. `JuridicCuprins` era o coloana de 200 px in stanga documentului, cu
 //   `IntersectionObserver` care muta accentul. REF-A spune explicit „fara cuprins lateral":
-//   navigarea in pagina o face BARA LOCALA, care sta oricum pe ecran tot timpul si nu fura o
-//   coloana din latimea textului. Componenta s-a sters; ancorele ei sunt acum ancorele barei.
+//   navigarea in pagina o fac BARA LOCALA, care sta oricum pe ecran tot timpul si nu fura o
+//   coloana din latimea textului, si cuprinsul orizontal de sub titlu (`JuridicAncore`).
+//
+// BARA POARTA GRUPELE, NU TOATE SECTIUNILE, si e o corectura masurata, nu o preferinta. Cu cate
+// o ancora de sectiune - noua pe /termeni si pe /confidentialitate - `scrollWidth`-ul PAGINII
+// iesea 927 px pe /termeni si 993 px pe /confidentialitate la ferestre de 768 si de 834 px:
+// componenta are `flex-nowrap` de la 768 px in sus, deci randul nu se rupe, ci impinge. Cu bara
+// pe `display:none` scrollWidth cobora la exact 768, deci ea era singura cauza. Pe bara raman
+// cele patru grupe din `GRUPE_ACT` - cate ancore are si bara referintei - iar toate sectiunile
+// stau in cuprinsul de sub titlu, fiecare cu numele scurt SI cu propozitia titlului. Aceeasi
+// parghie s-a aplicat la valul asta si uneltei de termene; pe acte lipsea, si acolo musca.
 //
 //   CIFRA DE SECTIUNE. „Secțiunea 4" statea deasupra fiecarui titlu, la 14 px. Actul referintei
 //   nu numeroteaza sectiunile, iar ancora (`#raspunderea`) e mijlocul de trimitere care chiar
@@ -57,7 +68,14 @@ import { RUTE } from "@/content/rute";
 // rigoare, adica exact clasa pe care poarta de afirmatii o refuza.
 
 function ancorele(pagina: PaginaJuridica) {
-  return pagina.sectiuni.map((s) => ({
+  // Bara poarta grupele actului. Cand actul nu e in tabel - unul nou, de pilda - le poarta pe
+  // toate: forma dinainte, vizibila si masurabila, nu o bara goala.
+  const grupe = GRUPE_ACT[pagina.cale];
+  const sectiuni = grupe
+    ? pagina.sectiuni.filter((s) => grupe.includes(s.id))
+    : pagina.sectiuni;
+
+  return sectiuni.map((s) => ({
     ancora: s.id,
     // Fara eticheta scurta, bara scrie titlul intreg: absenta se vede si se repara.
     eticheta: ANCORE_ACT[s.id] ?? s.titlu,
@@ -139,6 +157,9 @@ export default function JuridicPagina({ pagina }: { pagina: PaginaJuridica }) {
       </div>
 
       <div className="mx-auto w-full max-w-registru px-4 pb-20 md:px-8 md:pb-24">
+        {/* Cuprinsul actului: toate sectiunile, inaintea primei dintre ele. */}
+        <JuridicAncore sectiuni={pagina.sectiuni} />
+
         {pagina.sectiuni.map((s) => (
           <section key={s.id} id={s.id} className="mb-14 last:mb-0 md:mb-16">
             <h2 className="mb-6 text-[32px] text-cerneala">{s.titlu}</h2>

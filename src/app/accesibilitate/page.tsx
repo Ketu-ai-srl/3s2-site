@@ -92,7 +92,13 @@ export default function Accesibilitate() {
         text={C.masuratText}
       >
         <div className="w-full p-6 md:p-10">
-          <div className={MASURA_LISTA}>
+          {/* `mx-auto` langa plafonul de 505 px, si e o cifra, nu un gust: rama capitolului are
+              916 px la 1440, iar coloana ancorata la stanga lasa 371 px de ceata goala numai la
+              dreapta - 40% din rama, cat sa citeasca a aliniere ratata. Plafonul cere o coloana
+              INGUSTA, nu una lipita de margine; centrata, golul se imparte 185 / 185 si masura
+              randului ramane neatinsa. Celelalte doua rame ale paginii sunt pline (gol 40 px,
+              adica exact captuseala), deci abaterea era a acesteia. */}
+          <div className={`mx-auto ${MASURA_LISTA}`}>
             <ListaBifa titlu={C.masuratTitlu} elemente={MASURAT} />
           </div>
         </div>
