@@ -67,18 +67,18 @@ export default function ComparatieTabel({ coloane, randuri }: Props) {
             aria-hidden
             className={
               "hidden pb-5 lg:block lg:px-5 lg:pt-5 " +
-              (c.aNoastra ? "lg:rounded-t-card lg:bg-violet-pal" : "")
+              (c.aNoastra ? "lg:rounded-t-card lg:bg-ceata" : "")
             }
           >
             <span
               className={
                 "block text-nota font-semibold " +
-                (c.aNoastra ? "text-violet" : "text-cerneala")
+                (c.aNoastra ? "text-albastru-2" : "text-cerneala")
               }
             >
               {c.nume}
             </span>
-            <span className="mt-2 block text-nota text-cerneala-2">{c.rezumat}</span>
+            <span className="mt-2 block text-nota text-cerneala-3">{c.rezumat}</span>
           </div>
         ))}
 
@@ -87,7 +87,7 @@ export default function ComparatieTabel({ coloane, randuri }: Props) {
           <Fragment key={rand.axa}>
             <div
               className={
-                "rounded-t-card bg-ceata px-5 pt-5 pb-3 lg:rounded-none lg:bg-transparent lg:border-t lg:border-linie lg:px-0 lg:pr-5 lg:pt-7 lg:pb-9 " +
+                "rounded-t-card bg-ceata px-5 pt-5 pb-3 lg:rounded-none lg:bg-transparent lg:border-t lg:px-0 lg:pr-5 lg:pt-7 lg:pb-9 " +
                 (i === 0 ? "" : "mt-4 lg:mt-0")
               }
             >
@@ -108,9 +108,9 @@ export default function ComparatieTabel({ coloane, randuri }: Props) {
                 <div
                   key={c.id}
                   className={
-                    "bg-ceata px-5 lg:border-t lg:border-linie lg:px-5 lg:pt-7 lg:pb-9 " +
+                    "bg-ceata px-5 lg:border-t lg:px-5 lg:pt-7 lg:pb-9 " +
                     (j === ultima ? "rounded-b-card pb-5 " : "pb-4 ") +
-                    (c.aNoastra ? "lg:bg-violet-pal " : "lg:bg-transparent ") +
+                    (c.aNoastra ? "lg:bg-ceata " : "lg:bg-transparent ") +
                     colturiLat
                   }
                 >
@@ -119,7 +119,7 @@ export default function ComparatieTabel({ coloane, randuri }: Props) {
                   </span>
                   <p
                     className={
-                      "text-nota " + (c.aNoastra ? "text-cerneala" : "text-cerneala-2")
+                      "text-nota " + (c.aNoastra ? "text-cerneala" : "text-cerneala-3")
                     }
                   >
                     {celula}

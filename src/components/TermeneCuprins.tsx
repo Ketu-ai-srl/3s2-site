@@ -33,7 +33,7 @@ export default function TermeneCuprins({
   fundal?: "alb" | "ceata";
 }) {
   const card =
-    "group flex h-full flex-col rounded-card p-5 no-underline transition-colors duration-200 hover:bg-violet-pal " +
+    "group flex h-full flex-col rounded-card p-5 no-underline transition-colors duration-200 hover:bg-ceata " +
     (fundal === "alb" ? "bg-ceata" : "bg-alb");
 
   return (
@@ -43,7 +43,7 @@ export default function TermeneCuprins({
         {termene.map((t) => (
           <li key={t.ancora}>
             <a href={"#" + t.ancora} className={card}>
-              <span className="flex items-baseline justify-between gap-3 text-corp font-semibold text-violet">
+              <span className="flex items-baseline justify-between gap-3 text-corp font-semibold text-albastru-2">
                 {t.scurt}
                 <span
                   aria-hidden="true"
@@ -55,7 +55,7 @@ export default function TermeneCuprins({
               <span className="mt-2 text-nota font-semibold text-cerneala">
                 {t.termen ? t.termen : fara}
               </span>
-              <span className="mt-1 text-nota text-cerneala-2">
+              <span className="mt-1 text-nota text-cerneala-3">
                 {t.lege ? t.lege : faraTemei}
               </span>
             </a>

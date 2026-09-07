@@ -28,7 +28,7 @@ type Props = {
 
 const CUTIE = "relative block h-full rounded-card-mare p-8 no-underline";
 const TITLU = "max-w-[16ch] text-titlu-4 text-cerneala";
-const REZUMAT = "mt-3 max-w-[42ch] text-corp text-cerneala-2";
+const REZUMAT = "mt-3 max-w-[42ch] text-corp text-cerneala-3";
 
 function SageataDiagonala() {
   return (
@@ -43,7 +43,7 @@ function SageataDiagonala() {
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="absolute top-7 right-7 text-violet transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+      className="absolute top-7 right-7 text-albastru-2 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
     >
       <path d="M6 14 L14 6" />
       <path d="M7 6h7v7" />
@@ -56,7 +56,7 @@ export default function FisaDomeniu({ titlu, href, children }: Props) {
     return (
       <li className="list-none">
         <div className={CUTIE + " bg-alb"}>
-          <span className="absolute top-7 right-7 rounded-pastila bg-ceata px-3 py-1 text-nota font-semibold text-cerneala-2">
+          <span className="absolute top-7 right-7 rounded-pastila bg-ceata px-3 py-1 text-nota font-semibold text-cerneala-3">
             În pregătire
           </span>
           <h3 className={TITLU}>{titlu}</h3>
@@ -70,7 +70,7 @@ export default function FisaDomeniu({ titlu, href, children }: Props) {
     <li className="list-none">
       <Link
         href={href}
-        className={CUTIE + " group bg-alb transition-colors duration-200 hover:bg-violet-pal"}
+        className={CUTIE + " group bg-alb transition-colors duration-200 hover:bg-ceata"}
       >
         <SageataDiagonala />
         <h3 className={TITLU}>{titlu}</h3>

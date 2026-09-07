@@ -43,7 +43,7 @@ export default function JuridicListaLipsa({
         {elemente.map((e, i) => (
           <li key={i} className={card}>
             <span aria-hidden className="mt-[11px] h-px w-[10px] shrink-0 bg-cerneala-3" />
-            <span className="text-corp text-cerneala-2">{e}</span>
+            <span className="text-corp text-cerneala-3">{e}</span>
           </li>
         ))}
       </ul>

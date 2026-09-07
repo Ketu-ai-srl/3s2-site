@@ -3,74 +3,78 @@ import { join, sep } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 /**
- * Fundatia directiei REF-V (felia 1, val S1-a): fundal ALB si ceata, un singur violet care
- * duce actiunea, o singura familie de litera, titluri cu litera obisnuita, fotografia in
- * card - niciodata pe tot ecranul.
+ * Fundatia directiei REF-A (felia 1, val S2-a): alb si gri deschis, text aproape negru, UN
+ * albastru care duce actiunea, fara gradiente si fara umbre, titluri la 600 in propozitii de
+ * doua-patru cuvinte cu punct, fotografii mari in tigle si niciodata text peste ele.
  *
- * CE CLASA DE DEFECT INCHID PROBELE DE AICI. Portile de browser masoara pagina CONSTRUITA:
- * axe pe 22 de rute plus un build inseamna minute, si raspunde abia dupa. Regulile de mai
- * jos se pot decide pe sursa, in sub o secunda, si sunt exact acelea pe care nicio alta
- * poarta nu le vede:
- *   - o culoare din paleta veche reintrodusa „temporar" in globals.css. Contrastul ei poate
- *     fi impecabil, deci nicio poarta de contrast nu se inroseste; ce se pierde e directia.
+ * CE CLASA DE DEFECT INCHID PROBELE DE AICI. Portile de browser masoara pagina CONSTRUITA: axe
+ * pe 22 de rute plus un build inseamna minute, si raspunde abia dupa. Regulile de mai jos se pot
+ * decide pe sursa, in sub o secunda, si sunt exact acelea pe care nicio alta poarta nu le vede:
+ *   - o culoare din paleta REF-V reintrodusa „temporar" in globals.css. Contrastul ei poate fi
+ *     impecabil, deci nicio poarta de contrast nu se inroseste; ce se pierde e directia.
  *   - un al doilea font incarcat printr-un nume mostenit (`font-mono`, `font-afis`).
- *   - `cerneala-3` scris pe o suprafata de ceata, unde da 3,97:1. Axe il prinde doar daca
- *     acel text ajunge randat pe o pagina din lista de rute, la latimea masurata.
- *   - doua butoane primare in aceeasi sectiune. Nicio unealta nu numara asta.
+ *   - `albastru` scris ca litera, unde da 4,31:1 pe ceata. Axe il prinde doar daca acel text
+ *     ajunge randat pe o pagina din lista de rute, la latimea masurata.
+ *   - `albastru-clar` pe deschis sau `albastru-2` pe negru: fiecare albastru are UN capat pe
+ *     care trece, si nicio unealta nu se uita la care.
+ *   - doua butoane primare pe aceeasi tigla. Nicio unealta nu numara asta.
+ *   - inaltimea de rand sub pragul diacriticelor romanesti.
  *
- * Cifrele de contrast citate mai jos sunt calculate din valorile paletei (raportul de
- * luminanta WCAG), iar cele de pe gradientul eroului sunt masurate pe captura, cu litera
- * facuta transparenta. Scriptul si valorile: `docs/design/DIRECTIA.md`.
+ * Cifrele de contrast citate mai jos sunt calculate din valorile paletei (raportul de luminanta
+ * WCAG), iar pragul diacriticelor e masurat pe fontul REAL servit de site, cu TextMetrics.
+ * Amandoua, cu metoda si cu martorii lor: `docs/design/DIRECTIA.md`.
  */
 
 const RADACINA = join(__dirname, '..')
 const COMPONENTE = join(RADACINA, 'src', 'components')
-// Domeniul probelor de clase: TOT `src` (pagini, componente, continut). Pana la valul S1-b
-// se masurau doar fisierele feliei 1, ca sa nu se inroseasca pe pagini pe care nimeni nu avea
-// voie sa le atinga; S1-b a rescris si ultimele 21 de pagini interioare, deci nu mai exista
-// nicio exceptie legitima. Sirurile de clase din `src/content` intra si ele: `termene.ts`
-// purta 6 clase moarte exact acolo.
 const SURSA = join(RADACINA, 'src')
 const CSS = readFileSync(join(RADACINA, 'src', 'app', 'globals.css'), 'utf8')
 const DIRECTIA = readFileSync(join(RADACINA, 'docs', 'design', 'DIRECTIA.md'), 'utf8')
+const PAGINA = join(RADACINA, 'src', 'app', 'page.tsx')
 
-// Cele 14 roluri ale paletei REF-V. Lista e inchisa: o culoare in plus inseamna un rol pe
-// care nu l-a numit nimeni, iar rolurile nenumite se aleg dupa gust, nu dupa masuratoare.
+// Cele 9 roluri ale paletei REF-A, asa cum le poate folosi acest site. Lista e inchisa: o
+// culoare in plus inseamna un rol pe care nu l-a numit nimeni, iar rolurile nenumite se aleg
+// dupa gust, nu dupa masuratoare.
+//
+// AL ZECELEA ROL AL REFERINTEI, griul deschis de la paragraful de capitol, NU e aici, si e o
+// refutare masurata: la 21 px si greutatea 600 da 3,62:1, iar axe l-a raportat `serious` pe 20
+// din 22 de rute. Pragul de 3:1 pentru text mare cere 24 px sau greutatea 700, iar directia are
+// doua greutati. Motivul intreg, cu cele trei iesiri cantarite: `globals.css` si DIRECTIA.md.
 const PALETA = [
-  'violet',
-  'violet-2',
-  'violet-clar',
-  'violet-pal',
-  'violet-adanc',
-  'noapte-v',
   'cerneala',
-  'cerneala-2',
   'cerneala-3',
+  'albastru',
+  'albastru-2',
+  'albastru-clar',
   'alb',
   'ceata',
-  'ceata-2',
-  'linie',
-  'succes',
+  'negru',
+  'accent-nou',
 ]
 
-// Numele directiei anterioare. `noapte-v` NU e printre ele si nu se potriveste: tiparul cere
-// ca dupa `noapte` sa urmeze sfarsitul numelui sau o cratima urmata de cifra.
+// Numele directiei anterioare (REF-V). `albastru-clar` NU e printre ele si nu se potriveste:
+// tiparele cer numele intreg, nu o bucata din el.
 const PALETA_VECHE = [
-  /--color-noapte(-[23])?:/,
-  /--color-hartie(-[a-z0-9-]+)?:/,
-  /--color-arama(-[a-z0-9-]+)?:/,
-  /--color-verde(-[a-z0-9-]+)?:/,
-  /--color-tus(-[a-z0-9-]+)?:/,
-  /--color-pe-inchis(-[a-z0-9-]+)?:/,
-  /--color-suprafata:/,
-  /--color-linie-noapte:/,
-  /--color-linie-suprafata:/,
-  /--color-cerneala-accent:/,
+  /--color-violet(-[a-z0-9-]+)?:/,
+  /--color-noapte-v:/,
+  /--color-ceata-2:/,
+  /--color-linie(-[a-z0-9-]+)?:/,
+  /--color-succes:/,
 ]
 
-// Clasele pe care le-ar scrie cineva care se intoarce, din obisnuinta, la directia veche.
+// Clasele pe care le-ar scrie cineva care se intoarce, din obisnuinta, la directia REF-V.
 const CLASE_VECHI =
-  /\b(?:hover:|group-hover:|focus:)?(?:bg|text|border|decoration|from|to|via)-(?:noapte-[23]|noapte(?![-\w])|hartie|hartie-veche|hartie-veche-[23]|arama|arama-clar|arama-moale|arama-inchis|verde|verde-adanc|verde-moale|tus|tus-[23]|pe-inchis|suprafata|linie-noapte|linie-suprafata|cerneala-accent)\b/g
+  /\b(?:hover:|group-hover:|focus:)?(?:bg|text|border|decoration|from|to|via|ring|fill|stroke|outline|divide)-(?:violet|violet-2|violet-clar|violet-pal|violet-adanc|noapte-v|ceata-2|linie|succes)\b/g
+
+// FISIERELE FELIEI 1. Restul lui `src/` apartine valului S2-b, si acolo reziduul e MASURAT si
+// plafonat, nu zero - vezi proba lui.
+const ALE_FELIEI = ['src/components/', 'src/app/page.tsx', 'src/app/layout.tsx', 'src/content/start.ts']
+
+// Reziduul masurat azi in afara feliei 1, cu comentariile scoase: 41 de clase REF-V, in 11
+// pagini din `src/app` si in `src/content/termene.ts`. E o PODEA care poate doar sa scada:
+// scrisa ca `<=`, nu ca `===`, tocmai ca sa nu se inroseasca atunci cand cineva face lucrul
+// corect si rescrie una dintre pagini.
+const REZIDUU_MAXIM = 41
 
 function fisiereTsx(dir: string, acc: string[] = []): string[] {
   for (const intrare of readdirSync(dir, { withFileTypes: true })) {
@@ -85,122 +89,182 @@ function relativa(cale: string) {
   return cale.replace(RADACINA, '').split(sep).join('/').replace(/^\//, '')
 }
 
-// Comentariile se scot inainte de a cauta clase: notele istorice ale componentelor
-// retintuite numesc pe fata culorile directiei anterioare, si asta e chiar ce vrem sa ramana
-// scris. Ce nu are voie sa existe e clasa in COD.
+// Comentariile se scot inainte de a cauta clase: notele istorice ale componentelor retintuite
+// numesc pe fata culorile directiei anterioare, si asta e chiar ce vrem sa ramana scris. Ce nu
+// are voie sa existe e clasa in COD.
 function faraComentarii(text: string) {
   return text.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/^[ \t]*\/\/.*$/gm, '')
 }
 
-describe('paleta REF-V', () => {
-  it('globals.css defineste exact cele 14 roluri ale paletei, si nimic in plus', () => {
+// Raportul de luminanta WCAG, din valorile paletei. Nu numele, VALORILE.
+const canal = (v: number) => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4))
+const luminanta = (hex: string) => {
+  const n = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+  return 0.2126 * canal(n[0]) + 0.7152 * canal(n[1]) + 0.0722 * canal(n[2])
+}
+const contrast = (a: string, b: string) => {
+  const [la, lb] = [luminanta(a), luminanta(b)]
+  return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05)
+}
+const valoare = (rol: string) => {
+  const m = CSS.match(new RegExp('--color-' + rol + ':\\s*(#[0-9a-f]{6})'))
+  expect(m, 'nu gasesc valoarea rolului ' + rol).not.toBeNull()
+  return m![1]
+}
+
+describe('paleta REF-A', () => {
+  it('globals.css defineste exact cele 9 roluri folosibile, si nimic in plus', () => {
     for (const rol of PALETA) {
       expect(CSS, 'globals.css nu defineste --color-' + rol).toContain('--color-' + rol + ':')
     }
     const definite = [...CSS.matchAll(/--color-([a-z0-9-]+):/g)].map((m) => m[1]).sort()
-    expect(definite, 'roluri de culoare in plus fata de lista REF-V').toEqual([...PALETA].sort())
+    expect(definite, 'roluri de culoare in plus fata de lista REF-A').toEqual([...PALETA].sort())
   })
 
-  it('paleta directiei anterioare nu mai e definita, nici macar ca alias', () => {
+  it('paleta REF-V nu mai e definita, nici macar ca alias', () => {
     const ramase: string[] = []
     for (const tipar of PALETA_VECHE) {
       const m = CSS.match(tipar)
       if (m) ramase.push(m[0])
     }
-    expect(ramase, 'jetoane ale directiei vechi ramase in globals.css').toEqual([])
+    expect(ramase, 'jetoane ale directiei REF-V ramase in globals.css').toEqual([])
     // Si controlul: tiparul chiar prinde ceva, altfel proba de mai sus ar fi verde si oarba.
-    expect('--color-noapte-2: #141416;'.match(PALETA_VECHE[0]), 'tiparul nu prinde nici macar forma pe care o vaneaza').not.toBeNull()
-    // `noapte-v` e din paleta NOUA si nu are voie sa fie prins de tiparul vechi.
-    expect('--color-noapte-v: #110c29;'.match(PALETA_VECHE[0]), 'tiparul vechi inghite si noapte-v').toBeNull()
+    expect('--color-violet-2: #7b66ff;'.match(PALETA_VECHE[0]), 'tiparul nu prinde nici macar forma pe care o vaneaza').not.toBeNull()
+    expect('--color-linie: #e9e9ec;'.match(PALETA_VECHE[3]), 'tiparul de linie nu prinde forma vanata').not.toBeNull()
+    // Martor negativ: numele NOI nu au voie sa fie inghitite de tiparele vechi.
+    for (const tipar of PALETA_VECHE) {
+      expect('--color-albastru-clar: #2997ff;'.match(tipar), 'un tipar vechi inghite un rol nou').toBeNull()
+    }
   })
 
-  it('nicio componenta si nicio pagina nu mai scrie o clasa din paleta veche', () => {
-    const abateri: string[] = []
+  it('fisierele feliei 1 nu mai scriu nicio clasa REF-V, iar reziduul din rest nu creste', () => {
+    const aleMele: string[] = []
+    let reziduu = 0
+    const fisiereReziduu = new Set<string>()
     for (const cale of fisiereTsx(SURSA)) {
+      const rel = relativa(cale)
       const cod = faraComentarii(readFileSync(cale, 'utf8'))
-      for (const m of cod.matchAll(CLASE_VECHI)) abateri.push(relativa(cale) + ': ' + m[0])
+      const gasite = [...cod.matchAll(CLASE_VECHI)]
+      if (gasite.length === 0) continue
+      if (ALE_FELIEI.some((p) => rel.startsWith(p))) {
+        for (const m of gasite) aleMele.push(rel + ': ' + m[0])
+      } else {
+        reziduu += gasite.length
+        fisiereReziduu.add(rel)
+      }
     }
-    expect(abateri, 'clase din paleta veche in src/').toEqual([])
-    // Control pozitiv: tiparul trebuie sa prinda forma pe care o vaneaza, inclusiv variantele.
-    const martor = 'className="bg-noapte text-hartie-veche-2 hover:text-arama-clar"'
-    expect([...martor.matchAll(CLASE_VECHI)].length, 'tiparul de clase vechi nu prinde martorul').toBe(3)
+    expect(aleMele, 'clase REF-V in fisierele feliei 1').toEqual([])
+    // Reziduul valului urmator: masurat 41 azi, in 12 fisiere. Poate doar sa scada.
+    expect(reziduu, 'reziduul REF-V din afara feliei 1 a CRESCUT peste cel masurat').toBeLessThanOrEqual(
+      REZIDUU_MAXIM,
+    )
+    expect(fisiereReziduu.size, 'reziduul s-a raspandit in mai multe fisiere decat cele masurate').toBeLessThanOrEqual(12)
+    // Control pozitiv: tiparul prinde forma pe care o vaneaza, inclusiv variantele.
+    const martor = 'className="bg-noapte-v text-violet-clar hover:text-violet decoration-violet-2 border-linie"'
+    expect([...martor.matchAll(CLASE_VECHI)].length, 'tiparul de clase vechi nu prinde martorul').toBe(5)
+    // Control negativ: clasele NOI nu au voie sa fie prinse.
+    const martorNou = 'className="bg-albastru text-albastru-clar hover:bg-albastru-2 text-cerneala-3"'
+    expect([...martorNou.matchAll(CLASE_VECHI)].length, 'tiparul vechi inghite clasele noi').toBe(0)
   })
 
-  it('fiecare cerneala trece pragul pe fiecare suprafata deschisa, calculat din valori', () => {
-    // Nu numele, VALORILE. Proba citeste hexul din globals.css si calculeaza raportul de
-    // luminanta WCAG, deci prinde si cazul in care cineva schimba o culoare fara sa se uite
-    // la ce sta sub ea. Clasa de defect e reala si masurata: `cerneala-3` la valoarea din
-    // referinta (#797980) dadea 4,32:1 pe alb si a inrosit sapte pagini la axe.
-    const valoare = (rol: string) => {
-      const m = CSS.match(new RegExp('--color-' + rol + ':\\s*(#[0-9a-f]{6})'))
-      expect(m, 'nu gasesc valoarea rolului ' + rol).not.toBeNull()
-      return m![1]
-    }
-    const canal = (v: number) => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4))
-    const luminanta = (hex: string) => {
-      const n = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
-      return 0.2126 * canal(n[0]) + 0.7152 * canal(n[1]) + 0.0722 * canal(n[2])
-    }
-    const contrast = (a: string, b: string) => {
-      const [la, lb] = [luminanta(a), luminanta(b)]
-      return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05)
-    }
+  it('fiecare culoare trece pragul pe suprafata pe care are voie sa scrie, calculat din valori', () => {
     // Control: doua valori al caror raspuns se stie dinainte.
     expect(contrast('#ffffff', '#000000'), 'formula de contrast e gresita').toBeCloseTo(21, 2)
     expect(contrast('#ffffff', '#ffffff'), 'formula de contrast e gresita').toBeCloseTo(1, 2)
 
     const sub: string[] = []
-    for (const cerneala of ['cerneala', 'cerneala-2', 'cerneala-3']) {
-      for (const suprafata of ['alb', 'ceata', 'ceata-2']) {
+    for (const cerneala of ['cerneala', 'cerneala-3', 'accent-nou']) {
+      for (const suprafata of ['alb', 'ceata']) {
         const c = contrast(valoare(cerneala), valoare(suprafata))
         if (c < 4.5) sub.push(cerneala + ' pe ' + suprafata + ': ' + c.toFixed(2))
       }
     }
-    expect(sub, 'cerneala sub pragul de 4,5:1 pe o suprafata deschisa').toEqual([])
-    // Si perechile de pe fundal inchis, unde scriu banda de incredere si eroul.
-    expect(contrast(valoare('alb'), valoare('noapte-v'))).toBeGreaterThan(4.5)
-    expect(contrast(valoare('violet-clar'), valoare('noapte-v'))).toBeGreaterThan(4.5)
-    expect(contrast(valoare('violet-clar'), valoare('violet-adanc'))).toBeGreaterThan(4.5)
-    expect(contrast(valoare('alb'), valoare('violet'))).toBeGreaterThan(4.5)
-    // `violet-2` NU trece pe alb, si asta se afirma explicit: daca ar ajunge sa treaca,
-    // regula care il tine departe de litera si-a pierdut motivul si trebuie rescrisa.
-    expect(contrast(valoare('violet-2'), valoare('alb')), 'violet-2 a devenit culoare de text').toBeLessThan(4.5)
+    expect(sub, 'culoare de litera sub pragul de 4,5:1 pe o suprafata deschisa').toEqual([])
+    // Legaturile pe deschis, si albul pe pastila plina.
+    expect(contrast(valoare('albastru-2'), valoare('alb')), 'albastru-2 nu mai trece pe alb').toBeGreaterThan(4.5)
+    expect(contrast(valoare('albastru-2'), valoare('ceata')), 'albastru-2 nu mai trece pe ceata').toBeGreaterThan(4.5)
+    expect(contrast(valoare('alb'), valoare('albastru')), 'albul de pe pastila plina nu mai trece').toBeGreaterThan(4.5)
+    // Pe negru: litera `ceata`, legaturile `albastru-clar`.
+    expect(contrast(valoare('ceata'), valoare('negru'))).toBeGreaterThan(4.5)
+    expect(contrast(valoare('albastru-clar'), valoare('negru'))).toBeGreaterThan(4.5)
   })
 
-  it('violet-2 nu se scrie ca litera nicaieri in fisierele feliei', () => {
-    // `violet-2` da 4,05:1 pe alb: sub pragul de 4,5:1 pentru text mic, si proba de mai sus
-    // afirma explicit ca inca e asa. E contur, hover si subliniere, nu litera.
-    //
-    // Se masoara tot `src` (vezi SURSA): de la S1-b nu mai exista pagini nerescrise.
-    const gasite: string[] = []
-    for (const cale of fisiereTsx(SURSA)) {
-      const cod = faraComentarii(readFileSync(cale, 'utf8'))
-      for (const m of cod.matchAll(/\btext-violet-2\b/g)) {
-        gasite.push(relativa(cale) + ': ' + m[0])
-      }
-    }
-    expect(gasite, 'violet-2 folosit ca litera').toEqual([])
-    // Control pozitiv: tiparul prinde forma pe care o vaneaza, altfel lista goala de mai sus
-    // nu spune nimic.
-    const martorSubPrag = 'className="text-violet-2 underline"'
+  it('cele doua culori care NU sunt de litera raman sub prag, si asta se afirma explicit', () => {
+    // Daca vreuna ar ajunge sa treaca, regula care o tine departe de litera si-a pierdut motivul
+    // si trebuie rescrisa. De aia se afirma, nu se presupune.
     expect(
-      [...martorSubPrag.matchAll(/\btext-violet-2\b/g)].length,
-      'tiparul nu prinde nici macar martorul',
-    ).toBe(1)
-    // Si martorul negativ: `decoration-violet-2` e forma LEGITIMA si nu are voie sa fie prinsa.
-    expect([...'decoration-violet-2'.matchAll(/\btext-violet-2\b/g)].length).toBe(0)
+      contrast(valoare('albastru'), valoare('ceata')),
+      'albastru a devenit culoare de text pe ceata',
+    ).toBeLessThan(4.5)
+    expect(
+      contrast(valoare('albastru-clar'), valoare('alb')),
+      'albastru-clar a devenit culoare de text pe alb',
+    ).toBeLessThan(4.5)
+    // Si griul referintei, cel care NU e definit: calculat aici din valoarea lui literala,
+    // ca sa ramana scris de ce nu poate exista. 3,62:1 pe alb, adica sub 4,5:1; iar usa de
+    // 3:1 pentru text mare cere 24 px sau greutatea 700, pe care directia nu le are la
+    // paragraful de capitol. Daca cineva il reintroduce, prima proba din fisier se inroseste.
+    expect(contrast('#86868b', valoare('alb')), 'griul referintei ar trece pragul de text mic').toBeLessThan(4.5)
+    expect(contrast('#86868b', valoare('ceata'))).toBeLessThan(4.5)
   })
 
-  it('cifrele de contrast sunt scrise in globals.css si in DIRECTIA.md', () => {
-    for (const cifra of ['17,73', '7,06', '6,20', '18,95', '7,61']) {
+  it('griul de la 21 px al referintei nu se intoarce, nici ca jeton, nici ca clasa', () => {
+    // Rolul a fost RETRAS dupa o masuratoare cu axe, nu uitat: 3,62:1 la 19 px, impact
+    // `serious` pe 20 din 22 de rute, un nod pe fiecare - paragraful de capitol. Proba pazeste
+    // exact intoarcerea lui, in amandoua formele in care s-ar putea intoarce.
+    expect(CSS, 'griul de 21 px a fost redefinit ca jeton').not.toMatch(/--color-cerneala-2:/)
+    expect(CSS, 'valoarea lui a fost strecurata sub alt nume').not.toMatch(/--color-[a-z0-9-]+:\s*#86868b/)
+    const scriu: string[] = []
+    for (const cale of fisiereTsx(SURSA)) {
+      const rel = relativa(cale)
+      if (!ALE_FELIEI.some((x) => rel.startsWith(x))) continue
+      const cod = faraComentarii(readFileSync(cale, 'utf8'))
+      for (const m of cod.matchAll(/\btext-cerneala-2\b/g)) scriu.push(rel + ': ' + m[0])
+    }
+    expect(scriu, 'fisierele feliei 1 inca scriu clasa griului retras').toEqual([])
+    // Control pozitiv: tiparele prind formele pe care le vaneaza.
+    expect('--color-cerneala-2: #86868b;'.match(/--color-cerneala-2:/), 'tiparul de jeton nu prinde martorul').not.toBeNull()
+    expect('--color-gri-nou: #86868b;'.match(/--color-[a-z0-9-]+:\s*#86868b/), 'tiparul de valoare nu prinde martorul').not.toBeNull()
+    expect([...'className="text-cerneala-2"'.matchAll(/\btext-cerneala-2\b/g)].length).toBe(1)
+    // Si motivul retragerii e SCRIS, nu doar aplicat: cifra masurata si pragul care o judeca.
+    expect(CSS, 'globals.css nu scrie cifra masurata de axe').toContain('3,62')
+    expect(DIRECTIA, 'DIRECTIA.md nu scrie de ce a fost retras rolul').toMatch(/700/)
+    // SI documentul nu are voie sa prescrie in alta parte chiar pragul pe care il refuta aici.
+    // Asa s-a intamplat: reteta de masurare de la finalul lui DIRECTIA.md cerea „18,66 px la
+    // greutatea 600", adica exact conditia referintei, nu a WCAG - un agent care o urma masura
+    // cu pragul larg si lasa griul de 3,62:1 sa treaca. Refutarea si reteta trebuie sa spuna
+    // acelasi lucru, si asta o tine proba, nu buna-credinta.
+    expect(DIRECTIA, 'DIRECTIA.md prescrie undeva pragul de 3:1 la greutatea 600, pe care tot el il refuta').not.toMatch(
+      /18,66\s*px\s*(?:cu|la)\s*greutatea\s*600/,
+    )
+    // Control pozitiv: tiparul chiar prinde forma pe care o vaneaza.
+    expect(
+      'de la 18,66 px la greutatea 600;'.match(/18,66\s*px\s*(?:cu|la)\s*greutatea\s*600/),
+      'tiparul pragului refuzat nu prinde martorul',
+    ).not.toBeNull()
+  })
+
+  it('cifrele de contrast si pragul diacriticelor sunt scrise in globals.css si in DIRECTIA.md', () => {
+    // `3,77` e cifra pe care se sprijina regula „albastru-2 nu se scrie pe negru". A stat scrisa
+    // `3,86` in patru locuri si nicio proba n-o cerea, deci nimeni n-a recalculat-o: valoarea
+    // reala a lui #0066cc pe #000000 e 3,7725. De aici incolo o cere lista de mai jos.
+    for (const cifra of ['16,83', '3,62', '5,07', '4,70', '5,57', '6,96', '19,29', '3,77']) {
       expect(CSS, 'globals.css nu scrie contrastul ' + cifra).toContain(cifra)
     }
-    expect(DIRECTIA, 'DIRECTIA.md nu scrie contrastul masurat pe captura').toMatch(/5,3[0-9]/)
+    for (const cifra of ['16,83', '3,62', '5,07', '6,96', '3,77']) {
+      expect(DIRECTIA, 'DIRECTIA.md nu scrie contrastul ' + cifra).toContain(cifra)
+    }
+    // Si cifra scrisa trebuie sa fie CEA CALCULATA, nu una apropiata: se reface din valorile
+    // paletei, cu martorii alaturi.
+    expect(contrast(valoare('albastru-2'), valoare('negru'))).toBeCloseTo(3.77, 2)
+    expect(CSS, 'globals.css nu scrie pragul masurat al diacriticelor').toContain('1,190')
+    expect(DIRECTIA, 'DIRECTIA.md nu scrie urcarea masurata a lui I cu circumflex').toContain('0,945')
+    expect(DIRECTIA, 'DIRECTIA.md nu scrie coborarea masurata a virgulei').toContain('0,245')
   })
 
-  it('fiecare jeton definit in globals.css e explicat in DIRECTIA.md', () => {
+  it('fiecare jeton de culoare definit in globals.css e explicat in DIRECTIA.md', () => {
     const definite = [...CSS.matchAll(/--color-([a-z0-9-]+):/g)].map((m) => m[1])
-    expect(definite.length, 'blocul de paleta din globals.css pare gol').toBeGreaterThan(10)
+    expect(definite.length, 'blocul de paleta din globals.css pare gol').toBeGreaterThan(8)
     for (const j of definite) {
       expect(DIRECTIA, 'DIRECTIA.md nu numeste jetonul ' + j).toContain(j)
     }
@@ -208,28 +272,28 @@ describe('paleta REF-V', () => {
 })
 
 describe('litera si scara', () => {
-  it('se incarca o singura familie, si toate jetoanele de familie arata catre ea', () => {
+  it('se incarca o singura familie, Inter, si toate jetoanele de familie arata catre ea', () => {
     const layout = readFileSync(join(RADACINA, 'src', 'app', 'layout.tsx'), 'utf8')
     const importuri = layout.match(/from "next\/font\/google"/g) ?? []
     expect(importuri.length, 'mai mult sau mai putin de un import de font').toBe(1)
-    expect(layout, 'fontul nu e DM Sans').toMatch(/DM_Sans\(/)
-    // Doua greutati, 400 si 600: 700 nu se incarca, fiindca titlurile REF-V nu sunt bold.
+    expect(layout, 'fontul nu e Inter').toMatch(/Inter\(/)
+    // Doua greutati, 400 si 600: 700 nu se incarca, fiindca REF-A n-are titluri mai grele.
     expect(layout).toMatch(/weight:\s*\["400",\s*"600"\]/)
+    expect(layout, 'lipseste subsetul latin-ext, fara de care s si t cu virgula cad pe alt font').toMatch(
+      /subsets:\s*\["latin",\s*"latin-ext"\]/,
+    )
     const familii = [...CSS.matchAll(/--font-(afis|vitrina|mono|sans|serif):\s*([^;]+);/g)]
     expect(familii.length, 'jetoanele de familie lipsesc din globals.css').toBeGreaterThan(2)
-    for (const [, nume, valoare] of familii) {
-      expect(valoare, 'jetonul --font-' + nume + ' nu arata catre familia unica').toContain(
-        'var(--fnt-text)',
-      )
+    for (const [, nume, val] of familii) {
+      expect(val, 'jetonul --font-' + nume + ' nu arata catre familia unica').toContain('var(--fnt-text)')
     }
   })
 
-  it('titlurile nu sunt bold si nu sunt majuscule', () => {
+  it('titlurile sunt la 600 si nu sunt majuscule nicaieri', () => {
     const baza = CSS.match(/h1,\s*\n\s*h2,\s*\n\s*h3,\s*\n\s*h4\s*\{([\s\S]*?)\}/)
     expect(baza, 'nu gasesc regula de baza h1..h4').not.toBeNull()
-    expect(baza![1], 'titlurile nu sunt la greutatea 400').toMatch(/font-weight:\s*400\s*;/)
+    expect(baza![1], 'titlurile nu sunt la greutatea 600').toMatch(/font-weight:\s*600\s*;/)
     expect(baza![1], 'titlurile nu declara text-transform: none').toMatch(/text-transform:\s*none\s*;/)
-    // Si `uppercase` nu se mai scrie nicaieri in `src`.
     const cuMajuscule: string[] = []
     for (const cale of fisiereTsx(SURSA)) {
       const cod = faraComentarii(readFileSync(cale, 'utf8'))
@@ -238,20 +302,10 @@ describe('litera si scara', () => {
     expect(cuMajuscule, 'clase `uppercase` ramase in src/').toEqual([])
   })
 
-  it('scara e cea masurata pe REF-V: 72, 48, 36, 24, 20, 16, 14', () => {
-    expect(CSS, 'titlul erou nu urca la 72 px (4,5rem)').toMatch(/--text-titlu-1:\s*clamp\([^)]*4\.5rem\)/)
-    expect(CSS, 'titlul de sectiune nu urca la 48 px (3rem)').toMatch(/--text-titlu-2:\s*clamp\([^)]*3rem\)/)
-    expect(CSS, 'lipseste treapta de 36 px').toMatch(/--text-titlu-3:\s*clamp\([^)]*2\.25rem\)/)
-    expect(CSS, 'lipseste treapta de 24 px').toMatch(/--text-titlu-4:\s*24px/)
-    expect(CSS, 'lipseste subtitlul de 20 px').toMatch(/--text-subtitlu:\s*20px/)
-    expect(CSS, 'corpul nu e 16 px').toMatch(/--text-corp:\s*16px/)
-    expect(CSS, 'nota nu e 14 px').toMatch(/--text-nota:\s*14px/)
-  })
-
-  // Evaluator minim de valori CSS, pentru jetoanele scarii: numar fara unitate, `px`, `rem`,
-  // si `clamp(minim, preferat, maxim)` unde fiecare parte e o suma de termeni `px`/`rem`/`vw`.
-  // Nu e un motor CSS: acopera exact formele folosite in globals.css, si crapa daca apare
-  // alta - tacerea ar fi mai rea decat eroarea.
+  // Evaluator minim de valori CSS, pentru jetoanele scarii: numar fara unitate, `px`, `rem`, si
+  // `clamp(minim, preferat, maxim)` unde fiecare parte e o suma de termeni `px`/`rem`/`vw`. Nu e
+  // un motor CSS: acopera exact formele folosite in globals.css, si crapa daca apare alta -
+  // tacerea ar fi mai rea decat eroarea.
   const px = (termen: string, latime: number): number => {
     let total = 0
     const gasite = termen.match(/-?[0-9.]+(?:px|rem|vw)/g)
@@ -275,16 +329,19 @@ describe('litera si scara', () => {
     }
     return px(e, latime)
   }
-  // Raportul REAL dintre pasul de rand si marimea literei, la o latime data. Cand inaltimea
-  // de rand e un numar fara unitate, raportul e chiar acel numar, la orice latime.
-  const raportLa = (css: string, jeton: string, latime: number): number => {
+  const marimea = (css: string, jeton: string, latime: number) => {
     const fs = css.match(new RegExp('--text-' + jeton + ':\\s*([^;]+);'))
-    const lh = css.match(new RegExp('--text-' + jeton + '--line-height:\\s*([^;]+);'))
     if (!fs) throw new Error('nu gasesc --text-' + jeton)
+    return evalueaza(fs[1], latime)
+  }
+  // Raportul REAL dintre pasul de rand si marimea literei, la o latime data. Cand inaltimea de
+  // rand e un numar fara unitate, raportul e chiar acel numar, la orice latime.
+  const raportLa = (css: string, jeton: string, latime: number): number => {
+    const lh = css.match(new RegExp('--text-' + jeton + '--line-height:\\s*([^;]+);'))
     if (!lh) throw new Error('nu gasesc --text-' + jeton + '--line-height')
     const v = lh[1].trim()
     if (/^[0-9.]+$/.test(v)) return Number(v)
-    return evalueaza(v, latime) / evalueaza(fs[1], latime)
+    return evalueaza(v, latime) / marimea(css, jeton, latime)
   }
   const raportMinim = (css: string, jeton: string): { r: number; la: number } => {
     let r = Infinity
@@ -299,168 +356,264 @@ describe('litera si scara', () => {
     return { r, la }
   }
 
-  it('inaltimea de rand a titlurilor incape diacriticele romanesti', () => {
-    // Pragul e cel masurat la directia anterioara, pe fontul real: virgula lui S coboara
-    // 0,180 em sub linia de baza, iar A/I cu accent urca 0,889 em, deci 1,069 em e minimul
-    // sub care doua randuri se ating. Se pastreaza desi titlurile nu mai sunt cu majuscule -
-    // nu costa nimic, iar o regula relaxata fiindca "azi nu mai avem majuscule" se strica la
-    // primul titlu scris cu majuscule.
-    //
-    // DE CE SE MASOARA PE INTERVAL, nu pe o cifra. Pana la valul asta proba citea jetonul ca
-    // pe un numar unic. Nu mai poate: REF-V cere la cele doua capete RAPORTURI diferite (h1
-    // 1,111 la 1440 si 1,222 la 390), asa ca inaltimea de rand a devenit si ea `clamp`, iar
-    // un `clamp` nu are "un" raport. Proba masoara acum raportul REAL, la fiecare latime de
-    // la 320 la 1920, si cere ca MINIMUL lui sa treaca pragul. Pe un jeton scris ca numar
-    // fix se reduce exact la verificarea de dinainte, deci nu s-a pierdut nimic: s-au
-    // adaugat 1600 de puncte de masurare acolo unde era unul.
-    const PRAG = 1.069
-    for (const jeton of ['titlu-1', 'titlu-2', 'titlu-3']) {
+  it('marimile literei sunt EXACT cele masurate pe REF-A, la amandoua capetele', () => {
+    // Cifrele sunt cele din fisa referintei, citite din stilurile calculate la 1440 si la 390.
+    // Capetele inguste ale lui `afirmatie` si `titlu-1` sunt ALESE de noi (referinta nu si-a
+    // masurat pagina de produs pe telefon) si scrise ca atare in globals.css.
+    const CERUT: Array<[string, number, number]> = [
+      ['afirmatie', 1440, 80],
+      ['afirmatie', 390, 40],
+      ['titlu-1', 1440, 64],
+      ['titlu-1', 390, 40],
+      ['tigla', 1440, 56],
+      ['tigla', 390, 32],
+      ['titlu-2', 1440, 48],
+      ['titlu-2', 390, 32],
+      ['titlu-3', 1440, 40],
+      ['titlu-3', 390, 32],
+      ['subtitlu-tigla', 1440, 28],
+      ['subtitlu-tigla', 390, 19],
+      ['subtitlu', 1440, 21],
+      ['subtitlu', 390, 19],
+      ['capitol', 1440, 21],
+      ['capitol', 390, 19],
+    ]
+    for (const [jeton, latime, cerut] of CERUT) {
+      expect(marimea(CSS, jeton, latime), jeton + ' la ' + latime + ' px').toBeCloseTo(cerut, 2)
+    }
+    // Treptele fixe, care nu se schimba cu latimea.
+    expect(CSS, 'eticheta de capitol nu e 24 px').toMatch(/--text-titlu-4:\s*24px/)
+    expect(CSS, 'titlul de card juridic nu e 20 px').toMatch(/--text-titlu-card:\s*20px/)
+    expect(CSS, 'corpul nu e 17 px').toMatch(/--text-corp:\s*17px/)
+    expect(CSS, 'nota nu e 14 px').toMatch(/--text-nota:\s*14px/)
+    expect(CSS, 'treapta de 12 px a barelor si a subsolului lipseste').toMatch(/--text-mic:\s*12px/)
+    // MARTOR: evaluatorul chiar calculeaza, nu intoarce mereu aceeasi cifra.
+    expect(evalueaza('clamp(2rem, 3.8889vw, 3.5rem)', 1440)).toBeCloseTo(56, 2)
+    expect(evalueaza('clamp(2rem, 3.8889vw, 3.5rem)', 390)).toBeCloseTo(32, 2)
+  })
+
+  it('inaltimea de rand trece pragul MASURAT al diacriticelor romanesti', () => {
+    // PRAGUL NU E MOSTENIT, e masurat pe Inter, pe pagina construita, cu TextMetrics: urcarea
+    // maxima 0,945 em (I / A cu circumflex sau breve) plus coborarea maxima 0,245 em (S / T cu
+    // virgula) = 1,190 em. Sub el, un I cu circumflex de pe randul al doilea intra in virgula
+    // unui s de pe primul. Referinta da 1,05-1,17 pe treptele de titlu, fiindca textul ei e in
+    // alta limba; noi ridicam PASUL DE RAND, niciodata marimea literei.
+    const PRAG = 1.19
+    for (const jeton of ['afirmatie', 'titlu-1', 'tigla', 'titlu-2', 'titlu-3', 'titlu-4',
+                         'subtitlu-tigla', 'subtitlu', 'capitol', 'titlu-card', 'corp', 'nota', 'mic']) {
       const { r, la } = raportMinim(CSS, jeton)
       expect(r, jeton + ' scade sub pragul diacriticelor la ' + la + ' px').toBeGreaterThanOrEqual(PRAG)
     }
 
-    // MARTOR POZITIV: proba trebuie sa se inroseasca pe defectul pe care il pazeste, in
-    // AMANDOUA formele. Fara asta, trecerea de mai sus nu dovedeste nimic.
-    const subPrag = '--text-titlu-1: 72px; --text-titlu-1--line-height: 1.0;'
-    expect(raportMinim(subPrag, 'titlu-1').r, 'martor pozitiv (numar fix sub prag) NU a fost prins').toBeLessThan(PRAG)
-    // Aceeasi valoare gresita, ascunsa intr-un clamp: la 390 px da 36/36, adica exact 1,0.
-    // Forma noua nu are voie sa devina o portita pentru defectul vechi.
+    // MARTOR POZITIV, in AMANDOUA formele in care defectul poate aparea. Fara el, trecerea de
+    // mai sus nu dovedeste nimic. Prima e chiar cifra referintei: 80 / 84 = 1,05.
+    const caReferinta = '--text-afirmatie: 80px; --text-afirmatie--line-height: 84px;'
+    expect(raportMinim(caReferinta, 'afirmatie').r, 'martor pozitiv (cifra referintei) NU a fost prins').toBeLessThan(PRAG)
+    // A doua: aceeasi greseala ascunsa intr-un clamp, care la 1440 da tot 1,05.
     const clampSubPrag =
-      '--text-titlu-1: clamp(2.25rem, 5vw, 4.5rem); --text-titlu-1--line-height: clamp(2.25rem, 5.6vw, 5rem);'
-    expect(raportMinim(clampSubPrag, 'titlu-1').r, 'martor pozitiv (clamp sub prag) NU a fost prins').toBeLessThan(PRAG)
+      '--text-afirmatie: clamp(2.5rem, 5.5556vw, 5rem); --text-afirmatie--line-height: clamp(2.75rem, 5.8333vw, 5.25rem);'
+    expect(raportMinim(clampSubPrag, 'afirmatie').r, 'martor pozitiv (clamp sub prag) NU a fost prins').toBeLessThan(PRAG)
     // MARTOR NEGATIV: valoarea din arbore, care trebuie sa treaca.
-    const bun =
-      '--text-titlu-1: clamp(2.25rem, 5vw, 4.5rem); --text-titlu-1--line-height: clamp(2.75rem, 5.6vw, 5rem);'
-    expect(raportMinim(bun, 'titlu-1').r, 'martor negativ respins pe nedrept').toBeGreaterThanOrEqual(PRAG)
+    expect(raportMinim(CSS, 'afirmatie').r, 'martor negativ respins pe nedrept').toBeGreaterThanOrEqual(PRAG)
 
     const baza = CSS.match(/h1,\s*\n\s*h2,\s*\n\s*h3,\s*\n\s*h4\s*\{([\s\S]*?)\}/)
     const pas = baza![1].match(/line-height:\s*([0-9.]+)\s*;/)
     expect(pas, 'regula de baza h1..h4 nu are line-height').not.toBeNull()
     expect(Number(pas![1]), 'line-height de baza sub pragul diacriticelor').toBeGreaterThanOrEqual(PRAG)
   })
-
-  it('titlurile cad pe cifrele REF-V la amandoua capetele, nu doar la 1440', () => {
-    // Constatarea care a produs proba asta: marimea literei era `clamp`, dar inaltimea de
-    // rand era un raport UNIC, iar REF-V cere la cele doua capete raporturi diferite. La
-    // 1440 iesea exact; la 390, h1 dadea 40,32 px in loc de 44 si h2 28,08 in loc de 32.
-    // Nicio proba nu se uita atunci la capatul ingust, fiindca jetonul avea o singura cifra
-    // si cifra aia era corecta la capatul larg. Cifrele de mai jos sunt cele citite din
-    // REF-V si reverificate pe stiluri calculate, cu innerWidth citit din pagina.
-    const CERUT: Array<[string, number, number, number]> = [
-      // jeton, latime, marimea literei, pasul de rand
-      ['titlu-1', 1440, 72, 80],
-      ['titlu-1', 390, 36, 44],
-      ['titlu-2', 1440, 48, 56],
-      ['titlu-2', 390, 24, 32],
-    ]
-    for (const [jeton, latime, fsCerut, lhCerut] of CERUT) {
-      const fs = CSS.match(new RegExp('--text-' + jeton + ':\\s*([^;]+);'))!
-      const lh = CSS.match(new RegExp('--text-' + jeton + '--line-height:\\s*([^;]+);'))!
-      const eticheta = jeton + ' la ' + latime + ' px'
-      expect(evalueaza(fs[1], latime), eticheta + ': marimea literei').toBeCloseTo(fsCerut, 2)
-      const v = lh[1].trim()
-      const lhReal = /^[0-9.]+$/.test(v) ? Number(v) * evalueaza(fs[1], latime) : evalueaza(v, latime)
-      expect(lhReal, eticheta + ': pasul de rand').toBeCloseTo(lhCerut, 2)
-    }
-    // MARTOR POZITIV: raportul fix de dinainte, care trecea la 1440 si rata la 390. Daca
-    // proba asta nu l-ar prinde, n-ar apara nimic.
-    const vechi = 'clamp(2.25rem, 5vw, 4.5rem)'
-    expect(evalueaza(vechi, 390) * 1.12, 'martor pozitiv: raportul fix NU a fost prins la 390').toBeCloseTo(40.32, 2)
-    expect(evalueaza(vechi, 1440) * 1.12, 'martorul de control: acelasi raport la capatul larg').toBeCloseTo(80.64, 2)
-  })
 })
 
-describe('forma: raze, umbre, un singur buton primar', () => {
-  it('razele REF-V exista ca jetoane, iar cardurile nu poarta umbra', () => {
-    for (const raza of ['buton', 'card', 'card-mare', 'pastila']) {
+describe('forma: pastila, cardul de 28, zero umbre', () => {
+  it('razele REF-A exista ca jetoane, si nu mai exista niciun jeton de umbra', () => {
+    for (const raza of ['buton', 'pastila', 'card', 'card-mare']) {
       expect(CSS, 'lipseste raza --radius-' + raza).toContain('--radius-' + raza + ':')
     }
-    expect(CSS, 'butonul nu are 8 px').toMatch(/--radius-buton:\s*8px/)
-    expect(CSS, 'cardul mare nu are 16 px').toMatch(/--radius-card-mare:\s*16px/)
-    // Cardul se desparte prin culoare de fundal, nu prin umbra. Umbra ramane definita pentru
-    // conturul butonului secundar, care nu misca asezarea; pe carduri nu se scrie.
+    expect(CSS, 'pastila nu are 980 px').toMatch(/--radius-pastila:\s*980px/)
+    expect(CSS, 'cardul nu are 28 px').toMatch(/--radius-card:\s*28px/)
+    expect(CSS, 'raza mostenita `buton` nu da o pastila').toMatch(/--radius-buton:\s*980px/)
+    // Umbre: niciuna, nici macar definita. Cat timp exista una, „doar o umbra mica aici" e la o
+    // clasa distanta.
+    expect(CSS, 'a ramas un jeton de umbra in paleta').not.toMatch(/--shadow-[a-z-]+:/)
+  })
+
+  it('cardul nu poarta umbra si se desparte prin culoare de fundal', () => {
     const card = faraComentarii(readFileSync(join(COMPONENTE, 'Card.tsx'), 'utf8'))
     expect(card, 'cardul static poarta umbra').not.toMatch(/\bshadow-/)
     expect(card, 'cardul nu se desparte prin culoare de fundal').toMatch(/bg-ceata|bg-alb/)
+    expect(card, 'cardul nu are raza de 28').toMatch(/rounded-card/)
+    // Si niciun `shadow-` in tot `src`: umbra nu mai exista in directie.
+    const cuUmbra: string[] = []
+    for (const cale of fisiereTsx(SURSA)) {
+      const cod = faraComentarii(readFileSync(cale, 'utf8'))
+      if (/\bshadow-[a-z]/.test(cod)) cuUmbra.push(relativa(cale))
+    }
+    expect(cuUmbra, 'clase de umbra ramase in src/').toEqual([])
   })
 
-  it('fiecare sectiune a paginii de start are cel mult un buton primar', () => {
-    const pagina = faraComentarii(readFileSync(join(RADACINA, 'src', 'app', 'page.tsx'), 'utf8'))
-    // Butonul primar e recunoscut dupa forma lui: raza de buton plus o suprafata plina.
-    const bucati = pagina.split(/<section\b/)
-    const prea: string[] = []
-    bucati.forEach((bucata, i) => {
-      const cate = [...bucata.matchAll(/rounded-buton bg-(?:violet|alb)\b/g)].length
-      if (cate > 1) prea.push('sectiunea ' + i + ': ' + cate + ' butoane primare')
-    })
-    expect(prea, 'doua butoane primare in aceeasi sectiune').toEqual([])
-    // Si controlul: forma chiar se recunoaste undeva, altfel proba numara zero peste tot.
-    expect(
-      [...pagina.matchAll(/rounded-buton bg-(?:violet|alb)\b/g)].length,
-      'nu s-a recunoscut niciun buton primar: tiparul nu mai potriveste forma',
-    ).toBeGreaterThan(0)
-  })
-
-  it('butonul are cele patru feluri REF-V, si cel de pe fundal inchis e alb', () => {
+  it('butonul are cele patru feluri REF-A si cele trei marimi masurate', () => {
     const buton = readFileSync(join(COMPONENTE, 'Buton.tsx'), 'utf8')
     for (const fel of ['plin', 'alb', 'contur', 'text']) {
       expect(buton, 'lipseste felul de buton ' + fel).toContain(fel + ':')
     }
-    expect(buton, 'butonul primar nu e violet plin cu litera alba').toMatch(/plin:\s*"[^"]*bg-violet[^"]*text-alb/)
-    expect(buton, 'butonul de pe fundal inchis nu e alb cu litera cerneala').toMatch(
+    expect(buton, 'butonul primar nu e albastru plin cu litera alba').toMatch(
+      /plin:\s*"[^"]*bg-albastru\b[^"]*text-alb/,
+    )
+    expect(buton, 'butonul de pe tigla neagra nu e alb cu litera cerneala').toMatch(
       /alb:\s*"[^"]*bg-alb[^"]*text-cerneala/,
     )
-    expect(buton, 'butonul secundar nu are conturul violet-2').toMatch(/contur:[\s\S]{0,120}shadow-contur/)
+    expect(buton, 'butonul secundar nu are conturul de 0,8 px').toMatch(/contur:[\s\S]{0,140}contur-albastru/)
+    // Cele trei inaltimi masurate: 44 (17 px), 36 (14 px), 24 (12 px). Se recunosc dupa
+    // captuseala, care e chiar cifra masurata pe referinta.
+    expect(buton, 'lipseste pastila de 44 px').toContain('px-[21px] py-[11px]')
+    expect(buton, 'lipseste pastila de 36 px').toContain('px-[15px] py-[8px]')
+    expect(buton, 'lipseste pastila de 24 px').toContain('px-[10px] py-[3px]')
+    // Toate butoanele sunt pastile: nicio alta raza pe niciun fel.
+    expect(buton, 'un fel de buton nu e pastila').not.toMatch(/rounded-(?!pastila)[a-z]/)
+  })
+
+  it('conturul e desenat ca umbra interioara de 0,8 px, nu ca chenar', () => {
+    // Ca sa nu mute inaltimea cu un pixel fata de pastila plina de langa el. Nu e umbra: n-are
+    // difuzie si n-are deplasare.
+    expect(CSS, 'lipseste conturul de 0,8 px').toMatch(
+      /\.contur-albastru\s*\{\s*box-shadow:\s*inset 0 0 0 0\.8px var\(--color-albastru-2\)/,
+    )
+    expect(CSS, 'lipseste conturul pentru tigla neagra').toMatch(
+      /\.contur-albastru-clar\s*\{\s*box-shadow:\s*inset 0 0 0 0\.8px var\(--color-albastru-clar\)/,
+    )
+  })
+
+  it('fiecare tigla a paginii de start are exact un buton primar', () => {
+    // In REF-A ecranul e TIGLA, deci regula „un singur buton primar pe ecran" se citeste pe
+    // tigla. NU se numara clasele: butonul isi alege culoarea printr-un ternar (alb pe tigla
+    // neagra, albastru pe cele deschise), deci amandoua ramurile stau in sursa si o numaratoare
+    // de clase ar raporta doua butoane acolo unde se randeaza unul. Se numara INTENTIA - cate
+    // legaturi primesc `actiune` - si se cere ca fiecare tigla din continut sa aiba exact una.
+    const pagina = faraComentarii(readFileSync(PAGINA, 'utf8'))
+    expect(
+      [...pagina.matchAll(/href=\{t.actiune.href\}/g)].length,
+      'grila randeaza alt numar de butoane primare decat unul pe tigla',
+    ).toBe(1)
+    expect(
+      [...pagina.matchAll(/href=\{t.secundar.href\}/g)].length,
+      'grila randeaza mai mult de un drum al doilea pe tigla',
+    ).toBe(1)
+    // Si in continut: fiecare tigla are un `actiune` si cel mult un `secundar`.
+    const start = readFileSync(join(RADACINA, 'src', 'content', 'start.ts'), 'utf8')
+    const tigle = (start.match(/^    titlu:/gm) || []).length
+    const actiuni = (start.match(/^    actiune:/gm) || []).length
+    const secundare = (start.match(/^    secundar:/gm) || []).length
+    expect(tigle, 'nu mai gasesc tiglele in continut').toBeGreaterThan(5)
+    expect(actiuni, 'o tigla fara buton primar, sau una cu doua').toBe(tigle)
+    expect(secundare, 'mai multe drumuri secundare decat tigle').toBeLessThanOrEqual(tigle)
+    // Controlul tiparului: forma cautata chiar exista in sursa paginii.
+    expect(pagina, 'tiparul nu mai potriveste forma butonului primar').toMatch(/rounded-pastila/)
   })
 })
 
 describe('gramatica paginilor', () => {
-  it('antetul e alb, de 56 px, si e transparent doar peste eroul paginii de start', () => {
+  it('bara globala are 44 px, e sticla si nu mai are stare transparenta', () => {
     const nav = readFileSync(join(COMPONENTE, 'Navigatie.tsx'), 'utf8')
-    expect(nav, 'bara nu are 56 px').toContain('h-[56px]')
-    expect(nav, 'bara nu e alba in starea ei obisnuita').toMatch(/bg-alb/)
-    expect(nav, 'transparenta nu e legata de pagina de start').toMatch(/cale === "\/"/)
+    expect(nav, 'bara nu are 44 px de la 768 in sus').toContain('md:h-[44px]')
+    expect(nav, 'bara nu are 48 px pe telefon').toContain('h-[48px]')
+    expect(nav, 'bara nu e alb translucid cu estompare').toMatch(/\bsticla\b/)
+    expect(CSS, 'clasa sticla nu are backdrop-filter cu prefix pentru Safari').toMatch(
+      /-webkit-backdrop-filter:\s*saturate\(180%\) blur\(20px\)/,
+    )
+    expect(CSS, 'clasa sticla nu e alb la 80%').toMatch(/\.sticla\s*\{[\s\S]*rgba\(255, 255, 255, 0\.8\)/)
+    // Starea transparenta a disparut: nu mai exista ecran inchis peste care sa stea bara, deci
+    // nici variabilele care o comutau. Nu se cauta `bg-transparent` - butonul de meniu il are pe
+    // drept - ci chiar mecanismul: culoarea barei nu mai depinde de cale sau de derulare.
+    expect(faraComentarii(nav), 'bara inca isi comuta culorile dupa erou').not.toMatch(/peErou|derulat/)
+    expect(faraComentarii(nav), 'bara inca isi alege fundalul dupa cale').not.toMatch(/cale === "\/" \?/)
     // Panoul pliabil ramane HTML servit, cu contractul pe care il masoara proba de browser.
     expect(nav, 'panoul pliabil si-a pierdut identificatorul').toContain('id="meniu-pliabil"')
     expect(nav, 'butonul nu mai controleaza panoul').toContain('aria-controls="meniu-pliabil"')
   })
 
-  it('eroul paginii de start e culoare, nu fotografie', () => {
-    const pagina = readFileSync(join(RADACINA, 'src', 'app', 'page.tsx'), 'utf8')
-    const dupaErou = pagina.slice(pagina.indexOf('ton="erou"'))
-    const pana = dupaErou.slice(0, dupaErou.indexOf('/>'))
-    expect(pana, 'eroul primeste o fotografie, desi REF-V il da ca gradient').not.toMatch(/imagine=/)
-    expect(CSS, 'lipseste gradientul eroului').toMatch(/\.erou-violet\s*\{/)
-    expect(CSS, 'gradientul nu merge de la violet-adanc la noapte-v').toMatch(/#251951[\s\S]{0,80}#110c29/)
-    const ecran = readFileSync(join(COMPONENTE, 'Ecran.tsx'), 'utf8')
-    expect(ecran, 'ecranul randeaza fotografie si pe erou').toMatch(/Boolean\(imagine\) && !erou/)
+  it('bara locala exista, are 52 px, e lipicioasa si sta chiar sub bara globala', () => {
+    const bara = readFileSync(join(COMPONENTE, 'BaraLocala.tsx'), 'utf8')
+    expect(bara, 'bara locala nu are 52 px').toContain('md:h-[52px]')
+    expect(bara, 'bara locala nu e lipicioasa').toMatch(/\bsticky\b/)
+    expect(bara, 'bara locala nu se opreste sub bara globala').toContain('md:top-[44px]')
+    expect(bara, 'ancorele barei locale nu sunt de 12 px').toMatch(/text-mic/)
+    expect(bara, 'bara locala nu are pastila de 24 px').toContain('px-[10px] py-[3px]')
+    // Si chiar e folosita: navigarea in pagina a paginilor interioare trece prin ea, altfel
+    // componenta ar fi cod scris si niciodata randat.
+    const ancore = readFileSync(join(COMPONENTE, 'SegmentAncore.tsx'), 'utf8')
+    expect(ancore, 'navigarea in pagina nu foloseste bara locala').toContain('BaraLocala')
+    // Filele-pastila care faceau navigarea in pagina nu mai exista deloc.
+    expect(readdirSync(COMPONENTE), 'TabPastila a ramas in arbore').not.toContain('TabPastila.tsx')
   })
 
-  it('nu mai exista voal: fotografia nu mai poarta text peste ea', () => {
-    // Voalul era mecanismul prin care textul statea peste fotografie, si el cerea calibrare
-    // per cadru, plus o masuratoare pe captura pentru fiecare fotografie noua, fiindca axe
-    // lasa contrastul peste imagine in afara verdictului. In REF-V fotografia sta in card,
-    // fara text peste ea, deci mecanismul intreg dispare.
+  it('pagina de start e facuta din tigle, fara erou colorat si fara banda CTA', () => {
+    const pagina = faraComentarii(readFileSync(PAGINA, 'utf8'))
+    expect(pagina, 'pagina de start nu mai randeaza tigle mari').toContain('ton="erou"')
+    expect(pagina, 'pagina de start nu mai citeste cele trei tigle din continut').toMatch(/\bTIGLE\b/)
+    expect(pagina, 'pagina de start nu mai citeste grila din continut').toMatch(/\bGRILA\b/)
+    // Gradientul si cardul violet au disparut din CSS cu totul.
+    expect(CSS, 'a ramas gradientul eroului').not.toMatch(/\.erou-violet/)
+    expect(CSS, 'a ramas cardul cu gradient').not.toMatch(/\.card-violet/)
+    // Banda CTA nu mai are culoare de brand nici in componenta ei.
+    const cta = faraComentarii(readFileSync(join(COMPONENTE, 'BandaCTA.tsx'), 'utf8'))
+    // Conteaza fundalul SECTIUNII, nu butonul din ea: pastila plina ramane albastra oriunde.
+    const sectiune = cta.match(/<section className="([^"]+)"/)
+    expect(sectiune, 'banda CTA nu mai are o sectiune cu fundal').not.toBeNull()
+    expect(sectiune![1], 'banda CTA nu sta pe ceata').toContain('bg-ceata')
+    expect(sectiune![1], 'banda CTA a ramas colorata').not.toMatch(/bg-(?:albastru|negru)/)
+    // Si nu e chemata de pe pagina de start: chemarea la actiune sta in pastila fiecarei tigle.
+    expect(pagina, 'pagina de start a ramas cu o banda CTA').not.toContain('BandaCTA')
+  })
+
+  it('inaltimea tiglei cu fotografie e legata la AMANDOUA capetele, nu doar la 1440', () => {
+    // Clasa de defect: `min-h-[500px]` e o PODEA, nu o inaltime. Sub 768 px nimic nu mai lega
+    // cutia fotografiei, ea crestea la inaltimea proprie a cadrului (585 px la 390) si tigla
+    // iesea 885-987 px in loc de 500 - cifra pe care o scriu si fisa REF-A, si DIRECTIA.md, de
+    // doua ori. Pagina masura atunci 9784 px la 390, fata de 7327 cat are referinta la aceeasi
+    // latime. Masurat dupa legare: tigle de 500 px si pagina de 6879 px. Poarta de browser nu
+    // vede asta - ea masoara culori si roluri, nu inaltimi - deci regula sta aici.
+    const tigla = faraComentarii(readFileSync(join(COMPONENTE, 'Ecran.tsx'), 'utf8'))
+    const pagina = faraComentarii(readFileSync(PAGINA, 'utf8'))
+    for (const [nume, cod] of [['Ecran.tsx', tigla], ['page.tsx', pagina]] as const) {
+      expect(cod, nume + ': tigla e legata doar cu o podea la capatul ingust').not.toMatch(
+        /min-h-\[500px\]/,
+      )
+      // Fara privirea inapoi tiparul ar fi inutil: `min-h-[500px]` il contine pe `h-[500px]`,
+      // deci exact forma refuzata ar fi trecut drept forma ceruta.
+      expect(cod, nume + ': tigla nu mai are inaltime legata la capatul ingust').toMatch(
+        /(?<!min-)h-\[500px\]/,
+      )
+    }
+    // Si cutia fotografiei nu are voie sa-si impuna o podea proprie sub 768 px: podeaua ei era
+    // chiar mecanismul prin care tigla crestea.
+    expect(tigla, 'cutia fotografiei si-a recapatat podeaua').not.toMatch(/min-h-\[2[0-9]{2}px\]/)
+    expect(pagina, 'cutia fotografiei din grila si-a recapatat podeaua').not.toMatch(
+      /min-h-\[200px\]/,
+    )
+    // Control pozitiv: tiparele prind formele pe care le vaneaza.
+    expect('flex min-h-[500px] flex-col'.match(/min-h-\[500px\]/), 'tiparul podelei nu prinde martorul').not.toBeNull()
+    expect('flex h-[500px] flex-col'.match(/(?<!min-)h-\[500px\]/), 'tiparul inaltimii nu prinde martorul').not.toBeNull()
+    // Control NEGATIV: tiparul inaltimii nu are voie sa se aprinda pe podea.
+    expect('flex min-h-[500px] flex-col'.match(/(?<!min-)h-\[500px\]/), 'tiparul inaltimii se aprinde si pe podea').toBeNull()
+  })
+
+  it('nu exista voal: fotografia nu poarta text peste ea nicaieri', () => {
+    // Voalul era mecanismul prin care textul statea peste fotografie, si el cerea calibrare per
+    // cadru, plus o masuratoare pe captura pentru fiecare fotografie noua, fiindca axe lasa
+    // contrastul peste imagine in afara verdictului. In REF-A textul sta deasupra fotografiei,
+    // in partea de sus a tiglei, deci mecanismul intreg dispare.
     for (const clasa of ['.voal', '.voal-banda', '.voal-bara']) {
       expect(CSS, 'a ramas definit ' + clasa).not.toContain(clasa + ' {')
     }
-    // Tiparul scoate `voalBanda` din cautare din motiv ISTORIC: pana la felia 6 registrul de
-    // fotografii mai purta campul cu numele asta, si o cautare dupa „voal" l-ar fi prins pe el
-    // in loc de clasa de voal. Felia 6 l-a scos si din registru, si din tipul `Imagine` al lui
-    // `Ecran.tsx` (commit 347dd2f), deci azi lookahead-ul nu mai exclude nimic real: masurat pe
-    // 2026-09-06, `voalBanda` apare doar in comentarii si in tiparul de aici, in niciun camp de
-    // cod. Ramane fiindca nu schimba verdictul si fiindca fisierul e partajat intre felii; ce
-    // nu are voie sa existe e CLASA de voal.
     const ecran = faraComentarii(readFileSync(join(COMPONENTE, 'Ecran.tsx'), 'utf8'))
-    expect(ecran, 'Ecran inca pune un voal').not.toMatch(/voal(?!Banda)/)
-    expect(ecran, 'fotografia nu mai sta in card cu raza de 16 px').toMatch(/rounded-card-mare/)
+    expect(ecran, 'Ecran inca pune un voal').not.toMatch(/voal/)
+    expect(ecran, 'fotografia paginii interioare nu mai sta in card cu raza de 28').toMatch(/rounded-card/)
   })
 
   it('ancorele paginii de start raman, fiindca harta site-ului trimite la ele', () => {
     const rute = readFileSync(join(RADACINA, 'src', 'content', 'rute.ts'), 'utf8')
     const ancore = [...rute.matchAll(/ancora:\s*"([a-z-]+)"/g)].map((m) => m[1])
     expect(ancore.length, 'registrul de ancore pare gol').toBeGreaterThan(3)
-    const pagina = readFileSync(join(RADACINA, 'src', 'app', 'page.tsx'), 'utf8')
+    const pagina = readFileSync(PAGINA, 'utf8')
     const start = readFileSync(join(RADACINA, 'src', 'content', 'start.ts'), 'utf8')
     const lipsa = ancore.filter(
       (a) => !pagina.includes('id="' + a + '"') && !start.includes('cheie: "' + a + '"'),
@@ -472,6 +625,9 @@ describe('gramatica paginilor', () => {
     const start = readFileSync(join(RADACINA, 'src', 'content', 'start.ts'), 'utf8')
     const nume = [...start.matchAll(/nume:\s*"([a-z]+)"/g)].map((m) => m[1])
     expect(nume.length, 'pagina de start nu mai foloseste nicio fotografie').toBeGreaterThan(3)
+    // Fiecare cadru apare o SINGURA data pe pagina: acelasi cadru de doua ori, la marimea la
+    // care il pune REF-A, se citeste ca greseala de montaj.
+    expect(new Set(nume).size, 'un cadru apare de doua ori pe pagina de start').toBe(nume.length)
     const existente = new Set(readdirSync(join(RADACINA, 'public', 'img')))
     for (const n of nume) {
       for (const marime of ['1920', '960']) {
@@ -497,33 +653,66 @@ describe('gramatica paginilor', () => {
 
   it('textele noi ale paginii de start stau in continut, nu in componenta', () => {
     const start = readFileSync(join(RADACINA, 'src', 'content', 'start.ts'), 'utf8')
-    for (const cheie of ['EROU', 'INTREBARE', 'CARD_MARE', 'ETAPE', 'DOMENII', 'INCREDERE', 'INCHEIERE']) {
+    for (const cheie of ['TIGLE', 'GRILA', 'INCREDERE', 'NOTE']) {
       expect(start, 'lipseste blocul de text ' + cheie).toContain('export const ' + cheie)
     }
+    // Vocea REF-A: fiecare titlu de tigla e o propozitie cu PUNCT la final, de cel mult sase
+    // cuvinte. Nu e stil, e chiar regula pe care o masoara referinta in fiecare tigla.
+    const tigle = start.slice(start.indexOf('export const TIGLE'), start.indexOf('export const INCREDERE'))
+    const titluri = [...tigle.matchAll(/^\s*titlu:\s*"([^"]+)",$/gm)].map((m) => m[1])
+    expect(titluri.length, 'nu mai exista titluri de tigla in continut').toBeGreaterThan(5)
+    for (const t of titluri) {
+      expect(t, 'titlu de tigla fara punct la final: ' + t).toMatch(/[.?]$/)
+      expect(t.split(/\s+/).length, 'titlu de tigla mai lung de sase cuvinte: ' + t).toBeLessThanOrEqual(6)
+    }
     // Si pagina chiar le citeste de acolo, in loc sa-si scrie propriile siruri.
-    const pagina = readFileSync(join(RADACINA, 'src', 'app', 'page.tsx'), 'utf8')
+    const pagina = readFileSync(PAGINA, 'utf8')
     expect(pagina, 'pagina de start nu citeste textele din continut').toContain('@/content/start')
-    // Domeniile raman citite din `segmente.ts`, unde le rescrie cealalta felie.
-    expect(pagina, 'pagina de start si-a copiat domeniile in loc sa le citeasca').toContain(
-      '@/content/segmente',
-    )
   })
 
-  it('subsolul si banda de incredere scriu doar culori care trec pragul pe fundalul lor', () => {
+  it('subsolul sta pe ceata, scrie la 12 px si nu mai are buton', () => {
     const subsol = faraComentarii(readFileSync(join(COMPONENTE, 'Subsol.tsx'), 'utf8'))
     expect(subsol, 'subsolul nu mai sta pe ceata').toMatch(/bg-ceata/)
-    // Pe ceata trec doar cerneala (16,27:1) si cerneala-2 (6,48:1).
-    expect(subsol, 'text sub prag pe ceata, in subsol').not.toMatch(/text-cerneala-3|text-violet-2/)
+    expect(subsol, 'subsolul nu scrie la 12 px').toMatch(/text-mic/)
+    expect(subsol, 'subsolul are cinci coloane').toMatch(/lg:grid-cols-5/)
+    // Pe ceata, la 12 px, trec doar `cerneala` si `cerneala-3`.
+    expect(subsol, 'text sub prag pe ceata, in subsol').not.toMatch(/text-cerneala-2|text-albastru-clar/)
+    // Fara chemare la actiune: butonul de aici era al doilea buton primar al fiecarei pagini.
+    expect(subsol, 'subsolul si-a recapatat butonul').not.toMatch(/bg-albastru\b/)
+  })
+
+  it('pe negru se scrie ceata si albastru-clar, pe deschis niciodata albastru-clar', () => {
     const banda = faraComentarii(readFileSync(join(COMPONENTE, 'BandaIncredere.tsx'), 'utf8'))
-    expect(banda, 'banda de incredere nu sta pe noapte-v').toMatch(/bg-noapte-v/)
-    // Tiparul cere ca dupa nume sa NU urmeze cratima: altfel `text-violet-clar`, singura
-    // culoare mica permisa pe noapte-v, ar fi prinsa de `text-violet` si proba s-ar inrosi
-    // exact pe forma corecta.
-    expect(banda, 'pe noapte-v se scrie alb sau violet-clar, nimic altceva').not.toMatch(
-      /text-(?:cerneala|violet)(?![-\w])/,
+    expect(banda, 'banda de incredere nu mai sta pe negru').toMatch(/bg-negru/)
+    expect(banda, 'banda de incredere nu scrie cu ceata').toMatch(/text-ceata/)
+    // Tiparul cere ca dupa nume sa NU urmeze cratima: altfel `text-albastru-clar`, singura
+    // culoare de legatura permisa pe negru, ar fi prinsa de `text-albastru` si proba s-ar
+    // inrosi exact pe forma corecta.
+    expect(banda, 'pe negru s-a strecurat o culoare de deschis').not.toMatch(
+      /text-(?:cerneala|cerneala-2|cerneala-3|albastru|albastru-2)(?![-\w])/,
     )
-    expect(banda, 'banda de incredere nu foloseste violet-clar pentru textul mic').toMatch(
-      /text-violet-clar/,
-    )
+    expect(banda, 'banda nu foloseste albastru-clar pentru eticheta').toMatch(/text-albastru-clar/)
+    // Si regula generala, pe tot `src`: `albastru-clar` (3,02:1 pe alb) nu are voie sa apara
+    // decat in fisiere care au si o suprafata neagra sub el.
+    const gresite: string[] = []
+    for (const cale of fisiereTsx(SURSA)) {
+      const cod = faraComentarii(readFileSync(cale, 'utf8'))
+      if (!/\b(?:hover:)?text-albastru-clar\b/.test(cod)) continue
+      if (!/bg-negru|peNegru|inchis|fundal === "negru"|#141414/.test(cod)) gresite.push(relativa(cale))
+    }
+    expect(gresite, 'albastru-clar scris in fisiere fara suprafata neagra').toEqual([])
+  })
+
+  it('notele numerotate ale paginii de start au tinta si stau la 12 px', () => {
+    const pagina = faraComentarii(readFileSync(PAGINA, 'utf8'))
+    const start = readFileSync(join(RADACINA, 'src', 'content', 'start.ts'), 'utf8')
+    const identificatori = [...start.matchAll(/id:\s*"(nota-\d+)"/g)].map((m) => m[1])
+    expect(identificatori.length, 'pagina de start nu mai are note numerotate').toBeGreaterThan(1)
+    expect(pagina, 'notele nu se randeaza cu identificatorul lor').toMatch(/id=\{n\.id\}/)
+    expect(pagina, 'notele nu sunt la 12 px').toMatch(/text-mic/)
+    // Exponentul din banda trimite la prima nota, deci ancora chiar are tinta.
+    expect(pagina, 'exponentul nu trimite la nota').toMatch(/href=\{"#" \+ NOTE\[0\]\.id\}/)
+    // Si nota despre ce NU detinem e scrisa, nu ocolita.
+    expect(start, 'nota despre certificarea pe care nu o detinem a disparut').toMatch(/Nu deținem certificare/)
   })
 })

@@ -22,7 +22,7 @@ function bucata(f: Frag, i: number) {
   if (typeof f === "string") {
     return <span key={i}>{f}</span>;
   }
-  const stil = "text-violet underline decoration-violet-2 underline-offset-[3px] hover:text-cerneala";
+  const stil = "text-albastru-2 underline decoration-albastru-2 underline-offset-[3px] hover:text-cerneala";
   if (f.href.includes("#")) {
     return (
       <a key={i} href={f.href} className={stil}>
@@ -61,9 +61,9 @@ function Caseta({
   // recunoastere, nu o afirmatie. Inainte amandoua erau dreptunghiuri cu muchii drepte, una
   // pe alb cu o linie in stanga - adica invizibila pe o pagina alba.
   const stil =
-    fel === "declaratie" ? "bg-violet-pal" : "bg-ceata";
-  const stilEticheta = fel === "declaratie" ? "text-violet" : "text-cerneala-2";
-  const stilText = fel === "declaratie" ? "text-cerneala" : "text-cerneala-2";
+    fel === "declaratie" ? "bg-ceata" : "bg-ceata";
+  const stilEticheta = fel === "declaratie" ? "text-albastru-2" : "text-cerneala-3";
+  const stilText = fel === "declaratie" ? "text-cerneala" : "text-cerneala-3";
 
   return (
     <div className={`my-8 rounded-card p-6 ${stil}`}>
@@ -82,7 +82,7 @@ export default function JuridicBlocuri({ blocuri }: { blocuri: Bloc[] }) {
         switch (b.fel) {
           case "paragraf":
             return (
-              <p key={i} className={`mb-4 ${MASURA_ACT} text-corp text-cerneala-2 last:mb-0`}>
+              <p key={i} className={`mb-4 ${MASURA_ACT} text-corp text-cerneala-3 last:mb-0`}>
                 <Text parti={b.text} />
               </p>
             );
@@ -91,10 +91,10 @@ export default function JuridicBlocuri({ blocuri }: { blocuri: Bloc[] }) {
             return (
               <ul key={i} className={`m-0 mb-4 ${MASURA_ACT} list-none p-0 last:mb-0`}>
                 {b.elemente.map((e, j) => (
-                  <li key={j} className="mb-3 flex gap-3 text-corp text-cerneala-2 last:mb-0">
+                  <li key={j} className="mb-3 flex gap-3 text-corp text-cerneala-3 last:mb-0">
                     {/* Liniuta e un element real, nu un marcator de lista: se aliniaza pe
                         prima linie oricat de lung ar fi randul. */}
-                    <span aria-hidden className="mt-[11px] h-px w-[10px] shrink-0 bg-violet" />
+                    <span aria-hidden className="mt-[11px] h-px w-[10px] shrink-0 bg-albastru" />
                     <span>
                       <Text parti={e} />
                     </span>
@@ -105,18 +105,18 @@ export default function JuridicBlocuri({ blocuri }: { blocuri: Bloc[] }) {
 
           case "randuri":
             return (
-              <div key={i} className="my-6 border-t border-linie last:mb-0">
+              <div key={i} className="my-6 border-t last:mb-0">
                 {b.randuri.map((r) => (
                   <div
                     key={r.titlu}
-                    className="grid gap-1.5 border-b border-linie py-4 md:grid-cols-[180px_1fr] md:gap-6"
+                    className="grid gap-1.5 border-b py-4 md:grid-cols-[180px_1fr] md:gap-6"
                   >
                     {/* Randul de definitie: eticheta pe coloana din stanga, textul pe
                         dreapta, despartite doar de linia de 1 px. Titlul a coborat de la
                         19 px la treapta de subtitlu a REF-V (20/28), si e la aceeasi
                         greutate ca restul titlurilor - 400, din regula de baza. */}
                     <h3 className="text-subtitlu text-cerneala">{r.titlu}</h3>
-                    <p className="text-corp text-cerneala-2">
+                    <p className="text-corp text-cerneala-3">
                       <Text parti={r.text} />
                     </p>
                   </div>

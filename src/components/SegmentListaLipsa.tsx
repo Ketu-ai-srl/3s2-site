@@ -26,7 +26,7 @@ export default function SegmentListaLipsa({ titlu, elemente }: Props) {
       <h3 className="mb-5 text-titlu-4 text-cerneala">{titlu}</h3>
       <ul className="m-0 list-none p-0">
         {elemente.map((e) => (
-          <li key={e} className="mb-3 flex gap-3 text-corp text-cerneala-2">
+          <li key={e} className="mb-3 flex gap-3 text-corp text-cerneala-3">
             <span aria-hidden className="mt-[11px] h-px w-3 shrink-0 bg-cerneala-3" />
             <span>{e}</span>
           </li>

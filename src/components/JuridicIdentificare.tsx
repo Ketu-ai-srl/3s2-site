@@ -36,10 +36,10 @@ export default function JuridicIdentificare() {
   if (!identitateCompleta()) {
     return (
       <div className="rounded-card bg-ceata p-6">
-        <span className="mb-2 block text-nota font-semibold text-cerneala-2">
+        <span className="mb-2 block text-nota font-semibold text-cerneala-3">
           Ce lipsește azi, și de ce
         </span>
-        <p className={`${MASURA_ACT} text-corp text-cerneala-2`}>
+        <p className={`${MASURA_ACT} text-corp text-cerneala-3`}>
           3S este o firmă în curs de înființare. Din datele cerute de art. 5, azi există una
           singură, adresa de poștă electronică:{" "}
           <strong className="font-semibold text-cerneala">contact@3s.ro</strong>. Denumirea
@@ -47,7 +47,7 @@ export default function JuridicIdentificare() {
           telefonul apar aici după înmatriculare, copiate dintr-un certificat, nu scrise din
           memorie.
         </p>
-        <p className={`mt-3 ${MASURA_ACT} text-corp text-cerneala-2`}>
+        <p className={`mt-3 ${MASURA_ACT} text-corp text-cerneala-3`}>
           Nu le înlocuim cu datele firmei-mamă: ar fi o afirmație falsă despre o altă persoană
           juridică. Golul este verificat automat înainte de fiecare publicare și blochează
           punerea site-ului în producție cât timp durează, tocmai ca să nu poată fi uitat.
@@ -60,7 +60,7 @@ export default function JuridicIdentificare() {
     <dl className="m-0 grid gap-x-8 gap-y-3 rounded-card bg-ceata p-6 text-corp sm:grid-cols-2">
       {CAMPURI_IDENTITATE.map((camp) => (
         <div key={camp} className="flex flex-wrap gap-x-2">
-          <dt className="text-cerneala-2">{ETICHETE[camp]}:</dt>
+          <dt className="text-cerneala-3">{ETICHETE[camp]}:</dt>
           <dd className="m-0 font-semibold text-cerneala">{entitate[camp]}</dd>
         </div>
       ))}

@@ -50,7 +50,7 @@ export default function SegmentIncredere({ fapte }: Props) {
       <div className="mx-auto w-full max-w-vitrina px-4 pb-14 md:px-8 md:pb-16">
         <ul className="m-0 flex list-none flex-col items-start gap-4 p-0 md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-x-10 md:gap-y-4">
           {fapte.map((f, i) => (
-            <li key={f.titlu} className="flex items-start gap-2.5 text-nota text-cerneala-2">
+            <li key={f.titlu} className="flex items-start gap-2.5 text-nota text-cerneala-3">
               <svg
                 width="20"
                 height="20"
@@ -62,7 +62,7 @@ export default function SegmentIncredere({ fapte }: Props) {
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="mt-[1px] shrink-0 text-violet"
+                className="mt-[1px] shrink-0 text-albastru-2"
               >
                 {CONTURURI[i % CONTURURI.length]}
               </svg>

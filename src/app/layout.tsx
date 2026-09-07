@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import DateStructurate from "@/components/DateStructurate";
 import Navigatie from "@/components/Navigatie";
 import Subsol from "@/components/Subsol";
 import { ADRESA_BAZA, indexareaEstePermisa } from "@/content/rute";
 
-// UN SINGUR FONT, DM Sans, cu doua greutati: 400 pentru titluri si corp, 600 pentru
-// butoane si etichete. Directia REF-V nu are titluri bold si nu are majuscule, deci
-// 700 nu se incarca deloc - un `font-bold` ramas undeva cade pe 600, nu aduce un
-// fisier in plus pe fiecare pagina.
+// UN SINGUR FONT, Inter, cu doua greutati: 400 pentru corp, 600 pentru titluri, etichete
+// si butoane. Directia REF-A pune TOATE titlurile la 600 si niciunul cu majuscule, deci
+// 700 nu se incarca deloc - un `font-bold` ramas undeva cade pe 600, nu aduce un fisier in
+// plus pe fiecare pagina.
 //
-// Trei familii au devenit una. Fiecare familie in plus inseamna fisiere preincarcate
-// pe FIECARE pagina, pentru litere pe care nu le mai foloseste nimeni; jetoanele
-// `--font-afis`, `--font-vitrina` si `--font-mono` din `globals.css` arata acum toate
-// catre variabila de mai jos, deci fisierele altor felii care le mai scriu primesc
-// acelasi font, nu o a doua familie strecurata printr-un nume mostenit.
+// DE CE Inter si nu fontul referintei: acela e proprietar, iar licenta lui il leaga de
+// platformele proprietarului. Inter are aceeasi constructie - grotesc neutru, x-height mare,
+// cifre proportionale, forme deschise la 12 px - si licenta OFL.
+//
+// Cinci familii au devenit una. Fiecare familie in plus inseamna fisiere preincarcate pe
+// FIECARE pagina, pentru litere pe care nu le mai foloseste nimeni; jetoanele `--font-afis`,
+// `--font-vitrina` si `--font-mono` din `globals.css` arata acum toate catre variabila de mai
+// jos, deci fisierele altor felii care le mai scriu primesc acelasi font, nu o a doua familie
+// strecurata printr-un nume mostenit.
 //
 // NUMELE VARIABILEI incepe cu `--fnt-`, nu cu `--font-`, si nu e cosmetica. Jetoanele
 // Tailwind se numesc `--font-*`, iar `next/font` isi pune si el variabila pe elementul
@@ -30,7 +34,7 @@ import { ADRESA_BAZA, indexareaEstePermisa } from "@/content/rute";
 // Subsetul `latin-ext` e obligatoriu, nu decorativ: fara el, s si t cu virgula
 // (U+0219 / U+021B) cad pe fontul de rezerva si diacriticele romanesti se vad dintr-o
 // alta familie in mijlocul cuvantului.
-const text = DM_Sans({
+const text = Inter({
   variable: "--fnt-text",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "600"],
@@ -90,7 +94,7 @@ export default function RootLayout({
       <body className="antialiased">
         <DateStructurate />
         <a
-          className="absolute top-[-100px] left-4 z-[99] rounded-buton bg-violet px-4 py-3 text-nota font-semibold text-alb no-underline focus:top-3"
+          className="absolute top-[-100px] left-4 z-[99] rounded-pastila bg-albastru px-[21px] py-[11px] text-[17px] leading-[22px] font-semibold text-alb no-underline focus:top-3"
           href="#zona-continut"
         >
           Săriți la conținut

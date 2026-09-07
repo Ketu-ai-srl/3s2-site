@@ -36,16 +36,16 @@ export default function MecanismEtapa({
         (fundal === "alb" ? "bg-ceata" : "bg-alb")
       }
     >
-      <span className="mb-4 inline-flex w-fit rounded-pastila bg-violet-pal px-3 py-1 text-nota font-semibold text-violet">
+      <span className="mb-4 inline-flex w-fit rounded-pastila bg-ceata px-3 py-1 text-nota font-semibold text-albastru-2">
         Etapa {numar}
       </span>
 
       <h3 className="max-w-[22ch] text-titlu-4 text-cerneala">{titlu}</h3>
-      <p className="mt-3 text-corp text-cerneala-2">{text}</p>
+      <p className="mt-3 text-corp text-cerneala-3">{text}</p>
 
-      <div className="mt-6 border-t border-linie pt-5">
-        <span className="mb-1.5 block text-nota font-semibold text-violet">Rămâne scris</span>
-        <p className="text-nota text-cerneala-2">{urma}</p>
+      <div className="mt-6 border-t pt-5">
+        <span className="mb-1.5 block text-nota font-semibold text-albastru-2">Rămâne scris</span>
+        <p className="text-nota text-cerneala-3">{urma}</p>
       </div>
     </li>
   );

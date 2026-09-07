@@ -30,21 +30,21 @@ export default function SegmentBandaDovezi({
   semn = "bifa",
 }: Props) {
   return (
-    <section className="bg-noapte-v">
+    <section className="bg-negru">
       <div className="mx-auto w-full max-w-vitrina px-4 py-16 md:px-8 md:py-20">
         <div className="md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:items-start md:gap-x-16">
           <div>
-            <span className="mb-4 block text-nota font-semibold text-violet-clar">
+            <span className="mb-4 block text-nota font-semibold text-ceata">
               {eticheta}
             </span>
-            <h2 className="max-w-[18ch] text-titlu-2 text-alb">{titlu}</h2>
+            <h2 className="max-w-[18ch] text-titlu-2 text-ceata">{titlu}</h2>
           </div>
 
           <ul className="m-0 mt-10 list-none p-0 md:mt-0">
             {elemente.map((e) => (
               <li
                 key={e}
-                className="flex gap-3 border-t border-violet-adanc py-4 text-corp text-alb first:border-t-0 first:pt-0"
+                className="flex gap-3 border-t border-[#333336] py-4 text-corp text-ceata first:border-t-0 first:pt-0"
               >
                 {semn === "bifa" ? (
                   <svg
@@ -53,7 +53,7 @@ export default function SegmentBandaDovezi({
                     viewBox="0 0 18 18"
                     aria-hidden="true"
                     focusable="false"
-                    className="mt-1 shrink-0 text-violet-clar"
+                    className="mt-1 shrink-0 text-ceata"
                   >
                     <path
                       d="M3.5 9.5 L7 13 L14.5 5"
@@ -65,7 +65,7 @@ export default function SegmentBandaDovezi({
                     />
                   </svg>
                 ) : (
-                  <span aria-hidden className="mt-3 h-px w-3 shrink-0 bg-violet-clar" />
+                  <span aria-hidden className="mt-3 h-px w-3 shrink-0 bg-albastru-clar" />
                 )}
                 <span>{e}</span>
               </li>

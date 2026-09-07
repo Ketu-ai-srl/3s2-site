@@ -27,16 +27,16 @@ export default function BlocDovada({
 }: Props) {
   const stil =
     fel === "declaratie"
-      ? "border-l-2 border-violet bg-alb px-6 py-5"
-      : "border border-linie bg-ceata px-6 py-5";
+      ? "border-l-2 border-albastru bg-alb px-6 py-5"
+      : "border bg-ceata px-6 py-5";
 
   return (
     <div className={`${stil} ${className}`}>
       {/* `arama-clar` pe `noapte-3`: 5,72:1, deci trece si ca text mic. */}
       {eticheta ? (
-        <Eticheta className="mb-2 block text-violet!">{eticheta}</Eticheta>
+        <Eticheta className="mb-2 block text-albastru-2!">{eticheta}</Eticheta>
       ) : null}
-      <p className="max-w-[70ch] text-[16px] leading-[1.55] text-cerneala-2">{children}</p>
+      <p className="max-w-[70ch] text-[16px] leading-[1.55] text-cerneala-3">{children}</p>
     </div>
   );
 }

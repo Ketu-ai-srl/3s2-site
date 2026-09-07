@@ -57,34 +57,34 @@ export default function TermeneFisa({
       {termen.termen ? (
         <p className="mt-4 text-titlu-3 text-cerneala">{termen.termen}</p>
       ) : (
-        <p className="mt-4 text-subtitlu text-cerneala-2">Rând lăsat gol, intenționat</p>
+        <p className="mt-4 text-subtitlu text-cerneala-3">Rând lăsat gol, intenționat</p>
       )}
 
-      <dl className="m-0 mt-6 border-t border-linie">
+      <dl className="m-0 mt-6 border-t">
         {termen.dela ? (
-          <div className="border-b border-linie py-4 last:border-b-0 last:pb-0">
+          <div className="border-b py-4 last:border-b-0 last:pb-0">
             <dt className={ETICHETA_RAND}>Curge din</dt>
-            <dd className="m-0 mt-1 text-corp text-cerneala-2">{termen.dela}</dd>
+            <dd className="m-0 mt-1 text-corp text-cerneala-3">{termen.dela}</dd>
           </div>
         ) : null}
 
         {termen.lege ? (
-          <div className="border-b border-linie py-4 last:border-b-0 last:pb-0">
+          <div className="border-b py-4 last:border-b-0 last:pb-0">
             <dt className={ETICHETA_RAND}>Temei legal</dt>
             <dd className="m-0 mt-2">
-              <span className="block w-fit rounded-card bg-violet-pal px-3 py-2 text-nota leading-[1.45] break-words text-violet">
+              <span className="block w-fit rounded-card bg-ceata px-3 py-2 text-nota leading-[1.45] break-words text-albastru-2">
                 {termen.lege}
               </span>
-              <span className="mt-2 block text-corp text-cerneala-2">{termen.legeNota}</span>
+              <span className="mt-2 block text-corp text-cerneala-3">{termen.legeNota}</span>
             </dd>
           </div>
         ) : null}
 
-        <div className="border-b border-linie py-4 last:border-b-0 last:pb-0">
+        <div className="border-b py-4 last:border-b-0 last:pb-0">
           <dt className={ETICHETA_RAND}>
             {termen.termen ? "Ce mai trebuie știut" : "De ce este gol"}
           </dt>
-          <dd className="m-0 mt-1 text-corp text-cerneala-2">{termen.nota}</dd>
+          <dd className="m-0 mt-1 text-corp text-cerneala-3">{termen.nota}</dd>
         </div>
       </dl>
     </article>

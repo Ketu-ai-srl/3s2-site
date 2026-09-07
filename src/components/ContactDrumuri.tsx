@@ -53,7 +53,7 @@ export default function ContactDrumuri({ drumuri }: { drumuri: Drum[] }) {
     <ul className="m-0 grid list-none gap-6 p-0 md:grid-cols-3">
       {drumuri.map((d) => (
         <li key={d.eticheta} className="h-full rounded-card bg-alb p-6">
-          <span className="flex h-10 w-10 items-center justify-center rounded-card bg-violet-pal text-violet">
+          <span className="flex h-10 w-10 items-center justify-center rounded-card bg-ceata text-albastru-2">
             <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
               <path
                 d={CAI[d.iconita]}
@@ -66,15 +66,15 @@ export default function ContactDrumuri({ drumuri }: { drumuri: Drum[] }) {
             </svg>
           </span>
 
-          <p className="mt-5 text-nota font-semibold text-cerneala-2">{d.eticheta}</p>
+          <p className="mt-5 text-nota font-semibold text-cerneala-3">{d.eticheta}</p>
 
           <h3 className="mt-1 text-subtitlu break-words">
             {d.valoare === null ? (
-              <span className="text-cerneala-2">{d.lipsa ?? "Nu există încă"}</span>
+              <span className="text-cerneala-3">{d.lipsa ?? "Nu există încă"}</span>
             ) : d.href ? (
               <a
                 href={d.href}
-                className="text-violet underline decoration-violet-2 underline-offset-[5px] hover:text-cerneala"
+                className="text-albastru-2 underline decoration-albastru-2 underline-offset-[5px] hover:text-cerneala"
               >
                 {d.valoare}
               </a>
@@ -83,7 +83,7 @@ export default function ContactDrumuri({ drumuri }: { drumuri: Drum[] }) {
             )}
           </h3>
 
-          <p className="mt-4 text-nota text-cerneala-2">{d.nota}</p>
+          <p className="mt-4 text-nota text-cerneala-3">{d.nota}</p>
         </li>
       ))}
     </ul>

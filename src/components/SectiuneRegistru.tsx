@@ -85,7 +85,7 @@ export default function SectiuneRegistru({
   children,
 }: Props) {
   return (
-    <section id={id} className={`border-t border-linie ${FUNDAL[ton]}`}>
+    <section id={id} className={`border-t ${FUNDAL[ton]}`}>
       <div
         className={
           "mx-auto w-full max-w-vitrina px-6 md:px-10 " +
@@ -96,8 +96,8 @@ export default function SectiuneRegistru({
             sunt proza, si sunt scrise cu majuscule din CSS. Vezi nota lunga din
             `Ecran.tsx`. */}
         <div className="mb-5 flex items-baseline gap-3 font-mono text-[12px] ">
-          {cota ? <span className="text-violet">{cota}</span> : null}
-          <span className={cota ? "text-cerneala-2" : "text-violet"}>{eticheta}</span>
+          {cota ? <span className="text-albastru-2">{cota}</span> : null}
+          <span className={cota ? "text-cerneala-3" : "text-albastru-2"}>{eticheta}</span>
         </div>
         {/* La `dens`, titlul si linia stau alaturi, ca la banda de antet: asezate una sub
             alta impingeau primul rand al tabelului sub margine chiar dupa ce antetul se
@@ -119,7 +119,7 @@ export default function SectiuneRegistru({
             {lead ? (
               <p
                 className={
-                  "mt-6 max-w-[52ch] text-[clamp(1.05rem,1.3vw,1.2rem)] leading-[1.5] text-cerneala-2" +
+                  "mt-6 max-w-[52ch] text-[clamp(1.05rem,1.3vw,1.2rem)] leading-[1.5] text-cerneala-3" +
                   (dens ? " md:mt-1" : "")
                 }
               >

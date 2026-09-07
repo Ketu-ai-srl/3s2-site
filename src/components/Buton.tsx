@@ -1,53 +1,65 @@
 import Link from "next/link";
 
-// Butoanele directiei REF-V. Patru feluri, si fiecare raspunde la o intrebare diferita:
+// Butoanele directiei REF-A. O SINGURA FORMA - pastila, raza 980 px - si trei feluri, fiindca
+// referinta atat are:
 //
-//   plin    actiunea principala pe fundal DESCHIS: violet plin, litera alba (6,20:1).
-//   alb     actiunea principala pe fundal INCHIS (eroul, banda de incredere, banda CTA):
-//           alb plin, litera cerneala. Pe gradientul eroului nu exista buton violet -
-//           violetul pe violet-adanc da 1,9:1 pe muchie si butonul dispare.
-//   contur  drumul al doilea, cand chiar e un buton: transparent, litera violet, contur
-//           de 1 px `violet-2` desenat ca UMBRA, nu ca chenar, ca sa nu mute asezarea
-//           cu un pixel fata de butonul plin de langa el.
-//   text    drumul al doilea cand nu merita greutatea unui buton: legatura subliniata.
+//   plin    actiunea principala: `albastru` plin, litera alba (4,70:1).
+//   alb     actiunea principala pe o tigla NEAGRA: alb plin, litera cerneala (21:1). Pe negru
+//           un buton `albastru` ar da 4,47:1 fata de fundal, adica muchia lui aproape ca
+//           dispare; pe alb, in schimb, tigla insasi il ridica.
+//   contur  drumul al doilea: transparent, litera `albastru-2`, contur de 0,8 px desenat ca
+//           `box-shadow` interior, nu ca chenar, ca sa nu mute inaltimea cu un pixel fata de
+//           pastila plina de langa el. Pe negru contururile si litera trec pe `albastru-clar`
+//           (6,96:1), fiindca `albastru-2` pe negru da 3,77:1.
+//   text    drumul al doilea cand nu merita greutatea unui buton: legatura `albastru-2` cu un
+//           chevron dupa cuvant. NU e subliniata: in REF-A legaturile de actiune se recunosc
+//           dupa culoare si dupa chevron. Sublinierea ramane pe legaturile din proza, unde nu
+//           exista chevron care sa le semnaleze.
 //
-// UN SINGUR BUTON PRIMAR PE ECRAN ramane regula, si o are si REF-V. `plin` si `alb` sunt
-// amandoua primare - nu se pun doua pe acelasi ecran, indiferent de fundal.
+// UN SINGUR BUTON PRIMAR PE ECRAN ramane regula. `plin` si `alb` sunt amandoua primare - nu se
+// pun doua pe acelasi ecran, indiferent de fundal. In REF-A ecranul e TIGLA, deci regula se
+// citeste „un buton primar pe tigla", si asa o numara proba din `tests/directia.test.ts`.
 //
-// FORMA, masurata pe REF-V: inaltime 48 px (`py-3` peste 16 px cu inaltime de rand 1,5
-// da 48), captuseala orizontala 32 px, raza 8 px, litera 16 px la greutatea 600. Butonul
-// mic (40 px) e pentru randurile de card, nu pentru actiunea principala a unui ecran.
+// MARIMILE sunt cele trei masurate pe referinta, si sunt legate de marimea literei, nu alese:
+//   17 px -> 44 px inalt (captuseala 11 / 21, pas de rand 22)
+//   14 px -> 36 px inalt (captuseala  8 / 15, pas de rand 20)
+//   12 px -> 24 px inalt (captuseala  3 / 10, pas de rand 18) - bara globala si bara locala
+// Pasul de rand se scrie EXPLICIT pe fiecare marime. Fara el, butonul ar mosteni 1,4706 de pe
+// `body` si un buton de 17 px ar iesi 47 px, nu 44 - inaltimea unui buton e suma captuselii cu
+// pasul de rand, nu cu marimea literei.
 //
-// Semnatura (href, fel, marime, sageata, className) ramane cea veche, ca paginile altor
-// felii sa compileze fara sa fie atinse; `fel="contur"` si-a recapatat conturul, fiindca
-// in REF-V doua greutati diferite se disting prin plin contra contur, nu prin absenta.
+// Semnatura (href, fel, marime, sageata, className) ramane cea mostenita, ca paginile altor
+// felii sa compileze fara sa fie atinse. `marime="bara"` e noua si e a treia marime masurata.
 
 type Fel = "plin" | "alb" | "contur" | "text";
-type Marime = "mic" | "normal" | "mare";
+type Marime = "bara" | "mic" | "normal" | "mare";
 
 const FEL: Record<Fel, string> = {
-  plin: "rounded-buton bg-violet text-alb no-underline hover:bg-violet-2",
-  alb: "rounded-buton bg-alb text-cerneala no-underline hover:bg-violet-pal",
+  plin: "rounded-pastila bg-albastru text-alb no-underline hover:bg-albastru-2",
+  alb: "rounded-pastila bg-alb text-cerneala no-underline hover:bg-ceata",
   contur:
-    "rounded-buton bg-transparent text-violet no-underline shadow-contur hover:bg-violet-pal",
-  text: "bg-transparent text-violet underline decoration-violet-2 underline-offset-[5px] hover:text-cerneala",
+    "rounded-pastila contur-albastru bg-transparent text-albastru-2 no-underline hover:bg-ceata",
+  text: "bg-transparent text-albastru-2 no-underline hover:text-albastru",
 };
 
 const MARIME: Record<Marime, string> = {
-  mic: "px-5 py-2.5 text-nota",
-  normal: "px-8 py-3 text-corp",
-  mare: "px-8 py-3 text-corp",
+  bara: "px-[10px] py-[3px] text-mic leading-[18px]",
+  mic: "px-[15px] py-[8px] text-nota leading-[20px]",
+  normal: "px-[21px] py-[11px] text-corp leading-[22px]",
+  mare: "px-[21px] py-[11px] text-corp leading-[22px]",
 };
 
-// Legatura de text nu poarta contur, deci nu poarta nici captuseala orizontala: aliniata
-// cu butonul de langa ea, nu impinsa de un chenar inexistent.
+// Legatura de text nu poarta contur, deci nu poarta nici captuseala orizontala: aliniata cu
+// butonul de langa ea, nu impinsa de un chenar inexistent.
 const MARIME_TEXT: Record<Marime, string> = {
-  mic: "py-2.5 text-nota",
-  normal: "py-3 text-corp",
-  mare: "py-3 text-corp",
+  bara: "py-[3px] text-mic leading-[18px]",
+  mic: "py-[8px] text-nota leading-[20px]",
+  normal: "py-[11px] text-corp leading-[22px]",
+  mare: "py-[11px] text-corp leading-[22px]",
 };
 
-const BAZA = "inline-flex items-center justify-center gap-2 font-semibold transition-colors duration-200";
+const BAZA =
+  "inline-flex items-center justify-center gap-1 font-semibold transition-colors duration-200";
 
 type Props = {
   href: string;
@@ -73,7 +85,10 @@ export default function Buton({
       className={`${BAZA} ${FEL[fel]} ${cutie ? MARIME[marime] : MARIME_TEXT[marime]} ${className}`}
     >
       {children}
-      {sageata ? <span aria-hidden>→</span> : null}
+      {/* Chevronul e implicit pe legatura de text: asa arata „Afla mai mult" in referinta, si
+          el e semnul care o deosebeste de proza din jur, o data ce sublinierea a disparut.
+          `sageata` ramane in semnatura pentru apelurile mostenite si il pune si pe butoane. */}
+      {fel === "text" || sageata ? <span aria-hidden>&rsaquo;</span> : null}
     </Link>
   );
 }

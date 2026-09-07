@@ -117,7 +117,7 @@ export default function PaginaDeSegment({ segment, nume, slug }: Props) {
         <SegmentGrila elemente={segment.durere} fundal="alb" />
 
         {/* Invitatia la corectie sta SUB carduri: e o reactie la ce tocmai s-a citit. */}
-        <p className="mx-auto mt-10 max-w-[62ch] text-corp text-cerneala-2">
+        <p className="mx-auto mt-10 max-w-[62ch] text-corp text-cerneala-3">
           {SEGMENT.situatiaNota}
         </p>
       </SegmentSectiune>
@@ -182,11 +182,11 @@ export default function PaginaDeSegment({ segment, nume, slug }: Props) {
             {segment.notaCerere}
           </BlocDovada>
 
-          <p className="mt-8 text-corp text-cerneala-2">
+          <p className="mt-8 text-corp text-cerneala-3">
             Termenele pe care le putem cita pe articol stau în{" "}
             <Link
               href="/instrumente/termene-de-pastrare"
-              className="text-violet underline decoration-violet-2 underline-offset-[3px]"
+              className="text-albastru-2 underline decoration-albastru-2 underline-offset-[3px]"
             >
               verificatorul de termene
             </Link>
@@ -222,7 +222,7 @@ export default function PaginaDeSegment({ segment, nume, slug }: Props) {
         nota={
           <>
             {NOTA_CONTACT.inainte}
-            <a href={"mailto:" + NOTA_CONTACT.adresa} className="text-alb underline underline-offset-[3px]">
+            <a href={"mailto:" + NOTA_CONTACT.adresa} className="text-albastru-2 underline underline-offset-[3px]">
               {NOTA_CONTACT.adresa}
             </a>
             {NOTA_CONTACT.dupa}

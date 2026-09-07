@@ -1,9 +1,13 @@
-// Lista cu bifa verde a REF-V: `succes` (#009e5b) deseneaza semnul, textul ramane la 16 px
-// in cerneala secundara. Bifa e ICOANA, nu litera: contrastul ei fata de alb e 3,48:1, sub
-// pragul de text, si de aceea informatia nu sta niciodata in culoarea ei, ci in cuvant.
+// Lista simpla a directiei REF-A. NU mai are bifa verde, si nu e o economie: referinta nu are
+// nicaieri o icoana colorata langa un rand de lista. Bifa era, in plus, o culoare care nu
+// putea purta informatie (3,48:1 fata de alb, sub pragul de text), deci semnalul ei era
+// decorativ oricum; ce ramane e un fir de 1 px intre randuri, exact ca in listele referintei.
 //
-// `inchis` a ramas in semnatura pentru paginile altor felii care il dau inca; nu mai are
-// efect, fiindca nu mai exista suprafata inchisa sub liste.
+// Numele componentei ramane cel mostenit fiindca il scriu unsprezece pagini pe care felia 1 nu
+// le atinge. Un nume care descrie ce NU mai face e o datorie, si se plateste la valul S2-b,
+// cand paginile alea se rescriu si numele se poate schimba odata cu ele.
+//
+// `inchis` a ramas in semnatura pentru paginile altor felii care il dau inca; nu mai are efect.
 
 type Props = {
   titlu: string;
@@ -15,27 +19,10 @@ export default function ListaBifa({ titlu, elemente }: Props) {
   return (
     <div>
       <h3 className="mb-5 text-titlu-4 text-cerneala">{titlu}</h3>
-      <ul className="m-0 list-none p-0">
+      <ul className="m-0 list-none border-t p-0">
         {elemente.map((e) => (
-          <li key={e} className="mb-3 flex gap-3 text-corp text-cerneala-2">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              aria-hidden="true"
-              focusable="false"
-              className="mt-[3px] shrink-0 text-succes"
-            >
-              <path
-                d="M3.5 9.5 L7 13 L14.5 5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span>{e}</span>
+          <li key={e} className="border-b py-3 text-corp text-cerneala-3">
+            {e}
           </li>
         ))}
       </ul>

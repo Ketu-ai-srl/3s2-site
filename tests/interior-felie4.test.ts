@@ -133,7 +133,11 @@ describe('tabelul de comparatie', () => {
     const cod = faraComentarii(sursa('src', 'components', 'ComparatieTabel.tsx'))
     expect(cod, 'cardul tabelului poarta umbra').not.toMatch(/\bshadow-/)
     expect(cod, 'tabelul nu mai sta intr-un card cu raza de 16 px').toContain('rounded-card-mare')
-    expect(cod, 'coloana noastra nu mai e marcata cu violet-pal').toContain('bg-violet-pal')
+    // Marcajul coloanei noastre s-a mutat de pe `violet-pal` pe `ceata` la felia 1 a valului
+    // S2-a: directia REF-A n-are culoare de brand, iar `violet-pal` nu mai e definit deloc.
+    // Verificarea ramane aceeasi - coloana trebuie sa se deosebeasca prin FUNDAL, nu prin
+    // chenar sau umbra - doar numele culorii s-a schimbat odata cu paleta.
+    expect(cod, 'coloana noastra nu mai e marcata prin fundal').toContain('bg-ceata')
     // Pe telefon randul devine card: fundal de ceata plus colturi. Fara asta, „carduri
     // stivuite" ar fi ramas o intentie scrisa in comentariu.
     expect(cod, 'randul nu mai devine card pe telefon').toMatch(/rounded-t-card/)
@@ -185,16 +189,34 @@ describe('igiena fisierelor feliei', () => {
     expect([...'decoration-violet-2'.matchAll(/\btext-violet-2\b/g)].length).toBe(0)
   })
 
-  it('cerneala-3 nu scrie pe ceata in fisierele feliei', () => {
-    // Pe `ceata` da 4,79:1 cu valoarea de azi, deci ar trece; regula ramane totusi, fiindca
-    // valoarea a fost coborata o data si se poate urca la loc. Pe sectiunile de ceata ale
-    // feliei se scrie `cerneala` sau `cerneala-2`.
+  it('litera alba apare numai acolo unde fundalul o sustine', () => {
+    // PROBA ASTA INLOCUIESTE una care pazea `cerneala-3`, si inlocuirea e MASURATA. In REF-V
+    // `cerneala-3` era cerneala cea mai deschisa (4,79:1 pe ceata) si regula spunea sa nu se
+    // scrie in felie. In REF-A ordinea s-a inversat - `cerneala-3` (#6e6e73) da 5,07:1 pe alb si
+    // 4,66:1 pe ceata, deci trece peste tot, iar `cerneala-2` (#86868b) e cea deschisa - si, in
+    // plus, conditia lui `cerneala-2` e acum impusa de CSS, nu de conventie: clasa cade pe
+    // `cerneala-3` daca nu poarta si marimea, si greutatea care o fac legitima. Vechea proba
+    // pazea un defect care nu mai poate aparea.
+    //
+    // Ce a aparut in schimb, si a fost MASURAT pe pagina construita: sapte pagini trimit in
+    // slotul `nota` al benzii de incheiere o legatura scrisa `text-alb`, fiindca pana la felia 1
+    // a valului S2-a banda era violet plin. Pe `ceata`, alb da 1,09:1 - legatura dispare. Erau
+    // 7 blocuri invizibile pe 7 rute. Regula care ramane: `text-alb` are voie sa apara intr-un
+    // fisier numai daca fisierul are si o suprafata neagra, sau daca albul intra in slotul
+    // notei, unde contextul ii da culoarea (`.nota-banda .text-alb` din globals.css).
     const gasite: string[] = []
     for (const cale of FISIERELE_FELIEI) {
       const cod = faraComentarii(sursa(...cale))
-      for (const m of cod.matchAll(/\btext-cerneala-3\b/g)) gasite.push(relativa(cale) + ': ' + m[0])
+      if (!/\btext-alb\b/.test(cod)) continue
+      if (!/bg-negru|nota=\{/.test(cod)) gasite.push(relativa(cale))
     }
-    expect(gasite, 'cerneala-3 folosita in felia 4').toEqual([])
+    expect(gasite, 'litera alba pe un fundal care nu o sustine').toEqual([])
+    // Control pozitiv: un fisier fabricat, cu alb si fara nicio suprafata care sa-l sustina.
+    const rau = 'const x = <p className="text-alb">salut</p>'
+    expect(/\btext-alb\b/.test(rau) && !/bg-negru|nota=\{/.test(rau), 'martorul pozitiv nu e prins').toBe(true)
+    // Control negativ: acelasi alb, dar in slotul notei, unde contextul ii da culoarea.
+    const bun = 'const x = <BandaCTA nota={<a className="text-alb">salut</a>} />'
+    expect(/\btext-alb\b/.test(bun) && !/bg-negru|nota=\{/.test(bun), 'martorul negativ e prins pe nedrept').toBe(false)
   })
 
   it('componentele sterse nu mai sunt importate nicaieri in felie', () => {

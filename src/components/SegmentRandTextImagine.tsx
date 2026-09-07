@@ -31,7 +31,7 @@ export default function SegmentRandTextImagine({
     <div className="md:grid md:grid-cols-2 md:items-center md:gap-x-12 lg:gap-x-16">
       <div className={invers ? "md:order-2" : ""}>
         <h3 className="max-w-[20ch] text-titlu-3 text-cerneala">{titlu}</h3>
-        <p className="mt-5 max-w-[54ch] text-corp text-cerneala-2">{text}</p>
+        <p className="mt-5 max-w-[54ch] text-corp text-cerneala-3">{text}</p>
         <div className="mt-6">
           <Buton href={legatura.href} fel="text" sageata>
             {legatura.text}

@@ -32,24 +32,24 @@ type Props = {
 
 export default function SegmentBandaReguli({ eticheta, titlu, elemente }: Props) {
   return (
-    <section className="bg-noapte-v">
+    <section className="bg-negru">
       <div className="mx-auto w-full max-w-vitrina px-4 py-16 md:px-8 md:py-20">
         <div className="md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:items-start md:gap-x-16">
           <div>
-            <span className="mb-4 block text-nota font-semibold text-violet-clar">
+            <span className="mb-4 block text-nota font-semibold text-ceata">
               {eticheta}
             </span>
-            <h2 className="max-w-[18ch] text-titlu-2 text-alb">{titlu}</h2>
+            <h2 className="max-w-[18ch] text-titlu-2 text-ceata">{titlu}</h2>
           </div>
 
           <ul className="m-0 mt-10 list-none p-0 md:mt-0">
             {elemente.map((e) => (
               <li
                 key={e.titlu}
-                className="border-t border-violet-adanc py-5 first:border-t-0 first:pt-0"
+                className="border-t border-[#333336] py-5 first:border-t-0 first:pt-0"
               >
-                <h3 className="text-subtitlu text-alb">{e.titlu}</h3>
-                <p className="mt-2 max-w-[62ch] text-nota text-violet-clar">{e.text}</p>
+                <h3 className="text-subtitlu text-ceata">{e.titlu}</h3>
+                <p className="mt-2 max-w-[62ch] text-nota text-ceata">{e.text}</p>
               </li>
             ))}
           </ul>

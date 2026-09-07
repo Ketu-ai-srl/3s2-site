@@ -19,12 +19,12 @@ export default function HartaAncore({ sectiuni }: { sectiuni: SectiuneAcasa[] })
         <li key={s.ancora}>
           <a
             href={"/#" + s.ancora}
-            className="group inline-flex items-center gap-2 rounded-pastila bg-alb px-5 py-2.5 text-nota font-semibold text-cerneala no-underline transition-colors duration-200 hover:bg-violet-pal hover:text-violet"
+            className="group inline-flex items-center gap-2 rounded-pastila bg-alb px-5 py-2.5 text-nota font-semibold text-cerneala no-underline transition-colors duration-200 hover:bg-ceata hover:text-albastru-2"
           >
             {s.scurt}
             <span
               aria-hidden="true"
-              className="text-violet transition-transform duration-200 group-hover:translate-x-1"
+              className="text-albastru-2 transition-transform duration-200 group-hover:translate-x-1"
             >
               →
             </span>

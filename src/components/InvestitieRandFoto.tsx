@@ -39,7 +39,7 @@ export default function InvestitieRandFoto({
   const coloana = (
     <div className={imagine ? "" : "max-w-[68ch]"}>
       <h3 className="max-w-[20ch] text-titlu-3 text-cerneala">{titlu}</h3>
-      {text ? <p className="mt-5 max-w-[58ch] text-corp text-cerneala-2">{text}</p> : null}
+      {text ? <p className="mt-5 max-w-[58ch] text-corp text-cerneala-3">{text}</p> : null}
       {children ? <div className="mt-8">{children}</div> : null}
     </div>
   );
