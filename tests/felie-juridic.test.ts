@@ -71,8 +71,15 @@ const FISIERELE_FELIEI = [
 ]
 
 // Numele directiei DE NOAPTE, ca UTILITARE Tailwind. Tiparul cere ca dupa nume sa NU urmeze
-// cratima sau cifra, altfel `bg-noapte-v` - jeton valid din paleta de atunci - ar fi prins de
-// `bg-noapte`.
+// cratima sau cifra, altfel un jeton valid al paletei de atunci, format din numele scurt plus o
+// litera, ar fi prins de numele scurt.
+//
+// NUMELE MOARTE NU SE SCRIU PE LITERE nicaieri in fisierul asta, nici in comentarii, nici in
+// martori: comanda de inventar din `docs/design/DIRECTIA.md` scaneaza fisierul intreg cu `grep`,
+// iar `grep` nu stie ce e proza. Masurat pe prima versiune a probei: sase instante, din care cinci
+// intr-un singur martor scris intreg - adica proba devenea ea insasi cazul pe care il vaneaza.
+// Martorii se ASAMBLEAZA la rulare, din bucati (vezi `mort`), si tiparele raman singurul loc unde
+// numele apar, acolo unde `grep` nu le poate citi ca utilitare fiindca n-au prefix.
 const CLASE_NOAPTE =
   /\b(?:hover:|group-hover:|focus:)?(?:bg|text|border|decoration|from|to|via|ring|fill|stroke)-(?:noapte-[23]|noapte(?![-\w])|hartie|hartie-veche|hartie-veche-[23]|arama|arama-clar|arama-moale|arama-inchis|verde|verde-adanc|verde-apasat|verde-moale|tus|tus-[23]|pe-inchis(?:-[23])?|suprafata|linie-noapte|linie-suprafata|linie-fn|linie-inchis|cerneala-accent)(?![-\w])/g
 
@@ -94,6 +101,14 @@ const PALETA_REFA = [
   'negru',
   'accent-nou',
 ]
+
+/**
+ * Un nume de utilitar mort, asamblat din bucati. Scris intreg, ar fi o instanta a defectului pe
+ * care proba il vaneaza, si ar intra in cifra de inventar - masurat, o data, pe fisierul asta.
+ */
+function mort(prefix: string, rol: string[]) {
+  return prefix + '-' + rol.join('-')
+}
 
 function citeste(cale: string) {
   const intreg = join(RADACINA, cale)
@@ -120,9 +135,17 @@ describe('felia juridica: paleta REF-A', () => {
     }
     expect(abateri, 'clase din directia de noapte in fisierele feliei juridice').toEqual([])
 
-    // MARTOR POZITIV: tiparul prinde toate cele trei forme pe care le vaneaza.
-    const martor = 'className="bg-noapte text-hartie-veche-2 hover:text-arama-clar"'
+    // MARTOR POZITIV: tiparul prinde toate cele trei forme pe care le vaneaza, si un al
+    // patrulea sir - jetonul valid al paletei de atunci - pe care NU are voie sa-l prinda.
+    const martor =
+      'className="' +
+      [mort('bg', ['noapte']), mort('text', ['hartie', 'veche', '2']), mort('hover:text', ['arama', 'clar'])].join(' ') +
+      '"'
     expect([...martor.matchAll(CLASE_NOAPTE)].length, 'tiparul nu prinde martorul').toBe(3)
+    expect(
+      [...mort('bg', ['noapte', 'v']).matchAll(CLASE_NOAPTE)].length,
+      'tiparul inghite jetonul valid al paletei de atunci',
+    ).toBe(0)
     // MARTOR NEGATIV: doua jetoane VALIDE ale paletei de acum nu au voie sa fie prinse.
     expect([...'bg-negru text-cerneala-3'.matchAll(CLASE_NOAPTE)].length).toBe(0)
   })
@@ -137,9 +160,18 @@ describe('felia juridica: paleta REF-A', () => {
     }
     expect(abateri, 'clase REF-V in fisierele feliei juridice').toEqual([])
 
-    // MARTOR POZITIV, cu toate cele patru forme: fundal, litera, subliniere si chenar.
+    // MARTOR POZITIV, cu toate cele patru forme: fundal, litera, subliniere si chenar. Se
+    // ASAMBLEAZA la rulare: scris intreg, ar fi cinci instante ale defectului chiar in proba lui.
     const martor =
-      'className="bg-violet-pal text-violet decoration-violet-2 border-linie text-cerneala-2"'
+      'className="' +
+      [
+        mort('bg', ['violet', 'pal']),
+        mort('text', ['violet']),
+        mort('decoration', ['violet', '2']),
+        mort('border', ['linie']),
+        mort('text', ['cerneala', '2']),
+      ].join(' ') +
+      '"'
     expect([...martor.matchAll(CLASE_REFV)].length, 'tiparul REF-V nu prinde martorul').toBe(5)
     // MARTOR NEGATIV: `albastru-clar` si `cerneala-3` sunt roluri VII si nu au voie sa fie prinse.
     expect(
