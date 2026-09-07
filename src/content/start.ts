@@ -68,7 +68,7 @@ const DISCUTIE: Legatura = { href: "/contact", text: "Discuție de 30 de minute"
 export const TIGLE: TiglaMare[] = [
   {
     cheie: "scan",
-    titlu: "Se digitizează ce se caută.",
+    titlu: "Se digitalizează ce se caută.",
     subtitlu: "Nu tot fondul. Se scanează documentele cerute des, iar originalul rămâne pe raft.",
     actiune: DISCUTIE,
     secundar: { href: "/cum-functioneaza", text: "Cum funcționează" },

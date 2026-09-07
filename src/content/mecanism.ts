@@ -52,7 +52,7 @@ export type Fisa = {
 export const CUM_FUNCTIONEAZA = {
   titluMeta: "Cum funcționează, pas cu pas",
   descriereMeta:
-    "Preluarea cu proces-verbal, inventarul pe cote, ce se digitizează și ce nu, căutarea cu pagina citată și ce primiți în ziua în care plecați.",
+    "Preluarea cu proces-verbal, inventarul pe cote, ce se digitalizează și ce nu, căutarea cu pagina citată și ce primiți în ziua în care plecați.",
   eticheta: "Mecanismul serviciului",
   h1: "Cutia pleacă, urma rămâne.",
   // Linia ecranului de deschidere: sub 40 de cuvinte, regula directiei. Ce spunea fraza
@@ -75,7 +75,7 @@ export const CUM_FUNCTIONEAZA = {
     {
       titlu: "Scanăm ce se cere.",
       text: "Lista se face împreună și în scris, înainte de prima cutie deschisă. Scanarea rezistă la recunoașterea automată a textului și se verifică pe diacritice, unde se pierd cele mai multe căutări în română.",
-      urma: "Lista de digitizare, convenită în scris înainte de scanare, cu ordinea loturilor.",
+      urma: "Lista de digitalizare, convenită în scris înainte de scanare, cu ordinea loturilor.",
     },
     {
       titlu: "Întrebați, primiți pagina.",
@@ -94,7 +94,7 @@ export const CUM_FUNCTIONEAZA = {
     },
   ] as Etapa[],
 
-  digitizat: [
+  digitalizat: [
     "Documentele cerute des la ghișeu sau în control, oricât de vechi ar fi",
     "Fondul căutat după mai multe chei deodată: nume, dată, număr de înregistrare",
     "Registrele de intrare și opisurile vechi, din care pornește orice căutare",
@@ -108,8 +108,8 @@ export const CUM_FUNCTIONEAZA = {
     "Documentele folosite numai în original, unde o copie nu ajută la nimic",
   ],
 
-  notaDigitizare:
-    "Digitizarea integrală este varianta cea mai scumpă și rar cea mai utilă. Nu o propunem ca implicit, deși o facem dacă o cereți. Pornim de la ce se caută, restul rămâne pe raft și vine la cerere. Preț pe pagină sau pe metru liniar nu publicăm: ar fi o cifră ruptă de fondul dumneavoastră.",
+  notaDigitalizare:
+    "Digitalizarea integrală este varianta cea mai scumpă și rar cea mai utilă. Nu o propunem ca implicit, deși o facem dacă o cereți. Pornim de la ce se caută, restul rămâne pe raft și vine la cerere. Preț pe pagină sau pe metru liniar nu publicăm: ar fi o cifră ruptă de fondul dumneavoastră.",
 
   lant: [
     {
@@ -177,7 +177,7 @@ export const CUM_FUNCTIONEAZA = {
 
   incheiere: {
     titlu: "Discuția nu mută cutii.",
-    text: "Treizeci de minute în care ne uităm la arhiva dumneavoastră așa cum arată azi. La final plecați cu estimarea volumului, cu ordinea digitizării și cu un calendar de preluare scris.",
+    text: "Treizeci de minute în care ne uităm la arhiva dumneavoastră așa cum arată azi. La final plecați cu estimarea volumului, cu ordinea digitalizării și cu un calendar de preluare scris.",
   },
 };
 

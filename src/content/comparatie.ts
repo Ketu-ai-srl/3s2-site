@@ -168,7 +168,7 @@ export const COMPARATIE = {
         "Metrii pătrați ocupați de arhivă se plătesc la prețul biroului. Costul nu apare pe nicio factură fiindcă e deja în chirie.",
         "Același cost al spațiului, plus orele în care cineva plătit pentru altceva caută prin cutii.",
         "Spațiul se eliberează. Costul devine vizibil pe factură, măsurat pe metru liniar.",
-        "Spațiul se eliberează și costul devine o linie pe care o comparați, la care se adaugă digitizarea a ceea ce se caută des.",
+        "Spațiul se eliberează și costul devine o linie pe care o comparați, la care se adaugă digitalizarea a ceea ce se caută des.",
       ],
     },
     {
@@ -189,7 +189,7 @@ export const COMPARATIE = {
     {
       titlu: "Costul vine înainte.",
       text:
-        "Preluarea, inventarierea și digitizarea se plătesc înainte să vedeți primul răspuns cu pagina citată. Dacă bugetul de anul acesta nu are loc pentru ele, comparația se oprește aici.",
+        "Preluarea, inventarierea și digitalizarea se plătesc înainte să vedeți primul răspuns cu pagina citată. Dacă bugetul de anul acesta nu are loc pentru ele, comparația se oprește aici.",
     },
     {
       titlu: "Originalul pleacă din birou.",
@@ -222,7 +222,7 @@ export const COMPARATIE = {
     {
       titlu: "Fondul iese la selecționare.",
       text:
-        "Nu se plătesc depozitarea și digitizarea a ceea ce se elimină legal peste câteva luni. Întâi selecționarea, cu avizul cerut de lege, apoi discuția despre ce rămâne.",
+        "Nu se plătesc depozitarea și digitalizarea a ceea ce se elimină legal peste câteva luni. Întâi selecționarea, cu avizul cerut de lege, apoi discuția despre ce rămâne.",
     },
     {
       titlu: "Caietul cere o certificare.",
@@ -267,9 +267,9 @@ export const INVESTITIA = {
     {
       titlu: "Partea care se scanează",
       text:
-        "Digitizarea este partea cea mai scumpă. Împărțirea între ce se scanează și ce rămâne pe raft se face înainte de prima cutie deschisă și intră în contract.",
+        "Digitalizarea este partea cea mai scumpă. Împărțirea între ce se scanează și ce rămâne pe raft se face înainte de prima cutie deschisă și intră în contract.",
       creste:
-        "se cere digitizarea integrală a fondului, inclusiv a ceea ce nu s-a mai deschis de ani buni",
+        "se cere digitalizarea integrală a fondului, inclusiv a ceea ce nu s-a mai deschis de ani buni",
       scade:
         "se scanează întâi categoriile cerute des, restul rămâne pe raft și vine la cerere",
     },
@@ -320,8 +320,8 @@ export const INVESTITIA = {
     "Preluarea la sediul dumneavoastră, cu proces-verbal, și transportul inițial",
     "Inventarierea fondului pe unități arhivistice, cu cotă pentru fiecare",
     "Întocmirea nomenclatorului arhivistic, atunci când lipsește sau nu este avizat",
-    "Digitizarea lotului convenit în scris înainte de prima cutie deschisă",
-    "Punerea fondului digitizat în index, ca o întrebare să poată primi documentul și pagina",
+    "Digitalizarea lotului convenit în scris înainte de prima cutie deschisă",
+    "Punerea fondului digitalizat în index, ca o întrebare să poată primi documentul și pagina",
   ],
 
   costRecurent: [
@@ -329,7 +329,7 @@ export const INVESTITIA = {
     "Accesul și căutarea, pe toată durata contractului",
     "Aducerea originalelor la cerere, cu ieșirea și returul consemnate pe cotă",
     "Selecționarea periodică a fondului, cu avizul cerut de lege",
-    "Digitizarea loturilor adăugate după preluarea inițială",
+    "Digitalizarea loturilor adăugate după preluarea inițială",
   ],
 
   notaCosturi:
