@@ -30,9 +30,13 @@
 // proza ce lipseste si de ce. Poarta juridica ramane pe AVERT L-01 la staging si OPRESTE la
 // productie, si asta e corect: site-ul nu are voie sa fie publicat cu identitatea pe jumatate.
 //
-// VOCE (rescris 2026-09-06): propozitii mai scurte, titluri de sectiune scrise ca propozitii.
-// CE NU S-A ATINS: denumirile actelor, numerele de articol, temeiurile si ancorele (`id`).
-// Ele sunt citari, nu stil, iar legaturile interne trimit la ele.
+// VOCE REF-A (rescris 2026-09-07): titlul de sectiune e o AFIRMATIE de doua-patru cuvinte, cu
+// punct, iar antetul paginii are un h1 la fel de scurt si o singura propozitie de introducere.
+//
+// CE NU S-A ATINS, si de ce. Denumirile actelor, numerele de articol, temeiurile, ancorele
+// (`id`) si CLAUZELE insele. Ele sunt citari si obligatii, nu stil: o clauza scurtata isi
+// schimba intelesul, si atunci scurtarea n-ar mai fi o schimbare de voce, ci una de fond.
+// Regula valului a fost deci: se scurteaza ANTETUL si TITLURILE, nu textul care obliga.
 
 /** O bucata de text: sir simplu sau legatura interna. */
 export type Frag = string | { href: string; text: string };
@@ -97,17 +101,17 @@ export const TERMENI: PaginaJuridica = {
   cale: "/termeni",
   titluMeta: "Termeni și condiții",
   descriereMeta:
-    "Cine răspunde de site-ul 3S, ce face el azi și ce nu face. Firma este în curs de înființare, iar textul spune asta deschis.",
+    "Cine răspunde de site-ul 3S, ce face el azi și ce nu face. Firma este în curs de înființare și textul spune asta deschis.",
   eticheta: "Cadrul juridic",
-  h1: "Termenii în care folosiți site-ul, și cine răspunde de el.",
+  h1: "Site-ul prezintă, contractul obligă.",
   lead:
-    "Pagina spune cine este în spatele site-ului, ce faceți aici azi și ce nu se poate face. 3S este o firmă în curs de înființare, deci o parte din datele cerute de lege încă nu există. O scriem deschis, în loc să lăsăm un rând gol sau să împrumutăm datele altcuiva.",
+    "Pagina spune cine este în spatele site-ului, ce faceți aici azi și ce nu se poate face, inclusiv datele cerute de lege care încă nu există, fiindcă firma este în curs de înființare.",
   secundar: { href: "/confidentialitate", text: "Citiți politica de confidențialitate" },
   redactat: NEREVIZUIT_DE_AVOCAT,
   sectiuni: [
     {
       id: "cine-raspunde",
-      titlu: "Cine răspunde de site-ul acesta",
+      titlu: "Răspunderea pentru site.",
       blocuri: [
         {
           fel: "paragraf",
@@ -119,14 +123,14 @@ export const TERMENI: PaginaJuridica = {
         {
           fel: "paragraf",
           text: [
-            "Arhivarea din spatele proiectului este a firmei-mamă, ADRIA Servicii Arhivare SRL, din Golești, județul Argeș, care arhivează documente din 2019. Datele ei de identificare nu sunt scrise aici ca și cum ar fi ale 3S: sunt ale unei alte persoane juridice, iar o afirmație despre altcineva nu ține locul unei afirmații despre noi.",
+            "Arhivarea din spatele proiectului este a firmei-mamă, ADRIA Servicii Arhivare SRL, din Golești, județul Argeș, care arhivează documente din 2019. Datele ei de identificare nu sunt scrise aici ca și cum ar fi ale 3S: sunt ale unei alte persoane juridice. O afirmație despre altcineva nu ține locul unei afirmații despre noi.",
           ],
         },
       ],
     },
     {
       id: "ce-face-site-ul",
-      titlu: "Ce face site-ul, și ce nu face",
+      titlu: "Site-ul face puține lucruri.",
       blocuri: [
         {
           fel: "paragraf",
@@ -141,7 +145,7 @@ export const TERMENI: PaginaJuridica = {
             ["nu se vinde nimic online, nu se afișează prețuri și nu se procesează plăți;"],
             ["nu există cont de utilizator, autentificare sau zonă privată;"],
             [
-              "nu se încarcă documente. Formularul are câmpuri de text, nu atașamente, iar arhiva se preia fizic, cu proces-verbal, nu prin site;",
+              "nu se încarcă documente. Formularul are câmpuri de text, nu atașamente. Arhiva se preia fizic, cu proces-verbal, nu prin site;",
             ],
             [
               "nu se pune nimic în browserul dumneavoastră. Detaliile stau pe pagina ",
@@ -153,14 +157,14 @@ export const TERMENI: PaginaJuridica = {
         {
           fel: "paragraf",
           text: [
-            "Din listă decurge o consecință practică: prin site nu se încheie niciun contract la distanță cu un consumator, deci site-ul nu are atașat niciun mecanism de reclamație specific vânzării online. Nemulțumirile legate de site sau de textele lui se trimit la contact@3s.ro și primesc răspuns scris.",
+            "Din listă decurge o consecință practică: prin site nu se încheie niciun contract la distanță cu un consumator. Site-ul nu are atașat niciun mecanism de reclamație specific vânzării online. Nemulțumirile legate de site sau de textele lui se trimit la contact@3s.ro și primesc răspuns scris.",
           ],
         },
       ],
     },
     {
       id: "formularul",
-      titlu: "Formularul nu are încă un destinatar.",
+      titlu: "Formularul nu trimite încă.",
       blocuri: [
         {
           fel: "paragraf",
@@ -170,7 +174,7 @@ export const TERMENI: PaginaJuridica = {
         },
         {
           fel: "declaratie",
-          eticheta: "De ce vă spunem asta pe pagina de termeni",
+          eticheta: "De ce scrie aici",
           text: [
             "Un formular care pare că trimite și nu trimite este cea mai ieftină cale de a pierde încrederea cuiva care chiar avea nevoie de un răspuns. Până când cererea ajunge la un om, scrie în trei locuri că nu ajunge: în confirmarea din pagină, aici și în ",
             { href: "/confidentialitate", text: "politica de confidențialitate" },
@@ -187,7 +191,7 @@ export const TERMENI: PaginaJuridica = {
     },
     {
       id: "continutul",
-      titlu: "Textele și semnele proiectului sunt ale noastre.",
+      titlu: "Textele sunt ale noastre.",
       blocuri: [
         {
           fel: "paragraf",
@@ -211,7 +215,7 @@ export const TERMENI: PaginaJuridica = {
     },
     {
       id: "ce-va-cerem",
-      titlu: "Ce vă cerem când folosiți site-ul",
+      titlu: "Vă cerem grijă la ce trimiteți.",
       blocuri: [
         {
           fel: "lista",
@@ -231,7 +235,7 @@ export const TERMENI: PaginaJuridica = {
     },
     {
       id: "raspunderea",
-      titlu: "Ce citiți aici este o prezentare. Ce ne obligă este contractul.",
+      titlu: "Contractul obligă, nu pagina.",
       blocuri: [
         {
           fel: "paragraf",
@@ -257,7 +261,7 @@ export const TERMENI: PaginaJuridica = {
     },
     {
       id: "legea-aplicabila",
-      titlu: "Legea este română, limba este româna.",
+      titlu: "Legea și limba, române.",
       blocuri: [
         {
           fel: "paragraf",
@@ -275,7 +279,7 @@ export const TERMENI: PaginaJuridica = {
     },
     {
       id: "moldova",
-      titlu: "3S nu are sediu în Republica Moldova.",
+      titlu: "Fără sediu în Moldova.",
       blocuri: [
         {
           fel: "paragraf",
@@ -286,7 +290,7 @@ export const TERMENI: PaginaJuridica = {
         {
           fel: "paragraf",
           text: [
-            "Ce se schimbă pentru un vizitator din Republica Moldova ține de prelucrarea datelor, iar diferența este scrisă în ",
+            "Ce se schimbă pentru un vizitator din Republica Moldova ține de prelucrarea datelor. Diferența este scrisă în ",
             { href: "/confidentialitate#moldova", text: "secțiunea despre Moldova din politica de confidențialitate" },
             ". Contracte prin site nu se încheie nici într-o țară, nici în cealaltă.",
           ],
@@ -295,7 +299,7 @@ export const TERMENI: PaginaJuridica = {
     },
     {
       id: "schimbari",
-      titlu: "Textul se schimbă când se schimbă site-ul.",
+      titlu: "Textul urmează site-ul.",
       blocuri: [
         {
           fel: "paragraf",
@@ -338,15 +342,15 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
   descriereMeta:
     "Ce date primim prin formular, în ce temei le folosim și cât le păstrăm. Azi nu avem urmărire, terți sau destinatar pentru cereri.",
   eticheta: "Prelucrarea datelor",
-  h1: "Ce date primim de la dumneavoastră și ce facem cu ele.",
+  h1: "Datele care ajung la noi.",
   lead:
-    "Politica este scrisă pe ce se întâmplă azi, nu pe un șablon. Site-ul nu are urmărire, nu încarcă nimic de la altcineva și nu are un destinatar pentru cererile din formular. Textul spune exact asta, în loc să descrie o firmă care nu există încă.",
+    "Politica este scrisă pe ce se întâmplă azi: site-ul nu are urmărire, nu încarcă nimic de la altcineva și nu are încă un destinatar pentru cererile din formular.",
   secundar: { href: "/cookies", text: "Vedeți ce stocăm în browser" },
   redactat: NEREVIZUIT_DE_AVOCAT,
   sectiuni: [
     {
       id: "cine-prelucreaza",
-      titlu: "Cine prelucrează datele",
+      titlu: "Datele le prelucrăm noi.",
       blocuri: [
         {
           fel: "paragraf",
@@ -359,14 +363,14 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
         {
           fel: "paragraf",
           text: [
-            "Nu am desemnat un responsabil cu protecția datelor. Cererile privind datele dumneavoastră ajung la aceeași adresă de poștă electronică și primesc răspuns scris. Când 3S va prelucra efectiv arhive ale clienților, obligația de a desemna un responsabil se reevaluează, iar rândul acesta se rescrie.",
+            "Nu am desemnat un responsabil cu protecția datelor. Cererile privind datele dumneavoastră ajung la aceeași adresă de poștă electronică și primesc răspuns scris. Când 3S va prelucra efectiv arhive ale clienților, obligația de a desemna un responsabil se reevaluează. Rândul acesta se rescrie atunci.",
           ],
         },
       ],
     },
     {
       id: "ce-date",
-      titlu: "Ce date primim și de unde",
+      titlu: "De unde vin datele.",
       blocuri: [
         {
           fel: "paragraf",
@@ -376,9 +380,9 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
         },
         {
           fel: "declaratie",
-          eticheta: "Ce se întâmplă azi cu ele",
+          eticheta: "Ce se întâmplă azi",
           text: [
-            "Nimic. Formularul nu are încă un destinatar: cererea rămâne în pagina deschisă de dumneavoastră, se afișează o confirmare, nu pleacă niciun mesaj și nu se scrie nimic nicăieri. Când legăm formularul la un destinatar real, secțiunile de mai jos se completează cu termenele efective, iar schimbarea se vede în pagină.",
+            "Nimic. Formularul nu are încă un destinatar: cererea rămâne în pagina deschisă de dumneavoastră, se afișează o confirmare, nu pleacă niciun mesaj și nu se scrie nimic nicăieri. Când legăm formularul la un destinatar real, secțiunile de mai jos se completează cu termenele efective. Schimbarea se vede în pagină.",
           ],
         },
         {
@@ -395,16 +399,16 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
         },
         {
           fel: "limite",
-          eticheta: "Ce nu putem încă scrie despre jurnalele găzduirii",
+          eticheta: "Jurnalele găzduirii",
           text: [
-            "Nu am inventariat jurnalele furnizorului de găzduire, deci nu vă putem spune azi cât timp le păstrează el și cine are acces la ele. Preferăm rândul acesta unei durate scrise din presupunere. Se completează odată cu legarea formularului, cu cifra reală.",
+            "Nu am inventariat jurnalele furnizorului de găzduire. Nu vă putem spune azi cât timp le păstrează el și cine are acces la ele. Preferăm rândul acesta unei durate scrise din presupunere. Se completează odată cu legarea formularului, cu cifra reală.",
           ],
         },
       ],
     },
     {
       id: "temeiul",
-      titlu: "Pentru ce le folosim și în ce temei",
+      titlu: "Scopul și temeiul.",
       blocuri: [
         {
           fel: "paragraf",
@@ -414,9 +418,9 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
         },
         {
           fel: "declaratie",
-          eticheta: "De ce nu vă cerem acordul, și de ce contează",
+          eticheta: "De ce fără acord",
           text: [
-            "Nu bifați nicio căsuță și nu vă cerem consimțământul, fiindcă nu acesta este temeiul potrivit aici. Cereți o discuție, iar răspunsul la cererea dumneavoastră este chiar motivul pentru care avem nevoie de datele din formular: sunt demersuri precontractuale, la inițiativa dumneavoastră. Un temei declarat greșit nu este o scăpare de redactare, ci o eroare de fond, fiindcă schimbă drepturile pe care le aveți mai departe.",
+            "Nu bifați nicio căsuță și nu vă cerem consimțământul, fiindcă nu acesta este temeiul potrivit aici. Cereți o discuție. Răspunsul la cererea dumneavoastră este chiar motivul pentru care avem nevoie de datele din formular: sunt demersuri precontractuale, la inițiativa dumneavoastră. Un temei declarat greșit nu este o scăpare de redactare, ci o eroare de fond, fiindcă schimbă drepturile pe care le aveți mai departe.",
           ],
         },
         {
@@ -429,7 +433,7 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
     },
     {
       id: "cat-pastram",
-      titlu: "Cât timp le păstrăm",
+      titlu: "Nu le păstrăm încă.",
       blocuri: [
         {
           fel: "paragraf",
@@ -440,38 +444,38 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
         {
           fel: "paragraf",
           text: [
-            "Când formularul va livra, regula pe care o vom scrie aici este: cererile fără urmare se șterg după o perioadă scurtă, iar cele care duc la o ofertă sau la un contract se păstrează cât cere relația și cât cer obligațiile legale de evidență. Rândul rămâne fără cifră până când cifra este decisă și poate fi respectată.",
+            "Când formularul va livra, regula pe care o vom scrie aici este: cererile fără urmare se șterg după o perioadă scurtă. Cele care duc la o ofertă sau la un contract se păstrează cât cere relația și cât cer obligațiile legale de evidență. Rândul rămâne fără cifră până când cifra este decisă și poate fi respectată.",
           ],
         },
       ],
     },
     {
       id: "cui-le-dam",
-      titlu: "Cui ajung mai departe",
+      titlu: "Nu ajung la nimeni.",
       blocuri: [
         {
           fel: "paragraf",
           text: [
-            "Azi, nimănui. Site-ul nu încarcă niciun serviciu al altcuiva, nu are instrument de măsurare a traficului, nu are hărți, filme sau butoane de rețele sociale integrate. Fonturile sunt aduse la construirea site-ului și servite de pe domeniul nostru, deci browserul dumneavoastră nu cere nimic de la altcineva.",
+            "Azi, nimănui. Site-ul nu încarcă niciun serviciu al altcuiva, nu are instrument de măsurare a traficului, nu are hărți, filme sau butoane de rețele sociale integrate. Fonturile sunt aduse la construirea site-ului și servite de pe domeniul nostru. Browserul dumneavoastră nu cere nimic de la altcineva.",
           ],
         },
         {
           fel: "paragraf",
           text: [
-            "Furnizorul de găzduire vede cererile către server, prin natura serviciului. Când formularul va livra cereri, el devine împuternicit al nostru pentru prelucrarea acelor date, iar contractul care reglementează asta se încheie înainte de prima cerere livrată, nu după.",
+            "Furnizorul de găzduire vede cererile către server, prin natura serviciului. Când formularul va livra cereri, el devine împuternicit al nostru pentru prelucrarea acelor date. Contractul care reglementează asta se încheie înainte de prima cerere livrată, nu după.",
           ],
         },
         {
           fel: "paragraf",
           text: [
-            "Nu am pus în funcțiune niciun furnizor din afara Spațiului Economic European și nu trimitem date nicăieri. Nu am verificat încă unde se află fizic serverul care servește paginile. O aflăm înainte ca formularul să livreze prima cerere, iar dacă răspunsul cere garanții pentru un transfer, ele se scriu aici înainte, nu după.",
+            "Nu am pus în funcțiune niciun furnizor din afara Spațiului Economic European și nu trimitem date nicăieri. Nu am verificat încă unde se află fizic serverul care servește paginile. O aflăm înainte ca formularul să livreze prima cerere. Dacă răspunsul cere garanții pentru un transfer, ele se scriu aici înainte, nu după.",
           ],
         },
       ],
     },
     {
       id: "drepturi",
-      titlu: "Ce drepturi aveți și cum le exercitați",
+      titlu: "Drepturile dumneavoastră.",
       blocuri: [
         {
           fel: "paragraf",
@@ -521,21 +525,21 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
         {
           fel: "paragraf",
           text: [
-            "Autoritatea de supraveghere la care puteți face plângere este, în România, Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal, iar în Republica Moldova autoritatea de supraveghere prevăzută de Legea nr. 195/2024.",
+            "Autoritatea de supraveghere la care puteți face plângere este, în România, Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal. În Republica Moldova este autoritatea de supraveghere prevăzută de Legea nr. 195/2024.",
           ],
         },
         {
           fel: "limite",
-          eticheta: "Ce înseamnă drepturile astea azi, cinstit",
+          eticheta: "Ce înseamnă azi",
           text: [
-            "Azi nu avem ce să vă arătăm, să corectăm sau să ștergem, fiindcă nu stocăm nimic. Le scriem acum fiindcă vor avea obiect din ziua în care formularul livrează prima cerere, iar politica trebuie să fie deja scrisă atunci, nu după.",
+            "Azi nu avem ce să vă arătăm, să corectăm sau să ștergem, fiindcă nu stocăm nimic. Le scriem acum fiindcă vor avea obiect din ziua în care formularul livrează prima cerere. Politica trebuie să fie deja scrisă atunci, nu după.",
           ],
         },
       ],
     },
     {
       id: "automat",
-      titlu: "Decizii automate, profilare, antrenare de modele: cererea este citită de un om.",
+      titlu: "Un om citește cererea.",
       blocuri: [
         {
           fel: "paragraf",
@@ -553,7 +557,7 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
     },
     {
       id: "moldova",
-      titlu: "Republica Moldova: același fond, alt act citat.",
+      titlu: "Moldova, alt act citat.",
       blocuri: [
         {
           fel: "paragraf",
@@ -564,7 +568,7 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
         {
           fel: "paragraf",
           text: [
-            "Legea nr. 195/2024 este aliniată la Regulamentul (UE) 2016/679, deci descrierea de mai sus se aplică fără modificări de fond unui vizitator din Republica Moldova: același scop, același temei precontractual, aceleași drepturi. Diferă actul pe care îl invocați și autoritatea la care faceți plângere.",
+            "Legea nr. 195/2024 este aliniată la Regulamentul (UE) 2016/679. Descrierea de mai sus se aplică fără modificări de fond unui vizitator din Republica Moldova: același scop, același temei precontractual, aceleași drepturi. Diferă actul pe care îl invocați și autoritatea la care faceți plângere.",
           ],
         },
         {
@@ -572,14 +576,14 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
           text: [
             "Motivul pentru care Moldova este o secțiune, nu un set separat de pagini, este scris în ",
             { href: "/termeni#moldova", text: "secțiunea corespunzătoare din termeni și condiții" },
-            ": 3S nu are sediu sau reprezentant acolo, iar pagini separate ar sugera o prezență locală pe care nu o avem.",
+            ": 3S nu are sediu sau reprezentant acolo. Pagini separate ar sugera o prezență locală pe care nu o avem.",
           ],
         },
       ],
     },
     {
       id: "limite",
-      titlu: "Ce nu putem încă scrie aici",
+      titlu: "Nu putem scrie tot.",
       blocuri: [
         {
           fel: "paragraf",
@@ -591,7 +595,7 @@ export const CONFIDENTIALITATE: PaginaJuridica = {
           fel: "lista",
           elemente: [
             [
-              "datele de înmatriculare ale operatorului nu există încă, iar site-ul nu poate fi publicat în producție cât timp lipsesc;",
+              "datele de înmatriculare ale operatorului nu există încă și site-ul nu poate fi publicat în producție cât timp lipsesc;",
             ],
             ["durata de păstrare a jurnalelor tehnice ale găzduirii nu a fost inventariată;"],
             ["nu am verificat încă unde se află fizic serverul care servește paginile;"],
@@ -624,15 +628,15 @@ export const COOKIES: PaginaJuridica = {
   descriereMeta:
     "Site-ul nu pune cookie-uri și nu scrie nimic în browser. Explicăm de ce nu vă cerem acordul și cum verificăm asta la fiecare livrare.",
   eticheta: "Browser și stocare",
-  h1: "Site-ul acesta nu stochează nimic în browserul dumneavoastră.",
+  h1: "Browserul rămâne curat.",
   lead:
-    "Nu punem cookie-uri, nu scriem în memoria locală a browserului și nu încărcăm nimic de la altcineva. De aceea nu vedeți nicio casetă care să vă ceară acordul: nu avem ce să vă cerem. Mai jos scrie ce înseamnă asta pe rând și cum verificăm afirmația la fiecare livrare.",
+    "Nu punem cookie-uri, nu scriem în memoria locală și nu încărcăm nimic de la altcineva. Nu vedeți nicio casetă care să vă ceară acordul, fiindcă nu avem ce să vă cerem.",
   secundar: { href: "/confidentialitate", text: "Citiți politica de confidențialitate" },
   redactat: NEREVIZUIT_DE_AVOCAT,
   sectiuni: [
     {
       id: "ce-stocam",
-      titlu: "Ce este stocat azi în browserul dumneavoastră",
+      titlu: "Azi nu e stocat nimic.",
       blocuri: [
         {
           fel: "randuri",
@@ -668,7 +672,7 @@ export const COOKIES: PaginaJuridica = {
     },
     {
       id: "de-ce-fara-caseta",
-      titlu: "De ce nu vă cerem acordul",
+      titlu: "Caseta de acord nu are temei.",
       blocuri: [
         {
           fel: "paragraf",
@@ -679,12 +683,12 @@ export const COOKIES: PaginaJuridica = {
         {
           fel: "paragraf",
           text: [
-            "Noi nu stocăm nimic și nu citim nimic din echipamentul dumneavoastră, deci obligația nu se declanșează și nu avem ce să vă cerem. O casetă de acord pe un site fără stocare nu ar fi o precauție, ci o afirmație despre ceva ce nu există.",
+            "Noi nu stocăm nimic și nu citim nimic din echipamentul dumneavoastră. Obligația nu se declanșează și nu avem ce să vă cerem. O casetă de acord pe un site fără stocare nu ar fi o precauție, ci o afirmație despre ceva ce nu există.",
           ],
         },
         {
           fel: "declaratie",
-          eticheta: "Ce am ales în locul casetei",
+          eticheta: "În locul casetei",
           text: [
             "Zero servicii ale altcuiva în pagini. Decizia costă câteva facilități la care am renunțat, printre care măsurarea traficului, și scutește orice vizitator de o casetă, de un transfer de declarat și de întreaga clasă de risc care a produs cele mai multe amenzi în domeniu.",
           ],
@@ -693,7 +697,7 @@ export const COOKIES: PaginaJuridica = {
     },
     {
       id: "cum-verificam",
-      titlu: "Cum verificăm afirmația, la fiecare livrare",
+      titlu: "Afirmația se verifică automat.",
       blocuri: [
         {
           fel: "paragraf",
@@ -728,7 +732,7 @@ export const COOKIES: PaginaJuridica = {
     },
     {
       id: "gazduirea",
-      titlu: "Găzduirea vede cererile, chiar dacă browserul rămâne curat.",
+      titlu: "Găzduirea vede cererile.",
       blocuri: [
         {
           fel: "paragraf",
@@ -748,7 +752,7 @@ export const COOKIES: PaginaJuridica = {
     },
     {
       id: "daca-adaugam",
-      titlu: "Ce se schimbă dacă adăugăm vreodată ceva",
+      titlu: "Adăugarea are ordine scrisă.",
       blocuri: [
         {
           fel: "paragraf",

@@ -4,8 +4,11 @@
 // randul GOL, dinadins, si scrie de ce.
 //
 // VALORILE LEGALE NU SE REFORMULEAZA. `termen`, `dela`, `lege` si `legeNota` au ramas
-// neatinse la rescrierea vocii din 2026-09-06: sunt cifre si trimiteri la act, nu stil.
-// S-au rescris doar `nota` si etichetele de stare.
+// neatinse si la rescrierea vocii din 2026-09-07 (REF-A): sunt cifre si trimiteri la act, nu
+// stil. La valul asta s-au rescris doar notele, mai scurt, si eticheta primei stari. `tip` si
+// `scurt` au ramas neatinse dintr-un motiv mecanic, nu de gust: din `scurt` se deriva ancora
+// fiecarei fise (`ancoraTermen` din `termene-extins.ts`), deci o reformulare ar muta ancore
+// pe care le pot purta legaturi trimise prin mesaj.
 
 export type StareTermen = "confirmat" | "orientativ" | "neconfirmat";
 
@@ -22,7 +25,12 @@ export type Termen = {
   nota: string;
 };
 
-// PASTILELE DE STARE, pe paleta REF-V. S-a schimbat DOAR sirul de clase: textul si cheile
+// PASTILELE DE STARE. Sirul `clase` NU s-a atins la valul S2-a, desi paleta paginii se
+// schimba: `tests/felie-juridic.test.ts` cere ca fiecare rol de culoare de aici sa fie in
+// lista paletei REF-V, deci o mutare facuta din fisierul de TEXT ar inrosi proba fara ca
+// paleta noua sa fi aterizat. Perechile se muta odata cu proba, nu inaintea ei.
+//
+// Nota de mai jos e cea scrisa la valul dinainte, pe paleta REF-V. S-a schimbat DOAR sirul de clase: textul si cheile
 // sunt neatinse, fiindca ele sunt continut, nu stil. Cele trei perechi de dinainte
 // (fundal moale plus cerneala, cate una pe stare) numeau culori care nu mai exista in
 // `globals.css` de la felia de fundatie, deci nu mai produceau CSS: pastilele isi
@@ -38,7 +46,7 @@ export type Termen = {
 // fiecare pastila.
 export const STARI: Record<StareTermen, { text: string; clase: string }> = {
   confirmat: {
-    text: "Confirmat cu articol de lege",
+    text: "Confirmat cu articol",
     clase: "bg-violet-pal text-violet",
   },
   orientativ: {
@@ -60,7 +68,7 @@ export const TERMENE: Termen[] = [
     dela: "De la data încheierii exercițiului financiar în cursul căruia au fost întocmite.",
     lege: "Legea contabilității nr. 82/1991, art. 25 alin. (1)",
     legeNota: "Termen redus de la 10 la 5 ani prin Legea nr. 36/2023.",
-    nota: "Facturile intră aici, inclusiv cele emise prin RO e-Factura. Atenție la a doua cifră de 5 ani: prescripția dreptului organului fiscal de a stabili creanțe poate curge de la altă dată decât termenul de arhivare.",
+    nota: "Facturile intră aici, inclusiv cele emise prin RO e-Factura. Atenție la a doua cifră de cinci ani: prescripția dreptului organului fiscal poate curge de la altă dată decât termenul de arhivare.",
   },
   {
     tip: "State de salarii",
@@ -70,7 +78,7 @@ export const TERMENE: Termen[] = [
     dela: "De la data întocmirii.",
     lege: "Legea contabilității nr. 82/1991, art. 25 alin. (2)",
     legeNota: "Excepție expresă de la termenul general al documentelor financiare.",
-    nota: "Este actul pe care îl cere un fost angajat pentru vechime, uneori la treizeci de ani după ce a plecat. Se ține separat de restul documentelor financiare, fiindcă are alt termen. Amestecul lor este cauza cea mai frecventă a eliminărilor greșite.",
+    nota: "Este actul pe care îl cere un fost angajat pentru vechime, uneori la treizeci de ani după plecare. Se ține separat de restul documentelor financiare. Amestecul lor este cauza cea mai frecventă a eliminărilor greșite.",
   },
   {
     tip: "Dosare de personal",
@@ -81,7 +89,7 @@ export const TERMENE: Termen[] = [
     lege: "Legea Arhivelor Naționale nr. 16/1996",
     legeNota:
       "Termenul concret se stabilește prin nomenclatorul arhivistic avizat al organizației.",
-    nota: "Nomenclatorul propriu decide, nu cifra de aici. 75 de ani este practica preluată în nomenclatoarele avizate, nu un termen scris ca atare într-un articol general. Dacă nomenclatorul dumneavoastră spune altceva, nomenclatorul câștigă.",
+    nota: "Nomenclatorul propriu decide, nu cifra de aici: cei 75 de ani sunt practica preluată în nomenclatoarele avizate, nu un termen scris ca atare într-un articol general. Dacă nomenclatorul dumneavoastră spune altceva, el câștigă.",
   },
   {
     tip: "Registre de stare civilă",
@@ -91,7 +99,7 @@ export const TERMENE: Termen[] = [
     dela: "De la data întocmirii registrului.",
     lege: "Legea nr. 119/1996 cu privire la actele de stare civilă",
     legeNota: "După împlinirea termenului, registrele se predau Arhivelor Naționale.",
-    nota: "Pentru o primărie, acesta este fondul cu cea mai lungă viață și cel mai cerut la ghișeu. Exemplarul al doilea al registrului are propriul regim de păstrare și de depunere.",
+    nota: "Pentru o primărie acesta este fondul cu cea mai lungă viață și cel mai cerut la ghișeu. Exemplarul al doilea are propriul regim de păstrare și de depunere.",
   },
   {
     tip: "Hotărâri ale consiliului local și dispoziții ale primarului",
@@ -101,7 +109,7 @@ export const TERMENE: Termen[] = [
     dela: "Nu curge un termen. Documentele nu pot fi propuse spre eliminare niciodată.",
     lege: "Legea Arhivelor Naționale nr. 16/1996",
     legeNota: "Documente care fac parte din Fondul Arhivistic Național al României.",
-    nota: "Permanent înseamnă păstrare până la predarea către Arhivele Naționale, în condițiile legii. Un document cu termen permanent apărut într-un proces-verbal de eliminare este cea mai gravă eroare pe care o găsește un control.",
+    nota: "Permanent înseamnă păstrare până la predarea către Arhivele Naționale, în condițiile legii. Un asemenea document apărut într-un proces-verbal de eliminare este cea mai gravă eroare pe care o găsește un control.",
   },
   {
     tip: "Cartea tehnică a construcției",
@@ -121,7 +129,7 @@ export const TERMENE: Termen[] = [
     dela: "De la data la care obligația a devenit exigibilă.",
     lege: "Codul civil, art. 2517",
     legeNota: "Termenul general de prescripție este de 3 ani, dacă legea nu prevede altfel.",
-    nota: "Prescripția generală este punctul de plecare, nu răspunsul întreg. Garanțiile de bună execuție, clauzele de răspundere pe termen lung și obligațiile fiscale pot cere mai mult. Termenul practic se stabilește pe tip de contract, nu pe categoria întreagă.",
+    nota: "Prescripția generală este punctul de plecare: garanțiile de bună execuție, clauzele de răspundere pe termen lung și obligațiile fiscale pot cere mai mult. Termenul practic se stabilește pe tip de contract, nu pe categoria întreagă.",
   },
   {
     tip: "Dosare ale cabinetelor de avocatură",
@@ -131,6 +139,6 @@ export const TERMENE: Termen[] = [
     dela: "",
     lege: "",
     legeNota: "",
-    nota: "Preferăm rândul gol unei cifre pe care nu am putea să o susținem în fața unui control. Nu am găsit o normă generală, cu articol, valabilă pentru toate dosarele unui cabinet. Termenul se construiește din statutul profesiei, din contractul de asistență juridică și din nomenclatorul propriu. Dacă lucrați într-un cabinet și cunoașteți temeiul, scrieți-ne și îl completăm cu trimiterea la act.",
+    nota: "Preferăm rândul gol unei cifre pe care nu am putea să o susținem în fața unui control: nu am găsit o normă generală, cu articol, valabilă pentru toate dosarele unui cabinet. Termenul se construiește din statutul profesiei, din contractul de asistență juridică și din nomenclatorul propriu. Dacă îl cunoașteți, scrieți-ne și îl completăm cu trimiterea la act.",
   },
 ];

@@ -12,8 +12,10 @@
 // `src/content/afirmatii/despre-contact.json`, cu stare `neconfirmat` pana cand o confirma
 // cineva care cunoaste firma, cu sursa.
 //
-// VOCE: propozitii scurte, litera obisnuita, raspunsul intai si explicatia dupa. Adresarea e
-// „dumneavoastra”, aceeasi peste tot pe site - poarta de limba pica pe amestec.
+// VOCE REF-A (rescris 2026-09-07): titlul e o AFIRMATIE de doua-patru cuvinte, cu punct;
+// sub el sta o singura propozitie de explicatie, intre 15 si 35 de cuvinte. Litera
+// obisnuita, fara superlative. Adresarea ramane „dumneavoastra”, aceeasi peste tot pe site -
+// poarta de limba pica pe amestec.
 
 /** Un fapt scurt: un titlu si un paragraf. Aceeasi forma ca `Fapt` din `segmente.ts`. */
 export type FaptDespre = {
@@ -26,36 +28,36 @@ export const DESPRE = {
   titluMeta: "Despre 3S și ADRIA",
   /** meta description: intre 50 si 160 de caractere, unica in lot. Poarta S-01 masoara. */
   descriereMeta:
-    "3S este o firmă nouă, crescută din ADRIA Servicii Arhivare SRL, care arhivează din 2019 în Argeș. Ce este moștenit, ce este nou, ce lipsește.",
+    "Vechimea este a ADRIEI, firma-mamă care arhivează din 2019 în Argeș. 3S construiește căutarea. Ce e moștenit, ce e nou și ce lipsește încă.",
   eticheta: "Despre noi",
-  h1: "Firma este nouă. Depozitul din spatele ei lucrează din 2019.",
+  h1: "Vechimea este a ADRIEI.",
   lead:
-    "Depozitul de la Golești, arhivarea fizică și anii de la 2019 încoace sunt ale ADRIA Servicii Arhivare SRL, firma-mamă. Mai jos scrie ce este al ei și ce construim noi.",
+    "Depozitul de la Golești, arhivarea fizică și anii de la 2019 încoace sunt ale ADRIA Servicii Arhivare SRL, firma-mamă. 3S construiește căutarea peste ele.",
 };
 
 /** Ce exista azi, ce se construieste si ce lipseste. Trei fise, in ordinea asta. */
 export const STAREA_DE_AZI: FaptDespre[] = [
   {
     titlu: "Depozitul lucrează deja.",
-    text: "Oamenii, depozitul de la Golești și preluarea cu proces-verbal sunt ale ADRIEI. Lucrează pentru clienții ei dinainte să existe site-ul acesta.",
+    text: "Oamenii, depozitul de la Golești și preluarea cu proces-verbal sunt ale ADRIEI și lucrează pentru clienții ei dinainte să existe site-ul acesta.",
   },
   {
     titlu: "Căutarea se construiește acum.",
-    text: "Documentele se scanează, se indexează și se interoghează în română, cu documentul și pagina alături de răspuns. Aici este munca nouă și tot aici este riscul pe care ni-l asumăm noi.",
+    text: "Documentele se scanează, se indexează și se întreabă în română, cu documentul și pagina alături de răspuns. Aici este munca nouă și riscul pe care ni-l asumăm noi.",
   },
   {
     titlu: "Datele firmei încă lipsesc.",
-    text: "Cod fiscal, număr de registru, sediu declarat, telefon. Apar în subsol în ziua în care există, copiate dintr-un certificat, nu scrise din memorie.",
+    text: "Cod fiscal, număr de registru, sediu declarat și telefon apar în subsol în ziua în care există, copiate dintr-un certificat, nu scrise din memorie.",
   },
 ];
 
 /** Ce vine de la firma-mama. Fiecare rand este o afirmatie despre ADRIA, nu despre 3S. */
 export const MOSTENIT: string[] = [
   "Arhivare fizică și digitizare din 2019, în județul Argeș",
-  "Depozitul de la Golești, cu condițiile lui de temperatură, umiditate și acces",
-  "Autorizațiile de arhivare, pe care le cereți scanate înainte de semnătură",
-  "Preluarea cu proces-verbal, măsurarea în metri liniari și opisul ținut la zi",
-  "Oamenii care ridică documentele, le inventariază și le scanează",
+  "Depozitul de la Golești, cu condițiile și cu regimul lui de acces",
+  "Autorizațiile de arhivare, cerute scanate înainte de semnătură",
+  "Preluarea cu proces-verbal, metrii liniari măsurați, opisul la zi",
+  "Oamenii care ridică, inventariază și scanează documentele",
 ];
 
 /**
@@ -68,32 +70,32 @@ export const MOSTENIT: string[] = [
  * rescrierea in vocea noua; s-au schimbat propozitiile, nu felul textului.
  */
 export const CONSTRUIT =
-  "Se construiește căutarea în documente: întrebarea pusă în română, ca unui coleg care cunoaște arhiva, iar răspunsul cu documentul și pagina citate sau cu un „nu am găsit” limpede. Tot acum se construiesc canalul de pe telefon, site-ul acesta, cu termenele legale legate de actul din care provin, și firma însăși, româno-moldovenească, aflată în curs de înființare.";
+  "Se construiește căutarea: întrebarea pusă în română, ca unui coleg care cunoaște arhiva. Răspunsul vine cu documentul și pagina citate sau cu un „nu am găsit” limpede. Tot acum se construiesc canalul de pe telefon, site-ul acesta și firma însăși, româno-moldovenească, aflată în curs de înființare.";
 
 /** Cele trei verbe din nume, in ordinea in care se intampla cu documentele dumneavoastra. */
 export const NUMELE: FaptDespre[] = [
   {
     titlu: "Scan",
-    text: "Scanăm ce se cere des, la o rezoluție care rezistă la citire automată, și verificăm textul rezultat pe diacritice. Originalul rămâne în raft.",
+    text: "Scanăm ce se cere des, la o rezoluție care rezistă la citire automată, și verificăm textul pe diacritice. Originalul rămâne în raft.",
   },
   {
     titlu: "Store",
-    text: "Hârtia stă în depozit, cu cotă și opis. Copia digitală stă pe infrastructură din Uniunea Europeană. Locul exact se scrie în contract.",
+    text: "Hârtia stă în depozit, cu cotă și opis. Copia digitală stă pe infrastructură din Uniunea Europeană, cu locul exact scris în contract.",
   },
   {
     titlu: "Solve",
-    text: "Răspundem la întrebarea pusă în română, cu documentul și pagina alături. Când răspunsul nu se află în documente, o spunem.",
+    text: "Răspundem la întrebarea pusă în română, cu documentul și pagina alături. Când răspunsul nu se află în documente, o spunem pe față.",
   },
 ];
 
 /** Ce nu scriem pe site. Lista se citeste ca o limita asumata, nu ca o scuza. */
 export const NESCRIS: string[] = [
   "Ani de experiență pe seama 3S: firma nu are încă vârstă proprie",
-  "Cod fiscal, număr de registru sau sediu, fiindcă nu există înainte de înmatriculare",
+  "Cod fiscal, număr de registru sau sediu, câtă vreme înmatricularea nu s-a încheiat",
   "Certificări: nu deținem certificare ISO 27001 și nu punem sigle de standarde în pagină",
   "Un număr de clienți deserviți sau sigle de referință",
   "Prețuri, cât timp costul depinde de volum și de ce se digitizează întâi",
-  "Nume și funcții ale echipei, cât timp organigrama firmei noi nu este stabilită",
+  "Nume și funcții ale echipei, cât timp organigrama firmei noi nu e stabilită",
 ];
 
 /** Ce se poate vedea, in schimb, inainte de orice semnatura. */

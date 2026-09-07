@@ -16,9 +16,10 @@
 // `tests/interior-felie4.test.ts` masoara si ca sunt tot atatea etichete cate randuri, si ca
 // niciun text din `MOSTENIT` nu e copiat in fisierul asta.
 //
-// VOCE: propozitii scurte, litera obisnuita, adresarea „dumneavoastra", diacritice cu
-// virgula. Etichetele NU au punct - o eticheta cu punct e agramata, si a fost defect reparat
-// in valul S1-a. Propozitiile au punct.
+// VOCE REF-A (rescris 2026-09-07): titlul de sectiune e o AFIRMATIE de doua-patru cuvinte,
+// cu punct, iar linia de sub el e o singura propozitie, intre 15 si 35 de cuvinte. Etichetele
+// au unul pana la patru cuvinte si NU au punct - o eticheta cu punct e agramata, si a fost
+// defect reparat in valul S1-a. Adresarea ramane „dumneavoastra", diacriticele cu virgula.
 
 /** O grupa de elemente de cost, adica un card din sectiunea de factori a paginii /investitia. */
 export type GrupaFactori = {
@@ -45,20 +46,20 @@ export type IntrebareInterior = {
 export const INVESTITIA_INTERIOR = {
   /**
    * Randul de garantii de sub antet. Fiecare rand rezuma ceva deja scris pe site:
-   * primul e chiar al doilea element din `INVESTITIA.nuPrimiti`, al doilea vine din
+   * primul e al doilea element din `INVESTITIA.nuPrimiti`, al doilea vine din
    * `INVESTITIA.factori[0]`, al treilea din `ARATAM` de pe /despre. Fara punct: sunt
-   * etichete, nu propozitii.
+   * etichete, nu propozitii, si de la valul S2-a au cel mult patru cuvinte.
    */
   garantii: [
-    "Fără ofertă trimisă a doua zi",
-    "Măsurăm rafturile înainte de orice cifră",
-    "Contract în română, înainte de preluare",
+    "Fără ofertă pripită",
+    "Măsurăm înainte de cifră",
+    "Contract în română",
   ],
 
   factoriEticheta: "Ce intră în cost",
-  factoriTitlu: "Șapte elemente, în trei grupe.",
+  factoriTitlu: "Șapte elemente, trei grupe.",
   factoriLead:
-    "Nu sunt criterii de listă de prețuri, sunt lucrurile pe care le măsurăm la fața locului. Fiecare are scris în ce condiții crește și în ce condiții scade, ca să vă puteți așeza singur fondul undeva pe scară.",
+    "Sunt lucrurile pe care le măsurăm la fața locului, fiecare cu condițiile în care crește și în care scade, ca să vă puteți așeza singur fondul undeva pe scară.",
 
   /**
    * Cele sapte elemente din `INVESTITIA.factori`, grupate cate doua-trei. Indicii acopera
@@ -68,42 +69,42 @@ export const INVESTITIA_INTERIOR = {
   grupe: [
     {
       eticheta: "Fondul",
-      titlu: "Cât este și în ce stare este.",
+      titlu: "Mărimea și starea.",
       lead: "Primele două se măsoară cu ruleta și cu ochiul, la fața locului, înainte de orice discuție despre bani.",
       indici: [0, 4],
     },
     {
       eticheta: "Timpul",
-      titlu: "Cât stă în depozit și cât de des se cere.",
+      titlu: "Timpul și frecvența.",
       lead: "Grupa din mijloc hotărăște partea recurentă: un fond care se atinge rar înseamnă depozitare, unul din care se cere zilnic înseamnă muncă.",
       indici: [3, 2],
       inchis: true,
     },
     {
       eticheta: "Ce se cere de la noi",
-      titlu: "Câtă muncă cere hârtia până ajunge căutabilă.",
-      lead: "Ultimele trei nu depind de mărimea fondului, ci de cât timp de om cere: ce se scanează, pe ce drum ajunge la noi și cine hotărăște termenul.",
+      titlu: "Munca până la căutare.",
+      lead: "Ultimele trei depind de timpul de om, nu de mărimea fondului: ce se scanează, pe ce drum ajunge hârtia la noi și cine hotărăște termenul.",
       indici: [1, 5, 6],
     },
   ] as GrupaFactori[],
 
-  structuraTitlu: "Ce se plătește o dată și ce se plătește lună de lună.",
+  structuraTitlu: "O dată și lunar.",
   structuraLead:
-    "Împărțirea contează mai mult decât suma: partea unică se face o singură dată și rămâne făcută, partea recurentă se adună cât ține contractul. Două oferte cu același total pot fi foarte diferite aici.",
+    "Împărțirea contează mai mult decât suma: partea unică rămâne făcută, partea recurentă se adună cât ține contractul. Două oferte cu același total pot fi foarte diferite aici.",
 
   discutiaEticheta: "Discuția de 30 de minute",
-  discutiaTitlu: "Ce iese din jumătatea de oră.",
+  discutiaTitlu: "Ce iese din discuție.",
   discutiaLead:
-    "Discuția nu este o prezentare. Se măsoară, se scrie și pleacă la dumneavoastră, chiar dacă la final decideți să rămâneți la dulapul din birou.",
-  refuzTitlu: "Ce nu iese, și nici nu promitem.",
+    "Se măsoară, se scrie și pleacă la dumneavoastră, chiar dacă la final decideți să rămâneți la dulapul din birou.",
+  refuzTitlu: "Ce nu promitem.",
   refuzLead:
-    "Le scriem aici fiindcă sunt exact lucrurile pe care le cere un cumpărător grăbit, iar un furnizor grăbit le promite.",
+    "Le scriem aici fiindcă sunt exact lucrurile pe care le cere un cumpărător grăbit. Un furnizor grăbit le promite.",
 
   ctaNota:
-    "Nu afișăm număr de telefon: solicitările intră prin poșta electronică, ca să rămână o urmă scrisă a cererii dumneavoastră și a răspunsului nostru.",
+    "Nu afișăm număr de telefon: cererile intră prin poșta electronică, ca să rămână o urmă scrisă a cererii dumneavoastră și a răspunsului nostru.",
 
   intrebariEticheta: "Întrebări despre preț",
-  intrebariTitlu: "Ce ne întreabă lumea despre bani.",
+  intrebariTitlu: "Întrebările despre bani.",
   intrebari: [
     { intrebare: "De ce nu scrie un preț pe pagina asta?", cheie: "fara-pret-0" },
     { intrebare: "Ce se schimbă dacă publicați totuși o cifră?", cheie: "fara-pret-1" },
@@ -119,22 +120,22 @@ export const INVESTITIA_INTERIOR = {
 
 export const COMPARATIE_INTERIOR = {
   varianteEticheta: "Variantele",
-  varianteTitlu: "Patru situații reale, nu patru produse de pe un raft.",
+  varianteTitlu: "Patru situații reale.",
   varianteLead:
-    "Comparăm ce comparați dumneavoastră de fapt. Nu spațiu de stocare cu alt spațiu de stocare, fiindcă documentele nu sunt încă fișiere. Trei dintre cele patru variante nu sunt ale noastre și sunt descrise așa cum le-ar descrie cine le folosește.",
+    "Comparăm ce comparați dumneavoastră de fapt, fiindcă documentele nu sunt încă fișiere. Trei dintre cele patru variante nu sunt ale noastre și sunt descrise cum le-ar descrie cine le folosește.",
 
   tabelEticheta: "Comparația",
-  tabelTitlu: "Șase întrebări care se pun oricum.",
+  tabelTitlu: "Șase întrebări de pus.",
   tabelLead:
-    "Sunt întrebările care apar în discuție, în ordinea în care apar. Pe ecran lat se citesc pe coloane; pe telefon fiecare întrebare devine un card, iar fiecare răspuns își poartă numele variantei.",
+    "Sunt întrebările care apar în discuție, în ordinea lor. Pe ecran lat se citesc pe coloane. Pe telefon fiecare întrebare devine un card, cu numele variantei pe fiecare răspuns.",
 
   pierdemEticheta: "Unde pierdem",
-  pierdemTitlu: "Rândurile pe care le pierdem, scrise înaintea celor pe care le câștigăm.",
+  pierdemTitlu: "Ce pierdeți cu noi.",
 
   nuMeritaEticheta: "Când nu merită",
-  nuMeritaTitlu: "Patru situații în care răspunsul corect este nu.",
+  nuMeritaTitlu: "Patru situații de refuz.",
   nuMeritaLead:
-    "Le scriem fiindcă le auzim oricum în prima jumătate de oră, iar atunci s-a consumat deja timpul dumneavoastră. Mai bine se citesc aici, gratis.",
+    "Le auzim oricum în prima jumătate de oră, când s-a consumat deja timpul dumneavoastră. Se citesc mai bine aici.",
 };
 
 // ---------------------------------------------------------------------------
@@ -143,27 +144,27 @@ export const COMPARATIE_INTERIOR = {
 
 export const DESPRE_INTERIOR = {
   impartireaEticheta: "Împărțirea",
-  impartireaTitlu: "Două firme, două vechimi diferite.",
+  impartireaTitlu: "Două firme, două vechimi.",
   impartireaLead:
-    "O firmă care se înființează acum și care se sprijină pe depozitul firmei-mamă are două vechimi, nu una. Cititorul care le confundă semnează cu impresia greșită despre cine îi ține hârtia, deci scriem întâi împărțirea.",
+    "ADRIA arhivează din 2019, 3S se înființează anul acesta. Cititorul care le confundă semnează cu impresia greșită despre cine îi ține hârtia. Scriem întâi împărțirea.",
 
-  adriaTitlu: "ADRIA ține hârtia. Din 2019.",
-  treiSTitlu: "3S construiește răspunsul. Din anul acesta.",
+  adriaTitlu: "ADRIA ține hârtia.",
+  treiSTitlu: "3S construiește răspunsul.",
 
   stareaEticheta: "Starea de azi",
-  stareaTitlu: "3S nu are încă personalitate juridică, și asta se vede în pagină.",
+  stareaTitlu: "Firma nu e înmatriculată.",
   stareaLead:
-    "Dosarul de înmatriculare este în lucru. Până se încheie, firma nu are cod fiscal, număr de registru, sediu declarat sau telefon, iar acolo unde ar trebui să fie, site-ul scrie că lipsesc.",
+    "Dosarul de înmatriculare este în lucru. Până se încheie, firma nu are cod fiscal, număr de registru, sediu declarat sau telefon, și site-ul scrie că lipsesc.",
 
   numeleEticheta: "Numele",
-  numeleTitlu: "Scan, Store, Solve: trei verbe, în ordinea în care se întâmplă.",
+  numeleTitlu: "Trei verbe, în ordine.",
   numeleLead:
-    "Cele trei verbe sunt lucrurile care se fac cu un document, de la cutia din subsol până la răspunsul de pe telefon. Fiecare are în spate un furnizor cu nume, iar împărțirea de mai sus spune care pe care.",
+    "Scan, Store, Solve sunt lucrurile care se fac cu un document, de la cutia din subsol până la răspunsul de pe telefon. Împărțirea de mai sus spune cine răspunde de fiecare.",
 
   limiteEticheta: "Limite",
-  limiteTitlu: "Ce nu putem susține, scris de noi, primii.",
+  limiteTitlu: "Ce nu putem susține.",
   limiteLead:
-    "Într-o achiziție publică, afirmația nesusținută costă mai mult decât tăcerea. Prima listă adună lucrurile care lipsesc de pe site fiindcă nu le putem dovedi; a doua este ce punem în loc.",
+    "Într-o achiziție publică, afirmația nesusținută costă mai mult decât tăcerea. Prima listă adună ce lipsește de pe site fiindcă nu putem dovedi. A doua spune ce punem în loc.",
 
   /**
    * Banda inchisa: faptele atribuite firmei-mama. `BandaIncredere` cere perechi titlu-text,
@@ -173,7 +174,7 @@ export const DESPRE_INTERIOR = {
    * doua copie a lor care sa poata diverge. Proba masoara ca lungimile coincid.
    */
   bandaEticheta: "Firma-mamă",
-  bandaTitlu: "Ce aparține ADRIEI, și se verifică la ea.",
+  bandaTitlu: "Ce aparține ADRIEI.",
   bandaEtichete: ["Vechimea", "Depozitul", "Autorizațiile", "Preluarea", "Oamenii"],
 };
 
@@ -186,19 +187,19 @@ export type IconitaDrum = "posta" | "telefon" | "sediu";
 
 export const CONTACT_INTERIOR = {
   drumuriEticheta: "Drumuri",
-  drumuriTitlu: "Trei drumuri, din care unul singur ajunge la noi azi.",
+  drumuriTitlu: "Trei drumuri, unul deschis.",
   drumuriLead:
-    "Cardurile de mai jos se citesc din configurarea firmei, nu se scriu de mână în pagină. Unde valoarea lipsește, scrie că lipsește: nici substituent, nici datele firmei-mamă puse în locul lor.",
+    "Cardurile de mai jos se citesc din configurarea firmei. Unde valoarea lipsește, scrie că lipsește: nici substituent, nici datele firmei-mamă puse în locul lor.",
 
   mesajEticheta: "Primul mesaj",
-  mesajTitlu: "Cinci rânduri de la dumneavoastră scurtează discuția cu o săptămână.",
+  mesajTitlu: "Cinci rânduri scurtează discuția.",
   mesajLead:
-    "Scrieți cât vreți și în ce ordine vreți. Prima listă este ce ne trebuie oricum ca să vă putem răspunde cu ceva concret din primul mesaj, în loc să cerem detalii pe încă două.",
+    "Scrieți cât vreți și în ce ordine vreți. Prima listă este ce ne trebuie oricum ca să răspundem cu ceva concret din primul mesaj, nu de pe al treilea.",
 
   dateleEticheta: "Datele din mesaj",
-  dateleTitlu: "Ce facem cu ce ne scrieți.",
+  dateleTitlu: "Ce facem cu mesajul.",
   dateleLead:
-    "Un mesaj către un furnizor de arhivare conține adesea mai mult decât un salut: numele instituției, ce se caută des, uneori un termen de control. Deci merită spus dinainte ce se întâmplă cu el.",
+    "Un mesaj către un furnizor de arhivare conține adesea numele instituției, ce se caută des și uneori un termen de control. Merită spus dinainte ce se întâmplă cu el.",
   dateleIntrebari: [
     "Ce se întâmplă cu mesajul pe care ni-l trimiteți?",
     "Ce nu vă cerem în primul mesaj?",
