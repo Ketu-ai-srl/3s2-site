@@ -16,12 +16,9 @@ import type { Fotografie } from "@/content/fotografii";
 // centrarea e gestul tiglei de pe pagina de start. Erau doua asezari diferite pentru acelasi
 // lucru; a ramas cea a referintei.
 //
-// CE S-A SCHIMBAT FATA DE DIRECTIA ANTERIOARA, si de ce nu mai exista aici nicio nota despre ea:
-// antetul avea titlul de 48 px la stanga si fotografia intr-un CARD la dreapta, pe o grila de
-// doua coloane. Grila a disparut cu totul - fotografia sta acum SUB text, pe toata latimea
-// containerului - iar `Ecran` nu se mai importa deloc: ramura lui de antet alb nu mai are
-// niciun cititor din fisierul asta. Un comentariu care descrie ce nu mai exista e un defect, si
-// de aceea vechile note nu s-au pastrat „ca istorie": istoria e in git.
+// NOTELE DIRECTIEI ANTERIOARE NU S-AU PASTRAT „ca istorie": un comentariu care descrie ce nu
+// mai exista in fisier e un defect, iar ce a fost inainte se citeste din git. Din acelasi motiv
+// `Ecran` nu se mai importa aici deloc.
 //
 // API-UL RAMANE COMPATIBIL. Semnatura (fir, eticheta, titlu, lead, actiune, secundar, adresa,
 // imagine, forma) e neatinsa: cele 20 de pagini interioare o dau azi asa si nu se ating la felia
@@ -79,8 +76,8 @@ const GAZDA = "https://3s2.ke2.in";
 // aceeasi culoare cu el, fiindca e lipit de cuvant si nu e despartit de niciun spatiu.
 //
 // Se taie la ULTIMA insiruire de spatii, nu la un `split(" ")`, si nu din eleganta: doua
-// afirmatii din continut au un spatiu NEINTRERUPTIBIL inaintea ultimului cuvant
-// (`Actul se cere azi.`) si una are un rand nou in mijloc. `\s` din JavaScript prinde si
+// afirmatii din continut au un spatiu NEINTRERUPTIBIL inaintea ultimului cuvant - `Actul se
+// cere`, spatiul acela, `azi.` - si una are un rand nou in mijloc. `\s` din JavaScript prinde si
 // spatiul neintreruptibil si randul nou, iar taietura pastreaza caracterul EXACT asa cum e
 // scris in continut - un `join(" ")` l-ar fi inlocuit tacut cu un spatiu obisnuit si cuvintele
 // s-ar fi despartit tocmai acolo unde continutul cere sa nu se desparta.
@@ -218,7 +215,7 @@ export default function AntetPagina({
           ) : null}
 
           {/* FOTOGRAFIA, sub text, pe toata latimea celor 1247. Nu poarta text peste ea, deci nu
-              are nevoie de voal si nu intra in niciun calcul de contrast.
+              intra in niciun calcul de contrast.
 
               INALTIMEA DE 700 px LA 1440 e aleasa dintr-o masuratoare, nu din gust, si cifra de
               plecare e latimea REALA a cutiei, nu numele containerului: masurat pe pagina
