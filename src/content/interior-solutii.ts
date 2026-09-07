@@ -272,6 +272,7 @@ export const FIZICA_INTERIOR = {
   } as CapSectiune,
 
   etichetaNotaTemei: "Ce nu scriem aici",
+  etichetaNotaConsultanta: "Ce nu facem",
 
   bandaAratam: {
     eticheta: "La o vizită anunțată",

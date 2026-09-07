@@ -161,6 +161,11 @@ export default function ArhivareFizica() {
             <BlocDovada fel="limite" eticheta={F.etichetaNotaTemei}>
               {A.notaTemei}
             </BlocDovada>
+            <div className="mt-6">
+              <BlocDovada fel="limite" eticheta={F.etichetaNotaConsultanta}>
+                {A.notaConsultanta}
+              </BlocDovada>
+            </div>
 
             <p className="mt-8 max-w-[62ch] text-corp text-cerneala-3">
               Termenele pe care le putem cita pe articol stau în{" "}

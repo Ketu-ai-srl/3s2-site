@@ -299,8 +299,13 @@ export const ARHIVARE_FIZICA = {
     },
   ] as Fisa[],
 
+  // Doua note, nu una: criticul valului S2-b a masurat 89 de cuvinte intr-un singur paragraf pe
+  // /arhivare-fizica, peste pragul de 60 fara pauza vizuala; textul e taiat la granita celor doua
+  // miscari (de unde vin numerele / ce nu facem), fara niciun cuvant schimbat.
   notaTemei:
-    "Actele de mai sus sunt numite ca să le puteți citi la sursă. Numerele de articol au fost culese odată cu termenele, din actele citate pe fiecare rând, și nu au fost recitite la sursă în ziua în care s-a scris pagina; un arhivist autorizat le confirmă înainte de publicare. Nu dăm consultanță juridică: termenul care vă obligă este cel din nomenclatorul propriu, avizat. Legea specifică domeniului dumneavoastră are prioritate față de regula generală. Dacă o cunoașteți și lipsește de aici, scrieți-ne și o adăugăm cu trimiterea la act.",
+    "Actele de mai sus sunt numite ca să le puteți citi la sursă. Numerele de articol au fost culese odată cu termenele, din actele citate pe fiecare rând, și nu au fost recitite la sursă în ziua în care s-a scris pagina; un arhivist autorizat le confirmă înainte de publicare.",
+  notaConsultanta:
+    "Nu dăm consultanță juridică: termenul care vă obligă este cel din nomenclatorul propriu, avizat. Legea specifică domeniului dumneavoastră are prioritate față de regula generală. Dacă o cunoașteți și lipsește de aici, scrieți-ne și o adăugăm cu trimiterea la act.",
 
   aratam: [
     "Depozitul, rafturile și spațiul de manipulare, la o vizită anunțată din timp",
